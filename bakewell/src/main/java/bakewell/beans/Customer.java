@@ -5,6 +5,11 @@ import java.io.Serializable;
 public class Customer implements Serializable {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -279323690879135258L;
+	
 	private String firstName = "";
 	private String lastName = "";
 	private String address = "";
