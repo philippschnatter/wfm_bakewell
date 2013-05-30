@@ -8,11 +8,11 @@
     <userTask id="EvaluateRequirements" name="Evaluate customer requirements"></userTask>
     <sequenceFlow id="flow1" sourceRef="EvaluateRequirements" targetRef="exclusivegateway1"></sequenceFlow>
     <exclusiveGateway id="exclusivegateway1" name="MeetBusinessGoals"></exclusiveGateway>
-    <sequenceFlow id="DoesNotMeetBusinessGoals" name="Does not meet business goals" sourceRef="exclusivegateway1" targetRef="endevent2">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${MeetsBusinessGoals=="false"}]]></conditionExpression>
+    <sequenceFlow id="flow3" name="Does not meet business goals" sourceRef="exclusivegateway1" targetRef="endevent2">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[false]]></conditionExpression>
     </sequenceFlow>
     <sequenceFlow id="MeetsBusinessGoals" name="Meets business goals" sourceRef="exclusivegateway1" targetRef="CheckCreditWorthiness">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${MeetsBusinessGoals=="true"}]]></conditionExpression>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${FinalDocument.MeetsBusinessGoals==true}]]></conditionExpression>
     </sequenceFlow>
     <endEvent id="endevent2" name="End"></endEvent>
     <userTask id="CheckCreditWorthiness" name="Check credit worthiness"></userTask>
@@ -294,6 +294,20 @@
         <omgdi:waypoint x="938.0" y="219.0"></omgdi:waypoint>
         <omgdi:waypoint x="1020.0" y="219.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="1040.0" y="199.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1094.0" y="167.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="42.0" width="100.0" x="-88.0" y="-32.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="1040.0" y="239.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1112.0" y="259.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="42.0" width="100.0" x="9.0" y="-26.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
         <omgdi:waypoint x="1165.0" y="286.0"></omgdi:waypoint>
         <omgdi:waypoint x="1253.0" y="286.0"></omgdi:waypoint>
@@ -489,13 +503,6 @@
         <omgdi:waypoint x="1112.0" y="259.0"></omgdi:waypoint>
         <bpmndi:BPMNLabel>
           <omgdc:Bounds height="42.0" width="100.0" x="9.0" y="-26.0"></omgdc:Bounds>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="DoesNotMeetBusinessGoals" id="BPMNEdge_DoesNotMeetBusinessGoals">
-        <omgdi:waypoint x="1040.0" y="199.0"></omgdi:waypoint>
-        <omgdi:waypoint x="1094.0" y="167.0"></omgdi:waypoint>
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="42.0" width="100.0" x="-88.0" y="-32.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
