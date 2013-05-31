@@ -33,10 +33,10 @@
         <errorEventDefinition errorRef="LegalConstraintsViolated"></errorEventDefinition>
       </endEvent>
       <sequenceFlow id="flow63" sourceRef="CheckLegalConstraints" targetRef="errorendevent1">
-        <conditionExpression xsi:type="tFormalExpression"><![CDATA[$(LegalConstraintsOk=="false")]]></conditionExpression>
+        <conditionExpression xsi:type="tFormalExpression"><![CDATA[${LegalConstraintsOk=="false"}]]></conditionExpression>
       </sequenceFlow>
       <sequenceFlow id="flow89" sourceRef="CheckLegalConstraints" targetRef="GetProductLabel">
-        <conditionExpression xsi:type="tFormalExpression"><![CDATA[$(LegalConstraintsOk=="true")]]></conditionExpression>
+        <conditionExpression xsi:type="tFormalExpression"><![CDATA[${LegalConstraintsOk=="true"}]]></conditionExpression>
       </sequenceFlow>
       <serviceTask id="GetProductLabel" name="Get Product Label" activiti:class="activityTasks.GetProductLabelWsCall"></serviceTask>
       <sequenceFlow id="flow62" sourceRef="GetProductLabel" targetRef="endevent9"></sequenceFlow>
@@ -55,51 +55,19 @@
       <sequenceFlow id="flow55" sourceRef="DetermineFinalProductPrice" targetRef="endevent7"></sequenceFlow>
     </subProcess>
     <sequenceFlow id="flow52" sourceRef="CompileProductionPlan" targetRef="CompileOffer"></sequenceFlow>
-    <serviceTask id="SendOfferToCustomer" name="Send Offer to customer" activiti:type="mail">
-      <extensionElements>
-        <activiti:field name="to">
-          <activiti:string>test</activiti:string>
-        </activiti:field>
-        <activiti:field name="html">
-          <activiti:string>test</activiti:string>
-        </activiti:field>
-      </extensionElements>
-    </serviceTask>
-    <sequenceFlow id="flow25" sourceRef="SendOfferToCustomer" targetRef="eventgateway1"></sequenceFlow>
-    <serviceTask id="SendReminder" name="Send Reminder" activiti:type="mail">
-      <extensionElements>
-        <activiti:field name="html">
-          <activiti:string>test</activiti:string>
-        </activiti:field>
-        <activiti:field name="to">
-          <activiti:string>test</activiti:string>
-        </activiti:field>
-      </extensionElements>
-    </serviceTask>
-    <sequenceFlow id="flow34" sourceRef="SendReminder" targetRef="eventgateway1"></sequenceFlow>
+    <sequenceFlow id="flow25" sourceRef="manualtask3" targetRef="eventgateway1"></sequenceFlow>
+    <sequenceFlow id="flow34" sourceRef="manualtask4" targetRef="eventgateway1"></sequenceFlow>
     <intermediateCatchEvent id="timerintermediatecatchevent1" name="Remind Customer">
       <timerEventDefinition>
-        <timeDuration>1000000</timeDuration>
+        <timeDuration>PT1M</timeDuration>
       </timerEventDefinition>
     </intermediateCatchEvent>
     <sequenceFlow id="flow26" sourceRef="timerintermediatecatchevent1" targetRef="exclusivegateway6"></sequenceFlow>
-    <serviceTask id="SendTermination" name="Send termination" activiti:type="mail">
-      <extensionElements>
-        <activiti:field name="to">
-          <activiti:string>test</activiti:string>
-        </activiti:field>
-        <activiti:field name="html">
-          <activiti:string>test</activiti:string>
-        </activiti:field>
-      </extensionElements>
-    </serviceTask>
-    <sequenceFlow id="flow38" sourceRef="SendTermination" targetRef="endevent4"></sequenceFlow>
-    <exclusiveGateway id="exclusivegateway6" name="Exclusive Gateway"></exclusiveGateway>
-    <sequenceFlow id="flow33" name="Within time limit" sourceRef="exclusivegateway6" targetRef="SendReminder">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[true]]></conditionExpression>
-    </sequenceFlow>
-    <sequenceFlow id="flow35" name="exceeds time limit" sourceRef="exclusivegateway6" targetRef="SendTermination">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[false]]></conditionExpression>
+    <sequenceFlow id="flow38" sourceRef="manualtask5" targetRef="endevent4"></sequenceFlow>
+    <exclusiveGateway id="exclusivegateway6" name="Exclusive Gateway" default="WithinTimeLimit"></exclusiveGateway>
+    <sequenceFlow id="WithinTimeLimit" name="Within time limit" sourceRef="exclusivegateway6" targetRef="manualtask4"></sequenceFlow>
+    <sequenceFlow id="ExceedsLimit" name="exceeds time limit" sourceRef="exclusivegateway6" targetRef="manualtask5">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${false}]]></conditionExpression>
     </sequenceFlow>
     <intermediateCatchEvent id="signalintermediatecatchevent1" name="SignalCatchEvent">
       <signalEventDefinition signalRef="test"></signalEventDefinition>
@@ -122,7 +90,7 @@
     <sequenceFlow id="flow57" name="Offer Rejected, revision started" sourceRef="exclusivegateway5" targetRef="manualtask1">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[false]]></conditionExpression>
     </sequenceFlow>
-    <sequenceFlow id="flow58" sourceRef="CompileOffer" targetRef="SendOfferToCustomer"></sequenceFlow>
+    <sequenceFlow id="flow58" sourceRef="CompileOffer" targetRef="manualtask3"></sequenceFlow>
     <boundaryEvent id="boundaryerror1" name="Error" attachedToRef="subprocess2">
       <errorEventDefinition errorRef="LegalConstraintsViolated"></errorEventDefinition>
     </boundaryEvent>
@@ -131,10 +99,10 @@
     <exclusiveGateway id="exclusivegateway9" name="Exclusive Gateway"></exclusiveGateway>
     <sequenceFlow id="flow66" sourceRef="FindSubstitute" targetRef="exclusivegateway9"></sequenceFlow>
     <sequenceFlow id="flow68" name="No Substitute" sourceRef="exclusivegateway9" targetRef="manualtask2">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[$(substituteFound=="false")]]></conditionExpression>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${SubstituteFound=="false"}]]></conditionExpression>
     </sequenceFlow>
     <sequenceFlow id="flow69" name="FoundSubstitute" sourceRef="exclusivegateway9" targetRef="subprocess2">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[$(substituteFound=="true")]]></conditionExpression>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${SubstituteFound=="true"}]]></conditionExpression>
     </sequenceFlow>
     <endEvent id="endevent10" name="End"></endEvent>
     <sequenceFlow id="flow70" sourceRef="manualtask2" targetRef="endevent10"></sequenceFlow>
@@ -152,6 +120,9 @@
     <sequenceFlow id="flow97" sourceRef="manualtask1" targetRef="parallelgateway4"></sequenceFlow>
     <task id="manualtask1" name="Inform Product Manager"></task>
     <task id="manualtask2" name="Inform Customer"></task>
+    <task id="manualtask3" name="Send Offer to customer"></task>
+    <task id="manualtask4" name="Send Reminder"></task>
+    <task id="manualtask5" name="Send termination"></task>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_ProductCreationProcess">
     <bpmndi:BPMNPlane bpmnElement="ProductCreationProcess" id="BPMNPlane_ProductCreationProcess">
@@ -254,15 +225,6 @@
       <bpmndi:BPMNShape bpmnElement="FindSubstitute" id="BPMNShape_FindSubstitute">
         <omgdc:Bounds height="55.0" width="105.0" x="2410.0" y="107.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="SendOfferToCustomer" id="BPMNShape_SendOfferToCustomer">
-        <omgdc:Bounds height="55.0" width="105.0" x="2990.0" y="199.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="SendReminder" id="BPMNShape_SendReminder">
-        <omgdc:Bounds height="55.0" width="105.0" x="3123.0" y="52.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="SendTermination" id="BPMNShape_SendTermination">
-        <omgdc:Bounds height="55.0" width="105.0" x="3455.0" y="52.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="PrepareProduction" id="BPMNShape_PrepareProduction">
         <omgdc:Bounds height="55.0" width="105.0" x="3780.0" y="310.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
@@ -271,6 +233,15 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="manualtask2" id="BPMNShape_manualtask2">
         <omgdc:Bounds height="55.0" width="105.0" x="2594.0" y="-30.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="manualtask3" id="BPMNShape_manualtask3">
+        <omgdc:Bounds height="55.0" width="105.0" x="2990.0" y="199.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="manualtask4" id="BPMNShape_manualtask4">
+        <omgdc:Bounds height="55.0" width="105.0" x="3123.0" y="52.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="manualtask5" id="BPMNShape_manualtask5">
+        <omgdc:Bounds height="55.0" width="105.0" x="3455.0" y="52.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
         <omgdi:waypoint x="738.0" y="219.0"></omgdi:waypoint>
@@ -324,23 +295,10 @@
           <omgdc:Bounds height="14.0" width="76.0" x="-28.0" y="-20.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow33" id="BPMNEdge_flow33">
-        <omgdi:waypoint x="3342.0" y="136.0"></omgdi:waypoint>
-        <omgdi:waypoint x="3175.0" y="107.0"></omgdi:waypoint>
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="14.0" width="71.0" x="-13.0" y="-23.0"></omgdc:Bounds>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
+   
       <bpmndi:BPMNEdge bpmnElement="flow34" id="BPMNEdge_flow34">
         <omgdi:waypoint x="3175.0" y="107.0"></omgdi:waypoint>
         <omgdi:waypoint x="3175.0" y="206.0"></omgdi:waypoint>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow35" id="BPMNEdge_flow35">
-        <omgdi:waypoint x="3342.0" y="136.0"></omgdi:waypoint>
-        <omgdi:waypoint x="3507.0" y="107.0"></omgdi:waypoint>
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="14.0" width="84.0" x="-6.0" y="7.0"></omgdc:Bounds>
-        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow38" id="BPMNEdge_flow38">
         <omgdi:waypoint x="3560.0" y="79.0"></omgdi:waypoint>
@@ -488,6 +446,20 @@
         <omgdi:waypoint x="2300.0" y="228.0"></omgdi:waypoint>
         <bpmndi:BPMNLabel>
           <omgdc:Bounds height="14.0" width="68.0" x="10.0" y="0.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="WithinTimeLimit" id="BPMNEdge_WithinTimeLimit">
+        <omgdi:waypoint x="3342.0" y="136.0"></omgdi:waypoint>
+        <omgdi:waypoint x="3175.0" y="107.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="71.0" x="-13.0" y="-23.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="ExceedsLimit" id="BPMNEdge_ExceedsLimit">
+        <omgdi:waypoint x="3342.0" y="136.0"></omgdi:waypoint>
+        <omgdi:waypoint x="3507.0" y="107.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="84.0" x="-6.0" y="7.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>

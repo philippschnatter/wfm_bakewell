@@ -15,6 +15,8 @@ import org.activiti.engine.impl.cmd.StartProcessInstanceCmd;
 import org.activiti.engine.repository.DeploymentBuilder;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -66,13 +68,23 @@ public class FirstProcessPartTest {
 	}
 	
 
-	private void CreateNewProcess(){
+	private void createNewProcess(){
 		processInstance = runtimeService.startProcessInstanceByKey("ProductCreationProcess");
 		assertNotNull(processInstance.getId());
 		identityService = processEngine.getIdentityService();
 		taskService = processEngine.getTaskService(); 
 		pid = processInstance.getProcessInstanceId();
 		formService = processEngine.getFormService();
+	}
+	@After
+	public void Cleanup(){
+		
+try{
+	runtimeService.deleteProcessInstance(pid, "unit test");
+}catch(Exception e){
+	
+}
+
 	}
 	
 	private void evaluateRequirements(String meetsBusinessGoals, String isNewReceipe){
@@ -115,11 +127,28 @@ public class FirstProcessPartTest {
 		formService.submitTaskFormData(constraintsId, map);
 	}
 	
+	private void compileProductionPlan(){
+		String constraintsId = taskService.createTaskQuery().taskDefinitionKey("CompileProductionPlan").singleResult().getId();
+		HashMap<String, String> map = new HashMap<String, String>();
+		formService.submitTaskFormData(constraintsId, map);
+		
+	}
 	
+	private void gotToPremProductionPlan(){
+		evaluateRequirements("true","true");
+		checkCreditWorthiness("true");
+		checkLegalConstrains("true");
+	}
+	
+	private void determineFinalPrice(){
+		String constraintsId = taskService.createTaskQuery().taskDefinitionKey("DetermineFinalProductPrice").singleResult().getId();
+		HashMap<String, String> map = new HashMap<String, String>();
+		formService.submitTaskFormData(constraintsId, map);
+	}
 	
 	@Test
 	public void testEvalRequirementsPositive(){
-		CreateNewProcess();
+		createNewProcess();
 		
 		// First task is evaluate requirements
 		evaluateRequirements("true","true");
@@ -128,7 +157,7 @@ public class FirstProcessPartTest {
 	
 	@Test
 	public void testEvalRequirementsNegative(){
-		CreateNewProcess();
+		createNewProcess();
 		
 		// First task is evaluate requirements
 		evaluateRequirements("false","true");
@@ -138,7 +167,7 @@ public class FirstProcessPartTest {
 	
 	@Test
 	public void testCheckCreditWorthinessPositive(){
-		CreateNewProcess();
+		createNewProcess();
 		evaluateRequirements("true","true");
 		checkCreditWorthiness("true");
 		
@@ -147,7 +176,7 @@ public class FirstProcessPartTest {
 	
 	@Test
 	public void testCheckCreditWorthinessNegative(){
-		CreateNewProcess();
+		createNewProcess();
 		evaluateRequirements("true","true");
 		checkCreditWorthiness("false");
 		// should be at end state
@@ -156,7 +185,7 @@ public class FirstProcessPartTest {
 	
 	@Test
 	public void testCheckLegalConstraintsPositive(){
-		CreateNewProcess();
+		createNewProcess();
 		evaluateRequirements("true","true");
 		checkCreditWorthiness("true");
 		checkLegalConstrains("true");
@@ -165,7 +194,7 @@ public class FirstProcessPartTest {
 	
 	@Test
 	public void testCheckLegalConstraintsWithError(){
-		CreateNewProcess();
+		createNewProcess();
 		evaluateRequirements("true","true");
 		checkCreditWorthiness("true");
 		checkLegalConstrains("false");
@@ -174,7 +203,7 @@ public class FirstProcessPartTest {
 	
 	@Test
 	public void testFindSubstitutePositive(){
-		CreateNewProcess();
+		createNewProcess();
 		evaluateRequirements("true","true");
 		checkCreditWorthiness("true");
 		checkLegalConstrains("false");
@@ -184,7 +213,7 @@ public class FirstProcessPartTest {
 	
 	@Test
 	public void testFindSubstituteNegative(){
-		CreateNewProcess();
+		createNewProcess();
 		evaluateRequirements("true","true");
 		checkCreditWorthiness("true");
 		checkLegalConstrains("false");
@@ -194,4 +223,27 @@ public class FirstProcessPartTest {
 		assertNull(taskService.createTaskQuery().singleResult());
 	}
 	
+	@Test
+	public void testCompileProductionPlan(){
+		createNewProcess();
+		gotToPremProductionPlan();
+		compileProductionPlan();
+		assertNextTaskHasId("DetermineFinalProductPrice");
+	}
+	
+	@Test
+	public void testDetermineFinalPrice(){
+		createNewProcess();
+		gotToPremProductionPlan();
+		compileProductionPlan();
+		determineFinalPrice();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
 }
