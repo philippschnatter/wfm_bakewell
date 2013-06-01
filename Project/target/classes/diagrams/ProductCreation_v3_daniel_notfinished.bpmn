@@ -2,6 +2,8 @@
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
   <signal id="Test" name="Test"></signal>
   <signal id="test" name="test"></signal>
+  <signal id="StartCustomerProcess" name="StartCustomerProcess"></signal>
+  <signal id="SendCustomerResponse" name="SendCustomerResponse"></signal>
   <process id="ProductCreationProcess" name="Product creation" isExecutable="true">
     <startEvent id="startevent1" name="Start"></startEvent>
     <sequenceFlow id="flow2" sourceRef="startevent1" targetRef="EvaluateRequirements"></sequenceFlow>
@@ -55,8 +57,7 @@
       <sequenceFlow id="flow55" sourceRef="DetermineFinalProductPrice" targetRef="endevent7"></sequenceFlow>
     </subProcess>
     <sequenceFlow id="flow52" sourceRef="CompileProductionPlan" targetRef="CompileOffer"></sequenceFlow>
-    <sequenceFlow id="flow25" sourceRef="manualtask3" targetRef="eventgateway1"></sequenceFlow>
-    <sequenceFlow id="flow34" sourceRef="manualtask4" targetRef="eventgateway1"></sequenceFlow>
+    <sequenceFlow id="flow34" sourceRef="manualtask4" targetRef="WaitForCustomer"></sequenceFlow>
     <intermediateCatchEvent id="timerintermediatecatchevent1" name="Remind Customer">
       <timerEventDefinition>
         <timeDuration>PT1M</timeDuration>
@@ -69,26 +70,26 @@
     <sequenceFlow id="ExceedsLimit" name="exceeds time limit" sourceRef="exclusivegateway6" targetRef="manualtask5">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${false}]]></conditionExpression>
     </sequenceFlow>
-    <intermediateCatchEvent id="signalintermediatecatchevent1" name="SignalCatchEvent">
-      <signalEventDefinition signalRef="test"></signalEventDefinition>
+    <intermediateCatchEvent id="CustomerResponded" name="CustomerResponded">
+      <signalEventDefinition signalRef="SendCustomerResponse"></signalEventDefinition>
     </intermediateCatchEvent>
-    <sequenceFlow id="flow28" sourceRef="signalintermediatecatchevent1" targetRef="exclusivegateway5"></sequenceFlow>
-    <eventBasedGateway id="eventgateway1" name="Event Gateway"></eventBasedGateway>
-    <sequenceFlow id="flow24" name="Remind Customer" sourceRef="eventgateway1" targetRef="timerintermediatecatchevent1"></sequenceFlow>
-    <sequenceFlow id="flow27" name="Customer Responded" sourceRef="eventgateway1" targetRef="signalintermediatecatchevent1"></sequenceFlow>
+    <sequenceFlow id="flow28" sourceRef="CustomerResponded" targetRef="exclusivegateway5"></sequenceFlow>
+    <eventBasedGateway id="WaitForCustomer" name="WaitForCustomer"></eventBasedGateway>
+    <sequenceFlow id="flow24" name="Remind Customer" sourceRef="WaitForCustomer" targetRef="timerintermediatecatchevent1"></sequenceFlow>
+    <sequenceFlow id="flow27" name="Customer Responded" sourceRef="WaitForCustomer" targetRef="CustomerResponded"></sequenceFlow>
     <endEvent id="endevent4" name="End"></endEvent>
     <exclusiveGateway id="exclusivegateway5" name="Exclusive Gateway"></exclusiveGateway>
     <sequenceFlow id="flow29" name="Offer Rejected, no revision" sourceRef="exclusivegateway5" targetRef="endevent4">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[false]]></conditionExpression>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${OfferAcceptanceState=="RejectWithoutRevision"}]]></conditionExpression>
     </sequenceFlow>
     <sequenceFlow id="flow31" name="Offer Accepted" sourceRef="exclusivegateway5" targetRef="PrepareProduction">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[true]]></conditionExpression>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${OfferAcceptanceState=="Accepted"}]]></conditionExpression>
     </sequenceFlow>
     <task id="PrepareProduction" name="Prepare Production"></task>
     <endEvent id="endevent8" name="End"></endEvent>
     <sequenceFlow id="flow56" sourceRef="PrepareProduction" targetRef="endevent8"></sequenceFlow>
     <sequenceFlow id="flow57" name="Offer Rejected, revision started" sourceRef="exclusivegateway5" targetRef="manualtask1">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[false]]></conditionExpression>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${OfferAcceptanceState=="NeedsRevision"}]]></conditionExpression>
     </sequenceFlow>
     <sequenceFlow id="flow58" sourceRef="CompileOffer" targetRef="manualtask3"></sequenceFlow>
     <boundaryEvent id="boundaryerror1" name="Error" attachedToRef="subprocess2">
@@ -123,6 +124,29 @@
     <task id="manualtask3" name="Send Offer to customer"></task>
     <task id="manualtask4" name="Send Reminder"></task>
     <task id="manualtask5" name="Send termination"></task>
+    <parallelGateway id="parallelgateway5" name="Parallel Gateway"></parallelGateway>
+    <sequenceFlow id="flow98" sourceRef="manualtask3" targetRef="parallelgateway5"></sequenceFlow>
+    <sequenceFlow id="flow99" sourceRef="parallelgateway5" targetRef="WaitForCustomer">
+      <extensionElements>
+        <activiti:executionListener event="take" class="activityTasks.ExecutionTracker"></activiti:executionListener>
+      </extensionElements>
+    </sequenceFlow>
+    <subProcess id="CustomerSubProcess" name="Customer Process">
+      <startEvent id="startevent4" name="Start"></startEvent>
+      <endEvent id="endevent11" name="End"></endEvent>
+      <userTask id="CheckOffer" name="Check Offer"></userTask>
+      <sequenceFlow id="flow100" sourceRef="startevent4" targetRef="CheckOffer"></sequenceFlow>
+      <intermediateThrowEvent id="ReturnToCustomerProcess" name="ReturnToCustomerProcess">
+        <signalEventDefinition signalRef="SendCustomerResponse"></signalEventDefinition>
+      </intermediateThrowEvent>
+      <sequenceFlow id="flow101" sourceRef="CheckOffer" targetRef="ReturnToCustomerProcess"></sequenceFlow>
+      <sequenceFlow id="flow102" sourceRef="ReturnToCustomerProcess" targetRef="endevent11"></sequenceFlow>
+    </subProcess>
+    <sequenceFlow id="flow103" sourceRef="parallelgateway5" targetRef="CustomerSubProcess">
+      <extensionElements>
+        <activiti:executionListener event="take" class="activityTasks.ExecutionTracker"></activiti:executionListener>
+      </extensionElements>
+    </sequenceFlow>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_ProductCreationProcess">
     <bpmndi:BPMNPlane bpmnElement="ProductCreationProcess" id="BPMNPlane_ProductCreationProcess">
@@ -141,14 +165,8 @@
       <bpmndi:BPMNShape bpmnElement="parallelgateway2" id="BPMNShape_parallelgateway2">
         <omgdc:Bounds height="40.0" width="40.0" x="2410.0" y="208.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="eventgateway1" id="BPMNShape_eventgateway1">
-        <omgdc:Bounds height="40.0" width="40.0" x="3155.0" y="206.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="timerintermediatecatchevent1" id="BPMNShape_timerintermediatecatchevent1">
         <omgdc:Bounds height="35.0" width="35.0" x="3325.0" y="209.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="signalintermediatecatchevent1" id="BPMNShape_signalintermediatecatchevent1">
-        <omgdc:Bounds height="35.0" width="35.0" x="3158.0" y="320.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="exclusivegateway5" id="BPMNShape_exclusivegateway5">
         <omgdc:Bounds height="40.0" width="40.0" x="3607.0" y="317.0"></omgdc:Bounds>
@@ -243,6 +261,30 @@
       <bpmndi:BPMNShape bpmnElement="manualtask5" id="BPMNShape_manualtask5">
         <omgdc:Bounds height="55.0" width="105.0" x="3455.0" y="52.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="WaitForCustomer" id="BPMNShape_WaitForCustomer">
+        <omgdc:Bounds height="40.0" width="40.0" x="3155.0" y="206.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="CustomerResponded" id="BPMNShape_CustomerResponded">
+        <omgdc:Bounds height="35.0" width="35.0" x="3325.0" y="306.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="parallelgateway5" id="BPMNShape_parallelgateway5">
+        <omgdc:Bounds height="40.0" width="40.0" x="3022.0" y="310.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="CustomerSubProcess" id="BPMNShape_CustomerSubProcess" isExpanded="false">
+        <omgdc:Bounds height="158.0" width="482.0" x="3012.0" y="413.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="startevent4" id="BPMNShape_startevent4">
+        <omgdc:Bounds height="35.0" width="35.0" x="3030.0" y="476.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent11" id="BPMNShape_endevent11">
+        <omgdc:Bounds height="35.0" width="35.0" x="3430.0" y="476.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="CheckOffer" id="BPMNShape_CheckOffer">
+        <omgdc:Bounds height="55.0" width="105.0" x="3140.0" y="466.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ReturnToCustomerProcess" id="BPMNShape_ReturnToCustomerProcess">
+        <omgdc:Bounds height="35.0" width="35.0" x="3330.0" y="476.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
         <omgdi:waypoint x="738.0" y="219.0"></omgdi:waypoint>
         <omgdi:waypoint x="833.0" y="219.0"></omgdi:waypoint>
@@ -262,23 +304,19 @@
           <omgdc:Bounds height="14.0" width="84.0" x="-39.0" y="-20.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow25" id="BPMNEdge_flow25">
-        <omgdi:waypoint x="3095.0" y="226.0"></omgdi:waypoint>
-        <omgdi:waypoint x="3155.0" y="226.0"></omgdi:waypoint>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow26" id="BPMNEdge_flow26">
         <omgdi:waypoint x="3342.0" y="209.0"></omgdi:waypoint>
         <omgdi:waypoint x="3342.0" y="176.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow27" id="BPMNEdge_flow27">
         <omgdi:waypoint x="3175.0" y="246.0"></omgdi:waypoint>
-        <omgdi:waypoint x="3175.0" y="320.0"></omgdi:waypoint>
+        <omgdi:waypoint x="3342.0" y="306.0"></omgdi:waypoint>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="42.0" width="100.0" x="17.0" y="-20.0"></omgdc:Bounds>
+          <omgdc:Bounds height="42.0" width="100.0" x="3.0" y="-29.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow28" id="BPMNEdge_flow28">
-        <omgdi:waypoint x="3193.0" y="337.0"></omgdi:waypoint>
+        <omgdi:waypoint x="3360.0" y="323.0"></omgdi:waypoint>
         <omgdi:waypoint x="3607.0" y="337.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow29" id="BPMNEdge_flow29">
@@ -295,7 +333,6 @@
           <omgdc:Bounds height="14.0" width="76.0" x="-28.0" y="-20.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-   
       <bpmndi:BPMNEdge bpmnElement="flow34" id="BPMNEdge_flow34">
         <omgdi:waypoint x="3175.0" y="107.0"></omgdi:waypoint>
         <omgdi:waypoint x="3175.0" y="206.0"></omgdi:waypoint>
@@ -461,6 +498,31 @@
         <bpmndi:BPMNLabel>
           <omgdc:Bounds height="14.0" width="84.0" x="-6.0" y="7.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow98" id="BPMNEdge_flow98">
+        <omgdi:waypoint x="3042.0" y="254.0"></omgdi:waypoint>
+        <omgdi:waypoint x="3042.0" y="310.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow99" id="BPMNEdge_flow99">
+        <omgdi:waypoint x="3062.0" y="330.0"></omgdi:waypoint>
+        <omgdi:waypoint x="3175.0" y="330.0"></omgdi:waypoint>
+        <omgdi:waypoint x="3175.0" y="246.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow100" id="BPMNEdge_flow100">
+        <omgdi:waypoint x="3065.0" y="493.0"></omgdi:waypoint>
+        <omgdi:waypoint x="3140.0" y="493.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow101" id="BPMNEdge_flow101">
+        <omgdi:waypoint x="3245.0" y="493.0"></omgdi:waypoint>
+        <omgdi:waypoint x="3330.0" y="493.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow102" id="BPMNEdge_flow102">
+        <omgdi:waypoint x="3365.0" y="493.0"></omgdi:waypoint>
+        <omgdi:waypoint x="3430.0" y="493.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow103" id="BPMNEdge_flow103">
+        <omgdi:waypoint x="3042.0" y="350.0"></omgdi:waypoint>
+        <omgdi:waypoint x="3253.0" y="413.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
