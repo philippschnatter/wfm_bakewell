@@ -172,7 +172,7 @@ try{
 	private void checkOffer(String isOfferAccepted){
 		String constraintsId = taskService.createTaskQuery().taskDefinitionKey("CheckOffer").singleResult().getId();
 		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("OfferAcceptanceState", isOfferAccepted);
+		map.put("OfferResult", isOfferAccepted);
 		formService.submitTaskFormData(constraintsId, map);
 	}
 	

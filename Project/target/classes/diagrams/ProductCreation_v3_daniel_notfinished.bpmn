@@ -80,16 +80,25 @@
     <endEvent id="endevent4" name="End"></endEvent>
     <exclusiveGateway id="exclusivegateway5" name="Exclusive Gateway"></exclusiveGateway>
     <sequenceFlow id="flow29" name="Offer Rejected, no revision" sourceRef="exclusivegateway5" targetRef="endevent4">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${OfferAcceptanceState=="RejectWithoutRevision"}]]></conditionExpression>
+      <extensionElements>
+        <activiti:executionListener event="offerRejected" class="activityTasks.ExecutionTracker"></activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${OfferResult=="RejectWithoutRevision"}]]></conditionExpression>
     </sequenceFlow>
     <sequenceFlow id="flow31" name="Offer Accepted" sourceRef="exclusivegateway5" targetRef="PrepareProduction">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${OfferAcceptanceState=="Accepted"}]]></conditionExpression>
+      <extensionElements>
+        <activiti:executionListener event="offerAccepted" class="activityTasks.ExecutionTracker"></activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${OfferResult=="Accepted"}]]></conditionExpression>
     </sequenceFlow>
     <task id="PrepareProduction" name="Prepare Production"></task>
     <endEvent id="endevent8" name="End"></endEvent>
     <sequenceFlow id="flow56" sourceRef="PrepareProduction" targetRef="endevent8"></sequenceFlow>
     <sequenceFlow id="flow57" name="Offer Rejected, revision started" sourceRef="exclusivegateway5" targetRef="manualtask1">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${OfferAcceptanceState=="NeedsRevision"}]]></conditionExpression>
+      <extensionElements>
+        <activiti:executionListener event="OfferNeedsRevision" class="activityTasks.ExecutionTracker"></activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${OfferResult=="NeedsRevision"}]]></conditionExpression>
     </sequenceFlow>
     <sequenceFlow id="flow58" sourceRef="CompileOffer" targetRef="manualtask3"></sequenceFlow>
     <boundaryEvent id="boundaryerror1" name="Error" attachedToRef="subprocess2">
@@ -126,11 +135,7 @@
     <task id="manualtask5" name="Send termination"></task>
     <parallelGateway id="parallelgateway5" name="Parallel Gateway"></parallelGateway>
     <sequenceFlow id="flow98" sourceRef="manualtask3" targetRef="parallelgateway5"></sequenceFlow>
-    <sequenceFlow id="flow99" sourceRef="parallelgateway5" targetRef="WaitForCustomer">
-      <extensionElements>
-        <activiti:executionListener event="take" class="activityTasks.ExecutionTracker"></activiti:executionListener>
-      </extensionElements>
-    </sequenceFlow>
+    <sequenceFlow id="flow99" sourceRef="parallelgateway5" targetRef="WaitForCustomer"></sequenceFlow>
     <subProcess id="CustomerSubProcess" name="Customer Process">
       <startEvent id="startevent4" name="Start"></startEvent>
       <endEvent id="endevent11" name="End"></endEvent>
@@ -142,11 +147,7 @@
       <sequenceFlow id="flow101" sourceRef="CheckOffer" targetRef="ReturnToCustomerProcess"></sequenceFlow>
       <sequenceFlow id="flow102" sourceRef="ReturnToCustomerProcess" targetRef="endevent11"></sequenceFlow>
     </subProcess>
-    <sequenceFlow id="flow103" sourceRef="parallelgateway5" targetRef="CustomerSubProcess">
-      <extensionElements>
-        <activiti:executionListener event="take" class="activityTasks.ExecutionTracker"></activiti:executionListener>
-      </extensionElements>
-    </sequenceFlow>
+    <sequenceFlow id="flow103" sourceRef="parallelgateway5" targetRef="CustomerSubProcess"></sequenceFlow>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_ProductCreationProcess">
     <bpmndi:BPMNPlane bpmnElement="ProductCreationProcess" id="BPMNPlane_ProductCreationProcess">
