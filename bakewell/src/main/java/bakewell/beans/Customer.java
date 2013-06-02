@@ -4,91 +4,100 @@ import java.io.Serializable;
 
 public class Customer implements Serializable {
 
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -279323690879135258L;
-	
-	private String firstName = "";
-	private String lastName = "";
-	private String address = "";
-	private String telNo = "";
-	private String mailAddress = "";
-	private String company = "";
-	private String password = "";
-	
-	public Customer() {
-		
-	}
-	
-	public Customer(String firstName, String lastName, String address, String telNo, String mailAddress, String company, String password)
-	{
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
-		this.telNo = telNo;
-		this.mailAddress = mailAddress;
-		this.company = company;
-		this.password = password;
-	}
 
-	public String getFirstName() {
-		return firstName;
-	}
+/**
+*
+*/
+private static final long serialVersionUID = -279323690879135258L;
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+private Integer id = null;
+private String firstName = null;
+private String lastName = null;
+private String address = null;
+private String telNo = null;
+private String mailAddress = null;
+private String company = null;
+private String password = null;
 
-	public String getLastName() {
-		return lastName;
-	}
+public Customer() {
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+}
 
-	public String getAddress() {
-		return address;
-	}
+public Customer(String firstName, String lastName, String address, String telNo, String mailAddress, String company, String password)
+{
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.address = address;
+	this.telNo = telNo;
+	this.mailAddress = mailAddress;
+	this.company = company;
+	this.password = password;
+}
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+public Integer getId() {
+	return id;
+}
 
-	public String getTelNo() {
-		return telNo;
-	}
+public void setId(Integer id) {
+	this.id = id;
+}
 
-	public void setTelNo(String telNo) {
-		this.telNo = telNo;
-	}
+public String getFirstName() {
+	return firstName;
+}
 
-	public String getMailAddress() {
-		return mailAddress;
-	}
+public void setFirstName(String firstName) {
+	this.firstName = firstName;
+}
 
-	public void setMailAddress(String mailAddress) {
-		this.mailAddress = mailAddress;
-	}
+public String getLastName() {
+	return lastName;
+}
 
-	public String getCompany() {
-		return company;
-	}
+public void setLastName(String lastName) {
+	this.lastName = lastName;
+}
 
-	public void setCompany(String company) {
-		this.company = company;
-	}
+public String getAddress() {
+	return address;
+}
 
-	public String getPassword() {
-		return password;
-	}
+public void setAddress(String address) {
+	this.address = address;
+}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	
-		
+public String getTelNo() {
+	return telNo;
+}
+
+public void setTelNo(String telNo) {
+	this.telNo = telNo;
+}
+
+public String getMailAddress() {
+	return mailAddress;
+}
+
+public void setMailAddress(String mailAddress) {
+	this.mailAddress = mailAddress;
+}
+
+public String getCompany() {
+	return company;
+}
+
+public void setCompany(String company) {
+	this.company = company;
+}
+
+public String getPassword() {
+	return password;
+}
+
+public void setPassword(String password) {
+	this.password = password;
+}
+
+
+
 }

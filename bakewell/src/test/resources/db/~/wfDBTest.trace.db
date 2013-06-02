@@ -1,0 +1,4 @@
+06-02 20:34:59 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "CUSTOMER" nicht gefunden
+Table "CUSTOMER" not found; SQL statement:
+INSERT INTO CUSTOMER (ID, FIRSTNAME, LASTNAME , ADDRESS , TELNO , MAILADDRESS , COMPANY , PASSWORD ) VALUES (ID_CUSTOMER_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?) [42102-168]
