@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Plan_Offer</title>
+	<!-- <link href="/css/bootstrap.css" rel="stylesheet" />
+	<link href="/css/bootstrap-responsive.css" rel="stylesheet"
+		type="text/css" />-->
+	<link href="/resources/twitterBootstrap/css/bootstrap.min.css" rel="stylesheet"
+		type="text/css" />
+	<link href="/resources/twitterBootstrap/css/bootstrap-responsive.min.css"
+		rel="stylesheet" type="text/css" />
+	<link href="/resources/twitterBootstrap/css/override.css" rel="stylesheet"
+		type="text/css" />
+</h:head>
+
+<h:body>
+	<div class="container">
+		<h:form>
+			<h2>Financial estimations:</h2>
+			<div class="row">
+				<div class="span4">
+					<div class="well">
+						<h3>Ingredient Prices</h3>
+						<h:panelGrid columns="2" columnClasses="label, value"
+							styleClass="grid" style="margin-bottom: 10px" border="1"
+							cellpadding="2" cellspacing="5">
+							<h:outputText value="Ingredient I:" />
+							<h:outputText value="12" />
+
+							<h:outputText value="Ingredient II:" />
+							<h:outputText value="23" />
+
+							<h:outputText value="Ingredient III:" />
+							<h:outputText value="13" />
+
+							<h:outputText value="Ingredient IV:" />
+							<h:outputText value="31" />
+
+							<h:outputText value="Subtotal:" />
+							<h:outputText value="14212" />
+						</h:panelGrid>
+
+						<h3>Subcontractor Prices</h3>
+						<h:panelGrid columns="2" columnClasses="label, value"
+							styleClass="grid" style="margin-bottom: 10px" border="1"
+							cellpadding="2" cellspacing="5">
+							<h:outputText value="Transportation:" />
+							<h:outputText value="12" />
+
+							<h:outputText value="Packaging:" />
+							<h:outputText value="23" />
+
+							<h:outputText value="Subtotal:" />
+							<h:outputText value="231" />
+						</h:panelGrid>
+
+						<h3>Set Bid Price</h3>
+						<h:panelGrid columns="2" columnClasses="label, value"
+							styleClass="grid" style="margin-bottom: 10px" border="1"
+							cellpadding="2" cellspacing="5">
+							<h:outputText value="Total cost:" />
+							<h:outputText value="32134" />
+
+							<h:outputText value="Bid Price:" />
+							<h:inputText required="true" />
+						</h:panelGrid>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span1">
+					<h:commandButton value="Confirm Offer" type="button"
+						class="btn btn-primary" />
+				</div>
+			</div>
+		</h:form>
+	</div>
+</h:body>
+
+</html>
