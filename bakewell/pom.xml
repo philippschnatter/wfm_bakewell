@@ -8,6 +8,7 @@
   <name>BPMN 2.0 with Activiti - Examples</name>
   <properties>
     <activiti-version>5.11</activiti-version>
+    <cxf.version>2.6.6</cxf.version>
   </properties>
   <dependencies>
     <dependency>
@@ -35,6 +36,18 @@
       <artifactId>junit</artifactId>
       <version>4.8.1</version>
     </dependency>
+    <!-- REST frontend -->
+	<dependency>
+		<groupId>org.apache.cxf</groupId>
+		<artifactId>cxf-rt-frontend-jaxrs</artifactId>
+		<version>${cxf.version}</version>
+	</dependency>
+	<!-- JSONProvider -->
+  	<dependency>
+		<groupId>org.apache.cxf</groupId>
+		<artifactId>cxf-rt-rs-extension-providers</artifactId>
+		<version>${cxf.version}</version>
+	</dependency>
   </dependencies>
 	 <repositories>
     <repository>
