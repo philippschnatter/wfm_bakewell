@@ -10,7 +10,7 @@ public class GetProductLabelWsCall implements JavaDelegate
 	@Override
 	public void execute(DelegateExecution execution) throws Exception
 	{
-	
+		
 	}
 
 }

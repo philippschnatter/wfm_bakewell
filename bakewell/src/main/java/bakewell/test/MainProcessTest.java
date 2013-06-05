@@ -159,10 +159,21 @@ try{
 		
 	}
 	
+	private void planProductionProcess(){
+		String constraintsId = taskService.createTaskQuery().taskDefinitionKey("BookProductionFacility").singleResult().getId();
+		HashMap<String, String> map = new HashMap<String, String>();
+		formService.submitTaskFormData(constraintsId, map);
+		
+		String constraintsId2 = taskService.createTaskQuery().taskDefinitionKey("OrderPackaging").singleResult().getId();
+		HashMap<String, String> map2 = new HashMap<String, String>();
+		formService.submitTaskFormData(constraintsId2, map2);
+	}
+	
 	private void gotToPremProductionPlan(){
 		evaluateRequirements("true","true");
 		checkCreditWorthiness("true");
 		checkLegalConstrains("true");
+		planProductionProcess();
 	}
 	
 	private void determineFinalPrice(){
@@ -203,7 +214,11 @@ try{
 		evaluateRequirements("true","true");
 		checkCreditWorthiness("true");
 		
-		assertNextTaskHasId("CheckLegalConstraints");
+		List<String> resultStates = new LinkedList<String>();
+		resultStates.add("CheckLegalConstraints");
+		resultStates.add("BookProductionFacility");
+		resultStates.add("OrderPackaging");
+		assertShouldContainStates(resultStates);
 	}
 	
 	@Test
@@ -221,6 +236,7 @@ try{
 		evaluateRequirements("true","true");
 		checkCreditWorthiness("true");
 		checkLegalConstrains("true");
+		planProductionProcess();
 		assertNextTaskHasId("CompileProductionPlan");
 	}
 	
@@ -230,6 +246,7 @@ try{
 		evaluateRequirements("true","true");
 		checkCreditWorthiness("true");
 		checkLegalConstrains("false");
+		planProductionProcess();
 		assertNextTaskHasId("FindSubstitute");
 	}
 	
@@ -240,6 +257,7 @@ try{
 		checkCreditWorthiness("true");
 		checkLegalConstrains("false");
 		findSubstitute("true");
+		planProductionProcess();
 		assertNextTaskHasId("CheckLegalConstraints");
 	}
 	
@@ -249,6 +267,7 @@ try{
 		evaluateRequirements("true","true");
 		checkCreditWorthiness("true");
 		checkLegalConstrains("false");
+		planProductionProcess();
 		findSubstitute("false");
 		
 		// process will end here
@@ -259,6 +278,7 @@ try{
 	public void testCompileProductionPlan(){
 		createNewProcess();
 		gotToPremProductionPlan();
+	
 		compileProductionPlan();
 		assertNextTaskHasId("DetermineFinalProductPrice");
 	}
@@ -287,7 +307,7 @@ try{
 		determineFinalPrice();
 
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
