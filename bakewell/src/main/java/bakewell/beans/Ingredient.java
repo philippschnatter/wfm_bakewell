@@ -4,22 +4,22 @@ public class Ingredient {
 	
 	private Integer id = null;
 	private String name = null;
-	private Double amount = null;
 	private Double fat = null;
 	private Double sugar = null;
 	private Double calories = null;
+	private Double protein = null;
 	
 	public Ingredient() {
 
 	}
 
-	public Ingredient(String name, Double amount, Double fat, Double sugar, Double calories)
+	public Ingredient(String name, Double fat, Double sugar, Double calories, Double protein)
 	{
 		this.name = name;
-		this.amount = amount;
 		this.fat = fat;
 		this.sugar = sugar;
 		this.calories = calories;
+		this.protein = protein;
 	}
 	
 	public Integer getId() {
@@ -33,12 +33,6 @@ public class Ingredient {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public Double getAmount() {
-		return amount;
-	}
-	public void setAmount(Double amount) {
-		this.amount = amount;
 	}
 	public Double getFat() {
 		return fat;
@@ -57,5 +51,11 @@ public class Ingredient {
 	}
 	public void setCalories(Double calories) {
 		this.calories = calories;
+	}
+	public Double getProtein() {
+		return protein;
+	}
+	public void setProtein(Double protein) {
+		this.protein = protein;
 	}
 }
