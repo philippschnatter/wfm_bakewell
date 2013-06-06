@@ -6,14 +6,12 @@ import java.util.HashMap;
 import java.util.Map;
 import org.apache.cxf.binding.BindingFactoryManager;
 import org.apache.cxf.endpoint.Server;
-//import org.apache.cxf.interceptor.LoggingInInterceptor;
-//import org.apache.cxf.interceptor.LoggingOutInterceptor;
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxrs.JAXRSBindingFactory;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.apache.cxf.jaxrs.lifecycle.SingletonResourceProvider;
 import org.apache.cxf.jaxrs.provider.json.JSONProvider;
-
-
 
 
 
@@ -36,10 +34,10 @@ public class IngredientServiceServer {
         sf.setResourceProvider(IngredientRESTService.class, new SingletonResourceProvider(new IngredientRESTServiceImpl()));
         sf.setAddress("http://localhost:63082");
                 
-//        sf.getInFaultInterceptors().add(new LoggingInInterceptor());
-//        sf.getOutFaultInterceptors().add(new LoggingOutInterceptor());
-//        sf.getInInterceptors().add(new LoggingInInterceptor());
-//        sf.getOutInterceptors().add(new LoggingOutInterceptor());
+        sf.getInFaultInterceptors().add(new LoggingInInterceptor());
+        sf.getOutFaultInterceptors().add(new LoggingOutInterceptor());
+        sf.getInInterceptors().add(new LoggingInInterceptor());
+        sf.getOutInterceptors().add(new LoggingOutInterceptor());
         sf.setProvider(jsonProvider);
         
         BindingFactoryManager manager = sf.getBus().getExtension(BindingFactoryManager.class);

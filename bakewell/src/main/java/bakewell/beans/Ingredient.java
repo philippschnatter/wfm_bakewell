@@ -1,5 +1,11 @@
 package bakewell.beans;
 
+import javax.xml.bind.annotation.XmlRootElement;
+//import javax.inject.Named;
+
+
+@XmlRootElement(name="Ingredient")
+//@Named
 public class Ingredient {
 	
 	private Integer id = null;
@@ -58,4 +64,11 @@ public class Ingredient {
 	public void setProtein(Double protein) {
 		this.protein = protein;
 	}
+	
+	public String toString()
+	{
+		return this.name+", "+this.fat+", "+this.sugar+", "+this.calories+", "+this.protein;
+	}
+	
+	
 }
