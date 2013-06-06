@@ -1,37 +1,31 @@
 package bakewell.webservice.ingredient;
+import bakewell.beans.Ingredient;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
-import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.MediaType;
 
-import wfm.bean.Address;
-import wfm.bean.Customer;
 
-public class IngredientRESTService {
-	
-	
-	
-	public Customer validateAddress(String firstName, String lastName,
-			String street, String city, String zip, String country,
-			String telNo, String mailAddress)
-	 throws WebApplicationException
-	{				
-		for (Address address : this.knownAddresses)
-		{
-			if (address.getStreet().equals(street) &&
-				address.getCity().equals(city) &&
-				address.getZip().equals(zip) &&
-				address.getCountry().equals(country))
-			{
-				return new Customer(firstName, lastName, street, city, zip, country, telNo, mailAddress);
-			}
-		}
-		ResponseBuilder builder = Response.status(Status.NOT_FOUND);
-		builder.type("text/html");
-		builder.entity("<h3>Invalid address! Address could not be found</h3>");
 
-		throw new WebApplicationException(builder.build());
-	}
+
+@Produces({MediaType.APPLICATION_JSON})
+@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_ATOM_XML, MediaType.TEXT_HTML, MediaType.APPLICATION_XHTML_XML, MediaType.TEXT_PLAIN, MediaType.WILDCARD})
+@Path("/ingredientCalculation")
+public interface IngredientRESTService {
+	
+	@GET
+	@Path("calculateIngredient")
+	public Ingredient calculateIngredient(@QueryParam("id") String id,
+			@QueryParam("name") String name,
+			@QueryParam("fat") String fat,
+			@QueryParam("sugar") String sugar,
+			@QueryParam("calories") String calories,
+			@QueryParam("protein") String protein) throws WebApplicationException;
+	
+
 
 }
