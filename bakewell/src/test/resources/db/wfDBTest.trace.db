@@ -1575,3 +1575,95 @@ UPDATE INGREDIENT SET  AND ID = ? AND NAME = ? AND AMOUNT = ? AND FAT = ? AND SU
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+06-08 18:23:45 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "RECIPE" nicht gefunden
+Table "RECIPE" not found; SQL statement:
+DROP TABLE RECIPE [42102-172]
+06-08 18:23:45 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "PRODUCT" nicht gefunden
+Table "PRODUCT" not found; SQL statement:
+DROP TABLE PRODUCT [42102-172]
+06-08 18:23:45 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "INGREDIENT2RECIPE" nicht gefunden
+Table "INGREDIENT2RECIPE" not found; SQL statement:
+DROP TABLE INGREDIENT2RECIPE [42102-172]
+06-08 18:23:45 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "GDAREFERENCE" nicht gefunden
+Table "GDAREFERENCE" not found; SQL statement:
+DROP TABLE GDAREFERENCE [42102-172]
+06-08 18:23:45 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Sequenz "ID_PRODUCT_SEQ" nicht gefunden
+Sequence "ID_PRODUCT_SEQ" not found; SQL statement:
+DROP SEQUENCE ID_PRODUCT_SEQ [90036-172]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.command.ddl.DropSequence.update(DropSequence.java:46)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:235)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:180)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:155)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1316)
+	at org.h2.server.web.WebApp.query(WebApp.java:1005)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:967)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+06-08 18:23:45 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Sequenz "ID_RECIPE_SEQ" nicht gefunden
+Sequence "ID_RECIPE_SEQ" not found; SQL statement:
+DROP SEQUENCE ID_RECIPE_SEQ [90036-172]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.command.ddl.DropSequence.update(DropSequence.java:46)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:235)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:180)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:155)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1316)
+	at org.h2.server.web.WebApp.query(WebApp.java:1005)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:967)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+06-08 18:23:45 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Sequenz "ID_INGREDIENT2RECIPE_SEQ" nicht gefunden
+Sequence "ID_INGREDIENT2RECIPE_SEQ" not found; SQL statement:
+DROP SEQUENCE ID_INGREDIENT2RECIPE_SEQ [90036-172]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.command.ddl.DropSequence.update(DropSequence.java:46)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:235)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:180)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:155)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1316)
+	at org.h2.server.web.WebApp.query(WebApp.java:1005)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:967)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+06-08 18:23:45 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Sequenz "ID_GDAREFERENCE_SEQ" nicht gefunden
+Sequence "ID_GDAREFERENCE_SEQ" not found; SQL statement:
+DROP SEQUENCE ID_GDAREFERENCE_SEQ [90036-172]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.command.ddl.DropSequence.update(DropSequence.java:46)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:235)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:180)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:155)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1316)
+	at org.h2.server.web.WebApp.query(WebApp.java:1005)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:967)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
