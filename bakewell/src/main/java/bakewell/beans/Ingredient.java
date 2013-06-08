@@ -11,32 +11,34 @@ public class Ingredient {
 	private Integer id = null;
 	private String name = null;
 	private Double allgda_energy = null;
-	private Double allgda_protein = null;
-	private Double allgda_carbo = null;
-	private Double allgda_fat = null;
-	private Double allgda_fiber = null;
-	private Double allgda_sodium = null;
+	private Double gda_protein = null;
+	private Double gda_carbo = null;
+	private Double gda_fat = null;
+	private Double gda_fiber = null;
+	private Double gda_sodium = null;
 	
 	public Ingredient() {
 
 	}
-
-	public Ingredient(String name, Double allgda_energy, Double allgda_protein,
-			Double allgda_carbo, Double allgda_fat, Double allgda_fiber,
-			Double allgda_sodium) {
+	
+	public Ingredient(String name, Double allgda_energy, Double gda_protein,
+			Double gda_carbo, Double gda_fat, Double gda_fiber,
+			Double gda_sodium) {
 		this.name = name;
 		this.allgda_energy = allgda_energy;
-		this.allgda_protein = allgda_protein;
-		this.allgda_carbo = allgda_carbo;
-		this.allgda_fat = allgda_fat;
-		this.allgda_fiber = allgda_fiber;
-		this.allgda_sodium = allgda_sodium;
+		this.gda_protein = gda_protein;
+		this.gda_carbo = gda_carbo;
+		this.gda_fat = gda_fat;
+		this.gda_fiber = gda_fiber;
+		this.gda_sodium = gda_sodium;
 	}
+
+
 
 	public Integer getId() {
 		return id;
 	}
-	
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -57,49 +59,44 @@ public class Ingredient {
 		this.allgda_energy = allgda_energy;
 	}
 
-	public Double getAllgda_protein() {
-		return allgda_protein;
+	public Double getGda_protein() {
+		return gda_protein;
 	}
 
-	public void setAllgda_protein(Double allgda_protein) {
-		this.allgda_protein = allgda_protein;
+	public void setGda_protein(Double gda_protein) {
+		this.gda_protein = gda_protein;
 	}
 
-	public Double getAllgda_carbo() {
-		return allgda_carbo;
+	public Double getGda_carbo() {
+		return gda_carbo;
 	}
 
-	public void setAllgda_carbo(Double allgda_carbo) {
-		this.allgda_carbo = allgda_carbo;
+	public void setGda_carbo(Double gda_carbo) {
+		this.gda_carbo = gda_carbo;
 	}
 
-	public Double getAllgda_fat() {
-		return allgda_fat;
+	public Double getGda_fat() {
+		return gda_fat;
 	}
 
-	public void setAllgda_fat(Double allgda_fat) {
-		this.allgda_fat = allgda_fat;
+	public void setGda_fat(Double gda_fat) {
+		this.gda_fat = gda_fat;
 	}
 
-	public Double getAllgda_fiber() {
-		return allgda_fiber;
+	public Double getGda_fiber() {
+		return gda_fiber;
 	}
 
-	public void setAllgda_fiber(Double allgda_fiber) {
-		this.allgda_fiber = allgda_fiber;
+	public void setGda_fiber(Double gda_fiber) {
+		this.gda_fiber = gda_fiber;
 	}
 
-	public Double getAllgda_sodium() {
-		return allgda_sodium;
+	public Double getGda_sodium() {
+		return gda_sodium;
 	}
 
-	public void setAllgda_sodium(Double allgda_sodium) {
-		this.allgda_sodium = allgda_sodium;
+	public void setGda_sodium(Double gda_sodium) {
+		this.gda_sodium = gda_sodium;
 	}
-	
-	
-	
-	
-
 	
 }
