@@ -1,5 +1,5 @@
 package bakewell.webservice.ingredient;
-import bakewell.beans.Ingredient;
+import bakewell.beans.Recipe;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -19,12 +19,7 @@ public interface IngredientRESTService {
 	
 	@GET
 	@Path("calculateIngredient")
-	public Ingredient calculateIngredient(@QueryParam("id") String id,
-			@QueryParam("name") String name,
-			@QueryParam("fat") String fat,
-			@QueryParam("sugar") String sugar,
-			@QueryParam("calories") String calories,
-			@QueryParam("protein") String protein) throws WebApplicationException;
+	public Recipe calculateIngredient(@QueryParam("id") String id) throws WebApplicationException;
 	
 
 

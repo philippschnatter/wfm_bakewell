@@ -1,29 +1,29 @@
 package bakewell.webservice.ingredient;
 
+import java.util.HashMap;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
-
 import bakewell.beans.Ingredient;
+
+
+import bakewell.beans.Recipe;
 
 public class IngredientRESTServiceImpl implements IngredientRESTService {
 
 	@Override
 	@GET
 	@Path("calculateIngredient")
-	public Ingredient calculateIngredient(@QueryParam("id") String id,
-			@QueryParam("name") String name, @QueryParam("fat") String fat,
-			@QueryParam("sugar") String sugar,
-			@QueryParam("calories") String calories,
-			@QueryParam("protein") String protein)
-			throws WebApplicationException {
+	public Recipe calculateIngredient(@QueryParam("id") String id) throws WebApplicationException {
 		
-		// some magic still missing here
-		// not clear what to return
-		name = name+"_changed";
+    
+		// DAO: ich habe eine Product ID und brauche alle Ingredients + Mengen jeweils dazu
+		HashMap<Ingredient, Double> ingredientmap = ProductDAO.getIngredientDataByProductID();
+		
 
-		return new Ingredient(name, new Double(fat), new Double(sugar), new Double(calories), new Double(protein));
+		return new Recipe("some name", "some description",234.0, 234.0, 243.0, 54.0, 34.0, 34.0);
 	}
 	
 	

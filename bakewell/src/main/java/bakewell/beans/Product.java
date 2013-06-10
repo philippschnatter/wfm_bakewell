@@ -2,6 +2,9 @@ package bakewell.beans;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="Ingredient")
 public class Product {
 
 	private Integer id = null;
