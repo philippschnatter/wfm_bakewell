@@ -23,7 +23,7 @@ public class IngredientRESTServiceImpl implements IngredientRESTService {
     
 		// DAO: ich habe eine Product ID und brauche alle Ingredients + Mengen (in Gramm) jeweils dazu
 		// TODO DAO needed!!!!!
-		System.out.println("product id: " + productid); // test
+
 		Map<Ingredient, Double> ingredientmap = new HashMap<Ingredient, Double>();
 		
 		// statt der DAO temporaer eigene objekte
@@ -63,7 +63,6 @@ public class IngredientRESTServiceImpl implements IngredientRESTService {
 			totalamountingram = totalamountingram + amount;
 			
 		}
-		System.out.println(allgda_energy);
 		
 		// normalize to per 100 gram
 		allgda_energy = allgda_energy / totalamountingram * 100;
@@ -73,8 +72,6 @@ public class IngredientRESTServiceImpl implements IngredientRESTService {
 		allgda_fiber = allgda_fiber / totalamountingram * 100;
 		allgda_sodium = allgda_sodium / totalamountingram * 100;
 		
-		System.out.println(allgda_energy);
-		
 		// compute percentages of recommended GDA
 		allgda_energy = allgda_energy / GdaTable.RECGDA_ENERGY.getGramPerDay() * 100;
 		allgda_protein = allgda_protein / GdaTable.RECGDA_PROTEIN.getGramPerDay() * 100;
@@ -83,10 +80,7 @@ public class IngredientRESTServiceImpl implements IngredientRESTService {
 		allgda_fiber = allgda_fiber / GdaTable.RECGDA_FIBER.getGramPerDay() * 100;
 		allgda_sodium = allgda_sodium / GdaTable.RECGDA_SODIUM.getGramPerDay() * 100;
 		
-		System.out.println(allgda_energy);
-		
-		Recipe rec = new Recipe("some name", "some description", allgda_energy, allgda_protein, allgda_carbo, allgda_fat, allgda_fiber, allgda_sodium);
-		return rec;
+		return new Recipe("some name", "some description", allgda_energy, allgda_protein, allgda_carbo, allgda_fat, allgda_fiber, allgda_sodium);
 	}
 	
 	
