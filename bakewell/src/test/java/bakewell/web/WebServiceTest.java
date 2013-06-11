@@ -8,7 +8,7 @@ import javax.ws.rs.core.MediaType;
 
 import junit.framework.Assert;
 
-import bakewell.beans.Ingredient;
+import bakewell.beans.Recipe;
 import bakewell.webservice.StartServers;
 import bakewell.webservice.ingredient.IngredientRESTService;
 
@@ -61,14 +61,13 @@ public class WebServiceTest {
 		WebClient wc = sf.createWebClient();
 		wc.accept(MediaType.APPLICATION_JSON);
 		
-		Ingredient ingredient;
+		Recipe recipe;
 		
 		try {
 			
-			ingredient = service.calculateIngredient("2", "mehl", "1", "2", "3", "4");
-			System.out.println(ingredient);
-			Assert.assertNotNull(ingredient);
-			Assert.assertEquals("mehl_changed", ingredient.getName());
+			recipe = service.calculateIngredient("2");
+
+			Assert.assertNotNull(recipe);
 			
 		} catch (WebApplicationException waEx) {
 			
@@ -80,7 +79,7 @@ public class WebServiceTest {
 			Assert.fail(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
-		ingredient = null;
+		recipe = null;
 		
 	}
 

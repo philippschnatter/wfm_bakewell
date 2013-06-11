@@ -1,17 +1,20 @@
 package bakewell.beans;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="Recipe")
 public class Recipe {
 
 	
 	private Integer id = null;
 	private String name = null;
 	private String description = null;
-	private Double allgda_energy = null;
-	private Double allgda_protein = null;
-	private Double allgda_carbo = null;
-	private Double allgda_fat = null;
-	private Double allgda_fiber = null;
-	private Double allgda_sodium = null;
+	private Double allgda_energy = null;	// in percent of the recommended GDA
+	private Double allgda_protein = null;	// in percent of the recommended GDA
+	private Double allgda_carbo = null;		// in percent of the recommended GDA
+	private Double allgda_fat = null;		// in percent of the recommended GDA
+	private Double allgda_fiber = null;		// in percent of the recommended GDA
+	private Double allgda_sodium = null;	// in percent of the recommended GDA
 	
 	public Recipe() {
 		
@@ -84,5 +87,11 @@ public class Recipe {
 		this.id = id;
 	}
 	
+	@Override
+	public String toString() {
+		return name+" "+description+" "+allgda_energy+" "+
+				allgda_protein+" "+allgda_carbo+" "+allgda_fat+" "+
+				allgda_fiber+" "+allgda_sodium;
+	}
 	
 }

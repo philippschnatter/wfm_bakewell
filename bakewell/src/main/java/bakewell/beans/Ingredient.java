@@ -10,12 +10,12 @@ public class Ingredient {
 	
 	private Integer id = null;
 	private String name = null;
-	private Double allgda_energy = null;
-	private Double gda_protein = null;
-	private Double gda_carbo = null;
-	private Double gda_fat = null;
-	private Double gda_fiber = null;
-	private Double gda_sodium = null;
+	private Double allgda_energy = null;	// in kcal
+	private Double gda_protein = null;		// in gram per 100 gram
+	private Double gda_carbo = null;		// in gram per 100 gram
+	private Double gda_fat = null;			// in gram per 100 gram	
+	private Double gda_fiber = null;		// in gram per 100 gram
+	private Double gda_sodium = null;		// in gram per 100 gram
 	
 	public Ingredient() {
 
@@ -97,6 +97,12 @@ public class Ingredient {
 
 	public void setGda_sodium(Double gda_sodium) {
 		this.gda_sodium = gda_sodium;
+	}
+	
+	@Override
+	public String toString() {
+		return name+" "+allgda_energy+" "+gda_protein+" "+
+		gda_carbo+" "+gda_fat+" "+gda_fiber+" "+gda_sodium;
 	}
 	
 }

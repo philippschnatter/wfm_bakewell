@@ -5,7 +5,7 @@ public class Ingredient2Recipe {
 	private Integer id = null;
 	private Integer recipe_id = null;
 	private Integer ingredient_id = null;
-	private Double amount = null;
+	private Double amount = null;  // in gram
 	
 	public Ingredient2Recipe() {
 		

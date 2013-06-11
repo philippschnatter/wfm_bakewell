@@ -4,7 +4,7 @@ import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name="Ingredient")
+@XmlRootElement(name="Product")
 public class Product {
 
 	private Integer id = null;
@@ -108,6 +108,13 @@ public class Product {
 		this.transport_cost = transport_cost;
 	}
 	
+	@Override
+	public String toString() {
+		return recipe_id+" "+customer_id+" "+product_Name+" "+
+				deliveryDate+" "+production_Start+" "+production_End+" "+
+				production_Facility+" "+production_Contractor+" "+
+				transport_Contractor+" "+transport_cost;
+	}
 	
 	
 }
