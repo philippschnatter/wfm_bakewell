@@ -1,5 +1,7 @@
 package bakewell.beans;
 
+import java.util.ArrayList;
+
 import javax.xml.bind.annotation.XmlRootElement;
 //import javax.inject.Named;
 
@@ -16,6 +18,7 @@ public class Ingredient {
 	private Double gda_fat = null;			// in gram per 100 gram	
 	private Double gda_fiber = null;		// in gram per 100 gram
 	private Double gda_sodium = null;		// in gram per 100 gram
+	private ArrayList<Ingredient2Recipe>  ingredients = new ArrayList<Ingredient2Recipe>();
 	
 	public Ingredient() {
 
@@ -99,6 +102,14 @@ public class Ingredient {
 		this.gda_sodium = gda_sodium;
 	}
 	
+	public ArrayList<Ingredient2Recipe> getIngredients() {
+		return ingredients;
+	}
+
+	public void setIngredients(ArrayList<Ingredient2Recipe> ingredients) {
+		this.ingredients = ingredients;
+	}
+
 	@Override
 	public String toString() {
 		return name+" "+allgda_energy+" "+gda_protein+" "+
