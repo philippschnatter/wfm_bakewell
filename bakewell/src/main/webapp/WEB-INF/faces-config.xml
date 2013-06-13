@@ -4,8 +4,8 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
  <managed-bean>
   <managed-bean-name>loginBean</managed-bean-name>
-  <managed-bean-class>bakewell.loginBean</managed-bean-class>
-  <managed-bean-scope>session</managed-bean-scope>
+  <managed-bean-class>bakewell.jsf.loginBean</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
  </managed-bean>
  <navigation-rule>
   <from-view-id>/login.xhtml</from-view-id>
