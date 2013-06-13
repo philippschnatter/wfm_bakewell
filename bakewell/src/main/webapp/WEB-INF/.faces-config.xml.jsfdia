@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#login.xhtml" PATH="/login.xhtml"
+  SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#login.xhtml:0" NAME="item"
+   PATH="/login.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="ok::#landing_page.xhtml" NAME="output"
+    PATH="/landing_page.xhtml" TARGET="rules:#landing_page.xhtml"
+    TITLE="ok" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="denied::#login_failed.xhtml" NAME="output1"
+    PATH="/login_failed.xhtml" TARGET="rules:#login_failed.xhtml"
+    TITLE="denied" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#landing_page.xhtml"
+  PATH="/landing_page.xhtml" SHAPE="256,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#login_failed.xhtml"
+  PATH="/login_failed.xhtml" SHAPE="240,112,50,25" model-entity="JSFProcessGroup"/>
+</PROCESS>
