@@ -73,6 +73,23 @@
 		<artifactId>cxf-rt-rs-extension-providers</artifactId>
 		<version>${cxf.version}</version>
 	</dependency>
+	<dependency>
+		<groupId>org.activiti</groupId>
+		<artifactId>activiti-cdi</artifactId>
+		<version>${activiti-version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-context</artifactId>
+		<version>3.0.3.RELEASE</version>
+	</dependency>
+	<dependency>
+		<groupId>javax</groupId>
+		<artifactId>javaee-api</artifactId>
+		<version>6.0</version>
+		<scope>provided</scope>
+	</dependency>
+
   </dependencies>
 	 <repositories>
     <repository>
