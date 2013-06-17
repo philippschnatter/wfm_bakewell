@@ -18,6 +18,7 @@ public class Ingredient {
 	private Double gda_fat = null;			// in gram per 100 gram	
 	private Double gda_fiber = null;		// in gram per 100 gram
 	private Double gda_sodium = null;		// in gram per 100 gram
+	private Double price = null;			// in Euro Cents per 100 gram
 	private ArrayList<Ingredient2Recipe>  ingredients = new ArrayList<Ingredient2Recipe>();
 	
 	public Ingredient() {
@@ -26,7 +27,7 @@ public class Ingredient {
 	
 	public Ingredient(String name, Double allgda_energy, Double gda_protein,
 			Double gda_carbo, Double gda_fat, Double gda_fiber,
-			Double gda_sodium) {
+			Double gda_sodium, Double price) {
 		this.name = name;
 		this.allgda_energy = allgda_energy;
 		this.gda_protein = gda_protein;
@@ -34,6 +35,7 @@ public class Ingredient {
 		this.gda_fat = gda_fat;
 		this.gda_fiber = gda_fiber;
 		this.gda_sodium = gda_sodium;
+		this.price = price;
 	}
 
 
@@ -109,11 +111,19 @@ public class Ingredient {
 	public void setIngredients(ArrayList<Ingredient2Recipe> ingredients) {
 		this.ingredients = ingredients;
 	}
+	
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
 
 	@Override
 	public String toString() {
 		return name+" "+allgda_energy+" "+gda_protein+" "+
-		gda_carbo+" "+gda_fat+" "+gda_fiber+" "+gda_sodium;
+		gda_carbo+" "+gda_fat+" "+gda_fiber+" "+gda_sodium+" "+price;
 	}
 	
 }

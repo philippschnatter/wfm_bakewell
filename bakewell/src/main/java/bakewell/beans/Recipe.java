@@ -15,6 +15,7 @@ public class Recipe {
 	private Double allgda_fat = null;		// in percent of the recommended GDA
 	private Double allgda_fiber = null;		// in percent of the recommended GDA
 	private Double allgda_sodium = null;	// in percent of the recommended GDA
+	private Double totalprice = null;		// in Euro Cents per 100 gram
 	
 	public Recipe() {
 		
@@ -31,6 +32,7 @@ public class Recipe {
 		this.allgda_fat = allgda_fat;
 		this.allgda_fiber = allgda_fiber;
 		this.allgda_sodium = allgda_sodium;
+		this.totalprice = 0.0;
 	}
 	public String getName() {
 		return name;
@@ -87,11 +89,20 @@ public class Recipe {
 		this.id = id;
 	}
 	
+	public Double getTotalprice() {
+		return totalprice;
+	}
+
+	public void setTotalprice(Double totalprice) {
+		this.totalprice = totalprice;
+	}
+
+
 	@Override
 	public String toString() {
 		return name+" "+description+" "+allgda_energy+" "+
 				allgda_protein+" "+allgda_carbo+" "+allgda_fat+" "+
-				allgda_fiber+" "+allgda_sodium;
+				allgda_fiber+" "+allgda_sodium+" "+totalprice;
 	}
 	
 }

@@ -27,9 +27,9 @@ public class IngredientRESTServiceImpl implements IngredientRESTService {
 		Map<Ingredient, Double> ingredientmap = new HashMap<Ingredient, Double>();
 		
 		// statt der DAO temporaer eigene objekte
-		Ingredient ing_mehl = new Ingredient("Mehl", 897.0, 43.0, 10.0, 20.0, 7.0, 2.0);
-		Ingredient ing_ei = new Ingredient("Ei", 223.0, 10.0, 30.0, 9.0, 21.0, 3.0);
-		Ingredient ing_schokolade = new Ingredient("Schokolade", 893.0, 15.0, 50.0, 5.0, 5.0, 2.0);
+		Ingredient ing_mehl = new Ingredient("Mehl", 897.0, 43.0, 10.0, 20.0, 7.0, 2.0, 23.0);
+		Ingredient ing_ei = new Ingredient("Ei", 223.0, 10.0, 30.0, 9.0, 21.0, 3.0, 20.0);
+		Ingredient ing_schokolade = new Ingredient("Schokolade", 893.0, 15.0, 50.0, 5.0, 5.0, 2.0, 27.0);
 		
 		ingredientmap.put(ing_mehl, 250.0);
 		ingredientmap.put(ing_ei, 120.0);
