@@ -1,18 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
 
 <h:head>
 	<title>Customer_Offer</title>
 	<!-- <link href="/css/bootstrap.css" rel="stylesheet" />
 	<link href="/css/bootstrap-responsive.css" rel="stylesheet"
 		type="text/css" />-->
-	<link href="/resources/twitterBootstrap/css/bootstrap.min.css" rel="stylesheet"
+	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap.min.css" rel="stylesheet"
 		type="text/css" />
-	<link href="/resources/twitterBootstrap/css/bootstrap-responsive.min.css"
+	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap-responsive.min.css"
 		rel="stylesheet" type="text/css" />
-	<link href="/resources/twitterBootstrap/css/override.css" rel="stylesheet"
+	<link href="/bakewell/resources/twitterBootstrap/css/override.css" rel="stylesheet"
 		type="text/css" />
 </h:head>
 
@@ -25,25 +26,7 @@
 					<h:panelGrid columns="2" columnClasses="label, value"
 						styleClass="grid" style="margin-bottom: 10px" border="1" cellpadding="2" cellspacing="5">
 						<h:outputText value="Contractor Company:"/>
-						<h:outputText value="Mustermann AG"/>
-						
-						<h:outputText value="Contractor Address:" />
-						<h:outputText value="Lorem ipsum dolor sit amet" />
-
-						<h:outputText value="Product Specification:" />
-						<h:outputText value="consectetur adipisicing elit" />
-
-						<h:outputText value="Product Quantity:" />
-						<h:outputText value="Nonnullus" />
-
-						<h:outputText value="Delivery Address:" />
-						<h:outputText value="Duis aute irure dolor " />
-
-						<h:outputText value="Delivery Date:" />
-						<h:outputText value="Excepteur sint occaecat " />
-
-						<h:outputText value="Contractor Message:" />
-						<h:outputText value="sunt in culpa qui officia deserunt mollit anim id est laborum" />
+						<h:outputText value="#{customerOffer.company}"/>
 					</h:panelGrid>
 				</div>
 			</div>
@@ -51,12 +34,13 @@
 		<h:form>
 			<div class="row">
 				<div class="span1">
-					<h:commandButton value="Start Process" type="button"
-						class="btn btn-success" />
+					<h:commandButton value="Start Process"
+						class="btn btn-success" action="#{customerOffer.approve}"/>
 				</div>
 				<div class="span1 offset1">
-					<h:commandButton value="Reject Offer" type="button"
-						class="btn btn-danger" />
+					<h:commandButton value="Reject Offer"
+						class="btn btn-danger" action="#{customerOffer.reject}" />
+						<h:commandButton value="reject2" action="#{customerOffer.reject}"></h:commandButton>
 				</div>
 			</div>
 		</h:form>
