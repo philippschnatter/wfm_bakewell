@@ -6,8 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import bakewell.beans.Ingredient;
+import bakewell.beans.Recipe;
 
 /**
  * This Class contains generic CRUD Methods to access the wfDB.
@@ -95,6 +98,48 @@ public class IngredientDAO {
 	   private String getUrl () {
 		    return ("jdbc:h2:file:src/main/resources/db/wfDB");
 	   }
+	   
+	   
+	   /**
+	    * 
+	    * ich habe eine Product ID und brauche alle Ingredients + Mengen (in Gramm) jeweils dazu
+	    * 
+	    * @param productid
+	    */
+	public Map<Ingredient, Double> getIngredientsOfProduct(int productid) {
+	
+		// productid fuer die query verwenden
+		// HashMap mit Ingredients und Mengen
+		Map<Ingredient, Double> ingredientmap = new HashMap<Ingredient, Double>();
+		
+		// TODO some DAO magic
+		
+	
+		return ingredientmap;
+	}
+	
+	
+	   /**
+	    * 
+	    * der Webservice gibt ein Recipe-Object (newrecipe) mit den kalkulierten GDA Werten fuer das Label zurueck
+	    * dieses recipe object wird aber im WS neu erstellt, da der WS nur die ID vom Product kennt
+	    * 
+	    * das DAO muss folglich das "richtige" recipe (oldrecipe) mittels Product ID aus der DB holen und dann
+	    * die GDA Werte (und nur diese) vom newrecipe ins oldrecipe schreiben.
+	    * 
+	    * @params newrecipe, productid
+	    */
+	public void updateRecipeWithProductId(Recipe newrecipe, int productid) {
+		
+		// TODO logic
+		
+	}
+	
+	
+	
+	
+	
+	
 
 	
 	   /**
