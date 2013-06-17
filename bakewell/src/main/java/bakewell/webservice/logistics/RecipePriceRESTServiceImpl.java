@@ -9,8 +9,6 @@ import bakewell.beans.Recipe;
 public class RecipePriceRESTServiceImpl implements RecipePriceRESTService {
 
 	@Override
-	@GET
-	@Path("calculateRecipePrice")
 	public Recipe calculatePrice(@QueryParam("id") String id) throws WebApplicationException {
 		
 		int productid = Integer.valueOf(id);

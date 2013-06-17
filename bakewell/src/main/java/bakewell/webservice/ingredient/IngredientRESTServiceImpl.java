@@ -15,8 +15,6 @@ import bakewell.beans.Recipe;
 public class IngredientRESTServiceImpl implements IngredientRESTService {
 
 	@Override
-	@GET
-	@Path("calculateIngredient")
 	public Recipe calculateIngredient(@QueryParam("id") String id) throws WebApplicationException {
 		
 		int productid = Integer.valueOf(id);
