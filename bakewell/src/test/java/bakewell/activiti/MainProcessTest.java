@@ -1,4 +1,4 @@
-package bakewell.test;
+package bakewell.activiti;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -25,8 +25,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import bakewell.beans.FinalDocument;
 import static org.junit.Assert.*;
 
 public class MainProcessTest {
@@ -37,7 +35,7 @@ public class MainProcessTest {
     private FormService formService;
     private IdentityService identityService;
 	private String yourEMail = "yourEMail@yourHost.com";
-	private FinalDocument finalDocument;
+//	private FinalDocument finalDocument;
 	private String pid;
 	
 	@BeforeClass
