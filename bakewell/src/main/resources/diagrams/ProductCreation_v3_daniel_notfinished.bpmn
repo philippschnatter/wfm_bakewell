@@ -23,7 +23,7 @@
     <sequenceFlow id="DoesNotHaveSolvency" name="Not Ok" sourceRef="exclusivegateway7" targetRef="endevent2">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${HasSolvency=="false"}]]></conditionExpression>
     </sequenceFlow>
-    <sequenceFlow id="HasSolvency" name="Ok" sourceRef="exclusivegateway7" targetRef="manualtask1">
+    <sequenceFlow id="HasSolvency" name="Ok" sourceRef="exclusivegateway7" targetRef="manualtask6">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${HasSolvency=="true"}]]></conditionExpression>
     </sequenceFlow>
     <subProcess id="subprocess2" name="Ingredient Management">
@@ -57,7 +57,7 @@
       <sequenceFlow id="flow55" sourceRef="DetermineFinalProductPrice" targetRef="endevent7"></sequenceFlow>
     </subProcess>
     <sequenceFlow id="flow52" sourceRef="CompileProductionPlan" targetRef="CompileOffer"></sequenceFlow>
-    <sequenceFlow id="flow34" sourceRef="manualtask4" targetRef="WaitForCustomer"></sequenceFlow>
+    <sequenceFlow id="flow34" sourceRef="SendRemainder" targetRef="WaitForCustomer"></sequenceFlow>
     <intermediateCatchEvent id="timerintermediatecatchevent1" name="Remind Customer">
       <timerEventDefinition>
         <timeDuration>PT1M</timeDuration>
@@ -66,7 +66,7 @@
     <sequenceFlow id="flow26" sourceRef="timerintermediatecatchevent1" targetRef="exclusivegateway6"></sequenceFlow>
     <sequenceFlow id="flow38" sourceRef="manualtask5" targetRef="endevent4"></sequenceFlow>
     <exclusiveGateway id="exclusivegateway6" name="Exclusive Gateway" default="WithinTimeLimit"></exclusiveGateway>
-    <sequenceFlow id="WithinTimeLimit" name="Within time limit" sourceRef="exclusivegateway6" targetRef="manualtask4"></sequenceFlow>
+    <sequenceFlow id="WithinTimeLimit" name="Within time limit" sourceRef="exclusivegateway6" targetRef="SendRemainder"></sequenceFlow>
     <sequenceFlow id="ExceedsLimit" name="exceeds time limit" sourceRef="exclusivegateway6" targetRef="manualtask5">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${false}]]></conditionExpression>
     </sequenceFlow>
@@ -94,7 +94,7 @@
     <task id="PrepareProduction" name="Prepare Production"></task>
     <endEvent id="endevent8" name="End"></endEvent>
     <sequenceFlow id="flow56" sourceRef="PrepareProduction" targetRef="endevent8"></sequenceFlow>
-    <sequenceFlow id="flow57" name="Offer Rejected, revision started" sourceRef="exclusivegateway5" targetRef="manualtask1">
+    <sequenceFlow id="flow57" name="Offer Rejected, revision started" sourceRef="exclusivegateway5" targetRef="manualtask6">
       <extensionElements>
         <activiti:executionListener event="OfferNeedsRevision" class="activityTasks.ExecutionTracker"></activiti:executionListener>
       </extensionElements>
@@ -127,11 +127,9 @@
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${IsNewReceipe=="false"}]]></conditionExpression>
     </sequenceFlow>
     <sequenceFlow id="flow75" sourceRef="exclusivegateway11" targetRef="parallelgateway2"></sequenceFlow>
-    <sequenceFlow id="flow97" sourceRef="manualtask1" targetRef="parallelgateway4"></sequenceFlow>
-    <task id="manualtask1" name="Inform Product Manager"></task>
+    <sequenceFlow id="flow97" sourceRef="manualtask6" targetRef="parallelgateway4"></sequenceFlow>
     <task id="manualtask2" name="Inform Customer"></task>
     <task id="manualtask3" name="Send Offer to customer"></task>
-    <task id="manualtask4" name="Send Reminder"></task>
     <task id="manualtask5" name="Send termination"></task>
     <parallelGateway id="parallelgateway5" name="Parallel Gateway"></parallelGateway>
     <sequenceFlow id="flow98" sourceRef="manualtask3" targetRef="parallelgateway5"></sequenceFlow>
@@ -148,6 +146,24 @@
       <sequenceFlow id="flow102" sourceRef="ReturnToCustomerProcess" targetRef="endevent11"></sequenceFlow>
     </subProcess>
     <sequenceFlow id="flow103" sourceRef="parallelgateway5" targetRef="CustomerSubProcess"></sequenceFlow>
+    <task id="manualtask6" name="Inform Product Manager"></task>
+    <subProcess id="ProductionManagement" name="Production Management">
+      <startEvent id="startevent5" name="Start"></startEvent>
+      <parallelGateway id="parallelgateway6" name="Parallel Gateway"></parallelGateway>
+      <userTask id="BookProductionFacility" name="Book Production Facility"></userTask>
+      <userTask id="OrderPackaging" name="Order packaging"></userTask>
+      <parallelGateway id="parallelgateway7" name="Parallel Gateway"></parallelGateway>
+      <sequenceFlow id="flow104" sourceRef="startevent5" targetRef="parallelgateway6"></sequenceFlow>
+      <sequenceFlow id="flow105" sourceRef="parallelgateway6" targetRef="BookProductionFacility"></sequenceFlow>
+      <sequenceFlow id="flow106" sourceRef="parallelgateway6" targetRef="OrderPackaging"></sequenceFlow>
+      <sequenceFlow id="flow107" sourceRef="BookProductionFacility" targetRef="parallelgateway7"></sequenceFlow>
+      <sequenceFlow id="flow108" sourceRef="OrderPackaging" targetRef="parallelgateway7"></sequenceFlow>
+      <endEvent id="endevent12" name="End"></endEvent>
+      <sequenceFlow id="flow109" sourceRef="parallelgateway7" targetRef="endevent12"></sequenceFlow>
+    </subProcess>
+    <sequenceFlow id="flow110" sourceRef="ProductionManagement" targetRef="parallelgateway2"></sequenceFlow>
+    <sequenceFlow id="flow111" sourceRef="parallelgateway4" targetRef="ProductionManagement"></sequenceFlow>
+    <serviceTask id="SendRemainder" name="Send Reminder" activiti:class="bakewell.activityTasks.CustomerRemainder"></serviceTask>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_ProductCreationProcess">
     <bpmndi:BPMNPlane bpmnElement="ProductCreationProcess" id="BPMNPlane_ProductCreationProcess">
@@ -185,10 +201,10 @@
         <omgdc:Bounds height="40.0" width="40.0" x="1540.0" y="267.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="startevent2" id="BPMNShape_startevent2">
-        <omgdc:Bounds height="35.0" width="35.0" x="2793.0" y="64.0"></omgdc:Bounds>
+        <omgdc:Bounds height="35.0" width="35.0" x="2795.0" y="78.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="endevent7" id="BPMNShape_endevent7">
-        <omgdc:Bounds height="35.0" width="35.0" x="2793.0" y="344.0"></omgdc:Bounds>
+        <omgdc:Bounds height="35.0" width="35.0" x="2795.0" y="358.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="endevent8" id="BPMNShape_endevent8">
         <omgdc:Bounds height="35.0" width="35.0" x="3924.0" y="320.0"></omgdc:Bounds>
@@ -233,13 +249,13 @@
         <omgdc:Bounds height="55.0" width="105.0" x="2490.0" y="199.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="CompileOffer" id="BPMNShape_CompileOffer" isExpanded="false">
-        <omgdc:Bounds height="374.0" width="205.0" x="2698.0" y="26.0"></omgdc:Bounds>
+        <omgdc:Bounds height="374.0" width="205.0" x="2700.0" y="40.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="QuoteIngredientPrices" id="BPMNShape_QuoteIngredientPrices">
-        <omgdc:Bounds height="55.0" width="105.0" x="2758.0" y="134.0"></omgdc:Bounds>
+        <omgdc:Bounds height="55.0" width="105.0" x="2760.0" y="148.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="DetermineFinalProductPrice" id="BPMNShape_DetermineFinalProductPrice">
-        <omgdc:Bounds height="55.0" width="105.0" x="2758.0" y="239.0"></omgdc:Bounds>
+        <omgdc:Bounds height="55.0" width="105.0" x="2760.0" y="253.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="FindSubstitute" id="BPMNShape_FindSubstitute">
         <omgdc:Bounds height="55.0" width="105.0" x="2410.0" y="107.0"></omgdc:Bounds>
@@ -247,17 +263,11 @@
       <bpmndi:BPMNShape bpmnElement="PrepareProduction" id="BPMNShape_PrepareProduction">
         <omgdc:Bounds height="55.0" width="105.0" x="3780.0" y="310.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="manualtask1" id="BPMNShape_manualtask1">
-        <omgdc:Bounds height="55.0" width="105.0" x="1370.0" y="259.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="manualtask2" id="BPMNShape_manualtask2">
         <omgdc:Bounds height="55.0" width="105.0" x="2594.0" y="-30.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="manualtask3" id="BPMNShape_manualtask3">
         <omgdc:Bounds height="55.0" width="105.0" x="2990.0" y="199.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="manualtask4" id="BPMNShape_manualtask4">
-        <omgdc:Bounds height="55.0" width="105.0" x="3123.0" y="52.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="manualtask5" id="BPMNShape_manualtask5">
         <omgdc:Bounds height="55.0" width="105.0" x="3455.0" y="52.0"></omgdc:Bounds>
@@ -285,6 +295,33 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="ReturnToCustomerProcess" id="BPMNShape_ReturnToCustomerProcess">
         <omgdc:Bounds height="35.0" width="35.0" x="3330.0" y="476.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="manualtask6" id="BPMNShape_manualtask6">
+        <omgdc:Bounds height="55.0" width="105.0" x="1370.0" y="259.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ProductionManagement" id="BPMNShape_ProductionManagement" isExpanded="false">
+        <omgdc:Bounds height="205.0" width="491.0" x="1660.0" y="306.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="startevent5" id="BPMNShape_startevent5">
+        <omgdc:Bounds height="35.0" width="35.0" x="1680.0" y="383.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="parallelgateway6" id="BPMNShape_parallelgateway6">
+        <omgdc:Bounds height="40.0" width="40.0" x="1760.0" y="380.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="BookProductionFacility" id="BPMNShape_BookProductionFacility">
+        <omgdc:Bounds height="55.0" width="105.0" x="1850.0" y="326.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="OrderPackaging" id="BPMNShape_OrderPackaging">
+        <omgdc:Bounds height="55.0" width="105.0" x="1850.0" y="430.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="parallelgateway7" id="BPMNShape_parallelgateway7">
+        <omgdc:Bounds height="40.0" width="40.0" x="2000.0" y="380.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent12" id="BPMNShape_endevent12">
+        <omgdc:Bounds height="35.0" width="35.0" x="2100.0" y="383.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="SendRemainder" id="BPMNShape_SendRemainder">
+        <omgdc:Bounds height="55.0" width="105.0" x="3123.0" y="52.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
         <omgdi:waypoint x="738.0" y="219.0"></omgdi:waypoint>
@@ -347,20 +384,20 @@
         <omgdi:waypoint x="2490.0" y="226.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow53" id="BPMNEdge_flow53">
-        <omgdi:waypoint x="2810.0" y="99.0"></omgdi:waypoint>
-        <omgdi:waypoint x="2810.0" y="134.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2812.0" y="113.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2812.0" y="148.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow54" id="BPMNEdge_flow54">
-        <omgdi:waypoint x="2810.0" y="189.0"></omgdi:waypoint>
-        <omgdi:waypoint x="2810.0" y="239.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2812.0" y="203.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2812.0" y="253.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow55" id="BPMNEdge_flow55">
-        <omgdi:waypoint x="2810.0" y="294.0"></omgdi:waypoint>
-        <omgdi:waypoint x="2810.0" y="344.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2812.0" y="308.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2812.0" y="358.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow52" id="BPMNEdge_flow52">
         <omgdi:waypoint x="2595.0" y="226.0"></omgdi:waypoint>
-        <omgdi:waypoint x="2698.0" y="213.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2700.0" y="227.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow56" id="BPMNEdge_flow56">
         <omgdi:waypoint x="3885.0" y="337.0"></omgdi:waypoint>
@@ -379,7 +416,7 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow58" id="BPMNEdge_flow58">
-        <omgdi:waypoint x="2903.0" y="213.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2905.0" y="227.0"></omgdi:waypoint>
         <omgdi:waypoint x="2990.0" y="226.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow59" id="BPMNEdge_flow59">
@@ -524,6 +561,44 @@
       <bpmndi:BPMNEdge bpmnElement="flow103" id="BPMNEdge_flow103">
         <omgdi:waypoint x="3042.0" y="350.0"></omgdi:waypoint>
         <omgdi:waypoint x="3253.0" y="413.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow104" id="BPMNEdge_flow104">
+        <omgdi:waypoint x="1715.0" y="400.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1760.0" y="400.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow105" id="BPMNEdge_flow105">
+        <omgdi:waypoint x="1780.0" y="380.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1780.0" y="353.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1850.0" y="353.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow106" id="BPMNEdge_flow106">
+        <omgdi:waypoint x="1780.0" y="420.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1780.0" y="457.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1850.0" y="457.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow107" id="BPMNEdge_flow107">
+        <omgdi:waypoint x="1955.0" y="353.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2020.0" y="353.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2020.0" y="380.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow108" id="BPMNEdge_flow108">
+        <omgdi:waypoint x="1955.0" y="457.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2020.0" y="457.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2020.0" y="420.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow109" id="BPMNEdge_flow109">
+        <omgdi:waypoint x="2040.0" y="400.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2100.0" y="400.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow110" id="BPMNEdge_flow110">
+        <omgdi:waypoint x="2151.0" y="408.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2430.0" y="408.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2430.0" y="248.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow111" id="BPMNEdge_flow111">
+        <omgdi:waypoint x="1560.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1560.0" y="408.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1660.0" y="408.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
