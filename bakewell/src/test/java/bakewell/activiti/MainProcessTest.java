@@ -81,15 +81,15 @@ public class MainProcessTest {
 		formService = processEngine.getFormService();
 	
 	}
+	
 	@After
 	public void Cleanup(){
 		
-try{
-	runtimeService.deleteProcessInstance(pid, "unit test");
-}catch(Exception e){
+		try{
+			runtimeService.deleteProcessInstance(pid, "unit test");
+		}catch(Exception e){
 	
-}
-
+		}
 	}
 	
 	private void evaluateRequirements(String meetsBusinessGoals, String isNewReceipe){
