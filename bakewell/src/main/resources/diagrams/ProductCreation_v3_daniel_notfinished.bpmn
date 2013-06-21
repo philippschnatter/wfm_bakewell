@@ -7,7 +7,7 @@
   <process id="ProductCreationProcess" name="Product creation" isExecutable="true">
     <startEvent id="startevent1" name="Start"></startEvent>
     <sequenceFlow id="flow2" sourceRef="startevent1" targetRef="EvaluateRequirements"></sequenceFlow>
-    <userTask id="EvaluateRequirements" name="Evaluate customer requirements"></userTask>
+    <userTask id="EvaluateRequirements" name="Evaluate customer requirements" activiti:assignee="Controller" activiti:candidateUsers="Controller"></userTask>
     <sequenceFlow id="flow1" sourceRef="EvaluateRequirements" targetRef="exclusivegateway1"></sequenceFlow>
     <exclusiveGateway id="exclusivegateway1" name="MeetBusinessGoals"></exclusiveGateway>
     <sequenceFlow id="DoesNotMeetBusinessGoals" name="Does not meet business goals" sourceRef="exclusivegateway1" targetRef="endevent2">
@@ -17,7 +17,7 @@
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${MeetsBusinessGoals=="true"}]]></conditionExpression>
     </sequenceFlow>
     <endEvent id="endevent2" name="End"></endEvent>
-    <userTask id="CheckCreditWorthiness" name="Check credit worthiness"></userTask>
+    <userTask id="CheckCreditWorthiness" name="Check credit worthiness" activiti:assignee="Controller" activiti:candidateUsers="Controller"></userTask>
     <sequenceFlow id="flow6" sourceRef="CheckCreditWorthiness" targetRef="exclusivegateway7"></sequenceFlow>
     <exclusiveGateway id="exclusivegateway7" name="Exclusive Gateway"></exclusiveGateway>
     <sequenceFlow id="DoesNotHaveSolvency" name="Not Ok" sourceRef="exclusivegateway7" targetRef="endevent2">
@@ -28,7 +28,7 @@
     </sequenceFlow>
     <subProcess id="subprocess2" name="Ingredient Management">
       <startEvent id="startevent3" name="Start"></startEvent>
-      <userTask id="CheckLegalConstraints" name="Check Legal Constraints"></userTask>
+      <userTask id="CheckLegalConstraints" name="Check Legal Constraints" activiti:assignee="ProcessManager"></userTask>
       <endEvent id="endevent9" name="End"></endEvent>
       <sequenceFlow id="flow59" sourceRef="startevent3" targetRef="CheckLegalConstraints"></sequenceFlow>
       <endEvent id="errorendevent1" name="ErrorEnd">
@@ -45,12 +45,12 @@
     </subProcess>
     <parallelGateway id="parallelgateway4" name="Parallel Gateway"></parallelGateway>
     <parallelGateway id="parallelgateway2" name="Parallel Gateway"></parallelGateway>
-    <userTask id="CompileProductionPlan" name="Compile preliminary production plan"></userTask>
+    <userTask id="CompileProductionPlan" name="Compile preliminary production plan" activiti:assignee="ProcessManager"></userTask>
     <sequenceFlow id="flow50" sourceRef="parallelgateway2" targetRef="CompileProductionPlan"></sequenceFlow>
     <subProcess id="CompileOffer" name="Compile offer for customer">
       <startEvent id="startevent2" name="Start"></startEvent>
       <serviceTask id="QuoteIngredientPrices" name="Quote Ingredient Prices" activiti:class="bakewell.activiti.QuoteIngredientPricesWsCall"></serviceTask>
-      <userTask id="DetermineFinalProductPrice" name="Determine final product price"></userTask>
+      <userTask id="DetermineFinalProductPrice" name="Determine final product price" activiti:assignee="ProcessManager"></userTask>
       <endEvent id="endevent7" name="End"></endEvent>
       <sequenceFlow id="flow53" sourceRef="startevent2" targetRef="QuoteIngredientPrices"></sequenceFlow>
       <sequenceFlow id="flow54" sourceRef="QuoteIngredientPrices" targetRef="DetermineFinalProductPrice"></sequenceFlow>
@@ -108,7 +108,7 @@
     <boundaryEvent id="boundaryerror1" name="Error" attachedToRef="subprocess2">
       <errorEventDefinition errorRef="LegalConstraintsViolated"></errorEventDefinition>
     </boundaryEvent>
-    <userTask id="FindSubstitute" name="Find Substitute"></userTask>
+    <userTask id="FindSubstitute" name="Find Substitute" activiti:assignee="ProcessManager"></userTask>
     <sequenceFlow id="flow65" sourceRef="boundaryerror1" targetRef="FindSubstitute"></sequenceFlow>
     <exclusiveGateway id="exclusivegateway9" name="Exclusive Gateway"></exclusiveGateway>
     <sequenceFlow id="flow66" sourceRef="FindSubstitute" targetRef="exclusivegateway9"></sequenceFlow>
@@ -141,7 +141,7 @@
     <subProcess id="CustomerSubProcess" name="Customer Process">
       <startEvent id="startevent4" name="Start"></startEvent>
       <endEvent id="endevent11" name="End"></endEvent>
-      <userTask id="CheckOffer" name="Check Offer"></userTask>
+      <userTask id="CheckOffer" name="Check Offer" activiti:assignee="Customer"></userTask>
       <sequenceFlow id="flow100" sourceRef="startevent4" targetRef="CheckOffer"></sequenceFlow>
       <intermediateThrowEvent id="ReturnToCustomerProcess" name="ReturnToCustomerProcess">
         <signalEventDefinition signalRef="SendCustomerResponse"></signalEventDefinition>
@@ -154,8 +154,8 @@
     <subProcess id="ProductionManagement" name="Production Management">
       <startEvent id="startevent5" name="Start"></startEvent>
       <parallelGateway id="parallelgateway6" name="Parallel Gateway"></parallelGateway>
-      <userTask id="BookProductionFacility" name="Book Production Facility"></userTask>
-      <userTask id="OrderPackaging" name="Order packaging"></userTask>
+      <userTask id="BookProductionFacility" name="Book Production Facility" activiti:assignee="ProcessManager"></userTask>
+      <userTask id="OrderPackaging" name="Order packaging" activiti:assignee="ProcessManager"></userTask>
       <parallelGateway id="parallelgateway7" name="Parallel Gateway"></parallelGateway>
       <sequenceFlow id="flow104" sourceRef="startevent5" targetRef="parallelgateway6"></sequenceFlow>
       <sequenceFlow id="flow105" sourceRef="parallelgateway6" targetRef="BookProductionFacility"></sequenceFlow>
