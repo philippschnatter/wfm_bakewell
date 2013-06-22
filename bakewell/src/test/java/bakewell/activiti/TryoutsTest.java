@@ -2,6 +2,7 @@ package bakewell.activiti;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -31,8 +32,7 @@ public class TryoutsTest {
 	
 	@BeforeClass
 	public static void init()
-	{
-		
+	{	
 		// Create Activiti process engine
 		processEngine = ProcessEngineConfiguration.createStandaloneInMemProcessEngineConfiguration().buildProcessEngine();
 		runtimeService = processEngine.getRuntimeService();
@@ -64,6 +64,25 @@ public class TryoutsTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		List<Task> nextTasks = taskService.createTaskQuery().list();
+	}
+	
+	@Test
+	public void testRemindCustomer(){
+		createNewProcess();
+		runtimeService.setVariable(pid, "RemainderAmount", "0");
+		Task nextTask = taskService.createTaskQuery().singleResult();
+		HashMap<String, String> map = new HashMap<String, String>();
+		formService.submitTaskFormData(nextTask.getId(), map);
+		
+		Task nextTask2 = taskService.createTaskQuery().singleResult();
+		formService.submitTaskFormData(nextTask2.getId(), map);
+		
+		Task nextTask3 = taskService.createTaskQuery().singleResult();
+		formService.submitTaskFormData(nextTask3.getId(), map);
+		
+		Task lastTasks = taskService.createTaskQuery().singleResult();
+		
 	}
 }

@@ -72,7 +72,7 @@
     <exclusiveGateway id="exclusivegateway6" name="Exclusive Gateway" default="WithinTimeLimit"></exclusiveGateway>
     <sequenceFlow id="WithinTimeLimit" name="Within time limit" sourceRef="exclusivegateway6" targetRef="SendRemainder"></sequenceFlow>
     <sequenceFlow id="ExceedsLimit" name="exceeds time limit" sourceRef="exclusivegateway6" targetRef="manualtask5">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${false}]]></conditionExpression>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${ RemainderAmount =="2"}]]></conditionExpression>
     </sequenceFlow>
     <intermediateCatchEvent id="CustomerResponded" name="CustomerResponded">
       <signalEventDefinition signalRef="SendCustomerResponse"></signalEventDefinition>
@@ -289,19 +289,19 @@
         <omgdc:Bounds height="40.0" width="40.0" x="3022.0" y="310.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="CustomerSubProcess" id="BPMNShape_CustomerSubProcess" isExpanded="false">
-        <omgdc:Bounds height="158.0" width="482.0" x="3012.0" y="413.0"></omgdc:Bounds>
+        <omgdc:Bounds height="158.0" width="482.0" x="3010.0" y="430.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="startevent4" id="BPMNShape_startevent4">
-        <omgdc:Bounds height="35.0" width="35.0" x="3030.0" y="476.0"></omgdc:Bounds>
+        <omgdc:Bounds height="35.0" width="35.0" x="3028.0" y="493.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="endevent11" id="BPMNShape_endevent11">
-        <omgdc:Bounds height="35.0" width="35.0" x="3430.0" y="476.0"></omgdc:Bounds>
+        <omgdc:Bounds height="35.0" width="35.0" x="3428.0" y="493.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="CheckOffer" id="BPMNShape_CheckOffer">
-        <omgdc:Bounds height="55.0" width="105.0" x="3140.0" y="466.0"></omgdc:Bounds>
+        <omgdc:Bounds height="55.0" width="105.0" x="3138.0" y="483.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="ReturnToCustomerProcess" id="BPMNShape_ReturnToCustomerProcess">
-        <omgdc:Bounds height="35.0" width="35.0" x="3330.0" y="476.0"></omgdc:Bounds>
+        <omgdc:Bounds height="35.0" width="35.0" x="3328.0" y="493.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="manualtask6" id="BPMNShape_manualtask6">
         <omgdc:Bounds height="55.0" width="105.0" x="1370.0" y="259.0"></omgdc:Bounds>
@@ -557,20 +557,20 @@
         <omgdi:waypoint x="3175.0" y="246.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow100" id="BPMNEdge_flow100">
-        <omgdi:waypoint x="3065.0" y="493.0"></omgdi:waypoint>
-        <omgdi:waypoint x="3140.0" y="493.0"></omgdi:waypoint>
+        <omgdi:waypoint x="3063.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="3138.0" y="510.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow101" id="BPMNEdge_flow101">
-        <omgdi:waypoint x="3245.0" y="493.0"></omgdi:waypoint>
-        <omgdi:waypoint x="3330.0" y="493.0"></omgdi:waypoint>
+        <omgdi:waypoint x="3243.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="3328.0" y="510.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow102" id="BPMNEdge_flow102">
-        <omgdi:waypoint x="3365.0" y="493.0"></omgdi:waypoint>
-        <omgdi:waypoint x="3430.0" y="493.0"></omgdi:waypoint>
+        <omgdi:waypoint x="3363.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="3428.0" y="510.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow103" id="BPMNEdge_flow103">
         <omgdi:waypoint x="3042.0" y="350.0"></omgdi:waypoint>
-        <omgdi:waypoint x="3253.0" y="413.0"></omgdi:waypoint>
+        <omgdi:waypoint x="3251.0" y="430.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow104" id="BPMNEdge_flow104">
         <omgdi:waypoint x="1715.0" y="400.0"></omgdi:waypoint>
@@ -611,7 +611,7 @@
         <omgdi:waypoint x="1660.0" y="408.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow112" id="BPMNEdge_flow112">
-        <omgdi:waypoint x="3494.0" y="492.0"></omgdi:waypoint>
+        <omgdi:waypoint x="3492.0" y="509.0"></omgdi:waypoint>
         <omgdi:waypoint x="3550.0" y="492.0"></omgdi:waypoint>
         <omgdi:waypoint x="3550.0" y="343.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>

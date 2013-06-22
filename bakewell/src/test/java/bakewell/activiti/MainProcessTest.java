@@ -92,7 +92,7 @@ public class MainProcessTest {
 		pid = processInstance.getProcessInstanceId();
 		formService = processEngine.getFormService();
 	
-	
+		runtimeService.setVariable(pid, "RemainderAmount", "0");
 	}
 	
 	@After

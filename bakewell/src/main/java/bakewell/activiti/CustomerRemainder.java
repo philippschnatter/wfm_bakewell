@@ -13,12 +13,15 @@ public class CustomerRemainder implements JavaDelegate
 		
 		int remainder=1;
 		String remAmount = (String)execution.getVariable("RemainderAmount");
+		
 		if(remAmount!=null)
 		{
+			//String remAmount =  remAmountObject.toString();
 			remainder= Integer.parseInt(remAmount);
+			remainder ++;
 		}			
 		
-		execution.setVariable("RemainderAmount", remainder);
+		execution.setVariable("RemainderAmount", "" + remainder);
 	}
 
 }
