@@ -15,6 +15,7 @@ import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.form.TaskFormData;
 import org.activiti.engine.history.HistoricActivityInstance;
+import org.activiti.engine.identity.User;
 import org.activiti.engine.impl.cmd.StartProcessInstanceByMessageCmd;
 import org.activiti.engine.impl.cmd.StartProcessInstanceCmd;
 import org.activiti.engine.repository.DeploymentBuilder;
@@ -37,6 +38,10 @@ public class MainProcessTest {
 	private String yourEMail = "yourEMail@yourHost.com";
 //	private FinalDocument finalDocument;
 	private String pid;
+	
+	private static final String USER_CONTROLLER = "Controller";
+	private static final String USER_CUSTOMER = "Customer";
+	private static final String USER_PROCESSMANAGER = "ProcessManager";
 	
 	@BeforeClass
 	public static void init()
@@ -68,44 +73,39 @@ public class MainProcessTest {
 		builder.name(xmlFile);
 		builder.deploy();
 
-	
+		// Create our 3 users
+		IdentityService identityService = processEngine.getIdentityService();
+		User controller = identityService.newUser(USER_CONTROLLER);
+		identityService.saveUser(controller);
+		User customer = identityService.newUser(USER_CUSTOMER);
+		identityService.saveUser(controller);
+		User processManager = identityService.newUser(USER_PROCESSMANAGER);
+		identityService.saveUser(controller);
 	}
 	
 
 	private void createNewProcess(){
 		processInstance = runtimeService.startProcessInstanceByKey("ProductCreationProcess");
 		assertNotNull(processInstance.getId());
-		identityService = processEngine.getIdentityService();
+
 		taskService = processEngine.getTaskService(); 
 		pid = processInstance.getProcessInstanceId();
 		formService = processEngine.getFormService();
 	
+	
 	}
+	
 	@After
 	public void Cleanup(){
 		
-try{
-	runtimeService.deleteProcessInstance(pid, "unit test");
-}catch(Exception e){
+		try{
+			runtimeService.deleteProcessInstance(pid, "unit test");
+		}catch(Exception e){
 	
-}
-
+		}
 	}
 	
-	private void evaluateRequirements(String meetsBusinessGoals, String isNewReceipe){
-		String evalRequirementsId = taskService.createTaskQuery().taskDefinitionKey("EvaluateRequirements").singleResult().getId();
-		//assertNotNull(evalRequirements);
-		/*FinalDocument finalDocument = new FinalDocument();
-		finalDocument.MeetsBusinessGoals=true;
-		runtimeService.setVariable(pid, "finalDocument", finalDocument);
-		runtimeService.setVariable(pid, "test", true);
-		FinalDocument doc = (FinalDocument)runtimeService.getVariable(pid, "finalDocument");*/
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("MeetsBusinessGoals", meetsBusinessGoals);
-		map.put("IsNewReceipe", isNewReceipe);
-		formService.submitTaskFormData(evalRequirementsId, map);
-	}
-	
+	// assert helpers
 	private void assertNextTaskHasId(String taskId){
 		Task nextTasks = taskService.createTaskQuery().singleResult();
 		assertEquals(nextTasks.getTaskDefinitionKey(), taskId);
@@ -123,12 +123,28 @@ try{
 			assertTrue(activeActivityIds.contains(state));
 		}
 		
-		assertEquals(activeActivityIds.size(), states.size());
-		
+		assertEquals(activeActivityIds.size(), states.size());	
 	}
 	
+	// test state helpers
+	private void evaluateRequirements(String meetsBusinessGoals, String isNewReceipe){
+		String evalRequirementsId = taskService.createTaskQuery().taskDefinitionKey("EvaluateRequirements").
+				taskAssignee(USER_CONTROLLER).singleResult().getId();
+		//assertNotNull(evalRequirements);
+		/*FinalDocument finalDocument = new FinalDocument();
+		finalDocument.MeetsBusinessGoals=true;
+		runtimeService.setVariable(pid, "finalDocument", finalDocument);
+		runtimeService.setVariable(pid, "test", true);
+		FinalDocument doc = (FinalDocument)runtimeService.getVariable(pid, "finalDocument");*/
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("MeetsBusinessGoals", meetsBusinessGoals);
+		map.put("IsNewReceipe", isNewReceipe);
+		formService.submitTaskFormData(evalRequirementsId, map);
+	}
+		
 	private void checkCreditWorthiness(String hasSolvency){
-		String checkCreditId = taskService.createTaskQuery().taskDefinitionKey("CheckCreditWorthiness").singleResult().getId();
+		String checkCreditId = taskService.createTaskQuery().taskDefinitionKey("CheckCreditWorthiness").
+				taskAssignee(USER_CONTROLLER).singleResult().getId();
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("HasSolvency", hasSolvency);
 		formService.submitTaskFormData(checkCreditId, map);
@@ -137,28 +153,32 @@ try{
 
 	
 	private void checkLegalConstrains(String legalConstraintsOk){
-		String constraintsId = taskService.createTaskQuery().taskDefinitionKey("CheckLegalConstraints").singleResult().getId();
+		String constraintsId = taskService.createTaskQuery().taskDefinitionKey("CheckLegalConstraints").
+				taskAssignee(USER_PROCESSMANAGER).singleResult().getId();
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("LegalConstraintsOk", legalConstraintsOk);
 		formService.submitTaskFormData(constraintsId, map);
 	}
 	
 	private void findSubstitute(String substituteFound){
-		String constraintsId = taskService.createTaskQuery().taskDefinitionKey("FindSubstitute").singleResult().getId();
+		String constraintsId = taskService.createTaskQuery().taskDefinitionKey("FindSubstitute").
+				taskAssignee(USER_PROCESSMANAGER).singleResult().getId();
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("SubstituteFound", substituteFound);
 		formService.submitTaskFormData(constraintsId, map);
 	}
 	
 	private void compileProductionPlan(){
-		String constraintsId = taskService.createTaskQuery().taskDefinitionKey("CompileProductionPlan").singleResult().getId();
+		String constraintsId = taskService.createTaskQuery().taskDefinitionKey("CompileProductionPlan").
+				taskAssignee(USER_PROCESSMANAGER).singleResult().getId();
 		HashMap<String, String> map = new HashMap<String, String>();
 		formService.submitTaskFormData(constraintsId, map);
 		
 	}
 	
 	private void planProductionProcess(){
-		String constraintsId = taskService.createTaskQuery().taskDefinitionKey("BookProductionFacility").singleResult().getId();
+		String constraintsId = taskService.createTaskQuery().taskDefinitionKey("BookProductionFacility").
+				taskAssignee(USER_PROCESSMANAGER).singleResult().getId();
 		HashMap<String, String> map = new HashMap<String, String>();
 		formService.submitTaskFormData(constraintsId, map);
 		
@@ -175,13 +195,15 @@ try{
 	}
 	
 	private void determineFinalPrice(){
-		String constraintsId = taskService.createTaskQuery().taskDefinitionKey("DetermineFinalProductPrice").singleResult().getId();
+		String constraintsId = taskService.createTaskQuery().taskDefinitionKey("DetermineFinalProductPrice").
+				taskAssignee(USER_PROCESSMANAGER).singleResult().getId();
 		HashMap<String, String> map = new HashMap<String, String>();
 		formService.submitTaskFormData(constraintsId, map);
 	}
 	
 	private void checkOffer(String isOfferAccepted){
-		String constraintsId = taskService.createTaskQuery().taskDefinitionKey("CheckOffer").singleResult().getId();
+		String constraintsId = taskService.createTaskQuery().taskDefinitionKey("CheckOffer").
+				taskAssignee(USER_CUSTOMER).singleResult().getId();
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("OfferResult", isOfferAccepted);
 		formService.submitTaskFormData(constraintsId, map);
@@ -191,9 +213,43 @@ try{
 	public void testEvalRequirementsPositive(){
 		createNewProcess();
 		
+		
+		
 		// First task is evaluate requirements
 		evaluateRequirements("true","true");
 		assertNextTaskHasId("CheckCreditWorthiness");
+	}
+	
+	@Test
+	public void testFirstTaskWithWrongUser(){
+		createNewProcess();
+		Task taskGeneral = taskService.createTaskQuery().
+				taskDefinitionKey("EvaluateRequirements").
+				singleResult();
+		
+		Task taskForCustomer = taskService.createTaskQuery().
+				taskDefinitionKey("EvaluateRequirements").
+				taskAssignee("Customer").
+				singleResult();
+		
+		// wrong user
+		assertNull(taskForCustomer);
+		
+		Task taskForProcessManager = taskService.createTaskQuery().
+				taskDefinitionKey("EvaluateRequirements").
+				taskAssignee("ProcessManager").
+				singleResult();
+		
+		// wrong user
+		assertNull(taskForProcessManager);
+		
+		Task taskForController = taskService.createTaskQuery().
+				taskDefinitionKey("EvaluateRequirements").
+				taskAssignee("Controller").
+				singleResult();
+		
+		// correct user
+		assertNotNull(taskForController);
 	}
 	
 	@Test
@@ -297,6 +353,7 @@ try{
 		assertShouldContainStates(resultStates);
 	}
 	
+	/*
 	@Test
 	public void testTimer(){
 		createNewProcess();
@@ -315,7 +372,7 @@ try{
 		resultStates.add("WaitForCustomer");
 		resultStates.add("CheckOffer");
 		assertShouldContainStates(resultStates);
-	}
+	}*/
 	
 	@Test
 	public void testCheckOffer(){
