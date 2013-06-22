@@ -40,7 +40,16 @@
       <sequenceFlow id="flow89" sourceRef="CheckLegalConstraints" targetRef="GetProductLabel">
         <conditionExpression xsi:type="tFormalExpression"><![CDATA[${LegalConstraintsOk=="true"}]]></conditionExpression>
       </sequenceFlow>
-      <serviceTask id="GetProductLabel" name="Get Product Label" activiti:class="bakewell.activiti.GetProductLabelWsCall"></serviceTask>
+      <serviceTask id="GetProductLabel" name="Get Product Label" activiti:class="bakewell.activiti.GetProductLabelWsCall">
+        <extensionElements>
+          <activiti:field name="service">
+            <activiti:string>http://localhost:63082</activiti:string>
+          </activiti:field>
+          <activiti:field name="productId">
+            <activiti:expression>${productId}</activiti:expression>
+          </activiti:field>
+        </extensionElements>
+      </serviceTask>
       <sequenceFlow id="flow62" sourceRef="GetProductLabel" targetRef="endevent9"></sequenceFlow>
     </subProcess>
     <parallelGateway id="parallelgateway4" name="Parallel Gateway"></parallelGateway>
@@ -49,7 +58,16 @@
     <sequenceFlow id="flow50" sourceRef="parallelgateway2" targetRef="CompileProductionPlan"></sequenceFlow>
     <subProcess id="CompileOffer" name="Compile offer for customer">
       <startEvent id="startevent2" name="Start"></startEvent>
-      <serviceTask id="QuoteIngredientPrices" name="Quote Ingredient Prices" activiti:class="bakewell.activiti.QuoteIngredientPricesWsCall"></serviceTask>
+      <serviceTask id="QuoteIngredientPrices" name="Quote Ingredient Prices" activiti:class="bakewell.activiti.QuoteIngredientPricesWsCall">
+        <extensionElements>
+          <activiti:field name="service">
+            <activiti:string>http://localhost:63082</activiti:string>
+          </activiti:field>
+          <activiti:field name="productId">
+            <activiti:expression>${productId}</activiti:expression>
+          </activiti:field>
+        </extensionElements>
+      </serviceTask>
       <userTask id="DetermineFinalProductPrice" name="Determine final product price" activiti:assignee="ProcessManager"></userTask>
       <endEvent id="endevent7" name="End"></endEvent>
       <sequenceFlow id="flow53" sourceRef="startevent2" targetRef="QuoteIngredientPrices"></sequenceFlow>
