@@ -1,5 +1,7 @@
 package bakewell.beans;
 
+import java.util.ArrayList;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="Recipe")
@@ -16,6 +18,7 @@ public class Recipe {
 	private Double allgda_fiber = null;		// in percent of the recommended GDA
 	private Double allgda_sodium = null;	// in percent of the recommended GDA
 	private Double totalprice = null;		// in Euro Cents per 100 gram
+	private ArrayList<Ingredient2Recipe>  ingredients = new ArrayList<Ingredient2Recipe>();
 	
 	public Recipe() {
 		
@@ -23,7 +26,7 @@ public class Recipe {
 	
 	public Recipe(String name, String description, Double allgda_energy,
 			Double allgda_protein, Double allgda_carbo, Double allgda_fat,
-			Double allgda_fiber, Double allgda_sodium) {
+			Double allgda_fiber, Double allgda_sodium, Double totalprice) {
 		this.name = name;
 		this.description = description;
 		this.allgda_energy = allgda_energy;
@@ -32,7 +35,7 @@ public class Recipe {
 		this.allgda_fat = allgda_fat;
 		this.allgda_fiber = allgda_fiber;
 		this.allgda_sodium = allgda_sodium;
-		this.totalprice = 0.0;
+		this.totalprice = totalprice;
 	}
 	public String getName() {
 		return name;
@@ -46,7 +49,7 @@ public class Recipe {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Double getAllgda_Energy() {
+	public Double getAllgda_energy() {
 		return allgda_energy;
 	}
 	public void setAllgda_energy(Double allgda_energy) {
@@ -96,7 +99,14 @@ public class Recipe {
 	public void setTotalprice(Double totalprice) {
 		this.totalprice = totalprice;
 	}
+	
+	public ArrayList<Ingredient2Recipe> getIngredients() {
+		return ingredients;
+	}
 
+	public void setIngredients(ArrayList<Ingredient2Recipe> ingredients) {
+		this.ingredients = ingredients;
+	}
 
 	@Override
 	public String toString() {

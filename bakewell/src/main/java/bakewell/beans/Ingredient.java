@@ -1,7 +1,5 @@
 package bakewell.beans;
 
-import java.util.ArrayList;
-
 import javax.xml.bind.annotation.XmlRootElement;
 //import javax.inject.Named;
 
@@ -12,24 +10,23 @@ public class Ingredient {
 	
 	private Integer id = null;
 	private String name = null;
-	private Double allgda_energy = null;	// in kcal
+	private Double gda_energy = null;		// in kcal
 	private Double gda_protein = null;		// in gram per 100 gram
 	private Double gda_carbo = null;		// in gram per 100 gram
 	private Double gda_fat = null;			// in gram per 100 gram	
 	private Double gda_fiber = null;		// in gram per 100 gram
 	private Double gda_sodium = null;		// in gram per 100 gram
 	private Double price = null;			// in Euro Cents per 100 gram
-	private ArrayList<Ingredient2Recipe>  ingredients = new ArrayList<Ingredient2Recipe>();
 	
 	public Ingredient() {
 
 	}
 	
-	public Ingredient(String name, Double allgda_energy, Double gda_protein,
+	public Ingredient(String name, Double gda_energy, Double gda_protein,
 			Double gda_carbo, Double gda_fat, Double gda_fiber,
 			Double gda_sodium, Double price) {
 		this.name = name;
-		this.allgda_energy = allgda_energy;
+		this.gda_energy = gda_energy;
 		this.gda_protein = gda_protein;
 		this.gda_carbo = gda_carbo;
 		this.gda_fat = gda_fat;
@@ -56,12 +53,12 @@ public class Ingredient {
 		this.name = name;
 	}
 
-	public Double getAllgda_energy() {
-		return allgda_energy;
+	public Double getGda_energy() {
+		return gda_energy;
 	}
 
-	public void setAllgda_energy(Double allgda_energy) {
-		this.allgda_energy = allgda_energy;
+	public void setGda_energy(Double gda_energy) {
+		this.gda_energy = gda_energy;
 	}
 
 	public Double getGda_protein() {
@@ -104,14 +101,6 @@ public class Ingredient {
 		this.gda_sodium = gda_sodium;
 	}
 	
-	public ArrayList<Ingredient2Recipe> getIngredients() {
-		return ingredients;
-	}
-
-	public void setIngredients(ArrayList<Ingredient2Recipe> ingredients) {
-		this.ingredients = ingredients;
-	}
-	
 	public Double getPrice() {
 		return price;
 	}
@@ -122,7 +111,7 @@ public class Ingredient {
 
 	@Override
 	public String toString() {
-		return name+" "+allgda_energy+" "+gda_protein+" "+
+		return name+" "+gda_energy+" "+gda_protein+" "+
 		gda_carbo+" "+gda_fat+" "+gda_fiber+" "+gda_sodium+" "+price;
 	}
 	

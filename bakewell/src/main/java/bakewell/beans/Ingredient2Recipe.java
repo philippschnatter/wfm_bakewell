@@ -42,6 +42,4 @@ public class Ingredient2Recipe {
 		this.amount = amount;
 	}
 	
-	
-	
 }

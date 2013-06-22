@@ -56,8 +56,6 @@ public class CustomerDAO {
 		  this.url = url;
 	}
 	
-	
-	
 	/**
 	 * Opens the connection to the DB and is used in the four CRUD methods before executing the query to the DB
 	 */
@@ -101,7 +99,7 @@ public class CustomerDAO {
 	    * Used to insert a new Customer into the Database
 	    * @param c 
 	    */
-	public void insertCustomer(Customer c) {
+	public Customer insertCustomer(Customer c) {
 		
 		//Establish a connection to the DB
 		openConnection();
@@ -126,9 +124,24 @@ public class CustomerDAO {
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return null;
 		}
+		
 		//closes the connection to the DB
 		closeConnection();
+		
+		ArrayList<Customer> result = new ArrayList<Customer>();
+		result = selectCustomer(c);
+		Customer b = new Customer();
+		int index = 0;
+		for(int i = 0; i < result.size(); i++) {
+			if(result.get(i).getId() > index) {
+				b = result.get(i);
+				index = result.get(i).getId();
+			}
+		}
+		
+		return b;
 	}
 	
 	   /**
@@ -136,7 +149,10 @@ public class CustomerDAO {
 	    * @param c 
 	    */
 	
-	public void deleteCustomer(Customer c) {
+	public ArrayList<Customer> deleteCustomer(Customer c) {
+		
+		ArrayList<Customer> result = new ArrayList<Customer>();
+		result = selectCustomer(c);
 		
 		//Establish a connection to the DB
 		openConnection();
@@ -187,10 +203,12 @@ public class CustomerDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return null;
 		}
 		
 		//closes the connection to the DB
 		closeConnection();
+		return result;
 	}
 	
 	
@@ -265,7 +283,7 @@ public class CustomerDAO {
 	}
 	
 	
-	public void UpdateCustomer(Customer newC, Customer oldC) {
+	public ArrayList<Customer> UpdateCustomer(Customer newC, Customer oldC) {
 		
 		//Establish a connection to the DB
 		openConnection();
@@ -331,8 +349,10 @@ public class CustomerDAO {
 			//Execute the Update on the DB
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
+			return null;
 		}
 		//Close the connection to the DB
 		closeConnection();
+		return selectCustomer(newC);
 	}
 }
