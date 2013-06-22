@@ -32,10 +32,10 @@ public class GetProductLabelWsCall implements JavaDelegate
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 		
-		
-		Product p = (Product)execution.getVariable("product");
-		
-		String productId = p.getId().toString();
+		// aus activiti
+		Integer productId = (Integer)execution.getVariable("productId");
+		// product aus dao
+
 		
 		// REST-Service
 		// define a JSON provider and a mapping between REST and JSON namespace's
@@ -65,7 +65,7 @@ public class GetProductLabelWsCall implements JavaDelegate
 		
 		try {
 			
-			recipe = service.calculateIngredient(productId);
+			recipe = service.calculateIngredient(productId.toString());
 			execution.setVariable("recipe", recipe);
 			
 		} catch (WebApplicationException waEx) {
