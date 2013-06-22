@@ -27,7 +27,7 @@ public class RecipeDAO {
 	private String query;
 	
 	private String driver = "org.h2.Driver";
-	private Ingredient2RecipeDAO rDAO;
+	private Ingredient2RecipeDAO iDAO;
 	
 	//Name of the DB
 	private String url = "";
@@ -44,7 +44,7 @@ public class RecipeDAO {
 		  this.user = user;
 		  this.password = password;
 		  this.url = getUrl();
-		  rDAO = new Ingredient2RecipeDAO(user, password);
+		  iDAO = new Ingredient2RecipeDAO(user, password);
 	}
 	
 	/**
@@ -57,6 +57,7 @@ public class RecipeDAO {
 		  this.user = user;
 		  this.password = password;
 		  this.url = url;
+		  iDAO = new Ingredient2RecipeDAO(user, password);
 	}
 	
 	/**
@@ -97,7 +98,36 @@ public class RecipeDAO {
 		    return ("jdbc:h2:file:src/main/resources/db/wfDB");
 	   }
 
-	
+	/**
+	 * inserts a new Recipe without ID and connects the ingredients via the ingredient2recipe table
+	 * @param r ... might be a Recipe, WITH OR WITHOUT an ID
+	 * @param ingredients ... a list with ingredients and the respective Amount, the recipe_id does 
+	 * not have to be set
+	 * @return ... a Recipe with the complete Ingredient2Recipe list attached
+	 */
+	public ArrayList<Recipe> insertNewRecipe(Recipe r, ArrayList<Ingredient2Recipe> ingredients) {
+		
+		Recipe recipe = r;
+		
+		//if the Recipe does not exist, and does not have an ID
+		if(r.getId() == null) {
+			recipe = insertRecipe(r);
+		//if the Recipe has an ID
+		} else {
+			recipe = selectRecipe(r).get(0);
+		}
+		
+		//run through the given Ingredient2Recipe...
+		for(int i = 0; i < ingredients.size(); i++) {
+			//and connect the Recipe ID to each ingredient...
+			ingredients.get(i).setRecipe_id(recipe.getId());
+			//furthermore add each Ingredient2Recipe to the DB
+			iDAO.insertIngredient2Recipe(ingredients.get(i));
+		}
+		
+		//in the end the finished Recipe with all Ingredien2Recipe Connections shall be returned
+		return selectRecipe(recipe);
+	}
 	   /**
 	    * Used to insert a new Recipe into the Database
 	    * @param c 
@@ -129,7 +159,7 @@ public class RecipeDAO {
 			pstmt.executeUpdate();
 			
 			for(int i = 0; i < c.getIngredients().size(); i++) {
-				rDAO.insertIngredient2Recipe(c.getIngredients().get(i));
+				iDAO.insertIngredient2Recipe(c.getIngredients().get(i));
 			}
 			
 		} catch (Exception e) {
@@ -167,7 +197,7 @@ public class RecipeDAO {
 		for(int i = 0; i < result.size(); i++) {
 			Recipe r = result.get(i);
 			for(int j = 0; j < r.getIngredients().size(); i++) {
-				rDAO.deleteIngredient2Recipe(r.getIngredients().get(i));
+				iDAO.deleteIngredient2Recipe(r.getIngredients().get(i));
 			}
 		}
 		
@@ -308,7 +338,7 @@ public class RecipeDAO {
 		
 		for(int i = 0; i < result.size(); i++) {
 			Ingredient2Recipe searchEntity = new Ingredient2Recipe(result.get(i).getId(), null, null);
-			result.get(i).setIngredients(rDAO.selectIngredient2Recipe(searchEntity));
+			result.get(i).setIngredients(iDAO.selectIngredient2Recipe(searchEntity));
 		}
 		
 		//...and returns the ArrayList

@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import bakewell.beans.Ingredient;
+import bakewell.beans.Ingredient2Recipe;
+import bakewell.beans.Product;
 import bakewell.beans.Recipe;
 
 /**
@@ -96,49 +98,6 @@ public class IngredientDAO {
 	   private String getUrl () {
 		    return ("jdbc:h2:file:src/main/resources/db/wfDB");
 	   }
-	   
-	   
-	   /**
-	    * 
-	    * ich habe eine Product ID und brauche alle Ingredients + Mengen (in Gramm) jeweils dazu
-	    * 
-	    * @param productid
-	    */
-	public Map<Ingredient, Double> getIngredientsOfProduct(int productid) {
-	
-		// productid fuer die query verwenden
-		// HashMap mit Ingredients und Mengen
-		Map<Ingredient, Double> ingredientmap = new HashMap<Ingredient, Double>();
-		
-	
-		return ingredientmap;
-	}
-	
-	
-	   /**
-	    * 
-	    * der Webservice gibt ein Recipe-Object (newrecipe) mit den kalkulierten GDA Werten fuer das Label zurueck
-	    * dieses recipe object wird aber im WS neu erstellt, da der WS nur die ID vom Product kennt
-	    * 
-	    * das DAO muss folglich das "richtige" recipe (oldrecipe) mittels Recipe ID aus der DB holen und dann
-	    * die GDA Werte (und nur diese) vom newrecipe ins oldrecipe schreiben.
-	    * 
-	    * @params oldrecipeid, oldrecipe
-	    */
-	public void updateRecipe(int oldrecipeid, Recipe newrecipe) {
-		
-	}
-	
-	
-	public Recipe getRecipeByProductId(int productid) {
-		Recipe recipe = null;
-		
-		return recipe;
-	}
-	
-	
-	
-
 	
 	   /**
 	    * Used to insert a new Ingredient into the Database
@@ -260,6 +219,50 @@ public class IngredientDAO {
 		return result;
 	}
 	
+	public ArrayList<Ingredient> selectAllIngredients() {
+		
+		//Result ArrayList, which is returned to the invoking routine
+		ArrayList<Ingredient> result = new ArrayList<Ingredient>();
+		
+		//Establish a connection to the DB
+		openConnection();
+		
+		//Builds the query
+		query = "SELECT * FROM INGREDIENT;";
+		
+		try {
+			
+			//prepares the query
+			pstmt = connection.prepareStatement(query);
+			
+			//executes the query on the DB and receives the result set
+			rs = pstmt.executeQuery();
+
+			//While the result set contains results, they shall be
+			//converted to Ingredient Objects and asserted to a result ArrayList
+			while(rs.next()) {
+				Ingredient res = new Ingredient();
+				res.setId(rs.getInt(1));
+				res.setName(rs.getString(2));
+				res.setGda_energy(rs.getDouble(3));
+				res.setGda_protein(rs.getDouble(4));
+				res.setGda_carbo(rs.getDouble(5));
+				res.setGda_fat(rs.getDouble(6));
+				res.setGda_fiber(rs.getDouble(7));
+				res.setGda_sodium(rs.getDouble(8));
+				res.setPrice(rs.getDouble(9));
+				result.add(res);	
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		//closes the connection to the DB...
+		closeConnection();
+		//...and returns the ArrayList
+		return result;
+		
+	}
 	
 	public ArrayList<Ingredient> selectIngredient(Ingredient c) {
 		

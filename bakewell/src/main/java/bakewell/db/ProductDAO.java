@@ -6,8 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import bakewell.beans.Ingredient;
+import bakewell.beans.Ingredient2Recipe;
 import bakewell.beans.Product;
+import bakewell.beans.Recipe;
 
 /**
  * This Class contains generic CRUD Methods to access the UserDB.
@@ -31,6 +36,9 @@ public class ProductDAO {
 	private String url = "";
 	private String user = "";
 	private String password = "";  
+	
+	RecipeDAO rDAO = null;
+	IngredientDAO iDAO = null;
 
 	/**
 	 * Constructor, which takes the url, username and the password in order
@@ -94,6 +102,65 @@ public class ProductDAO {
 		    return ("jdbc:h2:file:src/main/resources/db/wfDB");
 	   }
 
+	   /**
+	    * 
+	    * @param productid ... Searches the Recipe for a product
+	    * @return ... returns the Recipe, which is connected to the product
+	    */
+		public Recipe selectRecipeByProductId(int productid) {
+			//initializing of all DAOs which are needed 
+			rDAO = new RecipeDAO(user, password);
+			//Creating a new searchproduct
+			Product p = new Product();
+			p.setId(productid);
+			//Searching for the complete Product accodring to the ID in order to get all Product attributes
+			p = selectProduct(p).get(0);
+			Recipe r = new Recipe();
+			//Fetch the Recipe ID from the Product Attributes and inserting it into a new search recipe
+			r.setId(p.getRecipe_id());
+			//search the recipe in the DB in order to get all attributes, including the ArrayList with all Ingredient2Recipe Connections			
+			return rDAO.selectRecipe(r).get(0);
+		}
+	   
+	   /**
+	    * 
+	    * Searches the Ingredients of a product, together with the respective amounts
+	    * 
+	    * @param productid ... the product id, which is a new identifier
+	    * @return ... a Map <Ingredient, Double> with the Ingredient of a product with the quantity of the ingredient in the recipe/product
+	    */
+	   public Map<Ingredient, Double> selectIngredientsOfProduct(int productid) {
+	
+			//initializing of all DAOs which are needed 
+			rDAO = new RecipeDAO(user, password);
+			iDAO = new IngredientDAO(user, password);
+			Map<Ingredient, Double> ingredientMap = new HashMap<Ingredient, Double>();
+			
+			//Creating a new searchproduct
+			Product p = new Product();
+			p.setId(productid);
+			//Searching for the complete Product accodring to the ID in order to get all Product attributes
+			p = selectProduct(p).get(0);
+			Recipe r = new Recipe();
+			//Fetch the Recipe ID from the Product Attributes and inserting it into a new search recipe
+			r.setId(p.getRecipe_id());
+			//search the recipe in the DB in order to get all attributes, including the ArrayList with all Ingredient2Recipe Connections
+			r = rDAO.selectRecipe(r).get(0);
+			//Get the Ingredient2Recipe Connections
+			ArrayList<Ingredient2Recipe> ingredient2recipe = r.getIngredients();
+			//... and run through them
+			for(int i = 0; i < ingredient2recipe.size(); i++) {
+				//Create a new search Ingredient and fetching the id from each ingredient2recipe
+				Ingredient ing = new Ingredient();
+				ing.setId(ingredient2recipe.get(i).getIngredient_id());
+				//search the full ingredient with all attributes
+				ing = iDAO.selectIngredient(ing).get(0);
+				//and add it to the result Hashmap together with the Amounts which are stored in the Ingredient2Recipe Connections
+				ingredientMap.put(ing, ingredient2recipe.get(i).getAmount());
+			}
+			
+		return ingredientMap;
+	}
 	
 	   /**
 	    * Used to insert a new Product into the Database

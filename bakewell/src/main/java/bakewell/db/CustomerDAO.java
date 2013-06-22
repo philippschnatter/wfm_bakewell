@@ -99,6 +99,7 @@ public class CustomerDAO {
 	    * Used to insert a new Customer into the Database
 	    * @param c 
 	    */
+	   
 	public Customer insertCustomer(Customer c) {
 		
 		//Establish a connection to the DB
@@ -210,7 +211,6 @@ public class CustomerDAO {
 		closeConnection();
 		return result;
 	}
-	
 	
 	public ArrayList<Customer> selectCustomer(Customer c) {
 		
