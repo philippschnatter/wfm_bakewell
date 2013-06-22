@@ -33,8 +33,10 @@ public class ActivitiFactory {
 	}
 
 	
-	public Deployment init(String description)
+	public Deployment init()
 	{
+		String description = ActivitiConstants.PROCESS_NAME;
+		
 		if (processEngine == null)
 		{
 			// use an H2 in-memory database for Activiti
@@ -52,13 +54,14 @@ public class ActivitiFactory {
 			 *  *) change the jdbc.url inside WEB-INF/classes/db.properties of the activiti-explorer to match
 			 *     your H2 jdbc.url f.e. jdbc.url=jdbc:h2:tcp://localhost/activiti
 			 **/
-			// ProcessEngineConfiguration config = ProcessEngineConfiguration.createStandaloneProcessEngineConfiguration();
-		
+//			ProcessEngineConfiguration config = ProcessEngineConfiguration.createStandaloneProcessEngineConfiguration();
+//			processEngine = ProcessEngineConfiguration.createStandaloneInMemProcessEngineConfiguration().buildProcessEngine();
 			config.setProcessEngineName("Activiti 5.11 (Standalone)");
 			processEngine = config.buildProcessEngine();
 			
 			CreateUsers();
 		}
+		
 		if (processEngine == null)
 		{
 //			logger.error("Could not start the Activiti Engine");
@@ -75,7 +78,7 @@ public class ActivitiFactory {
 			if (deployments == null || deployments.size() == 0)
 			{
 				DeploymentBuilder builder = repositoryService.createDeployment();
-				builder.addClasspathResource("diagrams/"+description);
+				builder.addClasspathResource("diagrams/"+ActivitiConstants.DIAGRAMM_NAME);
 				builder.name(description);
 				deployment = builder.deploy();
 //				logger.info("process deployed!");
@@ -87,6 +90,7 @@ public class ActivitiFactory {
 			
 			return deployment;
 		}
+		
 	}
 	
 	private void CreateUsers(){

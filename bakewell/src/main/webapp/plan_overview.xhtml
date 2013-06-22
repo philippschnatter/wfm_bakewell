@@ -26,54 +26,28 @@
 					<h:panelGrid columns="2" columnClasses="label, value"
 						styleClass="grid" style="margin-bottom: 10px" border="1"
 						cellpadding="2" cellspacing="5">
-						<h:outputText value="Contractor Company:" />
-						<h:outputText value="Mustermann AG" />
-
-						<h:outputText value="Contractor Address:" />
-						<h:outputText value="Lorem ipsum dolor sit amet" />
-
-						<h:outputText value="Product Specification:" />
-						<h:outputText value="consectetur adipisicing elit" />
-
-						<h:outputText value="Product Quantity:" />
-						<h:outputText value="Nonnullus" />
-
-						<h:outputText value="Delivery Address:" />
-						<h:outputText value="Duis aute irure dolor " />
-
-						<h:outputText value="Delivery Date:" />
-						<h:outputText value="Excepteur sint occaecat " />
-
-						<h:outputText value="Contractor Message:" />
-						<h:outputText
-							value="sunt in culpa qui officia deserunt mollit anim id est laborum" />
+						<h:outputText value="Contractor company:"/>
+						<h:outputText value="#{planOverview.company}"/>
+						<h:outputText value="Business partner first name:"/>
+						<h:outputText value="#{planOverview.firstName}"/>
+						<h:outputText value="Business partner last name:"/>
+						<h:outputText value="#{planOverview.lastName}"/>
+						<h:outputText value="Telephone number:"/>
+						<h:outputText value="#{planOverview.telNo}"/>
+						<h:outputText value="Mail address:"/>
+						<h:outputText value="#{planOverview.mailAddress}"/>
+						<h:outputText value="Business address:"/>
+						<h:outputText value="#{planOverview.address}"/>
+						<h:outputText value="Product name:"/>
+						<h:outputText value="#{planOverview.product_Name}"/>
+						<h:outputText value="Delivery date:"/>
+						<h:outputText value="#{planOverview.deliveryDate}"/>
 					</h:panelGrid>
 
 					<h3>Ingredient Data:</h3>
 					<h:panelGrid columns="4" columnClasses="label, value, label, value"
 						styleClass="grid" style="margin-bottom: 10px" border="1"
 						cellpadding="2" cellspacing="5">
-						<h:outputText value="Ingredient I:" />
-						<h:outputText value="Excepteur sint occaecat" />
-						<h:outputText value="Quantity:" />
-						<h:outputText value="1" />
-
-						<h:outputText value="Ingredient II:" />
-						<h:outputText value="Duis aute irure dolor" />
-						<h:outputText value="Quantity:" />
-						<h:outputText value="2" />
-						
-
-						<h:outputText value="Ingredient III:" />
-						<h:outputText value="consectetur adipisicing elit" />
-						<h:outputText value="Quantity:" />
-						<h:outputText value="3" />
-						
-
-						<h:outputText value="Ingredient IV:" />
-						<h:outputText value="Lorem ipsum dolor" />
-						<h:outputText value="Quantity:" />
-						<h:outputText value="4" />
 						
 					</h:panelGrid>
 
@@ -81,17 +55,17 @@
 					<h:panelGrid columns="2" columnClasses="label, value"
 						styleClass="grid" style="margin-bottom: 10px" border="1"
 						cellpadding="2" cellspacing="5">
-						<h:outputText value="Production Start:" />
-						<h:outputText value="2013-01-01" />
+						<h:outputText value="Production Contractor:" />
+							<h:inputText required="true" value="#{planOverview.production_Contractor}"/>
+							
+							<h:outputText value="Production Start:" />
+							<h:inputText required="true" value="#{planOverview.production_Start}"/>
 
-						<h:outputText value="Production End:" />
-						<h:outputText value="2014-01-01" />
-
-						<h:outputText value="Production Facility:" />
-						<h:outputText value="Lorem ipsum" />
-
-						<h:outputText value="Number of occupied Ovens:" />
-						<h:outputText value="42" />
+							<h:outputText value="Production End:" />
+							<h:inputText required="true" value="#{planOverview.production_End}"/>
+							
+							<h:outputText value="Production Facility:" />
+							<h:inputText required="true" value="#{planOverview.production_Facility}"/>
 					</h:panelGrid>
 
 					<h3>Packaging Data:</h3>
@@ -99,19 +73,12 @@
 						styleClass="grid" style="margin-bottom: 10px" border="1"
 						cellpadding="2" cellspacing="5">
 						<h:outputText value="Packaging Contractor:" />
-						<h:outputText value="PasstEh GmbH" />
+							<h:inputText required="true"
+								value="#{planOverview.packagingContractor}" />
 
-						<h:outputText value="Projected Cost:" />
-						<h:outputText value="1000" />
-
-						<h:outputText value="Date of delivery:" />
-						<h:outputText value="2013-10-10" />
-
-						<h:outputText value="Delivery destination:" />
-						<h:outputText value="Sit amet" />
-
-						<h:outputText value="Date of last possible Contract Termination:" />
-						<h:outputText value="2013-05-05" />
+							<h:outputText value="Projected Cost:" />
+							<h:inputText required="true"
+								value="#{planOverview.packagingCost}" />
 					</h:panelGrid>
 
 					<h3>Transportation Data:</h3>
@@ -119,13 +86,10 @@
 						styleClass="grid" style="margin-bottom: 10px" border="1"
 						cellpadding="2" cellspacing="5">
 						<h:outputText value="Transportation Contractor:" />
-						<h:outputText value="De'Lay AG" />
+							<h:inputText required="true" value="#{planOverview.transport_Contractor}"/>
 
-						<h:outputText value="Projected Cost:" />
-						<h:outputText value="123" />
-
-						<h:outputText value="Date of last possible Contract Termination:" />
-						<h:outputText value="2013-09-09" />
+							<h:outputText value="Projected Cost:" />
+							<h:inputText required="true" value="#{planOverview.transport_cost}"/>
 					</h:panelGrid>
 				</div>
 			</div>
@@ -133,7 +97,7 @@
 		<h:form>
 			<div class="row">
 				<div class="span1 offset4">
-					<h:commandButton value="Compile an offer" type="button"
+					<h:commandButton value="Compile an offer" action="#{planOverview.proceed()}"
 						class="btn btn-primary" />
 				</div>
 			</div>

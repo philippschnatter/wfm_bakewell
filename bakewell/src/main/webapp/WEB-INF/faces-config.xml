@@ -12,6 +12,16 @@
   <managed-bean-class>bakewell.jsf.customerOfferBean</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>testb</managed-bean-name>
+  <managed-bean-class>bakewell.jsf.testBean</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>tasklist</managed-bean-name>
+  <managed-bean-class>bakewell.jsf.tasklistBean</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
  <navigation-rule>
   <from-view-id>/login.xhtml</from-view-id>
   <navigation-case>

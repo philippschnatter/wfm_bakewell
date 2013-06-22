@@ -31,16 +31,14 @@
 		<h:form>
 			<div class="row">
 				<div class="span2">
-					<h:commandButton value="Forward Offer to Product Management" type="button"
-						class="btn btn-success" />
+					<h:commandButton value="Forward Offer to Product Management" class="btn btn-success" action="#{creditCheck.approve()}"/>
 				</div>
 			</div>
 			<p>
 			</p>
 			<div class="row">
 				<div class="span2">
-					<h:commandButton value="Reject Offer due to financial risk" type="button"
-						class="btn btn-danger" />
+					<h:commandButton value="Reject Offer due to financial risk" class="btn btn-danger" action="#{creditCheck.reject()}"/>
 				</div>
 			</div>
 		</h:form>

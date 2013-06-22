@@ -26,23 +26,26 @@
 					<h:panelGrid columns="2" columnClasses="label, value"
 						styleClass="grid" style="margin-bottom: 10px" border="1" cellpadding="2" cellspacing="5">
 						<h:outputText value="Customer:"/>
-						<h:outputText value="Mustermann AG"/>
+						<h:outputText value="#{sendOffer.company}"/>
+						
+						<h:outputText value="Mail Address:" />
+						<h:outputText value="#{sendOffer.mailAddress}" />
 						
 						<h:outputText value="Contract:" />
-						<h:outputText value="Lorem ipsum dolor sit amet" />
+						<h:outputText value="#{sendOffer.product_Name}" />
 
 						<h:outputText value="Bid Price:" />
-						<h:outputText value="234143" />
+						<h:outputText value="#{sendOffer.bidPrice}" />
 
 						<h:outputText value="Additional Message:" />
-						<h:inputTextarea />
+						<h:inputTextarea value="#{sendOffer.additionalMessage}" />
 					</h:panelGrid>
 				</div>
 			</div>
 		</div>
 			<div class="row">
 				<div class="span1">
-					<h:commandButton value="Send Message" type="button"
+					<h:commandButton value="Send Message" action="#{sendOffer.send()}"
 						class="btn btn-primary" />
 				</div>
 			</div>

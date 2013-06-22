@@ -26,27 +26,27 @@
 					<h:panelGrid columns="2" columnClasses="label, value"
 						styleClass="grid" style="margin-bottom: 10px" border="1"
 						cellpadding="2" cellspacing="5">
-						<h:outputText value="Contractor Company:" />
-						<h:outputText value="Mustermann AG" />
-
-						<h:outputText value="Contractor Address:" />
-						<h:outputText value="Lorem ipsum dolor sit amet" />
-
-						<h:outputText value="Product Specification:" />
-						<h:outputText value="consectetur adipisicing elit" />
-
-						<h:outputText value="Product Quantity:" />
-						<h:outputText value="Nonnullus" />
-
-						<h:outputText value="Delivery Address:" />
-						<h:outputText value="Duis aute irure dolor " />
-
-						<h:outputText value="Delivery Date:" />
-						<h:outputText value="Excepteur sint occaecat " />
+						<h:outputText value="Contractor company:"/>
+						<h:outputText value="#{customerResponse.company}"/>
+						
+						<h:outputText value="Business partner first name:"/>
+						<h:outputText value="#{customerResponse.firstName}"/>
+						
+						<h:outputText value="Business partner last name:"/>
+						<h:outputText value="#{customerResponse.lastName}"/>
+						
+						<h:outputText value="Business address:"/>
+						<h:outputText value="#{customerResponse.address}"/>
+						
+						<h:outputText value="Product name:"/>
+						<h:outputText value="#{customerResponse.product_Name}"/>
+						
+						<h:outputText value="Delivery date:"/>
+						<h:outputText value="#{customerResponse.deliveryDate}"/>
 
 						<h:outputText value="Contractor Message:" />
 						<h:outputText
-							value="sunt in culpa qui officia deserunt mollit anim id est laborum" />
+							value="#{customerResponse.additionalMessage}" />
 					</h:panelGrid>
 
 					<h3>Price Offer</h3>
@@ -54,7 +54,7 @@
 						styleClass="grid" style="margin-bottom: 10px" border="1"
 						cellpadding="2" cellspacing="5">
 						<h:outputText value="Bid Price" />
-						<h:outputText value="32123" />
+						<h:outputText value="#{customerResponse.bidPrice}" />
 					</h:panelGrid>
 				</div>
 			</div>
@@ -62,11 +62,11 @@
 		<h:form>
 			<div class="row">
 				<div class="span1">
-					<h:commandButton value="Accept Bid" type="button"
+					<h:commandButton value="Accept Bid" action="#{customerResponse.accept()}"
 						class="btn btn-success" />
 				</div>
 				<div class="span1 offset1">
-					<h:commandButton value="Reject Bid" type="button"
+					<h:commandButton value="Reject Bid" action="#{customerResponse.reject()}"
 						class="btn btn-danger" />
 				</div>
 			</div>

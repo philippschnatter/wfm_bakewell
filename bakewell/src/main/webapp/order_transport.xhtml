@@ -29,20 +29,17 @@
 							styleClass="grid" style="margin-bottom: 10px" border="1"
 							cellpadding="2" cellspacing="5">
 							<h:outputText value="Transportation Contractor:" />
-							<h:inputText required="true" />
+							<h:inputText required="true" value="#{orderTransport.transport_Contractor}"/>
 
 							<h:outputText value="Projected Cost:" />
-							<h:inputText required="true" />
-
-							<h:outputText value="Date of last possible Contract Termination:" />
-							<h:inputText required="true" />
+							<h:inputText required="true" value="#{orderTransport.transport_cost}"/>
 						</h:panelGrid>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="span1">
-					<h:commandButton value="Proceed" type="button"
+					<h:commandButton value="Proceed" action="#{orderTransport.proceed()}"
 						class="btn btn-success" />
 				</div>
 			</div>

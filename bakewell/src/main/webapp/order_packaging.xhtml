@@ -8,12 +8,13 @@
 	<!-- <link href="/css/bootstrap.css" rel="stylesheet" />
 	<link href="/css/bootstrap-responsive.css" rel="stylesheet"
 		type="text/css" />-->
-	<link href="/resources/twitterBootstrap/css/bootstrap.min.css" rel="stylesheet"
-		type="text/css" />
-	<link href="/resources/twitterBootstrap/css/bootstrap-responsive.min.css"
+	<link href="/resources/twitterBootstrap/css/bootstrap.min.css"
 		rel="stylesheet" type="text/css" />
-	<link href="/resources/twitterBootstrap/css/override.css" rel="stylesheet"
-		type="text/css" />
+	<link
+		href="/resources/twitterBootstrap/css/bootstrap-responsive.min.css"
+		rel="stylesheet" type="text/css" />
+	<link href="/resources/twitterBootstrap/css/override.css"
+		rel="stylesheet" type="text/css" />
 </h:head>
 
 <h:body>
@@ -28,27 +29,20 @@
 							styleClass="grid" style="margin-bottom: 10px" border="1"
 							cellpadding="2" cellspacing="5">
 							<h:outputText value="Packaging Contractor:" />
-							<h:inputText required="true" />
+							<h:inputText required="true"
+								value="#{orderPackaging.packagingContractor}" />
 
 							<h:outputText value="Projected Cost:" />
-							<h:inputText required="true" />
-							
-							<h:outputText value="Date of delivery:" />
-							<h:inputText required="true" />
-							
-							<h:outputText value="Delivery destination:" />
-							<h:inputText required="true" />
-
-							<h:outputText value="Date of last possible Contract Termination:" />
-							<h:inputText required="true" />
+							<h:inputText required="true"
+								value="#{orderPackaging.packagingCost}" />
 						</h:panelGrid>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="span1">
-					<h:commandButton value="Proceed" type="button"
-						class="btn btn-success" />
+					<h:commandButton value="Proceed"
+						action="#{orderPackaging.proceed()}" class="btn btn-success" />
 				</div>
 			</div>
 		</h:form>

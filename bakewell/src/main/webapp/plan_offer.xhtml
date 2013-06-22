@@ -27,20 +27,6 @@
 						<h:panelGrid columns="2" columnClasses="label, value"
 							styleClass="grid" style="margin-bottom: 10px" border="1"
 							cellpadding="2" cellspacing="5">
-							<h:outputText value="Ingredient I:" />
-							<h:outputText value="12" />
-
-							<h:outputText value="Ingredient II:" />
-							<h:outputText value="23" />
-
-							<h:outputText value="Ingredient III:" />
-							<h:outputText value="13" />
-
-							<h:outputText value="Ingredient IV:" />
-							<h:outputText value="31" />
-
-							<h:outputText value="Subtotal:" />
-							<h:outputText value="14212" />
 						</h:panelGrid>
 
 						<h3>Subcontractor Prices</h3>
@@ -48,10 +34,10 @@
 							styleClass="grid" style="margin-bottom: 10px" border="1"
 							cellpadding="2" cellspacing="5">
 							<h:outputText value="Transportation:" />
-							<h:outputText value="12" />
+							<h:outputText value="#{planOffer.transport_cost}" />
 
 							<h:outputText value="Packaging:" />
-							<h:outputText value="23" />
+							<h:outputText value="#{planOffer.packagingCost}" />
 
 							<h:outputText value="Subtotal:" />
 							<h:outputText value="231" />
@@ -65,7 +51,7 @@
 							<h:outputText value="32134" />
 
 							<h:outputText value="Bid Price:" />
-							<h:inputText required="true" />
+							<h:inputText required="true" value="#{planOffer.bidPrice}"/>
 						</h:panelGrid>
 					</div>
 				</div>
