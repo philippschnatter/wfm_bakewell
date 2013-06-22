@@ -124,19 +124,24 @@ public class IngredientDAO {
 	    * der Webservice gibt ein Recipe-Object (newrecipe) mit den kalkulierten GDA Werten fuer das Label zurueck
 	    * dieses recipe object wird aber im WS neu erstellt, da der WS nur die ID vom Product kennt
 	    * 
-	    * das DAO muss folglich das "richtige" recipe (oldrecipe) mittels Product ID aus der DB holen und dann
+	    * das DAO muss folglich das "richtige" recipe (oldrecipe) mittels Recipe ID aus der DB holen und dann
 	    * die GDA Werte (und nur diese) vom newrecipe ins oldrecipe schreiben.
 	    * 
-	    * @params newrecipe, productid
+	    * @params oldrecipeid, oldrecipe
 	    */
-	public void updateRecipeWithProductId(Recipe newrecipe, int productid) {
+	public void updateRecipe(int oldrecipeid, Recipe newrecipe) {
 		
 		// TODO logic
 		
 	}
 	
 	
-	
+	public Recipe getRecipeByProductId(int productid) {
+		Recipe recipe = null;
+		
+		// TODO
+		return recipe;
+	}
 	
 	
 	
