@@ -28,7 +28,7 @@
     </sequenceFlow>
     <subProcess id="subprocess2" name="Ingredient Management">
       <startEvent id="startevent3" name="Start"></startEvent>
-      <userTask id="CheckLegalConstraints" name="Check Legal Constraints" activiti:assignee="ProcessManager"></userTask>
+      <userTask id="CheckLegalConstraints" name="Check Legal Constraints" activiti:assignee="ProcessManager" activiti:formKey="ingredient_check.xhtml"></userTask>
       <endEvent id="endevent9" name="End"></endEvent>
       <sequenceFlow id="flow59" sourceRef="startevent3" targetRef="CheckLegalConstraints"></sequenceFlow>
       <endEvent id="errorendevent1" name="ErrorEnd">
@@ -154,8 +154,8 @@
     <subProcess id="ProductionManagement" name="Production Management">
       <startEvent id="startevent5" name="Start"></startEvent>
       <parallelGateway id="parallelgateway6" name="Parallel Gateway"></parallelGateway>
-      <userTask id="BookProductionFacility" name="Book Production Facility" activiti:assignee="ProcessManager"></userTask>
-      <userTask id="OrderPackaging" name="Order packaging" activiti:assignee="ProcessManager"></userTask>
+      <userTask id="BookProductionFacility" name="Book Production Facility" activiti:assignee="ProcessManager" activiti:formKey="order_production.xhtml"></userTask>
+      <userTask id="OrderPackaging" name="Order packaging" activiti:assignee="ProcessManager" activiti:formKey="order_packaging.xhtml"></userTask>
       <parallelGateway id="parallelgateway7" name="Parallel Gateway"></parallelGateway>
       <sequenceFlow id="flow104" sourceRef="startevent5" targetRef="parallelgateway6"></sequenceFlow>
       <sequenceFlow id="flow105" sourceRef="parallelgateway6" targetRef="BookProductionFacility"></sequenceFlow>

@@ -27,6 +27,21 @@
   <managed-bean-class>bakewell.jsf.creditCheck</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>orderProduction</managed-bean-name>
+  <managed-bean-class>bakewell.jsf.orderProduction</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>orderPackaging</managed-bean-name>
+  <managed-bean-class>bakewell.jsf.orderPackaging</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>ingredientCheck</managed-bean-name>
+  <managed-bean-class>bakewell.jsf.ingredientCheck</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
  <navigation-rule>
   <from-view-id>/credit_check.xhtml</from-view-id>
   <navigation-case>
@@ -55,6 +70,30 @@
   </navigation-case>
   <navigation-case>
    <from-outcome>approve</from-outcome>
+   <to-view-id>/tasklist.xhtml</to-view-id>
+   <redirect include-view-params="true"/>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/order_production.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>proceed</from-outcome>
+   <to-view-id>/tasklist.xhtml</to-view-id>
+   <redirect include-view-params="true"/>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/order_packaging.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>proceed</from-outcome>
+   <to-view-id>/tasklist.xhtml</to-view-id>
+   <redirect include-view-params="true"/>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/ingredient_check.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>proceed</from-outcome>
    <to-view-id>/tasklist.xhtml</to-view-id>
    <redirect include-view-params="true"/>
   </navigation-case>

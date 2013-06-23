@@ -17,6 +17,7 @@
 </h:head>
 
 <h:body>
+<h:outputText value="#{orderProduction.taskID}"/>
 	<div class="container">
 		<h:form>
 			<h2>Production Plan</h2>
@@ -25,7 +26,7 @@
 					<div class="well">
 						<p class="lead">Insert estimated data on production facility
 							usage:</p>
-						<h:panelGrid columns="2" columnClasses="label, value"
+<!-- 						<h:panelGrid columns="2" columnClasses="label, value"
 							styleClass="grid" style="margin-bottom: 10px" border="1"
 							cellpadding="2" cellspacing="5">
 							<h:outputText value="Production Contractor:" />
@@ -40,14 +41,14 @@
 							<h:outputText value="Production Facility:" />
 							<h:inputText required="true" value="#{orderProduction.production_Facility}"/>
 						</h:panelGrid>
-					</div>
+ -->					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="span1">
-					<h:commandButton value="Proceed" action="#{orderProduction.proceed()}"
-						class="btn btn-success" />
+				<div class="span2">
+					<h:commandButton value="Proceed" class="btn btn-success" action="#{orderProduction.proceed()}"/>
 				</div>
+				
 			</div>
 		</h:form>
 	</div>

@@ -1,17 +1,34 @@
 package bakewell.jsf;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+
+import org.activiti.engine.FormService;
+import org.activiti.engine.ProcessEngine;
+import org.activiti.engine.RuntimeService;
 
 /**
  * @author Alex K
  *
  */
 public class orderProduction {
+	HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+	String taskId = request.getParameter("taskId");
+
+	
 	private Date production_Start = null;
 	private Date production_End = null;
 	private String production_Facility = null;
 	private String production_Contractor = null;
 	
+	
+	public String getTaskID() {
+		return taskId;
+	}
 	
 	public Date getProduction_Start() {
 		return production_Start;
@@ -55,6 +72,17 @@ public class orderProduction {
 
 
 	public String proceed(){
+		System.out.println("order production proceed start");
+		ActivitiFactory engine = ActivitiFactory.getInstance();
+		ProcessEngine processEngine = engine.getProcessEngine();
+//		RuntimeService runtimeService = processEngine.getRuntimeService();
+		FormService formService = processEngine.getFormService();
+		Map<String, String> map = new HashMap<String, String>();
+//		map.put("HasSolvency", "true");
+//		map.put("IsNewRecipe", "true");
+//		runtimeService.setVariable(engine.getInstance().toString(), "MeetsBusinessGoals", "true");
+		formService.submitTaskFormData(this.taskId, map);
+		System.out.println("order production proceed");
 		return "proceed";
 	}
 }

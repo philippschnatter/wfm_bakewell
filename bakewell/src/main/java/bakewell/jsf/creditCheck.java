@@ -9,15 +9,22 @@ import javax.servlet.http.HttpServletRequest;
 import org.activiti.engine.FormService;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.RuntimeService;
+import javax.annotation.PostConstruct;
 
 /**
  * @author Alex K
  *
  */
 public class creditCheck {
-	HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-	String taskId = request.getParameter("taskId");
-
+//	HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+	private String taskId;
+	
+	@PostConstruct
+	void init() {
+		HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		taskId = request.getParameter("taskId");
+	}
+	
 	public String getTaskId() {
 		return taskId;
 	}
