@@ -21,11 +21,16 @@
 
 	<div class="container">
 		<h2>Customer Offer</h2>
-		<div class="row">
+		<!-- <div class="row">
 			<div class="span4">
 				<div class="well">
-					<h:panelGrid columns="2" columnClasses="label, value"
-						styleClass="grid" style="margin-bottom: 10px" border="1" cellpadding="2" cellspacing="5">
+					
+				</div>
+			</div>
+		</div> -->
+		<h:form>
+		<h:panelGrid columns="2" columnClasses="label, value"
+styleClass="grid" style="margin-bottom: 10px" border="1" cellpadding="2" cellspacing="5">
 						<h:outputText value="Contractor company:"/>
 						<h:inputText value="#{customerOffer.company}"/>
 						<h:outputText value="Business partner first name:"/>
@@ -43,10 +48,6 @@
 						<h:outputText value="Delivery date:"/>
 						<h:inputText value="#{customerOffer.deliveryDate}"/>
 					</h:panelGrid>
-				</div>
-			</div>
-		</div>
-		<h:form>
 			<div class="row">
 				<div class="span1">
 					<h:commandButton value="Start Process"

@@ -1,5 +1,6 @@
 package bakewell.jsf;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +26,11 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.*;
 
 import bakewell.activiti.ActivitiConstants;
+import bakewell.db.CustomerDAO;
+import bakewell.db.ProductDAO;
+
+import bakewell.beans.Customer;
+import bakewell.beans.Product;
 
 /**
  * @author Alex K
@@ -43,7 +49,7 @@ public class customerOffer {
 	private String mailAddress = null;
 	private String company = null;
 	private String product_Name = null;
-	private Date deliveryDate = null;
+	private String deliveryDate = null;
 	
 	public String getTaskId() {
 		return taskId;
@@ -91,14 +97,17 @@ public class customerOffer {
 	public void setProduct_Name(String product_Name) {
 		this.product_Name = product_Name;
 	}
-	public Date getDeliveryDate() {
+	public String getDeliveryDate() {
 		return deliveryDate;
 	}
-	public void setDeliveryDate(Date deliveryDate) {
+	public void setDeliveryDate(String deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
 	
 	public String approve(){
+		createCustomer();
+		createProduct();
+		
 		ActivitiFactory engine = ActivitiFactory.getInstance();
 		ProcessEngine processEngine = engine.getProcessEngine();
 		RuntimeService runtimeService = processEngine.getRuntimeService();
@@ -112,6 +121,34 @@ public class customerOffer {
 	}
 	public String reject(){
 		return "reject";
+	}
+	
+	private String createCustomer() {
+		Customer customer = new Customer();
+		customer.setFirstName(firstName);
+		customer.setLastName(lastName);
+		customer.setAddress(address);
+		customer.setCompany(company);
+		
+		CustomerDAO customerDAO = new CustomerDAO("jdbc:h2:file:C:/Users/stefan/Documents/Workflow/git/bakewell/src/main/resources/db/wfDB", "sa", "");
+		Customer insertedCustomer = customerDAO.insertCustomer(customer);
+		System.out.println(insertedCustomer.getId().toString());
+		System.out.println(customer.getFirstName());
+//		CustomerDAO cDAO = new CustomerDAO("jdbc:h2:file:C:/Users/stefan/Documents/Workflow/git/bakewell/src/main/resources/db/wfDB", "sa", "");
+//		Customer testCustomer = new Customer("firstNameTest1", "lastNameTest1", "addressTest1", "1234567890", "test1@mail1.com", "testCompany1", "testPassword1");
+//		Customer failCustomer = new Customer(); 
+//		ArrayList<Customer> result = new ArrayList<Customer>();
+//		
+//		Customer a = cDAO.insertCustomer(testCustomer);
+//		result = cDAO.selectCustomer(testCustomer);
+	
+		return "success";
+	}
+	
+	private String createProduct() {
+		
+		
+		return "success";
 	}
 	
 	public void submit() {
