@@ -18,6 +18,7 @@
 </h:head>
 
 <h:body>
+<h:outputText value="#{customerOffer.taskId}"/>
 	<div class="container">
 		<h2>Customer Offer</h2>
 		<div class="row">
@@ -25,8 +26,22 @@
 				<div class="well">
 					<h:panelGrid columns="2" columnClasses="label, value"
 						styleClass="grid" style="margin-bottom: 10px" border="1" cellpadding="2" cellspacing="5">
-						<h:outputText value="Contractor Company:"/>
-						<h:outputText value="#{customerOffer.company}"/>
+						<h:outputText value="Contractor company:"/>
+						<h:inputText value="#{customerOffer.company}"/>
+						<h:outputText value="Business partner first name:"/>
+						<h:inputText value="#{customerOffer.firstName}"/>
+						<h:outputText value="Business partner last name:"/>
+						<h:inputText value="#{customerOffer.lastName}"/>
+						<h:outputText value="Telephone number:"/>
+						<h:inputText value="#{customerOffer.telNo}"/>
+						<h:outputText value="Mail address:"/>
+						<h:inputText value="#{customerOffer.mailAddress}"/>
+						<h:outputText value="Business address:"/>
+						<h:inputText value="#{customerOffer.address}"/>
+						<h:outputText value="Product name:"/>
+						<h:inputText value="#{customerOffer.product_Name}"/>
+						<h:outputText value="Delivery date:"/>
+						<h:inputText value="#{customerOffer.deliveryDate}"/>
 					</h:panelGrid>
 				</div>
 			</div>
@@ -35,12 +50,12 @@
 			<div class="row">
 				<div class="span1">
 					<h:commandButton value="Start Process"
-						class="btn btn-success" action="#{customerOffer.approve}"/>
+						class="btn btn-success" action="#{customerOffer.approve()}"/>
 				</div>
 				<div class="span1 offset1">
 					<h:commandButton value="Reject Offer"
 						class="btn btn-danger" action="#{customerOffer.reject}" />
-						<h:commandButton value="reject2" action="#{customerOffer.reject}"></h:commandButton>
+						<h:commandButton value="reject2" action="#{customerOffer.reject()}"></h:commandButton>
 				</div>
 			</div>
 		</h:form>
