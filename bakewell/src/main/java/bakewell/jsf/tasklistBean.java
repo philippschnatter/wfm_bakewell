@@ -13,19 +13,48 @@ import javax.faces.context.FacesContext;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
+import org.activiti.engine.ProcessEngine;
+import org.activiti.engine.ProcessEngineConfiguration;
+import org.activiti.engine.ProcessEngines;
+import org.activiti.engine.RepositoryService;
+import org.activiti.engine.TaskService;
+import org.activiti.engine.FormService;
 
 import bakewell.jsf.ActivitiFactory;
 import bakewell.activiti.ActivitiConstants;
+
+import javax.enterprise.inject.Instance;
+import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
+import javax.annotation.PostConstruct;
 
 /**
  * @author stefan
  *
  */
 public class tasklistBean {
+	  //private RepositoryService repositoryService = ActivitiFactory
+	
+
+//		processEngine = ActivitiFactory.getProcessEngine();
+//	  @Produces
+//	  @Named("processDefinitionList")
+//	  public List getProcessDefinitionList() {
+//	    return repositoryService.createProcessDefinitionQuery().list();
+	
 	private String instanceId = "";
 	private String taskId = "";
 //	private List<ItemEntry> items;
 	private String page = "";
+	TaskService taskService = null;
+	
+	@Inject
+	public FormService formService;
 	
 	public tasklistBean() {
 	}
@@ -39,7 +68,9 @@ public class tasklistBean {
 	public String getPage() { return page; }
 	public void setPage(String page) { this.page = page; }
 	
-	public String start() {
+	@PostConstruct
+	public void init() {
+		
 		System.out.println("abc");
 		FacesContext fc = FacesContext.getCurrentInstance();
 		String processName = ActivitiConstants.PROCESS_NAME;
@@ -74,7 +105,7 @@ public class tasklistBean {
 		this.setInstanceId(id);
 		
 		// Retrieve next task
-		List<Task> tasks = engine.getProcessEngine().getTaskService().createTaskQuery().taskAssignee("").processInstanceId(instance.getId()).list();
+//		List<Task> tasks = engine.getProcessEngine().getTaskService().createTaskQuery().taskAssignee("").processInstanceId(instance.getId()).list();
 		//System.out.println(tasks);
 		System.out.println("abc");
 		//return tasks.toString();
@@ -91,8 +122,17 @@ public class tasklistBean {
 //			return "success";
 //		}
  
- 
-		return "xxx";
+		taskService = engine.getProcessEngine().getTaskService();
+		formService = engine.getProcessEngine().getFormService();
+		//System.out.println(taskService.createTaskQuery().taskAssignee("Controller").list().toString());
+	}
+	
+	public List<Task> start() {
+		return taskService.createTaskQuery().list();
+	}
+	
+	public FormService getFormService() {
+		return formService;
 	}
 	
 	public void test() {

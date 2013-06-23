@@ -7,7 +7,7 @@
   <process id="ProductCreationProcess" name="Product creation" isExecutable="true">
     <startEvent id="startevent1" name="Start"></startEvent>
     <sequenceFlow id="flow2" sourceRef="startevent1" targetRef="EvaluateRequirements"></sequenceFlow>
-    <userTask id="EvaluateRequirements" name="Evaluate customer requirements" activiti:assignee="Controller" activiti:candidateUsers="Controller"></userTask>
+    <userTask id="EvaluateRequirements" name="Evaluate customer requirements" activiti:assignee="Controller" activiti:candidateUsers="Controller" activiti:formKey="customer_offer.xhtml"></userTask>
     <sequenceFlow id="flow1" sourceRef="EvaluateRequirements" targetRef="exclusivegateway1"></sequenceFlow>
     <exclusiveGateway id="exclusivegateway1" name="MeetBusinessGoals"></exclusiveGateway>
     <sequenceFlow id="DoesNotMeetBusinessGoals" name="Does not meet business goals" sourceRef="exclusivegateway1" targetRef="endevent2">
