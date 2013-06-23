@@ -52,9 +52,8 @@ public class tasklistBean {
 //	private List<ItemEntry> items;
 	private String page = "";
 	TaskService taskService = null;
+	FormService formService = null;
 	
-	@Inject
-	public FormService formService;
 	
 	public tasklistBean() {
 	}
