@@ -17,7 +17,7 @@
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${MeetsBusinessGoals=="true"}]]></conditionExpression>
     </sequenceFlow>
     <endEvent id="endevent2" name="End"></endEvent>
-    <userTask id="CheckCreditWorthiness" name="Check credit worthiness" activiti:assignee="Controller" activiti:candidateUsers="Controller"></userTask>
+    <userTask id="CheckCreditWorthiness" name="Check credit worthiness" activiti:assignee="Controller" activiti:candidateUsers="Controller" activiti:formKey="credit_check.xhtml"></userTask>
     <sequenceFlow id="flow6" sourceRef="CheckCreditWorthiness" targetRef="exclusivegateway7"></sequenceFlow>
     <exclusiveGateway id="exclusivegateway7" name="Exclusive Gateway"></exclusiveGateway>
     <sequenceFlow id="DoesNotHaveSolvency" name="Not Ok" sourceRef="exclusivegateway7" targetRef="endevent2">
@@ -123,7 +123,7 @@
     <exclusiveGateway id="exclusivegateway10" name="Exclusive Gateway"></exclusiveGateway>
     <sequenceFlow id="flow71" sourceRef="parallelgateway4" targetRef="exclusivegateway10"></sequenceFlow>
     <sequenceFlow id="NewReceipe" name="New recipe" sourceRef="exclusivegateway10" targetRef="subprocess2">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${IsNewReceipe=="true"}]]></conditionExpression>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${IsNewRecipe=="true"}]]></conditionExpression>
     </sequenceFlow>
     <exclusiveGateway id="exclusivegateway11" name="Exclusive Gateway"></exclusiveGateway>
     <sequenceFlow id="flow73" sourceRef="subprocess2" targetRef="exclusivegateway11"></sequenceFlow>

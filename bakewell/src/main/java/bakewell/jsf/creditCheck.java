@@ -30,6 +30,7 @@ public class creditCheck {
 		FormService formService = processEngine.getFormService();
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("HasSolvency", "true");
+		map.put("IsNewRecipe", "true");
 //		runtimeService.setVariable(engine.getInstance().toString(), "MeetsBusinessGoals", "true");
 		formService.submitTaskFormData(this.taskId, map);
 		
