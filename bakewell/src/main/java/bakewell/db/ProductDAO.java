@@ -172,7 +172,7 @@ public class ProductDAO {
 		openConnection();
 		
 		//Build the query
-		query = "INSERT INTO PRODUCT (ID, RECIPE_ID, CUSTOMER_ID , PRODUCTNAME , DELIVERYDATE , PRODUCTION_START , PRODUCTION_END , PRODUCTION_FACILITY, PRODUCTION_CONTRACTOR, TRANSPORT_CONTRACTOR, TRANSPORT_COST ) VALUES (ID_PRODUCT_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		query = "INSERT INTO PRODUCT (ID, RECIPE_ID, CUSTOMER_ID , PRODUCTNAME , DELIVERYDATE , PRODUCTION_START , PRODUCTION_END , PRODUCTION_FACILITY, PRODUCTION_CONTRACTOR, TRANSPORT_CONTRACTOR, TRANSPORT_COST, COMMENT ) VALUES (ID_PRODUCT_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			//interpret the query...
@@ -189,6 +189,7 @@ public class ProductDAO {
 			pstmt.setString(8, c.getProduction_Contractor());
 			pstmt.setString(9, c.getTransport_Contractor());
 			pstmt.setDouble(10, c.getTransport_cost());
+			pstmt.setString(11, c.getComment());
 			
 			//executes the Insert query on the DB
 			pstmt.executeUpdate();
@@ -250,6 +251,7 @@ public class ProductDAO {
 		if(c.getProduction_Contractor() != null) {query = query + " AND PRODUCTION_CONTRACTOR = ?"; index++;}
 		if(c.getTransport_Contractor() != null) {query = query + " AND TRANSPORT_CONTRACTOR = ?"; index++;}
 		if(c.getTransport_cost() != null) {query = query + " AND TRANSPORT_COST = ?"; index++;}
+		if(c.getComment() != null) {query = query + " AND COMMENT = ?"; index++;}
 		
 		
 		//in case every given attribute is null, the query shall not be executed
@@ -262,6 +264,7 @@ public class ProductDAO {
 			
 			//sets as much attributes to the specified index of the prepared
 			//statement as were given in as delete criteria
+			if(c.getComment() != null) {pstmt.setString(index--, c.getComment());}
 			if(c.getTransport_cost() != null) {pstmt.setDouble(index--, c.getTransport_cost());}
 			if(c.getTransport_Contractor() != null) {pstmt.setString(index--, c.getTransport_Contractor());}
 			if(c.getProduction_Contractor() != null) {pstmt.setString(index--, c.getProduction_Contractor());}
@@ -273,6 +276,7 @@ public class ProductDAO {
 			if(c.getCustomer_id() != null) {pstmt.setInt(index--, c.getCustomer_id());}
 			if(c.getRecipe_id() != null) {pstmt.setInt(index--, c.getRecipe_id());}
 			if(c.getId() != null) {pstmt.setInt(index--, c.getId());}
+			
 			
 			//if at least one attribute is not null, the query shall be executed
 			if(status != false) {
@@ -316,6 +320,7 @@ public class ProductDAO {
 		if(c.getProduction_Contractor() != null) {query = query + " AND PRODUCTION_CONTRACTOR = ?"; index++;}
 		if(c.getTransport_Contractor() != null) {query = query + " AND TRANSPORT_CONTRACTOR = ?"; index++;}
 		if(c.getTransport_cost() != null) {query = query + " AND TRANSPORT_COST = ?"; index++;}
+		if(c.getComment() != null) {query = query + " AND COMMENT = ?"; index++;}
 		query = query+";";
 		
 		try {
@@ -326,6 +331,7 @@ public class ProductDAO {
 			//sets as much attributes to the specified index of the prepared
 			//statement as were given in as delete criteria
 			
+			if(c.getComment() != null) {pstmt.setString(index--, c.getComment());}
 			if(c.getTransport_cost() != null) {pstmt.setDouble(index--, c.getTransport_cost());}
 			if(c.getTransport_Contractor() != null) {pstmt.setString(index--, c.getTransport_Contractor());}
 			if(c.getProduction_Contractor() != null) {pstmt.setString(index--, c.getProduction_Contractor());}
@@ -356,6 +362,7 @@ public class ProductDAO {
 				res.setProduction_Contractor(rs.getString(9));
 				res.setTransport_Contractor(rs.getString(10));
 				res.setTransport_cost(rs.getDouble(11));
+				res.setComment(rs.getString(12));
 				result.add(res);
 			}
 		} catch (SQLException e) {
@@ -382,17 +389,18 @@ public class ProductDAO {
 		
 		//if a given Object is not null, it shall be appended to the query and the index 
 		//shall be incremented --> NEW ATTRIBUTES
-		if(oldC.getId() != null) {query = query + " AND ID = ?"; index++;}
-		if(oldC.getRecipe_id() != null) {query = query + " AND RECIPE_ID = ?"; index++;}
-		if(oldC.getCustomer_id() != null) {query = query + " AND CUSTOMER_ID = ?"; index++;}
-		if(oldC.getProduct_Name() != null) {query = query + " AND PRODUCT_DATE = ?"; index++;}
-		if(oldC.getDeliveryDate() != null) {query = query + " AND DELIVERYDATE = ?"; index++;}
-		if(oldC.getProduction_Start() != null) {query = query + " AND PRODUCTION_START = ?"; index++;}
-		if(oldC.getProduction_End() != null) {query = query + " AND PRODUCTION_END = ?"; index++;}
-		if(oldC.getProduction_Facility() != null) {query = query + " AND PRODUCTION_FACILITY = ?"; index++;}
-		if(oldC.getProduction_Contractor() != null) {query = query + " AND PRODUCTION_CONTRACTOR = ?"; index++;}
-		if(oldC.getTransport_Contractor() != null) {query = query + " AND TRANSPORT_CONTRACTOR = ?"; index++;}
-		if(oldC.getTransport_cost() != null) {query = query + " AND TRANSPORT_COST = ?"; index++;}
+		if(oldC.getId() != null) {query = query + " ID = ?, "; index++;}
+		if(oldC.getRecipe_id() != null) {query = query + " RECIPE_ID = ?, "; index++;}
+		if(oldC.getCustomer_id() != null) {query = query + " CUSTOMER_ID = ?, "; index++;}
+		if(oldC.getProduct_Name() != null) {query = query + " PRODUCT_DATE = ?, "; index++;}
+		if(oldC.getDeliveryDate() != null) {query = query + " DELIVERYDATE = ?, "; index++;}
+		if(oldC.getProduction_Start() != null) {query = query + "PRODUCTION_START = ?, "; index++;}
+		if(oldC.getProduction_End() != null) {query = query + " PRODUCTION_END = ?, "; index++;}
+		if(oldC.getProduction_Facility() != null) {query = query + " PRODUCTION_FACILITY = ?, "; index++;}
+		if(oldC.getProduction_Contractor() != null) {query = query + " PRODUCTION_CONTRACTOR = ?, "; index++;}
+		if(oldC.getTransport_Contractor() != null) {query = query + " TRANSPORT_CONTRACTOR = ?, "; index++;}
+		if(oldC.getTransport_cost() != null) {query = query + " TRANSPORT_COST = ?, "; index++;}
+		if(oldC.getComment() != null) {query = query + " COMMENT = ? "; index++;}
 		
 		//The last "," from the subsequent query shall be removed in order to prevent a syntax error
 		//furthermore the WHERE Clause with a dummy argument shall be asserted
@@ -411,6 +419,7 @@ public class ProductDAO {
 		if(newC.getProduction_Contractor() != null) {query = query + " AND PRODUCTION_CONTRACTOR = ?"; index++;}
 		if(newC.getTransport_Contractor() != null) {query = query + " AND TRANSPORT_CONTRACTOR = ?"; index++;}
 		if(newC.getTransport_cost() != null) {query = query + " AND TRANSPORT_COST = ?"; index++;}
+		if(newC.getComment() != null) {query = query + " AND COMMENT = ?"; index++;}
 		
 		query = query+";";
 		
@@ -420,6 +429,7 @@ public class ProductDAO {
 			
 			//sets as much attributes to the specified index of the prepared
 			//statement as were given as argument
+			if(oldC.getComment() != null) {pstmt.setString(index--, oldC.getComment());}
 			if(oldC.getTransport_cost() != null) {pstmt.setDouble(index--, oldC.getTransport_cost());}
 			if(oldC.getTransport_Contractor() != null) {pstmt.setString(index--, oldC.getTransport_Contractor());}
 			if(oldC.getProduction_Contractor() != null) {pstmt.setString(index--, oldC.getProduction_Contractor());}
@@ -432,6 +442,7 @@ public class ProductDAO {
 			if(oldC.getRecipe_id() != null) {pstmt.setInt(index--, oldC.getRecipe_id());}
 			if(oldC.getId() != null) {pstmt.setInt(index--, oldC.getId());}
 			
+			if(newC.getComment() != null) {pstmt.setString(index--, newC.getComment());}
 			if(newC.getTransport_cost() != null) {pstmt.setDouble(index--, newC.getTransport_cost());}
 			if(newC.getTransport_Contractor() != null) {pstmt.setString(index--, newC.getTransport_Contractor());}
 			if(newC.getProduction_Contractor() != null) {pstmt.setString(index--, newC.getProduction_Contractor());}

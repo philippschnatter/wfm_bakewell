@@ -18,6 +18,7 @@ public class Product {
 	private String production_Contractor = null;
 	private String transport_Contractor = null;
 	private Double transport_cost = null;
+	private String comment = null;
 	
 	public Product() {
 		
@@ -26,7 +27,7 @@ public class Product {
 	public Product(Integer recipe_id, Integer customer_id, String product_Name,
 			Date deliveryDate, Date production_Start, Date production_End,
 			String production_Facility, String production_Contractor,
-			String transport_Contractor, Double transport_cost) {
+			String transport_Contractor, Double transport_cost, String comment) {
 		this.recipe_id = recipe_id;
 		this.customer_id = customer_id;
 		this.product_Name = product_Name;
@@ -37,6 +38,7 @@ public class Product {
 		this.production_Contractor = production_Contractor;
 		this.transport_Contractor = transport_Contractor;
 		this.transport_cost = transport_cost;
+		this.comment = comment;
 	}
 
 
@@ -107,13 +109,19 @@ public class Product {
 	public void setTransport_cost(Double transport_cost) {
 		this.transport_cost = transport_cost;
 	}
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 	
 	@Override
 	public String toString() {
 		return recipe_id+" "+customer_id+" "+product_Name+" "+
 				deliveryDate+" "+production_Start+" "+production_End+" "+
 				production_Facility+" "+production_Contractor+" "+
-				transport_Contractor+" "+transport_cost;
+				transport_Contractor+" "+transport_cost+" "+comment;
 	}
 	
 	
