@@ -29,6 +29,7 @@
 			</div>
 		</div> -->
 		<h:form>
+		<h2>Customer Data</h2>
 		<h:panelGrid columns="2" columnClasses="label, value"
 styleClass="grid" style="margin-bottom: 10px" border="1" cellpadding="2" cellspacing="5">
 						<h:outputText value="Contractor company:"/>
@@ -48,7 +49,60 @@ styleClass="grid" style="margin-bottom: 10px" border="1" cellpadding="2" cellspa
 						<h:outputText value="Delivery date:"/>
 						<h:inputText value="#{customerOffer.deliveryDate}"/>
 					</h:panelGrid>
-			<div class="row">
+					
+					<h2>Product Data</h2>
+					<h:panelGrid columns="2" columnClasses="label, value"
+						styleClass="grid" style="margin-bottom: 10px" border="1" cellpadding="2" cellspacing="5">
+						<h:outputText value="Product Start:"/>
+						<h:inputText value="#{customerOffer.production_Start}"/>
+						<h:outputText value="Product End:"/>
+						<h:inputText value="#{customerOffer.production_End}"/>
+						<h:outputText value="Production Facility:"/>
+						<h:inputText value="#{customerOffer.production_Facility}"/>
+						<h:outputText value="Product Contractor:"/>
+						<h:inputText value="#{customerOffer.production_Contractor}"/>
+						<h:outputText value="Transport Contractor:"/>
+						<h:inputText value="#{customerOffer.transport_Contractor}"/>
+						<h:outputText value="Transport Cost:"/>
+						<h:inputText value="#{customerOffer.transport_cost}">
+							<f:converter converterId="javax.faces.Double"/>
+						</h:inputText>
+					</h:panelGrid>
+					
+					<h2>Recipe Data</h2>
+					<h:panelGrid columns="2" columnClasses="label, value"
+						styleClass="grid" style="margin-bottom: 10px" border="1" cellpadding="2" cellspacing="5">
+						<h:outputText value="Recipe Name:"/>
+						<h:inputText value="#{customerOffer.recipeName}"/>
+						<h:outputText value="Recipe Description:"/>
+						<h:inputText value="#{customerOffer.recipeDescription}"/>	
+					</h:panelGrid>
+					
+					<h3>Ingredients in grams</h3>
+					<h:panelGrid columns="2" columnClasses="label, value"
+						styleClass="grid" style="margin-bottom: 10px" border="1" cellpadding="2" cellspacing="5">
+						<h:outputText value="Flour:"/>
+						<h:inputText value="#{customerOffer.flourQty}">
+							<f:converter converterId="javax.faces.Double"/>
+						</h:inputText>
+						<h:outputText value="Flour:"/>
+						<h:inputText value="#{customerOffer.waterQty}">
+							<f:converter converterId="javax.faces.Double"/>
+						</h:inputText>
+						<h:outputText value="Flour:"/>
+						<h:inputText value="#{customerOffer.yeastQty}">
+							<f:converter converterId="javax.faces.Double"/>
+						</h:inputText>
+						<h:outputText value="Flour:"/>
+						<h:inputText value="#{customerOffer.saltQty}">
+							<f:converter converterId="javax.faces.Double"/>
+						</h:inputText>
+							
+					</h:panelGrid>
+					
+					
+					
+		<div class="row">
 				<div class="span1">
 					<h:commandButton value="Start Process"
 						class="btn btn-success" action="#{customerOffer.approve()}"/>
