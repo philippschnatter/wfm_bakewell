@@ -9,6 +9,8 @@ import javax.ws.rs.core.MediaType;
 import junit.framework.Assert;
 
 import bakewell.beans.Recipe;
+import bakewell.db.ProductDAO;
+import bakewell.db.RecipeDAO;
 import bakewell.webservice.StartServers;
 import bakewell.webservice.ingredient.IngredientRESTService;
 
@@ -22,20 +24,28 @@ import org.junit.Test;
 
 
 
-
 public class WebServiceTest {
 	
+	
+	private ProductDAO prodao;
+	private RecipeDAO recdao;
+	private final String USER = "sa";
+	private final String PW = "";
 	private static StartServers server = null;
 	
 	@BeforeClass
 	public static void init()
 	{
+		
 		server = new StartServers();
 		server.start();
 	}
 	
 	@Test
 	public void testIngredientWS() {
+		
+		this.prodao = new ProductDAO (USER, PW);
+		this.recdao = new RecipeDAO(USER, PW);
 		
 		// REST-Service
 		// define a JSON provider and a mapping between REST and JSON namespace's

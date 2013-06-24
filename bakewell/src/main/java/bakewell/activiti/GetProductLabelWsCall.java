@@ -1,5 +1,6 @@
 package bakewell.activiti;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +19,7 @@ import org.apache.cxf.jaxrs.provider.json.JSONProvider;
 
 import bakewell.beans.Product;
 import bakewell.beans.Recipe;
+import bakewell.db.ProductDAO;
 import bakewell.webservice.ingredient.IngredientRESTService;
 
 public class GetProductLabelWsCall implements JavaDelegate
@@ -33,8 +35,23 @@ public class GetProductLabelWsCall implements JavaDelegate
 	public void execute(DelegateExecution execution) throws Exception {
 		
 		// aus activiti
-		Integer productId = (Integer)execution.getVariable("productId");
-		// product aus dao
+//		Integer productId = (Integer)execution.getVariable("productId");
+
+		String USER = "sa";
+		String PW = "";
+		
+		ProductDAO prodao = new ProductDAO (USER, PW);
+				
+		Product p = new Product();
+		ArrayList<Product> plist = prodao.selectProduct(p);
+		String productId = "0";
+		
+		if (!plist.isEmpty()) {
+			p = plist.get(0);
+			productId = p.getId().toString();
+		}
+		
+		
 
 		
 		// REST-Service

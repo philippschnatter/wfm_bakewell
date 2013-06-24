@@ -1,5 +1,6 @@
 package bakewell.activiti;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ import org.apache.cxf.jaxrs.provider.json.JSONProvider;
 
 import bakewell.beans.Product;
 import bakewell.beans.Recipe;
+import bakewell.db.ProductDAO;
 import bakewell.webservice.logistics.RecipePriceRESTService;
 
 public class QuoteIngredientPricesWsCall implements JavaDelegate
@@ -33,9 +35,19 @@ public class QuoteIngredientPricesWsCall implements JavaDelegate
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 		
-		Product p = (Product)execution.getVariable("product");
+		String USER = "sa";
+		String PW = "";
 		
-		String productId = p.getId().toString();
+		ProductDAO prodao = new ProductDAO (USER, PW);
+				
+		Product p = new Product();
+		ArrayList<Product> plist = prodao.selectProduct(p);
+		String productId = "0";
+		
+		if (!plist.isEmpty()) {
+			p = plist.get(0);
+			productId = p.getId().toString();
+		}
 		
 		// REST-Service
 		// define a JSON provider and a mapping between REST and JSON namespace's
