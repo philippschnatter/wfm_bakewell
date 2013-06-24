@@ -105,7 +105,7 @@ public class Ingredient2RecipeDAO {
 		openConnection();
 		
 		//Build the query
-		query = "INSERT INTO INGREDIENT2RECIPE (ID, REICPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, ?, ?, ?)";
+		query = "INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, ?, ?, ?)";
 		
 		try {
 			//interpret the query...

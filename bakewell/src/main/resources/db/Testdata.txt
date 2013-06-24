@@ -1,0 +1,196 @@
+INSERT INTO CUSTOMER (ID, FIRSTNAME, LASTNAME , ADDRESS , TELNO , MAILADDRESS , COMPANY , PASSWORD ) VALUES (ID_CUSTOMER_SEQ.nextval, 'Alexander', 'Gruber', 'Addresse1', '123', 'a@g.net', 'firma1', 
+'password1');
+INSERT INTO CUSTOMER (ID, FIRSTNAME, LASTNAME , ADDRESS , TELNO , MAILADDRESS , COMPANY , PASSWORD ) VALUES (ID_CUSTOMER_SEQ.nextval, 'Stefan', 'Goetzinger', 'Addresse2', '1234', 's@g.net', 'firma2', 'password2');
+INSERT INTO CUSTOMER (ID, FIRSTNAME, LASTNAME , ADDRESS , TELNO , MAILADDRESS , COMPANY , PASSWORD ) VALUES (ID_CUSTOMER_SEQ.nextval, 'Daniel', 'Puchner', 'Addresse3', '12345', 'd@p.net', 'firma3', 
+'password3');
+INSERT INTO CUSTOMER (ID, FIRSTNAME, LASTNAME , ADDRESS , TELNO , MAILADDRESS , COMPANY , PASSWORD ) VALUES (ID_CUSTOMER_SEQ.nextval, 'Alexander', 'Kiennast', 'Addresse4', '123456', 'a@k.net', 'firma4', 'password4');
+INSERT INTO CUSTOMER (ID, FIRSTNAME, LASTNAME , ADDRESS , TELNO , MAILADDRESS , COMPANY , PASSWORD ) VALUES (ID_CUSTOMER_SEQ.nextval, 'Philipp', 'Schnatter', 'Addresse5', '1234567', 'p@s.net', 'firma5', 'password5');
+
+INSERT INTO RECIPE (ID, NAME, DESCRIPTION , ALLGDA_ENERGY , ALLGDA_PROTEIN , ALLGDA_CARBO , ALLGDA_FAT , ALLGDA_FIBER, ALLGDA_SODIUM , TOTALPRICE ) VALUES (ID_RECIPE_SEQ.nextval, 'Guglhupf', 'Eier, Öl, Zucker, Nüsse und Vanillinzucker 7 Minuten rühren. Das halbe Mehl mit Wasser einrühren, anschließend das restliche Mehl mit Backpulver vermengen. Die Masse in eine Gugelhupfform füllen und im vorgeheizten Rohr bei 180°C ca. 45 Min. bei Ober- Unterhitze backen.', null, null, null, null, null, null, 100.0);
+
+INSERT INTO RECIPE (ID, NAME, DESCRIPTION , ALLGDA_ENERGY , ALLGDA_PROTEIN , ALLGDA_CARBO , ALLGDA_FAT , ALLGDA_FIBER, ALLGDA_SODIUM , TOTALPRICE ) VALUES (ID_RECIPE_SEQ.nextval, 'Schnitzel', '
+Zubereitung:
+
+Für das Wiener Hühnerschnitzel legen Sie die Schnitzel auf ein Schneidbrett und schneiden allfällige Fett- oder
+Sehnenreste mit einem scharfen Messer weg. Dann klopfen Sie die Schnitzel mit einem Schnitzelklopfer leicht platt. Auf beiden Seiten mit Salz sowie Pfeffer würzen und auf einen
+Teller legen.
+
+Etwas Mehl auf einen Teller schütten, die Eier in einen weiteren Suppenteller hineinschlagen
+und mit der Gabel einige Male kräftig durchrühren.
+
+Jetzt wenden Sie das erste Schnitzel zuerst auf beiden Seiten in Mehl und klopfen mit der Rückseite der Gabel vorsichtig das überflüssige Mehl ab. Dann legen Sie das Schnitzel in die verschlagenen Eier, wenden es und wälzen es danach auf beiden Seiten in den Bröseln.
+Schnitzel auf das Schneidbrett legen und die restlichen Schnitzel ebenso panieren.
+
+In einer großen flachen Pfanne (oder in zwei kleineren Pfannen) reichlich Öl (etwa eine Fingerbreite hoch) eingießen und erhitzen. Sollten Sie Butterschmalz zu Hause haben, einen schwachen Esslöffel davon dazugeben (das lässt das Schnitzerl wunderbar nussig schmecken). Nun die Wiener Hühnerschnitzel vorsichtig einlegen und anfangs bei relativ großer Hitze kurz auf beiden Seiten anbacken.
+Bitte stechen Sie die Schnitzel dabei möglichst nicht mit einer Gabel an! Das ruiniert die Panier und lässt den Saft ausfließen!
+Dann die Hitze ziemlich reduzieren und auf beiden Seiten langsam goldbraun backen. Dabei die Schnitzel immer wieder mit Hilfe eines Esslöffels mit heißem Fett begießen, damit die Panier so richtig knusprig wird und wellenartig soufflieren kann.
+
+Während die Wiener Hühnerschnitzel ihre letzte Bräune erhalten, geben Sie etwas Butter sowie die gehackte Petersilie zu den gekochten Kartoffeln. Vorsichtig durchrühren und die Kartoffeln nochmals kurz bei mittlerer Hitze auf den Herd stellen, damit die Butter unter wiederholtem Umrühren schön aufschäumen kann.
+
+Je nach Stärke der Schnitzel sollten Sie sie nach insgesamt 5–7 Minuten mit einem Bratenwender wieder herausheben. Legen Sie sie auf ein paar Blätter Küchenkrepp und tupfen Sie sie behutsam ab.
+Wiener Hühnerschnitzel auf Tellern anrichten und mit je einer Zitronenscheibe garnieren.
+
+Serviervorschlag: grüner Blattsalat, Gurken- oder Tomatensalat
+Tipp:
+
+Als Beilage zum Wiener Schnitzel Rezept können Sie auch Petersilkartoffeln machen. Dafür schälen Sie die Kartoffeln und kochen sie in Salzwasser 15–20 Minuten. Dann nehmen Sie die Kartoffeln vom Herd, gießen das Wasser ab und
+lassen sie einfach zugedeckt stehen.
+Empfohlene Beilagen:
+Kartoffeln/Pommes
+Reis
+Salat
+', null, null, null, null, null, null, 150.0);
+
+INSERT INTO RECIPE (ID, NAME, DESCRIPTION , ALLGDA_ENERGY , ALLGDA_PROTEIN , ALLGDA_CARBO , ALLGDA_FAT , ALLGDA_FIBER, ALLGDA_SODIUM , TOTALPRICE ) VALUES (ID_RECIPE_SEQ.nextval, 'Sachertorte', '
+Zubereitung:
+
+Für die Sachertorte die Eier trennen, Butter auf Zimmertemperatur bringen.
+
+In einer Schüssel Butter mit Staubzucker schaumig rühren und Dotter sowie Vanillezucker einrühren.
+
+Schokolade in einem Wasserbad schmelzen, aber keinesfalls zu heiß werden lassen und ebenfalls in den Abtrieb einmengen.
+
+Eiklar schlagen, mit Kristallzucker steif ausschlagen und vorsichtig unter die übrige Masse heben. Zuletzt das Mehl behutsam einrühren.
+
+Eine Tortenspringform gut mit Butter ausstreichen und mit Mehl bestauben, Tortenteig einfüllen und im auf 180 °C vorgeheizten Backrohr etwa 1 Stunde lang backen.
+
+Torte erkalten lassen, dann durchschneiden. Die beiden Tortenböden mit passierter, leicht erwärmter Marmelade hauchdünn bestreichen und wieder zusammensetzen.
+
+Anschließend auch die Außenseite der Sachertorte bestreichen, bevor man sie mit Schokoladeglasur überzieht.
+Tipp:
+
+Durch das Bestreichen der Außenseite der Sachertorte mit Marmelade wird die Glasur besonders schön glatt.
+', null, null, null, null, null, null, 50.0);
+
+INSERT INTO RECIPE (ID, NAME, DESCRIPTION , ALLGDA_ENERGY , ALLGDA_PROTEIN , ALLGDA_CARBO , ALLGDA_FAT , ALLGDA_FIBER, ALLGDA_SODIUM , TOTALPRICE ) VALUES (ID_RECIPE_SEQ.nextval, 'Krapfen', '
+
+
+    In 100 ml lauwarmer Milch die Hefe hineinbröckeln und verrühren.
+    Danach das ganze mit 150 g Mehl und die Milch zu einem Vorteig kneten. Mit etwas Mehl bestäuben und zugedeckt an einem warmen Ort ca. 25 Minuten ruhen lassen.
+    Die Eier, Eigelbe und den Zucker verrühren.
+    Das ganze zu dem Vorteig dazugeben. Die restliche Milch, das restliche Mehl, die weiche Butter und die Prise Salz dazu geben und zu einem glatten Teig verkneten. Zudecken und noch einmal 25 Min. ruhen lassen.
+    Aus dem Teig 20- 25 Kugeln formen. Diese etwas flach drücken und wieder zugedeckt weitere 45 Min. ruhen lassen, bis die Kugeln doppelt so groß sind.
+    Das Fett auf 170 °C erhitzen. Die Krapfen goldgelb auf beiden Seiten ausbacken. Mit einem Schaumlöffel die Krapfen herausheben und abtropfen lassen.
+    Jetzt kommt der spaßigste Teil. In einem Spritzbeutel die Marmelade füllen und diese seitlich in die Krapfen hineinspritzen. Beim Servieren mit Staubzucker bestäuben.
+
+', null, null, null, null, null, null, 50.0);
+
+INSERT INTO RECIPE (ID, NAME, DESCRIPTION , ALLGDA_ENERGY , ALLGDA_PROTEIN , ALLGDA_CARBO , ALLGDA_FAT , ALLGDA_FIBER, ALLGDA_SODIUM , TOTALPRICE ) VALUES (ID_RECIPE_SEQ.nextval, 'Strammer Max', '
+
+Für den Strammen Max eine Seite der Brotscheiben zuerst mit Butter, dann nach Belieben auch noch dünn mit etwas Senf bestreichen. Schinken darauf verteilen und je eine Scheibe Käse darauflegen.
+
+In einer beschichteten Pfanne sehr wenig Butter erhitzen, Brote hineingeben und bei minimaler Hitze zugedeckt gute 10 Minuten toasten, bis der Käse schön geschmolzen ist.
+
+Parallel dazu in einer anderen Pfanne die Eier in heißer Butter zu Spiegeleiern braten. Die fertigen Brote herausnehmen, die Spiegeleier daraufsetzen.
+
+Eier salzen, pfeffern und nach Belieben mit einer kleinen Prise Paprikapulver bestreuen und den Strammen Max servieren.', null, null, null, null, null, null, 50.0);
+
+INSERT INTO RECIPE (ID, NAME, DESCRIPTION , ALLGDA_ENERGY , ALLGDA_PROTEIN , ALLGDA_CARBO , ALLGDA_FAT , ALLGDA_FIBER, ALLGDA_SODIUM , TOTALPRICE ) VALUES (ID_RECIPE_SEQ.nextval, 'Mojito', 'Der Mojito wurde laut Wikipedia zwischen 1910 und 1920 auf Kuba kreiert, wo ihn schon Ernest Hemingway genießen durfte.
+
+In ein Becherglas den Rohrzucker, Limettensaft (oder 4 Limettenachtel) und 12 abgezupfte Minzeblätter geben. Den Stössel leicht drehen und fest nach unten drücken, damit die Aromen der Minze freigegeben werden und mit dem Limettensaft vermischt werden.
+Crushed Ice und Havana Club dazugeben, umrühren, und mit neutral schmeckendem, kalten Sodawasser auffüllen. Noch einmal kurz umrühren. Den Mojito mit einem in das Glas gesteckten Minzezweig garnieren und mit schwarzem Strohhalm servieren.
+Tipp: Die Minze nicht zerkleinern, sonst trinkt man beim Mojito kleine Minze-Stücke mit, die zwischen den Zähnen hängen bleiben.
+
+Über die Mojito-Zubereitung gibt es viele unterschiedliche Quellen. Übrigens: Die Blätter haben definitiv den guten Geschmack, also auf die Stängel verzichten. Welche Minze man für den Mojito verwenden sollte steht in der Rubrik "Zutaten Cocktails". Unbedingt sollte auch Havana Club Rum verwenden, alles andere ist für einen Mojito ungeeignet.', null, null, null, null, null, null, 50.0);
+
+INSERT INTO GDAREFERENCE (ID, NAME, AMOUNT ) VALUES (ID_GDAREFERENCE_SEQ.nextval, 'energy', 250.0);
+INSERT INTO GDAREFERENCE (ID, NAME, AMOUNT ) VALUES (ID_GDAREFERENCE_SEQ.nextval, 'protein', 100.0);
+INSERT INTO GDAREFERENCE (ID, NAME, AMOUNT ) VALUES (ID_GDAREFERENCE_SEQ.nextval, 'carbo', 500.0);
+INSERT INTO GDAREFERENCE (ID, NAME, AMOUNT ) VALUES (ID_GDAREFERENCE_SEQ.nextval, 'fat', 100.0);
+INSERT INTO GDAREFERENCE (ID, NAME, AMOUNT ) VALUES (ID_GDAREFERENCE_SEQ.nextval, 'fiber', 400.0);
+INSERT INTO GDAREFERENCE (ID, NAME, AMOUNT ) VALUES (ID_GDAREFERENCE_SEQ.nextval, 'sodium', 25.0);
+
+INSERT INTO PRODUCT (ID, RECIPE_ID, CUSTOMER_ID , PRODUCTNAME , DELIVERYDATE , PRODUCTION_START , PRODUCTION_END , PRODUCTION_FACILITY, PRODUCTION_CONTRACTOR, TRANSPORT_CONTRACTOR, TRANSPORT_COST ) VALUES (ID_PRODUCT_SEQ.nextval, 1, 1, 'Es werde Guglhupf', '2014-01-01', '2013-06-01', '2014-12-31', 'Wien', 'Vienna Bakery', 'LKW Augustin', 1000.0);
+INSERT INTO PRODUCT (ID, RECIPE_ID, CUSTOMER_ID , PRODUCTNAME , DELIVERYDATE , PRODUCTION_START , PRODUCTION_END , PRODUCTION_FACILITY, PRODUCTION_CONTRACTOR, TRANSPORT_CONTRACTOR, TRANSPORT_COST ) VALUES (ID_PRODUCT_SEQ.nextval, 2, 2, 'Wiener Schnitzel', '2014-01-01', '2013-06-01', '2014-12-31', 'Wien', 'Vienna Foods', 'LKW Augustin', 1500.0);
+INSERT INTO PRODUCT (ID, RECIPE_ID, CUSTOMER_ID , PRODUCTNAME , DELIVERYDATE , PRODUCTION_START , PRODUCTION_END , PRODUCTION_FACILITY, PRODUCTION_CONTRACTOR, TRANSPORT_CONTRACTOR, TRANSPORT_COST ) VALUES (ID_PRODUCT_SEQ.nextval, 3, 3, 'sachertorte Extended', '2014-01-01', '2013-06-01', '2014-12-31', 'Wien', 'Vienna Bakery', 'LKW Augustin', 1000.0);
+INSERT INTO PRODUCT (ID, RECIPE_ID, CUSTOMER_ID , PRODUCTNAME , DELIVERYDATE , PRODUCTION_START , PRODUCTION_END , PRODUCTION_FACILITY, PRODUCTION_CONTRACTOR, TRANSPORT_CONTRACTOR, TRANSPORT_COST ) VALUES (ID_PRODUCT_SEQ.nextval, 4, 4, 'Overkrapfen', '2014-01-01', '2013-06-01', '2014-12-31', 'Wien', 'Vienna Bakery', 'LKW Augustin', 1000.0);
+INSERT INTO PRODUCT (ID, RECIPE_ID, CUSTOMER_ID , PRODUCTNAME , DELIVERYDATE , PRODUCTION_START , PRODUCTION_END , PRODUCTION_FACILITY, PRODUCTION_CONTRACTOR, TRANSPORT_CONTRACTOR, TRANSPORT_COST ) VALUES (ID_PRODUCT_SEQ.nextval, 5, 5, 'Max Stramm', '2014-01-01', '2013-06-01', '2014-12-31', 'Wien', 'Vienna Deep fried Food', 'LKW Augustin', 1000.0);
+INSERT INTO PRODUCT (ID, RECIPE_ID, CUSTOMER_ID , PRODUCTNAME , DELIVERYDATE , PRODUCTION_START , PRODUCTION_END , PRODUCTION_FACILITY, PRODUCTION_CONTRACTOR, TRANSPORT_CONTRACTOR, TRANSPORT_COST ) VALUES (ID_PRODUCT_SEQ.nextval, 6, 1, 'Mojito', '2014-01-01', '2013-06-01', '2014-12-31', 'Wien', 'Drinks Linz', 'LKW Augustin', 500.0);
+INSERT INTO PRODUCT (ID, RECIPE_ID, CUSTOMER_ID , PRODUCTNAME , DELIVERYDATE , PRODUCTION_START , PRODUCTION_END , PRODUCTION_FACILITY, PRODUCTION_CONTRACTOR, TRANSPORT_CONTRACTOR, TRANSPORT_COST ) VALUES (ID_PRODUCT_SEQ.nextval, 6, 1, 'Mojito2', '2014-01-01', '2013-06-01', '2014-12-31', 'Wien', 'Drinks Linz', 'LKW Augustin', 2000.0);
+
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Backpulver', 1, 1, 1, 1, 1, 1, 10.0);
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Eier', 1, 1, 1, 1, 1, 1, 10.0);
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Nüsse', 1, 1, 1, 1, 1, 1, 10.0);
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Mehl', 1, 1, 1, 1, 1, 1, 10.0);
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Öl', 1, 1, 1, 1, 1, 1, 10.0);
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Vanillinzucker', 1, 1, 1, 1, 1, 1, 10.0);
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Wasser', 1, 1, 1, 1, 1, 1, 10.0);
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Zucker', 1, 1, 1, 1, 1, 1, 10.0);
+
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 1, 1, 25.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 1, 2, 200.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 1, 3, 100.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 1, 4, 200.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 1, 5, 125.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 1, 6, 25.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 1, 7, 125.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 1, 8, 250.0);
+
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Kalbsschnitzel', 1, 1, 1, 1, 1, 1, 10.0);
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Salz', 1, 1, 1, 1, 1, 1, 10.0);
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Pfeffer', 1, 1, 1, 1, 1, 1, 10.0);
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Semmelbroesel', 1, 1, 1, 1, 1, 1, 10.0);
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Butterschmalz', 1, 1, 1, 1, 1, 1, 10.0);
+
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 2, 9, 500.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 2, 10, 25.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 2, 11, 25.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 2, 2, 150.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 2, 12, 200.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 2, 4, 150.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 2, 13, 100.0);
+
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Kochschokolade', 1, 1, 1, 1, 1, 1, 10.0);
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Marillenmarmelade', 1, 1, 1, 1, 1, 1, 10.0);
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Butter', 1, 1, 1, 1, 1, 1, 10.0);
+
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 3, 1, 50.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 3, 2, 450.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 3, 14, 370.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 3, 8, 220.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 3, 15, 220.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 3, 4, 220.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 3, 5, 220.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 3, 16, 150.0);
+
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Hefe', 1, 1, 1, 1, 1, 1, 10.0);
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Milch', 1, 1, 1, 1, 1, 1, 10.0);
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Staubzucker', 1, 1, 1, 1, 1, 1, 10.0);
+
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 4, 16, 60.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 4, 2, 100.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 4, 17, 50.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 4, 15, 250.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 4, 4, 500.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 4, 18, 250.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 4, 10, 20.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 4, 19, 50.0);
+
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Bauernbrot', 1, 1, 1, 1, 1, 1, 10.0);
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Schinken', 1, 1, 1, 1, 1, 1, 10.0);
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Gouda', 1, 1, 1, 1, 1, 1, 10.0);
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Knoblauch', 1, 1, 1, 1, 1, 1, 10.0);
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Margarine', 1, 1, 1, 1, 1, 1, 10.0);
+
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 5, 20, 50.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 5, 21, 50.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 5, 22, 25.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 5, 2, 100.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 5, 23, 10.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 5, 10, 25.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 5, 11, 25.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 5, 24, 25.0);
+
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Brauner Zucker', 1, 1, 1, 1, 1, 1, 10.0);
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Crushed Ice', 1, 1, 1, 1, 1, 1, 10.0);
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Limette', 1, 1, 1, 1, 1, 1, 10.0);
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Minze', 1, 1, 1, 1, 1, 1, 10.0);
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'RWeißer Rum', 1, 1, 1, 1, 1, 1, 10.0);
+INSERT INTO INGREDIENT (ID, NAME, GDA_ENERGY , GDA_PROTEIN , GDA_CARBO , GDA_FAT , GDA_FIBER , GDA_SODIUM, PRICE ) VALUES (ID_INGREDIENT_SEQ.nextval, 'Soda', 1, 1, 1, 1, 1, 1, 10.0);
+
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 6, 25, 25.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 6, 26, 50.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 6, 27, 25.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 6, 28, 10.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 6, 29, 50.0);
+INSERT INTO INGREDIENT2RECIPE (ID, RECIPE_ID, INGREDIENT_ID , AMOUNT ) VALUES (ID_INGREDIENT2RECIPE_SEQ.nextval, 6, 30, 60.0);

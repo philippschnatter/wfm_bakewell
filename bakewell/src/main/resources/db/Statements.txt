@@ -34,16 +34,6 @@ ALLGDA_SODIUM DOUBLE,
 TOTALPRICE DOUBLE
 );
 
-Map  insertRecipe()
-
-public ArrayList<IngredientId, RecipeId, Ingredientname, amount> selectAllIngredients()
-
-public ArrayList<IngredientId, RecipeId, Ingredientname, amount> insertIngredient2Recipe(ArrayList<IngredientId, RecipeId, Ingredientname, amount>)
-
-
-
-
-
 CREATE TABLE IF NOT EXISTS PRODUCT(
 ID INT PRIMARY KEY,
 RECIPE_ID INT,
