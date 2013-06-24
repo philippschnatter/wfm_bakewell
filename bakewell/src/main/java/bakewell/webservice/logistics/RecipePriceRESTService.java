@@ -14,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_ATOM_XML, MediaType.TEXT_HTML, MediaType.APPLICATION_XHTML_XML, MediaType.TEXT_PLAIN, MediaType.WILDCARD})
-@Path("/ingredientCalculation")
+@Path("/priceCalculation")
 public interface RecipePriceRESTService {
 	
 	@GET
