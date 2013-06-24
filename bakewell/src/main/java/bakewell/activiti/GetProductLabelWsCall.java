@@ -1,6 +1,5 @@
 package bakewell.activiti;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,42 +16,21 @@ import org.apache.cxf.jaxrs.client.JAXRSClientFactoryBean;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.cxf.jaxrs.provider.json.JSONProvider;
 
-import bakewell.beans.Product;
 import bakewell.beans.Recipe;
-import bakewell.db.ProductDAO;
 import bakewell.webservice.ingredient.IngredientRESTService;
 
 public class GetProductLabelWsCall implements JavaDelegate
 {
 	
-	// These fields correspond to the name of the <activiti:field /> elements
-	// in the bpmn
-//	private FixedValue service;
-//	private Expression productId;
-	
-
 	@Override
-	public void execute(DelegateExecution execution) throws Exception {
+	public void execute(DelegateExecution execution){
+		// executeWs(execution);
+	}
+
+	public void executeWs(DelegateExecution execution) throws Exception {
 		
 		// aus activiti
-//		Integer productId = (Integer)execution.getVariable("productId");
-
-		String USER = "sa";
-		String PW = "";
-		
-		ProductDAO prodao = new ProductDAO (USER, PW);
-				
-		Product p = new Product();
-		ArrayList<Product> plist = prodao.selectProduct(p);
-		String productId = "0";
-		
-		if (!plist.isEmpty()) {
-			p = plist.get(0);
-			productId = p.getId().toString();
-		}
-		
-		
-
+		Integer productId = (Integer)execution.getVariable("productId");
 		
 		// REST-Service
 		// define a JSON provider and a mapping between REST and JSON namespace's
@@ -96,7 +74,7 @@ public class GetProductLabelWsCall implements JavaDelegate
 			e.printStackTrace();
 		}
 		recipe = null;
-		
+
 	}
 
 }

@@ -155,13 +155,13 @@
       <startEvent id="startevent5" name="Start"></startEvent>
       <parallelGateway id="parallelgateway6" name="Parallel Gateway"></parallelGateway>
       <userTask id="BookProductionFacility" name="Book Production Facility" activiti:assignee="ProcessManager" activiti:formKey="order_production.xhtml"></userTask>
-      <userTask id="OrderPackaging" name="Order packaging" activiti:assignee="ProcessManager" activiti:formKey="order_packaging.xhtml"></userTask>
+      <userTask id="OrderTransport" name="Order transport" activiti:assignee="ProcessManager" activiti:formKey="order_packaging.xhtml"></userTask>
       <parallelGateway id="parallelgateway7" name="Parallel Gateway"></parallelGateway>
       <sequenceFlow id="flow104" sourceRef="startevent5" targetRef="parallelgateway6"></sequenceFlow>
       <sequenceFlow id="flow105" sourceRef="parallelgateway6" targetRef="BookProductionFacility"></sequenceFlow>
-      <sequenceFlow id="flow106" sourceRef="parallelgateway6" targetRef="OrderPackaging"></sequenceFlow>
+      <sequenceFlow id="flow106" sourceRef="parallelgateway6" targetRef="OrderTransport"></sequenceFlow>
       <sequenceFlow id="flow107" sourceRef="BookProductionFacility" targetRef="parallelgateway7"></sequenceFlow>
-      <sequenceFlow id="flow108" sourceRef="OrderPackaging" targetRef="parallelgateway7"></sequenceFlow>
+      <sequenceFlow id="flow108" sourceRef="OrderTransport" targetRef="parallelgateway7"></sequenceFlow>
       <endEvent id="endevent12" name="End"></endEvent>
       <sequenceFlow id="flow109" sourceRef="parallelgateway7" targetRef="endevent12"></sequenceFlow>
     </subProcess>
@@ -318,9 +318,6 @@
       <bpmndi:BPMNShape bpmnElement="BookProductionFacility" id="BPMNShape_BookProductionFacility">
         <omgdc:Bounds height="55.0" width="105.0" x="1850.0" y="326.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="OrderPackaging" id="BPMNShape_OrderPackaging">
-        <omgdc:Bounds height="55.0" width="105.0" x="1850.0" y="430.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="parallelgateway7" id="BPMNShape_parallelgateway7">
         <omgdc:Bounds height="40.0" width="40.0" x="2000.0" y="380.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
@@ -332,6 +329,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="parallelgateway8" id="BPMNShape_parallelgateway8">
         <omgdc:Bounds height="40.0" width="40.0" x="3530.0" y="303.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="OrderTransport" id="BPMNShape_OrderTransport">
+        <omgdc:Bounds height="55.0" width="105.0" x="1850.0" y="430.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
         <omgdi:waypoint x="738.0" y="219.0"></omgdi:waypoint>

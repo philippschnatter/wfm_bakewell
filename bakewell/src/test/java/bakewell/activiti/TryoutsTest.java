@@ -34,7 +34,10 @@ public class TryoutsTest {
 	public static void init()
 	{	
 		// Create Activiti process engine
-		processEngine = ProcessEngineConfiguration.createStandaloneInMemProcessEngineConfiguration().buildProcessEngine();
+		processEngine = ProcessEngineConfiguration.createStandaloneInMemProcessEngineConfiguration()
+				.setMailServerPort(1025)
+				
+				.buildProcessEngine();
 		runtimeService = processEngine.getRuntimeService();
 		RepositoryService repositoryService = processEngine.getRepositoryService();
 		DeploymentBuilder builder = repositoryService.createDeployment();
@@ -45,27 +48,28 @@ public class TryoutsTest {
 	}
 	
 
+
 	private void createNewProcess(){
 		processInstance = runtimeService.startProcessInstanceByKey("myProcess");
+	
+
+		
 		assertNotNull(processInstance.getId());
 		identityService = processEngine.getIdentityService();
 		taskService = processEngine.getTaskService(); 
 		pid = processInstance.getProcessInstanceId();
 		formService = processEngine.getFormService();
-	
+		runtimeService.setVariable(pid, "mailvar1", "value1");
+		runtimeService.setVariable(pid, "mailvar2", "value2");
 	}
 	
+	
 	@Test
-	public void testTimerFunctionality(){
+	public void testMail(){
 		createNewProcess();
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		List<Task> nextTasks = taskService.createTaskQuery().list();
+		Task nextTask = taskService.createTaskQuery().singleResult();
+		HashMap<String, String> map = new HashMap<String, String>();
+		formService.submitTaskFormData(nextTask.getId(), map);
 	}
 	
 	@Test

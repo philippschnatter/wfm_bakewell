@@ -64,7 +64,9 @@ public class MainProcessTest {
 		
 		
 		// Create Activiti process engine
-		processEngine = ProcessEngineConfiguration.createStandaloneInMemProcessEngineConfiguration().buildProcessEngine();
+		processEngine = ProcessEngineConfiguration.createStandaloneInMemProcessEngineConfiguration()
+				.setMailServerPort(1025)
+				.buildProcessEngine();
 		runtimeService = processEngine.getRuntimeService();
 		RepositoryService repositoryService = processEngine.getRepositoryService();
 		DeploymentBuilder builder = repositoryService.createDeployment();
@@ -138,7 +140,7 @@ public class MainProcessTest {
 		FinalDocument doc = (FinalDocument)runtimeService.getVariable(pid, "finalDocument");*/
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("MeetsBusinessGoals", meetsBusinessGoals);
-		map.put("IsNewReceipe", isNewReceipe);
+		map.put("IsNewRecipe", isNewReceipe);
 		formService.submitTaskFormData(evalRequirementsId, map);
 	}
 		
@@ -182,7 +184,7 @@ public class MainProcessTest {
 		HashMap<String, String> map = new HashMap<String, String>();
 		formService.submitTaskFormData(constraintsId, map);
 		
-		String constraintsId2 = taskService.createTaskQuery().taskDefinitionKey("OrderPackaging").singleResult().getId();
+		String constraintsId2 = taskService.createTaskQuery().taskDefinitionKey("OrderTransport").singleResult().getId();
 		HashMap<String, String> map2 = new HashMap<String, String>();
 		formService.submitTaskFormData(constraintsId2, map2);
 	}
@@ -271,7 +273,7 @@ public class MainProcessTest {
 		List<String> resultStates = new LinkedList<String>();
 		resultStates.add("CheckLegalConstraints");
 		resultStates.add("BookProductionFacility");
-		resultStates.add("OrderPackaging");
+		resultStates.add("OrderTransport");
 		assertShouldContainStates(resultStates);
 	}
 	
