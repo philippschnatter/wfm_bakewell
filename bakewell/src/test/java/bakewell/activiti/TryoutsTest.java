@@ -51,31 +51,25 @@ public class TryoutsTest {
 
 	private void createNewProcess(){
 		processInstance = runtimeService.startProcessInstanceByKey("myProcess");
+	
+
+		
 		assertNotNull(processInstance.getId());
 		identityService = processEngine.getIdentityService();
 		taskService = processEngine.getTaskService(); 
 		pid = processInstance.getProcessInstanceId();
 		formService = processEngine.getFormService();
-	
+		runtimeService.setVariable(pid, "mailvar1", "value1");
+		runtimeService.setVariable(pid, "mailvar2", "value2");
 	}
 	
-	@Test
-	public void testTimerFunctionality(){
-		createNewProcess();
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		List<Task> nextTasks = taskService.createTaskQuery().list();
-	}
 	
 	@Test
 	public void testMail(){
 		createNewProcess();
-		
+		Task nextTask = taskService.createTaskQuery().singleResult();
+		HashMap<String, String> map = new HashMap<String, String>();
+		formService.submitTaskFormData(nextTask.getId(), map);
 	}
 	
 	@Test
