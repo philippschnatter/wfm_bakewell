@@ -6,13 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import bakewell.beans.Ingredient;
 import bakewell.beans.Ingredient2Recipe;
-import bakewell.beans.Product;
-import bakewell.beans.Recipe;
+import bakewell.beans.Ingredient2RecipeNonPersistent;
 
 /**
  * This Class contains generic CRUD Methods to access the wfDB.
@@ -31,6 +28,8 @@ public class IngredientDAO {
 	private String query;
 	
 	private String driver = "org.h2.Driver";
+	
+	private Ingredient2RecipeDAO i2rDAO = null;
 	
 	//Name of the DB
 	private String url = "";
@@ -98,7 +97,72 @@ public class IngredientDAO {
 	   private String getUrl () {
 		    return ("jdbc:h2:file:src/main/resources/db/wfDB");
 	   }
-	
+	   
+	   
+	   /**
+	    * Holt alle Ingredients und Ingredients2Recipe aus der Datenbank heraus und fügt sie in ein Objekt
+	    * Ingredient2RecipeNonPersistent zusammen
+	    * @return eine Liste aller Ingredient2Recipe Connections mit dem entsprechenden Ingredient Namen
+	    */
+	   public ArrayList<Ingredient2RecipeNonPersistent> selectAllIngredient2RecipeNonPersistent() {
+		  //Holt alle Ingredients mittels IngredientDAO aus der DB
+		  ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+		  ingredients = selectIngredient(new Ingredient());
+		  
+		  //Holt alle Ingredient2Recipe Connections mittels Ingredient2RecipeDAO aus der DB
+		  ArrayList<Ingredient2Recipe> ingredient2recipe = new ArrayList<Ingredient2Recipe>();
+		  i2rDAO = new Ingredient2RecipeDAO(user, password);
+		  ingredient2recipe = i2rDAO.selectIngredient2Recipe(new Ingredient2Recipe());
+		  
+		  //Ergebnisliste vom Typ Ingredient2RecipeNonPersistent
+		  ArrayList<Ingredient2RecipeNonPersistent> result = new ArrayList<Ingredient2RecipeNonPersistent>();
+		  
+		  //Durchlaufe alle Ingredient2Recipe Connections
+		  for(int i = 0; i < ingredient2recipe.size(); i++) {
+			  //... und fuege alle drei Attribute in ein Temp Element
+			  Ingredient2RecipeNonPersistent temp = new Ingredient2RecipeNonPersistent();
+			  temp.setRecipe_id(ingredient2recipe.get(i).getRecipe_id());
+			  temp.setIngredient_id(ingredient2recipe.get(i).getIngredient_id());
+			  temp.setAmount(ingredient2recipe.get(i).getAmount());
+			  
+			  //Durchlaufe alle Ingredients
+			  for(int j = 0; j < ingredients.size(); j ++) {
+				  //... und suche den Ingredientnamen des Ingredients heraus, das zur Ingredient2Recipe Connection passt
+				  if(ingredients.get(j).getId().equals(ingredient2recipe.get(i).getIngredient_id())) {
+					  //das vierte Attribut setzen
+					  temp.setIngredient_name(ingredients.get(j).getName());
+				  }
+			  }
+			  //... und zur Ergebnisliste hinzufuegen
+			  result.add(temp);  
+		  }
+		  return result;
+	   }
+
+	   /**
+	    * Takes an ArrayList of Type Ingredient2RecipeNonPersistent  takes the Ingredient2Recipe Attributes and saves them in the Ingredient2Recipe Table
+	    * @param ingredient2RecipeNonPersistent
+	    * @return ... an ArrayList of all Ingredients2Recipe with the respective Name
+	    */
+	   public ArrayList<Ingredient2RecipeNonPersistent> insertIngredient2RecipeNonPersistent(ArrayList<Ingredient2RecipeNonPersistent> ingredient2RecipeNonPersistent) {
+		   
+		   //Run through the input Arraylist
+		   for(int i = 0; i < ingredient2RecipeNonPersistent.size(); i++) {
+			   //Create a new Ingredient2Recipe Object and fill its attributes  with the values from the given Arraylist
+			   Ingredient2Recipe temp = new Ingredient2Recipe();
+			   temp.setIngredient_id(ingredient2RecipeNonPersistent.get(i).getIngredient_id());
+			   temp.setRecipe_id(ingredient2RecipeNonPersistent.get(i).getRecipe_id());
+			   temp.setAmount(ingredient2RecipeNonPersistent.get(i).getAmount());
+			   
+			   //save the Ingredient2Recipe Object in the Database
+			   i2rDAO = new Ingredient2RecipeDAO(user, password);
+			   i2rDAO.insertIngredient2Recipe(temp);
+		   }
+		   
+		   //... and return a list of all Ingredient2Recipe Connections with the respective Ingredient Names
+		   return selectAllIngredient2RecipeNonPersistent();
+	   }
+	   
 	   /**
 	    * Used to insert a new Ingredient into the Database
 	    * @param c 
