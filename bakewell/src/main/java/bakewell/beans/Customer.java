@@ -2,6 +2,9 @@ package bakewell.beans;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="Customer")
 public class Customer implements Serializable {
 
 
