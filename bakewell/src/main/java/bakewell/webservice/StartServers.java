@@ -18,8 +18,11 @@ public class StartServers {
 	}
 	
 	public void start() {
-		this.ingredientServiceServer.start();	
-		this.recipePriceServiceServer.start();	
+		this.ingredientServiceServer.start();
+		System.out.println("Web Service Ingedient GDA Caclulation started!");
+		this.recipePriceServiceServer.start();
+		System.out.println("Web Service Recipe Price Caclulation started!");
+
 	}
 	
 	
