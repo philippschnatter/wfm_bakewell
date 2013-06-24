@@ -13,6 +13,7 @@ import bakewell.db.ProductDAO;
 import bakewell.db.RecipeDAO;
 import bakewell.webservice.StartServers;
 import bakewell.webservice.ingredient.IngredientRESTService;
+import bakewell.webservice.logistics.RecipePriceRESTService;
 
 import org.apache.cxf.binding.BindingFactoryManager;
 import org.apache.cxf.jaxrs.JAXRSBindingFactory;
@@ -75,10 +76,19 @@ public class WebServiceTest {
 		
 		try {
 			
-			recipe = service.calculateIngredient("2");
+			recipe = service.calculateIngredient("0");
 
 			Assert.assertNotNull(recipe);
-			
+			Assert.assertEquals(recipe.getAllgda_carbo().toString(), "name");
+			Assert.assertEquals(recipe.getName(), "description");
+			Assert.assertEquals(recipe.getDescription(), "54.20");
+			Assert.assertEquals(recipe.getAllgda_energy().toString(), "54.20");
+			Assert.assertEquals(recipe.getAllgda_fat().toString(), "54.20");
+			Assert.assertEquals(recipe.getAllgda_fiber().toString(), "54.20");
+			Assert.assertEquals(recipe.getAllgda_protein().toString(), "54.20");
+			Assert.assertEquals(recipe.getAllgda_sodium().toString(), "54.20");
+			Assert.assertNotNull(recipe.getIngredients());
+	
 		} catch (WebApplicationException waEx) {
 			
 			Assert.fail(waEx.getLocalizedMessage());
@@ -92,5 +102,60 @@ public class WebServiceTest {
 		recipe = null;
 		
 	}
+	
+	@Test
+	public void testRecipePriceWS() {
+		
+		this.prodao = new ProductDAO (USER, PW);
+		this.recdao = new RecipeDAO(USER, PW);
+		
+		// REST-Service
+		// define a JSON provider and a mapping between REST and JSON namespace's
+		java.util.List<JSONProvider<RecipePriceRESTService>> providers = new java.util.ArrayList<JSONProvider<RecipePriceRESTService>> ();
+		JSONProvider<RecipePriceRESTService> jsonProvider = new JSONProvider<RecipePriceRESTService>();
+		Map<String, String> map = new HashMap<String, String> ();
+		map.put ( "http://rest.ws.wfm", "{}" );
+		jsonProvider.setNamespaceMap ( map );
+		providers.add ( jsonProvider );
+		
+		// Client setup programmatically
+		JAXRSClientFactoryBean sf = new JAXRSClientFactoryBean();
+		sf.setResourceClass(RecipePriceRESTService.class);
+		sf.setAddress("http://localhost:63082");
+		sf.setProvider(jsonProvider);
+		
+		BindingFactoryManager manager = sf.getBus().getExtension(BindingFactoryManager.class);
+		JAXRSBindingFactory factory = new JAXRSBindingFactory();
+		factory.setBus(sf.getBus());
+		manager.registerBindingFactory(JAXRSBindingFactory.JAXRS_BINDING_ID, factory);
+		
+		RecipePriceRESTService service = sf.create(RecipePriceRESTService.class);
+		WebClient wc = sf.createWebClient();
+		wc.accept(MediaType.APPLICATION_JSON);
+		
+		Recipe recipe;
+		
+		try {
+			
+			recipe = service.calculatePrice("0");
+
+			Assert.assertNotNull(recipe);
+			Assert.assertEquals(recipe.getTotalprice().toString(), "567.60");
+
+	
+		} catch (WebApplicationException waEx) {
+			
+			Assert.fail(waEx.getLocalizedMessage());
+			waEx.printStackTrace();
+			
+		} catch (Exception e) {
+			
+			Assert.fail(e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		recipe = null;
+		
+	}
+	
 
 }
