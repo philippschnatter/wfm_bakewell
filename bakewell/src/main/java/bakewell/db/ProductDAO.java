@@ -346,15 +346,16 @@ public class ProductDAO {
 			while(rs.next()) {
 				Product res = new Product();
 				res.setId(rs.getInt(1));
-				res.setCustomer_id(rs.getInt(2));
-				res.setProduct_Name(rs.getString(3));
-				res.setDeliveryDate(rs.getDate(4));
-				res.setProduction_Start(rs.getDate(5));
-				res.setProduction_End(rs.getDate(6));
-				res.setProduction_Facility(rs.getString(7));
-				res.setProduction_Contractor(rs.getString(8));
-				res.setTransport_Contractor(rs.getString(9));
-				res.setTransport_cost(rs.getDouble(10));
+				res.setRecipe_id(rs.getInt(2));
+				res.setCustomer_id(rs.getInt(3));
+				res.setProduct_Name(rs.getString(4));
+				res.setDeliveryDate(rs.getDate(5));
+				res.setProduction_Start(rs.getDate(6));
+				res.setProduction_End(rs.getDate(7));
+				res.setProduction_Facility(rs.getString(8));
+				res.setProduction_Contractor(rs.getString(9));
+				res.setTransport_Contractor(rs.getString(10));
+				res.setTransport_cost(rs.getDouble(11));
 				result.add(res);
 			}
 		} catch (SQLException e) {

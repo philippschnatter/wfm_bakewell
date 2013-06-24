@@ -65,6 +65,7 @@ public class CustomerDAOTest extends TestCase {
 		result = cDAO.selectCustomer(failCustomer);
 		assert(result.size() == 0);
 		assert(a == null);
+		cDAO.deleteCustomer(a);
 	}
 	
 	@Test
