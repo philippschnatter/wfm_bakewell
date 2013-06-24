@@ -1,6 +1,6 @@
 package bakewell.activiti;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,26 +11,18 @@ import junit.framework.Assert;
 
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.JavaDelegate;
-//import org.activiti.engine.impl.el.Expression;
-//import org.activiti.engine.impl.el.FixedValue;
+
 import org.apache.cxf.binding.BindingFactoryManager;
 import org.apache.cxf.jaxrs.JAXRSBindingFactory;
 import org.apache.cxf.jaxrs.client.JAXRSClientFactoryBean;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.cxf.jaxrs.provider.json.JSONProvider;
 
-import bakewell.beans.Product;
 import bakewell.beans.Recipe;
-import bakewell.db.ProductDAO;
 import bakewell.webservice.logistics.RecipePriceRESTService;
 
 public class QuoteIngredientPricesWsCall implements JavaDelegate
 {
-	// These fields correspond to the name of the <activiti:field /> elements
-	// in the bpmn
-//	private FixedValue service;
-//	private Expression productId;
-	
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
@@ -39,19 +31,8 @@ public class QuoteIngredientPricesWsCall implements JavaDelegate
 	
 	public void executeWs(DelegateExecution execution) throws Exception {
 		
-
-		String USER = "sa";
-		String PW = "";
 		
-		ProductDAO prodao = new ProductDAO (USER, PW);
-				
-		Product p = new Product();
-		ArrayList<Product> plist = prodao.selectProduct(p);
-		String productId = "0";
-		
-		if (!plist.isEmpty()) {
-			p = plist.get(0);
-			productId = p.getId().toString();
+		Integer productId = (Integer)execution.getVariable("productId");
 		
 		// REST-Service
 		// define a JSON provider and a mapping between REST and JSON namespace's
@@ -81,7 +62,7 @@ public class QuoteIngredientPricesWsCall implements JavaDelegate
 		
 		try {
 			
-			recipe = service.calculatePrice(productId);
+			recipe = service.calculatePrice(productId.toString());
 			execution.setVariable("recipe", recipe);
 			
 		} catch (WebApplicationException waEx) {
