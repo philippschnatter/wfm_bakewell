@@ -34,7 +34,10 @@ public class TryoutsTest {
 	public static void init()
 	{	
 		// Create Activiti process engine
-		processEngine = ProcessEngineConfiguration.createStandaloneInMemProcessEngineConfiguration().buildProcessEngine();
+		processEngine = ProcessEngineConfiguration.createStandaloneInMemProcessEngineConfiguration()
+				.setMailServerPort(1025)
+				
+				.buildProcessEngine();
 		runtimeService = processEngine.getRuntimeService();
 		RepositoryService repositoryService = processEngine.getRepositoryService();
 		DeploymentBuilder builder = repositoryService.createDeployment();
@@ -44,6 +47,7 @@ public class TryoutsTest {
 		builder.deploy();
 	}
 	
+
 
 	private void createNewProcess(){
 		processInstance = runtimeService.startProcessInstanceByKey("myProcess");
@@ -66,6 +70,12 @@ public class TryoutsTest {
 		}
 		
 		List<Task> nextTasks = taskService.createTaskQuery().list();
+	}
+	
+	@Test
+	public void testMail(){
+		createNewProcess();
+		
 	}
 	
 	@Test

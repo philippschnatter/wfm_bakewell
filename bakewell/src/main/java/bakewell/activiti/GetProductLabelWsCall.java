@@ -29,10 +29,12 @@ public class GetProductLabelWsCall implements JavaDelegate
 	// in the bpmn
 //	private FixedValue service;
 //	private Expression productId;
-	
-
 	@Override
-	public void execute(DelegateExecution execution) throws Exception {
+	public void execute(DelegateExecution execution){
+		// executeWs(execution);
+	}
+
+	public void executeWs(DelegateExecution execution) throws Exception {
 		
 		// aus activiti
 //		Integer productId = (Integer)execution.getVariable("productId");
@@ -96,7 +98,7 @@ public class GetProductLabelWsCall implements JavaDelegate
 			e.printStackTrace();
 		}
 		recipe = null;
-		
+
 	}
 
 }

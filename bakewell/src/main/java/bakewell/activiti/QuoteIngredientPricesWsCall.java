@@ -34,13 +34,24 @@ public class QuoteIngredientPricesWsCall implements JavaDelegate
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
+		// executeWs(execution);
+	}
+	
+	public void executeWs(DelegateExecution execution) throws Exception {
 		
-//		String USER = "sa";
-//		String PW = "";
+
+		String USER = "sa";
+		String PW = "";
 		
-		Product p = (Product)execution.getVariable("product");
+		ProductDAO prodao = new ProductDAO (USER, PW);
+				
+		Product p = new Product();
+		ArrayList<Product> plist = prodao.selectProduct(p);
+		String productId = "0";
 		
-		String productId = p.getId().toString();
+		if (!plist.isEmpty()) {
+			p = plist.get(0);
+			productId = p.getId().toString();
 		
 		// REST-Service
 		// define a JSON provider and a mapping between REST and JSON namespace's
@@ -84,7 +95,7 @@ public class QuoteIngredientPricesWsCall implements JavaDelegate
 			e.printStackTrace();
 		}
 		recipe = null;
-	
+
 	}
 
 }
