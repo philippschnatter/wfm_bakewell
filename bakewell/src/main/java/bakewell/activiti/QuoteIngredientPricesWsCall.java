@@ -78,5 +78,6 @@ public class QuoteIngredientPricesWsCall implements JavaDelegate
 		recipe = null;
 
 	}
+		}
 
 }

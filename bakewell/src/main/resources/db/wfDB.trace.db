@@ -698,3 +698,206 @@ Caused by: org.h2.jdbc.JdbcSQLException: Die Datenbank-Verbindung wurde nicht ex
 The connection was not closed by the application and is garbage collected [90018-172]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
 	... 33 more
+06-24 21:01:45 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Feld "COMMENT" nicht gefunden
+Column "COMMENT" not found; SQL statement:
+INSERT INTO PRODUCT (ID, RECIPE_ID, CUSTOMER_ID , PRODUCTNAME , DELIVERYDATE , PRODUCTION_START , PRODUCTION_END , PRODUCTION_FACILITY, PRODUCTION_CONTRACTOR, TRANSPORT_CONTRACTOR, TRANSPORT_COST, 
+
+COMMENT ) VALUES (ID_PRODUCT_SEQ.nextval, 1, 1, 'Es werde Guglhupf', '2014-01-01', '2013-06-01', '2014-12-31', 'Wien', 'Vienna Bakery', 'LKW Augustin', 1000.0, 'no comment') [42122-172]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.table.Table.getColumn(Table.java:613)
+	at org.h2.command.Parser.parseColumn(Parser.java:802)
+	at org.h2.command.Parser.parseColumnList(Parser.java:787)
+	at org.h2.command.Parser.parseInsert(Parser.java:975)
+	at org.h2.command.Parser.parsePrepared(Parser.java:375)
+	at org.h2.command.Parser.parse(Parser.java:279)
+	at org.h2.command.Parser.parse(Parser.java:251)
+	at org.h2.command.Parser.prepareCommand(Parser.java:218)
+	at org.h2.engine.Session.prepareLocal(Session.java:425)
+	at org.h2.engine.Session.prepareCommand(Session.java:374)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1138)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:167)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:155)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1316)
+	at org.h2.server.web.WebApp.query(WebApp.java:1005)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:967)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+06-24 21:01:45 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Feld "COMMENT" nicht gefunden
+Column "COMMENT" not found; SQL statement:
+INSERT INTO PRODUCT (ID, RECIPE_ID, CUSTOMER_ID , PRODUCTNAME , DELIVERYDATE , PRODUCTION_START , PRODUCTION_END , PRODUCTION_FACILITY, PRODUCTION_CONTRACTOR, TRANSPORT_CONTRACTOR, TRANSPORT_COST, 
+
+COMMENT ) VALUES (ID_PRODUCT_SEQ.nextval, 2, 2, 'Wiener Schnitzel', '2014-01-01', '2013-06-01', '2014-12-31', 'Wien', 'Vienna Foods', 'LKW Augustin', 1500.0, 'no comment') [42122-172]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.table.Table.getColumn(Table.java:613)
+	at org.h2.command.Parser.parseColumn(Parser.java:802)
+	at org.h2.command.Parser.parseColumnList(Parser.java:787)
+	at org.h2.command.Parser.parseInsert(Parser.java:975)
+	at org.h2.command.Parser.parsePrepared(Parser.java:375)
+	at org.h2.command.Parser.parse(Parser.java:279)
+	at org.h2.command.Parser.parse(Parser.java:251)
+	at org.h2.command.Parser.prepareCommand(Parser.java:218)
+	at org.h2.engine.Session.prepareLocal(Session.java:425)
+	at org.h2.engine.Session.prepareCommand(Session.java:374)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1138)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:167)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:155)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1316)
+	at org.h2.server.web.WebApp.query(WebApp.java:1005)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:967)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+06-24 21:01:45 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Feld "COMMENT" nicht gefunden
+Column "COMMENT" not found; SQL statement:
+INSERT INTO PRODUCT (ID, RECIPE_ID, CUSTOMER_ID , PRODUCTNAME , DELIVERYDATE , PRODUCTION_START , PRODUCTION_END , PRODUCTION_FACILITY, PRODUCTION_CONTRACTOR, TRANSPORT_CONTRACTOR, TRANSPORT_COST, 
+
+COMMENT ) VALUES (ID_PRODUCT_SEQ.nextval, 3, 3, 'sachertorte Extended', '2014-01-01', '2013-06-01', '2014-12-31', 'Wien', 'Vienna Bakery', 'LKW Augustin', 1000.0, 'no comment') [42122-172]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.table.Table.getColumn(Table.java:613)
+	at org.h2.command.Parser.parseColumn(Parser.java:802)
+	at org.h2.command.Parser.parseColumnList(Parser.java:787)
+	at org.h2.command.Parser.parseInsert(Parser.java:975)
+	at org.h2.command.Parser.parsePrepared(Parser.java:375)
+	at org.h2.command.Parser.parse(Parser.java:279)
+	at org.h2.command.Parser.parse(Parser.java:251)
+	at org.h2.command.Parser.prepareCommand(Parser.java:218)
+	at org.h2.engine.Session.prepareLocal(Session.java:425)
+	at org.h2.engine.Session.prepareCommand(Session.java:374)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1138)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:167)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:155)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1316)
+	at org.h2.server.web.WebApp.query(WebApp.java:1005)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:967)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+06-24 21:01:45 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Feld "COMMENT" nicht gefunden
+Column "COMMENT" not found; SQL statement:
+INSERT INTO PRODUCT (ID, RECIPE_ID, CUSTOMER_ID , PRODUCTNAME , DELIVERYDATE , PRODUCTION_START , PRODUCTION_END , PRODUCTION_FACILITY, PRODUCTION_CONTRACTOR, TRANSPORT_CONTRACTOR, TRANSPORT_COST, 
+
+COMMENT ) VALUES (ID_PRODUCT_SEQ.nextval, 4, 4, 'Overkrapfen', '2014-01-01', '2013-06-01', '2014-12-31', 'Wien', 'Vienna Bakery', 'LKW Augustin', 1000.0, 'no comment') [42122-172]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.table.Table.getColumn(Table.java:613)
+	at org.h2.command.Parser.parseColumn(Parser.java:802)
+	at org.h2.command.Parser.parseColumnList(Parser.java:787)
+	at org.h2.command.Parser.parseInsert(Parser.java:975)
+	at org.h2.command.Parser.parsePrepared(Parser.java:375)
+	at org.h2.command.Parser.parse(Parser.java:279)
+	at org.h2.command.Parser.parse(Parser.java:251)
+	at org.h2.command.Parser.prepareCommand(Parser.java:218)
+	at org.h2.engine.Session.prepareLocal(Session.java:425)
+	at org.h2.engine.Session.prepareCommand(Session.java:374)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1138)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:167)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:155)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1316)
+	at org.h2.server.web.WebApp.query(WebApp.java:1005)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:967)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+06-24 21:01:45 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Feld "COMMENT" nicht gefunden
+Column "COMMENT" not found; SQL statement:
+INSERT INTO PRODUCT (ID, RECIPE_ID, CUSTOMER_ID , PRODUCTNAME , DELIVERYDATE , PRODUCTION_START , PRODUCTION_END , PRODUCTION_FACILITY, PRODUCTION_CONTRACTOR, TRANSPORT_CONTRACTOR, TRANSPORT_COST, 
+
+COMMENT ) VALUES (ID_PRODUCT_SEQ.nextval, 5, 5, 'Max Stramm', '2014-01-01', '2013-06-01', '2014-12-31', 'Wien', 'Vienna Deep fried Food', 'LKW Augustin', 1000.0, 'no comment') [42122-172]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.table.Table.getColumn(Table.java:613)
+	at org.h2.command.Parser.parseColumn(Parser.java:802)
+	at org.h2.command.Parser.parseColumnList(Parser.java:787)
+	at org.h2.command.Parser.parseInsert(Parser.java:975)
+	at org.h2.command.Parser.parsePrepared(Parser.java:375)
+	at org.h2.command.Parser.parse(Parser.java:279)
+	at org.h2.command.Parser.parse(Parser.java:251)
+	at org.h2.command.Parser.prepareCommand(Parser.java:218)
+	at org.h2.engine.Session.prepareLocal(Session.java:425)
+	at org.h2.engine.Session.prepareCommand(Session.java:374)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1138)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:167)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:155)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1316)
+	at org.h2.server.web.WebApp.query(WebApp.java:1005)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:967)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+06-24 21:01:45 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Feld "COMMENT" nicht gefunden
+Column "COMMENT" not found; SQL statement:
+INSERT INTO PRODUCT (ID, RECIPE_ID, CUSTOMER_ID , PRODUCTNAME , DELIVERYDATE , PRODUCTION_START , PRODUCTION_END , PRODUCTION_FACILITY, PRODUCTION_CONTRACTOR, TRANSPORT_CONTRACTOR, TRANSPORT_COST, 
+
+COMMENT ) VALUES (ID_PRODUCT_SEQ.nextval, 6, 1, 'Mojito', '2014-01-01', '2013-06-01', '2014-12-31', 'Wien', 'Drinks Linz', 'LKW Augustin', 500.0, 'no comment') [42122-172]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.table.Table.getColumn(Table.java:613)
+	at org.h2.command.Parser.parseColumn(Parser.java:802)
+	at org.h2.command.Parser.parseColumnList(Parser.java:787)
+	at org.h2.command.Parser.parseInsert(Parser.java:975)
+	at org.h2.command.Parser.parsePrepared(Parser.java:375)
+	at org.h2.command.Parser.parse(Parser.java:279)
+	at org.h2.command.Parser.parse(Parser.java:251)
+	at org.h2.command.Parser.prepareCommand(Parser.java:218)
+	at org.h2.engine.Session.prepareLocal(Session.java:425)
+	at org.h2.engine.Session.prepareCommand(Session.java:374)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1138)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:167)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:155)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1316)
+	at org.h2.server.web.WebApp.query(WebApp.java:1005)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:967)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+06-24 21:01:45 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Feld "COMMENT" nicht gefunden
+Column "COMMENT" not found; SQL statement:
+INSERT INTO PRODUCT (ID, RECIPE_ID, CUSTOMER_ID , PRODUCTNAME , DELIVERYDATE , PRODUCTION_START , PRODUCTION_END , PRODUCTION_FACILITY, PRODUCTION_CONTRACTOR, TRANSPORT_CONTRACTOR, TRANSPORT_COST, 
+
+COMMENT ) VALUES (ID_PRODUCT_SEQ.nextval, 6, 1, 'Mojito2', '2014-01-01', '2013-06-01', '2014-12-31', 'Wien', 'Drinks Linz', 'LKW Augustin', 2000.0, 'no comment') [42122-172]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.table.Table.getColumn(Table.java:613)
+	at org.h2.command.Parser.parseColumn(Parser.java:802)
+	at org.h2.command.Parser.parseColumnList(Parser.java:787)
+	at org.h2.command.Parser.parseInsert(Parser.java:975)
+	at org.h2.command.Parser.parsePrepared(Parser.java:375)
+	at org.h2.command.Parser.parse(Parser.java:279)
+	at org.h2.command.Parser.parse(Parser.java:251)
+	at org.h2.command.Parser.prepareCommand(Parser.java:218)
+	at org.h2.engine.Session.prepareLocal(Session.java:425)
+	at org.h2.engine.Session.prepareCommand(Session.java:374)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1138)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:167)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:155)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1316)
+	at org.h2.server.web.WebApp.query(WebApp.java:1005)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:967)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)

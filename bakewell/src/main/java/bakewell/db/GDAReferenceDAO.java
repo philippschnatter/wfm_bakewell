@@ -117,7 +117,7 @@ public class GDAReferenceDAO {
 			
 			//executes the Insert query on the DB
 			pstmt.executeUpdate();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -266,9 +266,9 @@ public class GDAReferenceDAO {
 		
 		//if a given Object is not null, it shall be appended to the query and the index 
 		//shall be incremented --> NEW ATTRIBUTES
-		if(newC.getId() != null) {query = query + " AND ID = ?"; index++;}
-		if(newC.getName() != null) {query = query + " AND NAME = ?"; index++;}
-		if(newC.getAmount() != null) {query = query + " AND AMOUNT = ?"; index++;}
+		if(newC.getId() != null) {query = query + " ID = ?, "; index++;}
+		if(newC.getName() != null) {query = query + " NAME = ?, "; index++;}
+		if(newC.getAmount() != null) {query = query + " AMOUNT = ? "; index++;}
 		
 		//The last "," from the subsequent query shall be removed in order to prevent a syntax error
 		//furthermore the WHERE Clause with a dummy argument shall be asserted
@@ -276,7 +276,7 @@ public class GDAReferenceDAO {
 		
 		//if a given Object is not null, it shall be appended to the query and the index 
 		//shall be incremented --> SEARCH CRITERIA
-		if(oldC.getId() != null) {query = query + " AND ID = ?"; index++;}
+		if(oldC.getId() != null) {query = query + " ID = ?"; index++;}
 		if(oldC.getName() != null) {query = query + " AND NAME = ?"; index++;}
 		if(oldC.getAmount() != null) {query = query + " AND AMOUNT = ?"; index++;}
 		
