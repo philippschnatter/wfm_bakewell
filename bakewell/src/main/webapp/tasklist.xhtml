@@ -1,32 +1,51 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:head></h:head>
-<body> 
-<h:form>
-<h:dataTable value="#{tasklist.start()}" var="v_task" id="taskList">
-		<h:column>
-			<f:facet name="header">Task Name</f:facet>
+<h:head>
+	 	<link href="/resources/twitterBootstrap/css/bootstrap.min.css" rel="stylesheet" 
+	 		type="text/css" /> 
+	 	<link href="/resources/twitterBootstrap/css/bootstrap-responsive.min.css" 
+	 		rel="stylesheet" type="text/css" /> 
+	 	<link href="/resources/twitterBootstrap/css/override.css" rel="stylesheet" 
+	 		type="text/css" /> 
+</h:head>
+
+
+<body>
+	<div class="container">
+		<div class="span10">
+			<div class="well well-small">
+				<h3>Task Overview:</h3>
+				<h:form>
+					<h:dataTable value="#{tasklist.start()}" var="v_task" id="taskList"
+						class="table table-bordered">
+						<h:column>
+							<f:facet name="header">Task Name</f:facet>
 			#{v_task.name}
-		</h:column>
-		<h:column>
-			<f:facet name="header">Description</f:facet>
+						</h:column>
+						<h:column>
+							<f:facet name="header">Description</f:facet>
 			#{v_task.description}
-		</h:column>
-		<h:column>
-			<f:facet name="header">Action</f:facet>
-			<h:outputLink
-			value="#{tasklist.formService.getTaskFormData(v_task.id).formKey}">
+			#{v_task.name}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Action</f:facet>
+							<h:outputLink
+								value="#{tasklist.formService.getTaskFormData(v_task.id).formKey}">
 				Complete
 				<f:param name="taskId" value="#{v_task.id}"></f:param>
-			</h:outputLink>
-		</h:column>
-	</h:dataTable>
-<h:commandButton value="Blupp" action="#{tasklist.start}"></h:commandButton>
-<h:commandButton value="Test" action="#{tasklist.test}"/>
-</h:form>
-</body> 
+							</h:outputLink>
+			#{v_task.name}
+						</h:column>
+					</h:dataTable>
+					<h:commandButton value="Blupp" action="#{tasklist.start}"></h:commandButton>
+					<h:commandButton value="Test" action="#{tasklist.test}" />
+				</h:form>
+			</div>
+		</div>
+	</div>
+</body>
 </html>

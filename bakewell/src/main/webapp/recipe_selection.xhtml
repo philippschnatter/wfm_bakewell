@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<title>Recipe_Selection</title>
+<link href="/resources/twitterBootstrap/css/bootstrap.min.css"
+	rel="stylesheet" type="text/css" />
+<link
+	href="/resources/twitterBootstrap/css/bootstrap-responsive.min.css"
+	rel="stylesheet" type="text/css" />
+<link href="/resources/twitterBootstrap/css/override.css"
+	rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+	<h:form>
+		<div class="container">
+			<div class="span8">
+				<div class="well well-small">
+					<h3>Optionally Select a Known Recipe from the Database:</h3>
+
+					<h:panelGrid columns="5"
+						columnClasses="label, value, value, value, value"
+						styleClass="grid" style="margin-bottom: 10px" cellpadding="2"
+						cellspacing="5">
+						<h:outputText value=" Choose Recipe " />
+						<h:outputText value="&#160;" />
+						
+						<h:selectOneMenu value="recipeSelection.selectedRecipeId">
+							<f:selectItem itemValue="" itemLabel="Create a new Recipe" />
+							<f:selectItems value="#{recipeSelection.recipeList}" var="recipe"
+								itemLabel="#{recipe.name}" itemValue="#{recipe.id}" />
+						</h:selectOneMenu>
+						
+						<h:outputText value="&#160;" />
+						<h:commandButton value="Proceed" action="#{recipeSelection.proceed()}"
+							class="btn btn-primary" />
+					</h:panelGrid>
+
+				</div>
+			</div>
+		</div>
+	</h:form>
+</body>
+
+</html>
