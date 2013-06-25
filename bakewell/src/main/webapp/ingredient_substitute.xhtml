@@ -8,48 +8,60 @@
 	<!-- <link href="/css/bootstrap.css" rel="stylesheet" />
 	<link href="/css/bootstrap-responsive.css" rel="stylesheet"
 		type="text/css" />-->
-	<link href="/resources/twitterBootstrap/css/bootstrap.min.css" rel="stylesheet"
-		type="text/css" />
-	<link href="/resources/twitterBootstrap/css/bootstrap-responsive.min.css"
+	<link href="/resources/twitterBootstrap/css/bootstrap.min.css"
 		rel="stylesheet" type="text/css" />
-	<link href="/resources/twitterBootstrap/css/override.css" rel="stylesheet"
-		type="text/css" />
+	<link
+		href="/resources/twitterBootstrap/css/bootstrap-responsive.min.css"
+		rel="stylesheet" type="text/css" />
+	<link href="/resources/twitterBootstrap/css/override.css"
+		rel="stylesheet" type="text/css" />
 </h:head>
 
 <h:body>
 	<div class="container">
-	<h:form>
-		<h2>Substitute Ingredient</h2>
-		<div class="row">
-			<div class="span6">
-				<div class="well">
-					<p class="lead">Evaluate possible substitutes for ingredients:
-					</p>
-					<h:panelGrid columns="2" columnClasses="label, value"
-						styleClass="grid" style="margin-bottom: 10px" border="1"
-						cellpadding="2" cellspacing="5">
-						<h:outputText value="Problematic Ingredient:" />
-						<h:outputText value="Uranium-235" />
+		<h:form>
+			<h2>Substitute Ingredient</h2>
+			<div class="row">
+				<div class="span6">
+					<div class="well">
+						<p class="lead">Evaluate possible substitutes for ingredients:
+						</p>
+						<h:panelGrid columns="2" columnClasses="label, value"
+							styleClass="grid" style="margin-bottom: 10px" border="1"
+							cellpadding="2" cellspacing="5">
+							<h3>Recipe Data:</h3>
+							<h:panelGrid columns="2" columnClasses="label, value"
+								styleClass="grid" style="margin-bottom: 10px" border="1"
+								cellpadding="2" cellspacing="5">
+								<h:outputText value="Recipe name:" />
+								<h:outputText required="true" value="" />
 
-						<h:outputText value="Select Replacement:" />
-						<h:selectOneMenu id="replacement"
-							value="" required="true">
-							<f:selectItem itemLabel="Lorem" itemValue="" />
-							<f:selectItem itemLabel="Ipsum" itemValue="" />
-							<f:selectItem itemLabel="Dolor" itemValue="" />
-							<f:selectItem itemLabel="Amet" itemValue="" />
-						</h:selectOneMenu>
-					</h:panelGrid>
+								<h:outputText value="Recipe description:" />
+								<h:outputText required="true" value="" />
+							</h:panelGrid>
+
+							<h3>Used Ingredients:</h3>
+							<h:panelGrid columns="2" columnClasses="label, value"
+								styleClass="grid" style="margin-bottom: 10px" border="1"
+								cellpadding="2" cellspacing="5">
+								<!-- Table -->
+								<h:outputText value="Ingredient name:" />
+								<h:outputText required="true" value="" />
+
+								<h:outputText value="Ingredient quantity:" />
+								<h:outputText required="true" value="" />
+							</h:panelGrid>
+						</h:panelGrid>
+					</div>
 				</div>
 			</div>
-		</div>
 			<div class="row">
 				<div class="span1">
-					<h:commandButton value="Substitute Ingredient" type="button"
+					<h:commandButton value="Approve Ingredients" type="button"
 						class="btn btn-success" />
 				</div>
 				<div class="span1 offset1">
-					<h:commandButton value="No viable Substitute" type="button"
+					<h:commandButton value="Deny Ingredients" type="button"
 						class="btn btn-danger" />
 				</div>
 			</div>

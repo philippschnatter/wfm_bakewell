@@ -6,6 +6,17 @@
 
 <h:head></h:head> 
 <body> 
-<p>Approved</p>
+<div class="alert alert-success">
+<h2>Offer approved!</h2>
+<h3>Production Phase can be initiated!</h3>
+</div>
+<h:form>
+			<div class="row">
+				<div class="span1">
+					<h:commandButton value="Proceed to Production" action="#{customerResponse.accept()}"
+						class="btn btn-success" />
+				</div>
+			</div>
+		</h:form>
 </body> 
 </html>

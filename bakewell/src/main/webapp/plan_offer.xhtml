@@ -23,33 +23,26 @@
 			<div class="row">
 				<div class="span4">
 					<div class="well">
-						<h3>Ingredient Prices</h3>
+						<h3>Ingredient Costs</h3>
 						<h:panelGrid columns="2" columnClasses="label, value"
 							styleClass="grid" style="margin-bottom: 10px" border="1"
 							cellpadding="2" cellspacing="5">
+							<h:outputText value="Costs:" />
+							<h:outputText value="" />
 						</h:panelGrid>
 
-						<h3>Subcontractor Prices</h3>
+						<h3>Logistics Costs</h3>
 						<h:panelGrid columns="2" columnClasses="label, value"
 							styleClass="grid" style="margin-bottom: 10px" border="1"
 							cellpadding="2" cellspacing="5">
 							<h:outputText value="Transportation:" />
 							<h:outputText value="#{planOffer.transport_cost}" />
-
-							<h:outputText value="Packaging:" />
-							<h:outputText value="#{planOffer.packagingCost}" />
-
-							<h:outputText value="Subtotal:" />
-							<h:outputText value="231" />
 						</h:panelGrid>
 
 						<h3>Set Bid Price</h3>
 						<h:panelGrid columns="2" columnClasses="label, value"
 							styleClass="grid" style="margin-bottom: 10px" border="1"
 							cellpadding="2" cellspacing="5">
-							<h:outputText value="Total cost:" />
-							<h:outputText value="32134" />
-
 							<h:outputText value="Bid Price:" />
 							<h:inputText required="true" value="#{planOffer.bidPrice}"/>
 						</h:panelGrid>
