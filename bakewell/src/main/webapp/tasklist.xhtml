@@ -5,11 +5,11 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-	 	<link href="/resources/twitterBootstrap/css/bootstrap.min.css" rel="stylesheet" 
+	 	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap.min.css" rel="stylesheet" 
 	 		type="text/css" /> 
-	 	<link href="/resources/twitterBootstrap/css/bootstrap-responsive.min.css" 
+	 	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap-responsive.min.css" 
 	 		rel="stylesheet" type="text/css" /> 
-	 	<link href="/resources/twitterBootstrap/css/override.css" rel="stylesheet" 
+	 	<link href="/bakewell/resources/twitterBootstrap/css/override.css" rel="stylesheet" 
 	 		type="text/css" /> 
 </h:head>
 
@@ -38,11 +38,8 @@
 				Complete
 				<f:param name="taskId" value="#{v_task.id}"></f:param>
 							</h:outputLink>
-			#{v_task.name}
 						</h:column>
 					</h:dataTable>
-					<h:commandButton value="Blupp" action="#{tasklist.start}"></h:commandButton>
-					<h:commandButton value="Test" action="#{tasklist.test}" />
 				</h:form>
 			</div>
 		</div>
