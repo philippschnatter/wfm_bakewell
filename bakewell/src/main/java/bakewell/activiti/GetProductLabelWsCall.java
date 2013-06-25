@@ -30,7 +30,7 @@ public class GetProductLabelWsCall implements JavaDelegate
 	public void executeWs(DelegateExecution execution) throws Exception {
 		
 		// aus activiti
-		Integer productId = (Integer)execution.getVariable("productId");
+		Integer productId = (Integer)execution.getVariable("productid");
 		
 		// REST-Service
 		// define a JSON provider and a mapping between REST and JSON namespace's

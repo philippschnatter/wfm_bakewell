@@ -32,7 +32,7 @@ public class QuoteIngredientPricesWsCall implements JavaDelegate
 	public void executeWs(DelegateExecution execution) throws Exception {
 		
 		
-		Integer productId = (Integer)execution.getVariable("productId");
+		Integer productId = (Integer)execution.getVariable("productid");
 		
 		// REST-Service
 		// define a JSON provider and a mapping between REST and JSON namespace's
