@@ -43,6 +43,8 @@ import bakewell.beans.Ingredient;
 import bakewell.beans.Ingredient2Recipe;
 import bakewell.beans.Recipe;
 
+import bakewell.jsf.JsfService;
+
 /**
  * @author Alex K
  *
@@ -52,9 +54,10 @@ public class customerOffer {
 //	ActivitiFactory activiti = ActivitiFactory.getInstance();
 	HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 	String taskId = request.getParameter("taskId");
+	JsfService jsfService = new JsfService();
 	
 	// Customer variables
-	private String customerId = null;
+	private Integer customerId = null;
 	private String firstName = null;
 	private String lastName = null;
 	private String address = null;
@@ -79,20 +82,6 @@ public class customerOffer {
 	private String transport_Contractor = null;
 	private Double transport_cost = null;
 
-	public HttpServletRequest getRequest() {
-		return request;
-	}
-	
-	public void addRecipe() {
-		Recipe newRecipe = new Recipe();
-		newRecipe.setName(this.recipeName);
-		newRecipe.setDescription(this.recipeDescription);
-		
-		RecipeDAO recipeDAO = new RecipeDAO("jdbc:h2:file:C:/Users/stefan/Documents/Workflow/git/bakewell/src/main/resources/db/wfDB", "sa", "");
-		Recipe returnedRecipe = recipeDAO.insertRecipe(newRecipe);
-		
-		this.setRecipe_id(returnedRecipe.getId());
-	}
 	
 //	public void addToIngredientList(String ingId, String amount) {
 //		Ingredient2Recipe AddedIngredient = new Ingredient2Recipe(Integer.parseInt(this.recipe_id), Integer.parseInt(ingId), Double.parseDouble(amount));
@@ -103,11 +92,11 @@ public class customerOffer {
 		this.request = request;
 	}
 
-	public String getCustomerId() {
+	public Integer getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(String customerId) {
+	public void setCustomerId(Integer customerId) {
 		this.customerId = customerId;
 	}
 
@@ -256,8 +245,10 @@ public class customerOffer {
 	}
 	
 	public String approve(){
-//		createCustomer();
-//		createProduct();
+		Customer newCustomer = jsfService.createCustomer(firstName, lastName, address, telNo, mailAddress, company);
+		this.customerId = newCustomer.getId();
+		Product newProduct = jsfService.createProduct(production_Start, production_End, customerId, product_Name, production_Contractor, production_Facility, transport_Contractor, transport_cost);
+		this.productId = newProduct.getId();
 //		createRecipe();
 //		createIngredient2Recipe();
 		
@@ -313,12 +304,25 @@ public class customerOffer {
 			newI2R.setRecipe_id(recipe_id);
 //			newI2R.setIngredient_id(ingredient_id);
 			
-		}
-		
-			
+		}		
 		return "success";
 	}
+	
+	public HttpServletRequest getRequest() {
+		return request;
+	}
+	
+	public void addRecipe() {
+		Recipe newRecipe = new Recipe();
+		newRecipe.setName(this.recipeName);
+		newRecipe.setDescription(this.recipeDescription);
 		
+		RecipeDAO recipeDAO = new RecipeDAO("jdbc:h2:file:C:/Users/stefan/Documents/Workflow/git/bakewell/src/main/resources/db/wfDB", "sa", "");
+		Recipe returnedRecipe = recipeDAO.insertRecipe(newRecipe);
+		
+		this.setRecipe_id(returnedRecipe.getId());
+	}
+			
 //	public ArrayList<Ingredient2Recipe> getIngredient2RecipeList() {
 //		IngredientDAO ingDAO = new IngredientDAO("jdbc:h2:file:C:/Users/stefan/Documents/Workflow/git/bakewell/src/main/resources/db/wfDB", "sa", "");
 //		ArrayList<Ingredient> ingredientList = ingDAO.selectAllIngredients();
