@@ -56,8 +56,12 @@ public class recipeSelection {
 	public String proceed(){
 		if(selectedRecipeId!=null){
 			ActivitiFactory engine = ActivitiFactory.getInstance();
-			//TODO insert instance id as first argument
-			Integer productId = (Integer)engine.getProcessEngine().getRuntimeService().getVariable("", "productId");
+			RuntimeService runtimeService = engine.getProcessEngine().getRuntimeService();
+			Map<String, Object> variableMap = new HashMap<String, Object>();
+			String processName = ActivitiConstants.PROCESS_NAME;
+			ProcessInstance instance = runtimeService.startProcessInstanceByKey(processName, variableMap);
+			String processId = instance.getId();
+			Integer productId = (Integer)runtimeService.getVariable(processId, "productId");
 			
 			Product temp=jsfService.getProduct(productId);
 			temp.setRecipe_id(selectedRecipeId);
