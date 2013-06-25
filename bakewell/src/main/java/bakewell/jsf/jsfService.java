@@ -74,12 +74,21 @@ public class jsfService {
 		return dbCustomer;
 	}
 
-	public ArrayList<Recipe> getRecipes() {
+	public ArrayList<Recipe> getAllRecipes() {
 		Recipe newRecipe = new Recipe();
 
 		ArrayList<Recipe> dbRecipeList = recipeDAO.selectRecipe(newRecipe);
 		
 		return dbRecipeList;
+	}
+	
+	public Recipe getRecipe(Integer recipeId) {
+		Recipe newRecipe = new Recipe();
+		newRecipe.setId(recipeId);
+		
+		Recipe dbRecipe = recipeDAO.selectRecipe(newRecipe).get(0);
+		
+		return dbRecipe;
 	}
 	
 	private java.sql.Date convertToSqlDate(Date jDate) throws ParseException {
