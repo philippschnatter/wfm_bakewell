@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Customer_Offer</title>
+	 	<link href="/resources/twitterBootstrap/css/bootstrap.min.css" rel="stylesheet" 
+	 		type="text/css" /> 
+	 	<link href="/resources/twitterBootstrap/css/bootstrap-responsive.min.css" 
+	 		rel="stylesheet" type="text/css" /> 
+	 	<link href="/resources/twitterBootstrap/css/override.css" rel="stylesheet" 
+	 		type="text/css" />
+</h:head>
+
+<h:body>
+
+	<div class="container">
+		<h2>Customer Offer</h2>
+		<h:form>
+			<h2>Recipe Data</h2>
+			<h:panelGrid columns="2" columnClasses="label, value"
+				styleClass="grid" style="margin-bottom: 10px" border="1"
+				cellpadding="2" cellspacing="5">
+				<h:outputText value="Recipe Name:" />
+				<h:inputText value="" />
+				<h:outputText value="Recipe Description:" />
+				<h:inputText value="" />
+			</h:panelGrid>
+			<h3>Ingredients in grams</h3>
+			<h:panelGrid columns="2" columnClasses="label, value"
+				styleClass="grid" style="margin-bottom: 10px" border="1"
+				cellpadding="2" cellspacing="5">
+				<h:outputText value="Flour:" />
+				<h:inputText value="">
+					<f:converter converterId="javax.faces.Double" />
+				</h:inputText>
+				<h:outputText value="Flour:" />
+				<h:inputText value="">
+					<f:converter converterId="javax.faces.Double" />
+				</h:inputText>
+				<h:outputText value="Flour:" />
+				<h:inputText value="">
+					<f:converter converterId="javax.faces.Double" />
+				</h:inputText>
+				<h:outputText value="Flour:" />
+				<h:inputText value="">
+					<f:converter converterId="javax.faces.Double" />
+				</h:inputText>
+			</h:panelGrid>
+			<h:commandButton value="Proceed" action="none"
+				class="btn btn-primary" />
+		</h:form>
+	</div>
+</h:body>
+
+</html>
