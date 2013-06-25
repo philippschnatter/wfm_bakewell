@@ -67,39 +67,7 @@ styleClass="grid" style="margin-bottom: 10px" border="1" cellpadding="2" cellspa
 						<h:inputText value="#{customerOffer.transport_cost}">
 							<f:converter converterId="javax.faces.Double"/>
 						</h:inputText>
-					</h:panelGrid>
-					
-					<h2>Recipe Data</h2>
-					<h:panelGrid columns="2" columnClasses="label, value"
-						styleClass="grid" style="margin-bottom: 10px" border="1" cellpadding="2" cellspacing="5">
-						<h:outputText value="Recipe Name:"/>
-						<h:inputText value="#{customerOffer.recipeName}"/>
-						<h:outputText value="Recipe Description:"/>
-						<h:inputText value="#{customerOffer.recipeDescription}"/>	
-					</h:panelGrid>
-					
-					<h3>Ingredients in grams</h3>
-					<h:panelGrid columns="2" columnClasses="label, value"
-						styleClass="grid" style="margin-bottom: 10px" border="1" cellpadding="2" cellspacing="5">
-						<h:outputText value="Flour:"/>
-						<h:inputText value="#{customerOffer.flourQty}">
-							<f:converter converterId="javax.faces.Double"/>
-						</h:inputText>
-						<h:outputText value="Flour:"/>
-						<h:inputText value="#{customerOffer.waterQty}">
-							<f:converter converterId="javax.faces.Double"/>
-						</h:inputText>
-						<h:outputText value="Flour:"/>
-						<h:inputText value="#{customerOffer.yeastQty}">
-							<f:converter converterId="javax.faces.Double"/>
-						</h:inputText>
-						<h:outputText value="Flour:"/>
-						<h:inputText value="#{customerOffer.saltQty}">
-							<f:converter converterId="javax.faces.Double"/>
-						</h:inputText>
-							
-					</h:panelGrid>
-					
+					</h:panelGrid>			
 					
 					
 		<div class="row">
