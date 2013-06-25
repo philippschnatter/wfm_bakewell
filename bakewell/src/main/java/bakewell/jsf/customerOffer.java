@@ -53,8 +53,6 @@ public class customerOffer {
 	HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 	String taskId = request.getParameter("taskId");
 	
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
-	
 	// Customer variables
 	private String customerId = null;
 	private String firstName = null;
@@ -63,28 +61,24 @@ public class customerOffer {
 	private String telNo = null;
 	private String mailAddress = null;
 	private String company = null;
-	private String product_Name = null;
-	private String deliveryDate = null;
-
-	private Double yeastQty = null;
-	private Double waterQty = null;
-	private Double saltQty = null;
-	private String production_End = null;
-	private String production_Facility = null;
-	private String production_Contractor = null;
-	private String transport_Contractor = null;
-	private Double transport_cost = null;
-	
+		
 	// Recipe variables
 	private String recipeName = null;
 	private String recipeDescription = null;
 	private Integer recipe_id = null;
-	private Double flourQty = null;
 	
 	// Product variables
-	private String production_Start = null;
+	private Date production_Start = null;
+	private Date production_End = null;
+	private Date deliveryDate = null;
 	private Integer productId = null;
-	
+	private String product_Name = null;
+
+	private String production_Facility = null;
+	private String production_Contractor = null;
+	private String transport_Contractor = null;
+	private Double transport_cost = null;
+
 	public HttpServletRequest getRequest() {
 		return request;
 	}
@@ -117,19 +111,19 @@ public class customerOffer {
 		this.customerId = customerId;
 	}
 
-	public String getProduction_Start() {
+	public Date getProduction_Start() {
 		return production_Start;
 	}
 
-	public void setProduction_Start(String production_Start) {
+	public void setProduction_Start(Date production_Start) {
 		this.production_Start = production_Start;
 	}
 
-	public String getProduction_End() {
+	public Date getProduction_End() {
 		return production_End;
 	}
 
-	public void setProduction_End(String production_End) {
+	public void setProduction_End(Date production_End) {
 		this.production_End = production_End;
 	}
 
@@ -194,38 +188,7 @@ public class customerOffer {
 	}
 
 	
-	public Double getFlourQty() {
-		return flourQty;
-	}
-
-	public void setFlourQty(Double flourQty) {
-		this.flourQty = flourQty;
-	}
-
-	public Double getYeastQty() {
-		return yeastQty;
-	}
-
-	public void setYeastQty(Double yeastQty) {
-		this.yeastQty = yeastQty;
-	}
-
-	public Double getWaterQty() {
-		return waterQty;
-	}
-
-	public void setWaterQty(Double waterQty) {
-		this.waterQty = waterQty;
-	}
-
-	public Double getSaltQty() {
-		return saltQty;
-	}
-
-	public void setSaltQty(Double saltQty) {
-		this.saltQty = saltQty;
-	}
-
+	
 	public ArrayList<Ingredient2Recipe> getIngredient2RecipeList() {
 		return Ingredient2RecipeList;
 	}
@@ -285,10 +248,10 @@ public class customerOffer {
 	public void setProduct_Name(String product_Name) {
 		this.product_Name = product_Name;
 	}
-	public String getDeliveryDate() {
+	public Date getDeliveryDate() {
 		return deliveryDate;
 	}
-	public void setDeliveryDate(String deliveryDate) {
+	public void setDeliveryDate(Date deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
 	
@@ -313,47 +276,7 @@ public class customerOffer {
 		return "reject";
 	}
 	
-	private String createCustomer() {
-		Customer customer = new Customer();
-		customer.setFirstName(firstName);
-		customer.setLastName(lastName);
-		customer.setAddress(address);
-		customer.setCompany(company);
-		customer.setTelNo(telNo);
-		customer.setMailAddress(mailAddress);
-		
-		CustomerDAO customerDAO = new CustomerDAO("jdbc:h2:file:C:/Users/stefan/Documents/Workflow/git/bakewell/src/main/resources/db/wfDB", "sa", "");
-		Customer insertedCustomer = customerDAO.insertCustomer(customer);
-		
-		this.customerId = insertedCustomer.getId().toString();
-		
-		System.out.println(insertedCustomer.getId().toString());
-		System.out.println(customer.getFirstName());
-	
-		return "success";
-	}
 
-	private String createProduct() {
-		Product newProduct = new Product();
-		
-		try {
-			newProduct.setProduction_Start(convertToSqlDate(production_Start));
-			newProduct.setProduction_End(convertToSqlDate(production_End));
-		} catch(ParseException e) {}
-		
-		newProduct.setCustomer_id(Integer.parseInt(customerId));
-		newProduct.setProduct_Name(product_Name);
-		newProduct.setProduction_Contractor(production_Contractor);
-		newProduct.setProduction_Facility(production_Facility);
-		newProduct.setTransport_Contractor(transport_Contractor);
-		newProduct.setTransport_cost(transport_cost);
-		
-		ProductDAO productDAO = new ProductDAO("jdbc:h2:file:C:/Users/stefan/Documents/Workflow/git/bakewell/src/main/resources/db/wfDB", "sa", "");
-		Product insertedProduct = productDAO.insertProduct(newProduct);
-		this.productId = insertedProduct.getId();
-		
-		return "success";
-	}
 	
 	String createRecipe() {
 		Recipe newRecipe = new Recipe();
@@ -375,11 +298,6 @@ public class customerOffer {
 //		IngredientDAO ingDAO = new IngredientDAO("jdbc:h2:file:C:/Users/stefan/Documents/Workflow/git/bakewell/src/main/resources/db/wfDB", "sa", "");
 //		ingDAO.select
 		
-		ingList.put("Flour", this.flourQty);
-		ingList.put("Water", this.waterQty);
-		ingList.put("Yeast", this.yeastQty);
-		ingList.put("Salt", this.saltQty);
-
 		return ingList;
 	}
 	
@@ -400,14 +318,7 @@ public class customerOffer {
 			
 		return "success";
 	}
-	
-	private java.sql.Date convertToSqlDate(String stringDate) throws ParseException {
-		java.util.Date jDate = sdf.parse(stringDate);
-		java.sql.Date sqlDate = new java.sql.Date(jDate.getTime());
 		
-		return sqlDate;
-	}
-	
 //	public ArrayList<Ingredient2Recipe> getIngredient2RecipeList() {
 //		IngredientDAO ingDAO = new IngredientDAO("jdbc:h2:file:C:/Users/stefan/Documents/Workflow/git/bakewell/src/main/resources/db/wfDB", "sa", "");
 //		ArrayList<Ingredient> ingredientList = ingDAO.selectAllIngredients();
