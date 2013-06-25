@@ -19,7 +19,7 @@ public interface IngredientRESTService {
 	
 	@GET
 	@Path("calculateIngredient")
-	public Recipe calculateIngredient(@QueryParam("id") String id) throws WebApplicationException;
+	public Recipe calculateIngredient(@QueryParam("productId") String id) throws WebApplicationException;
 	
 
 
