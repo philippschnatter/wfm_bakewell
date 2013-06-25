@@ -53,7 +53,22 @@ public class jsfService {
 		
 		return insertedProduct;
 	}
-
+	
+	public ArrayList<Product> getAllProducts() {
+		Product newProduct = new Product();
+		
+		ArrayList<Product> dbProductList = productDAO.selectProduct(newProduct);
+		
+		return dbProductList;
+	}
+	
+	public void updateProduct(Product newProduct) {
+		Product oldProduct = new Product();
+		oldProduct.setId(newProduct.getId());
+		
+		productDAO.UpdateProduct(newProduct, oldProduct);
+	}
+	
 	public Product getProduct(Integer id) {
 		Product newProduct = new Product();
 		newProduct.setId(id);
