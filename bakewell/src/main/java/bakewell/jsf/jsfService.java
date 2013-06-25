@@ -6,14 +6,17 @@ import java.util.ArrayList;
 
 import bakewell.beans.Customer;
 import bakewell.beans.Product;
+import bakewell.beans.Recipe;
 import bakewell.db.CustomerDAO;
 import bakewell.db.ProductDAO;
+import bakewell.db.RecipeDAO;
 
 public class jsfService {
 	private String DBPath = "jdbc:h2:file:C:/Users/stefan/Documents/Workflow/git/bakewell/src/main/resources/db/wfDB";
 	private CustomerDAO customerDAO = new CustomerDAO(DBPath, "sa", "");
 	private ProductDAO productDAO = new ProductDAO(DBPath, "sa", "");
-
+	private RecipeDAO recipeDAO = new RecipeDAO(DBPath, "sa", "");
+	
 	public Customer createCustomer(String firstName, String lastName, String address, String telNo, String mailAddress, String company) {
 		Customer customer = new Customer();
 		customer.setFirstName(firstName);
@@ -71,6 +74,13 @@ public class jsfService {
 		return dbCustomer;
 	}
 
+	public ArrayList<Recipe> getRecipes() {
+		Recipe newRecipe = new Recipe();
+
+		ArrayList<Recipe> dbRecipeList = recipeDAO.selectRecipe(newRecipe);
+		
+		return dbRecipeList;
+	}
 	
 	private java.sql.Date convertToSqlDate(Date jDate) throws ParseException {
 		//java.util.Date jDate = sdf.parse(jDate);
