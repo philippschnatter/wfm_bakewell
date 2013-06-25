@@ -193,9 +193,8 @@ public class ProductDAO {
 			
 			//executes the Insert query on the DB
 			pstmt.executeUpdate();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
 		}
 		
 		//closes the connection to the DB
@@ -243,7 +242,7 @@ public class ProductDAO {
 		if(c.getId() != null) {query = query + " AND ID = ?"; index++;}
 		if(c.getRecipe_id() != null) {query = query + " AND RECIPE_ID = ?"; index++;}
 		if(c.getCustomer_id() != null) {query = query + " AND CUSTOMER_ID = ?"; index++;}
-		if(c.getProduct_Name() != null) {query = query + " AND PRODUCT_DATE = ?"; index++;}
+		if(c.getProduct_Name() != null) {query = query + " AND PRODUCTNAME = ?"; index++;}
 		if(c.getDeliveryDate() != null) {query = query + " AND DELIVERYDATE = ?"; index++;}
 		if(c.getProduction_Start() != null) {query = query + " AND PRODUCTION_START = ?"; index++;}
 		if(c.getProduction_End() != null) {query = query + " AND PRODUCTION_END = ?"; index++;}
@@ -312,7 +311,7 @@ public class ProductDAO {
 		if(c.getId() != null) {query = query + " AND ID = ?"; index++;}
 		if(c.getRecipe_id() != null) {query = query + " AND RECIPE_ID = ?"; index++;}
 		if(c.getCustomer_id() != null) {query = query + " AND CUSTOMER_ID = ?"; index++;}
-		if(c.getProduct_Name() != null) {query = query + " AND PRODUCT_DATE = ?"; index++;}
+		if(c.getProduct_Name() != null) {query = query + " AND PRODUCTNAME = ?"; index++;}
 		if(c.getDeliveryDate() != null) {query = query + " AND DELIVERYDATE = ?"; index++;}
 		if(c.getProduction_Start() != null) {query = query + " AND PRODUCTION_START = ?"; index++;}
 		if(c.getProduction_End() != null) {query = query + " AND PRODUCTION_END = ?"; index++;}
@@ -392,7 +391,7 @@ public class ProductDAO {
 		if(oldC.getId() != null) {query = query + " ID = ?, "; index++;}
 		if(oldC.getRecipe_id() != null) {query = query + " RECIPE_ID = ?, "; index++;}
 		if(oldC.getCustomer_id() != null) {query = query + " CUSTOMER_ID = ?, "; index++;}
-		if(oldC.getProduct_Name() != null) {query = query + " PRODUCT_DATE = ?, "; index++;}
+		if(oldC.getProduct_Name() != null) {query = query + " PRODUCTNAME = ?, "; index++;}
 		if(oldC.getDeliveryDate() != null) {query = query + " DELIVERYDATE = ?, "; index++;}
 		if(oldC.getProduction_Start() != null) {query = query + "PRODUCTION_START = ?, "; index++;}
 		if(oldC.getProduction_End() != null) {query = query + " PRODUCTION_END = ?, "; index++;}
@@ -411,7 +410,7 @@ public class ProductDAO {
 		if(newC.getId() != null) {query = query + " AND ID = ?"; index++;}
 		if(newC.getRecipe_id() != null) {query = query + " AND RECIPE_ID = ?"; index++;}
 		if(newC.getCustomer_id() != null) {query = query + " AND CUSTOMER_ID = ?"; index++;}
-		if(newC.getProduct_Name() != null) {query = query + " AND PRODUCT_DATE = ?"; index++;}
+		if(newC.getProduct_Name() != null) {query = query + " AND PRODUCTNAME = ?"; index++;}
 		if(newC.getDeliveryDate() != null) {query = query + " AND DELIVERYDATE = ?"; index++;}
 		if(newC.getProduction_Start() != null) {query = query + " AND PRODUCTION_START = ?"; index++;}
 		if(newC.getProduction_End() != null) {query = query + " AND PRODUCTION_END = ?"; index++;}

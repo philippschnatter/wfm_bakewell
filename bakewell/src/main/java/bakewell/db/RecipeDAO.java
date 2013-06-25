@@ -254,7 +254,6 @@ public class RecipeDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
 		}
 		
 		//closes the connection to the DB
