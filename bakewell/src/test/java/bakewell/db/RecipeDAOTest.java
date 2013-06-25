@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import bakewell.beans.Ingredient2Recipe;
 import bakewell.beans.Recipe;
 
 import junit.framework.TestCase;
@@ -13,6 +14,7 @@ import junit.framework.TestCase;
 public class RecipeDAOTest extends TestCase {
 
 	RecipeDAO rDAO = null;
+	Ingredient2RecipeDAO i2rDAO = null;
 	Recipe testRecipe = null;
 	Recipe failRecipe = null;
 	ArrayList<Recipe> result = null;
@@ -90,6 +92,10 @@ public class RecipeDAOTest extends TestCase {
 		assertTrue(a.get(0).getAllgda_fiber().equals(testRecipe.getAllgda_fiber()));	
 		assertTrue(a.get(0).getAllgda_sodium().equals(testRecipe.getAllgda_sodium()));
 		assertTrue(a.get(0).getTotalprice().equals(testRecipe.getTotalprice()));
+		
+		Ingredient2Recipe testConnection = new Ingredient2Recipe(a.get(0).getId(), null, null);
+		ArrayList<Ingredient2Recipe> result = i2rDAO.selectIngredient2Recipe(testConnection);
+		assert(result.size() == 0);
 		assert(a.get(0).getId() != null);
 	}
 	
@@ -106,8 +112,8 @@ public class RecipeDAOTest extends TestCase {
 	
 	@Test
 	public void testRecipeDAOSelect_ShouldWork() {
-		rDAO.insertRecipe(testRecipe);
-		rDAO.insertRecipe(testRecipe);
+		Recipe testRecipe1 = rDAO.insertRecipe(testRecipe);
+		Recipe testRecipe2 = rDAO.insertRecipe(testRecipe);
 		Recipe searchRecipe1 = new Recipe("testname1", null, null, null, null, null, null, null, null);
 		Recipe searchRecipe2 = new Recipe(null, "testdes1", null, null, null, null, null, null, null);
 		Recipe searchRecipe3 = new Recipe(null, null, 3.0, null, null, null, null, null, null);
@@ -117,6 +123,18 @@ public class RecipeDAOTest extends TestCase {
 		Recipe searchRecipe7 = new Recipe(null, null, null, null, null, null, 3.0, null, null);
 		Recipe searchRecipe8 = new Recipe(null, null, null, null, null, null, null, 3.0, null);
 		Recipe searchRecipe9 = new Recipe(null, null, null, null, null, null, null, null, 3.0);
+		
+		Recipe searchRecipe10 = new Recipe();
+		searchRecipe10.setId(testRecipe1.getId());
+		result = rDAO.selectRecipe(searchRecipe10);
+		assert(result.size() == 1);
+		assert(testRecipe1.getId().equals(result.get(0).getId()));
+		
+		Recipe searchRecipe11 = new Recipe();
+		searchRecipe11.setId(testRecipe2.getId());
+		result = rDAO.selectRecipe(searchRecipe11);
+		assert(result.size() == 1);
+		assert(testRecipe2.getId().equals(result.get(0).getId()));
 		
 		result = rDAO.selectRecipe(searchRecipe1);
 		assert(result.size() == 2);

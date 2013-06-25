@@ -79,13 +79,14 @@ public class IngredientDAOTest extends TestCase {
 		result = cDAO.selectIngredient(testIngredient);
 		assert(result.size() == 0);
 		
-		assertTrue(a.get(0).getFirstName().equals(testIngredient.getFirstName()));
-		assertTrue(a.get(0).getLastName().equals(testIngredient.getLastName()));
-		assertTrue(a.get(0).getAddress().equals(testIngredient.getAddress()));
-		assertTrue(a.get(0).getTelNo().equals(testIngredient.getTelNo()));
-		assertTrue(a.get(0).getMailAddress().equals(testIngredient.getMailAddress()));
-		assertTrue(a.get(0).getCompany().equals(testIngredient.getCompany()));
-		assertTrue(a.get(0).getPassword().equals(testIngredient.getPassword()));	
+		assertTrue(a.get(0).getName().equals(testIngredient.getName()));
+		assertTrue(a.get(0).getGda_energy().equals(testIngredient.getGda_energy()));
+		assertTrue(a.get(0).getGda_protein().equals(testIngredient.getGda_protein()));
+		assertTrue(a.get(0).getGda_carbo().equals(testIngredient.getGda_carbo()));
+		assertTrue(a.get(0).getGda_fat().equals(testIngredient.getGda_fat()));
+		assertTrue(a.get(0).getGda_fiber().equals(testIngredient.getGda_fiber()));
+		assertTrue(a.get(0).getGda_sodium().equals(testIngredient.getGda_sodium()));
+		assertTrue(a.get(0).getPrice().equals(testIngredient.getPrice()));	
 		assert(a.get(0).getId() != null);
 	}
 	
@@ -104,75 +105,84 @@ public class IngredientDAOTest extends TestCase {
 	public void testIngredientDAOSelect_ShouldWork() {
 		cDAO.insertIngredient(testIngredient);
 		cDAO.insertIngredient(testIngredient);
-		Ingredient searchIngredientFirstName = new Ingredient("firstNameTest1", null, null, null, null, null, null);
-		Ingredient searchIngredientLastName = new Ingredient(null, "lastNameTest1", null, null, null, null, null);
-		Ingredient searchIngredientAddress = new Ingredient(null, null, "addressTest1", null, null, null, null);
-		Ingredient searchIngredientTelNo = new Ingredient(null, null, null, "1234567890", null, null, null);
-		Ingredient searchIngredientMailAddress = new Ingredient(null, null, null, null, "test1@mail1.com", null, null);
-		Ingredient searchIngredientCompany = new Ingredient(null, null, null, null, null, "testCompany1", null);
-		Ingredient searchIngredientPassword = new Ingredient(null, null, null, null, null, null, "testPassword1");
 		
-		result = cDAO.selectIngredient(searchIngredientFirstName);
+		Ingredient searchIngredientName = new Ingredient("firstNameTest1", null, null, null, null, null, null, null);
+		Ingredient searchIngredientGDAEnergy = new Ingredient(null, 10.0, null, null, null, null, null, null);
+		Ingredient searchIngredientGDAProtein = new Ingredient(null, null, 10.0, null, null, null, null, null);
+		Ingredient searchIngredientGDACarbo = new Ingredient(null, null, null, 10.0, null, null, null, null);
+		Ingredient searchIngredientGDAFat = new Ingredient(null, null, null, null, 10.0, null, null, null);
+		Ingredient searchIngredientGDAFiber = new Ingredient(null, null, null, null, null, 10.0, null, null);
+		Ingredient searchIngredientGDASodium = new Ingredient(null, null, null, null, null, null, 10.0, null);
+		Ingredient searchIngredientPrice = new Ingredient(null, null, null, null, null, null, null, 10.0);
+		
+		result = cDAO.selectIngredient(searchIngredientName);
 		assert(result.size() == 2);
-		assert(result.get(0).getFirstName().equals("firstNametest1"));
+		assert(result.get(0).getName().equals("firstNameTest1"));
 		
-		result = cDAO.selectIngredient(searchIngredientLastName);
+		result = cDAO.selectIngredient(searchIngredientGDAEnergy);
 		assert(result.size() == 2);
-		assert(result.get(0).getLastName().equals("lastNameTest1"));
+		assert(result.get(0).getGda_energy().equals(10.0));
 		
-		result = cDAO.selectIngredient(searchIngredientAddress);
+		result = cDAO.selectIngredient(searchIngredientGDAProtein);
 		assert(result.size() == 2);
-		assert(result.get(0).getAddress().equals("addressTest1"));
+		assert(result.get(0).getGda_protein().equals(10.0));
 		
-		result = cDAO.selectIngredient(searchIngredientTelNo);
+		result = cDAO.selectIngredient(searchIngredientGDACarbo);
 		assert(result.size() == 2);
-		assert(result.get(0).getTelNo().equals("1234567890"));
+		assert(result.get(0).getGda_carbo().equals(10.0));
 		
-		result = cDAO.selectIngredient(searchIngredientMailAddress);
+		result = cDAO.selectIngredient(searchIngredientGDAFat);
 		assert(result.size() == 2);
-		assert(result.get(0).getMailAddress().equals("test1@mail1.com"));
+		assert(result.get(0).getGda_fat().equals(10.0));
 		
-		result = cDAO.selectIngredient(searchIngredientCompany);
+		result = cDAO.selectIngredient(searchIngredientGDAFiber);
 		assert(result.size() == 2);
-		assert(result.get(0).getCompany().equals("testCompany1"));
+		assert(result.get(0).getGda_fiber().equals(10.0));
 		
-		result = cDAO.selectIngredient(searchIngredientPassword);
+		result = cDAO.selectIngredient(searchIngredientGDASodium);
 		assert(result.size() == 2);
-		assert(result.get(0).getPassword().equals("testPassword1"));
+		assert(result.get(0).getGda_sodium().equals(10.0));
 		
+		result = cDAO.selectIngredient(searchIngredientPrice);
+		assert(result.size() == 2);
+		assert(result.get(0).getPrice().equals(10.0));
 		cDAO.deleteIngredient(testIngredient);
 	}
 	
 	@Test
 	public void testIngredientDAOSelect_ShouldFail() {
 		cDAO.insertIngredient(testIngredient);
-		Ingredient searchIngredientFirstName = new Ingredient("firstNameTest2", null, null, null, null, null, null);
-		Ingredient searchIngredientLastName = new Ingredient(null, "lastNameTest2", null, null, null, null, null);
-		Ingredient searchIngredientAddress = new Ingredient(null, null, "addressTest2", null, null, null, null);
-		Ingredient searchIngredientTelNo = new Ingredient(null, null, null, "12345678902", null, null, null);
-		Ingredient searchIngredientMailAddress = new Ingredient(null, null, null, null, "test1@mail2.com", null, null);
-		Ingredient searchIngredientCompany = new Ingredient(null, null, null, null, null, "testCompany2", null);
-		Ingredient searchIngredientPassword = new Ingredient(null, null, null, null, null, null, "testPassword2");
+		Ingredient searchIngredientName = new Ingredient("firstNameTest1", null, null, null, null, null, null, null);
+		Ingredient searchIngredientGDAEnergy = new Ingredient(null, 10.0, null, null, null, null, null, null);
+		Ingredient searchIngredientGDAProtein = new Ingredient(null, null, 10.0, null, null, null, null, null);
+		Ingredient searchIngredientGDACarbo = new Ingredient(null, null, null, 10.0, null, null, null, null);
+		Ingredient searchIngredientGDAFat = new Ingredient(null, null, null, null, 10.0, null, null, null);
+		Ingredient searchIngredientGDAFiber = new Ingredient(null, null, null, null, null, 10.0, null, null);
+		Ingredient searchIngredientGDASodium = new Ingredient(null, null, null, null, null, null, 10.0, null);
+		Ingredient searchIngredientPrice = new Ingredient(null, null, null, null, null, null, null, 10.0);
 		
-		result = cDAO.selectIngredient(searchIngredientFirstName);
+		result = cDAO.selectIngredient(searchIngredientName);
 		assert(result.size() == 0);
 		
-		result = cDAO.selectIngredient(searchIngredientLastName);
+		result = cDAO.selectIngredient(searchIngredientGDAEnergy);
 		assert(result.size() == 0);
 		
-		result = cDAO.selectIngredient(searchIngredientAddress);
+		result = cDAO.selectIngredient(searchIngredientGDAProtein);
 		assert(result.size() == 0);
 		
-		result = cDAO.selectIngredient(searchIngredientTelNo);
+		result = cDAO.selectIngredient(searchIngredientGDACarbo);
 		assert(result.size() == 0);
 		
-		result = cDAO.selectIngredient(searchIngredientMailAddress);
+		result = cDAO.selectIngredient(searchIngredientGDAFat);
 		assert(result.size() == 0);
 		
-		result = cDAO.selectIngredient(searchIngredientCompany);
+		result = cDAO.selectIngredient(searchIngredientGDAFiber);
 		assert(result.size() == 0);
 		
-		result = cDAO.selectIngredient(searchIngredientPassword);
+		result = cDAO.selectIngredient(searchIngredientGDASodium);
+		assert(result.size() == 0);
+		
+		result = cDAO.selectIngredient(searchIngredientPrice);
 		assert(result.size() == 0);
 		
 		cDAO.deleteIngredient(testIngredient);	
@@ -182,7 +192,7 @@ public class IngredientDAOTest extends TestCase {
 	public void testIngredientDAOUpdate_ShouldWork() {
 		ArrayList<Ingredient> a = new ArrayList<Ingredient>();
 		cDAO.insertIngredient(testIngredient);
-		Ingredient updateIngredient = new Ingredient("firstNameTest2", "lastNameTest2", "addressTest2", "12345678900", "test1@mail2.com", "testCompany2", "testPassword2");
+		Ingredient updateIngredient = new Ingredient("butter2", 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 20.0);
 		a = cDAO.UpdateIngredient(updateIngredient, testIngredient);
 		
 		result = cDAO.selectIngredient(testIngredient);
@@ -191,13 +201,14 @@ public class IngredientDAOTest extends TestCase {
 		result = cDAO.selectIngredient(updateIngredient);
 		assert(result.size() == 1);
 		
-		assertTrue(a.get(0).getFirstName().equals(updateIngredient.getFirstName()));
-		assertTrue(a.get(0).getLastName().equals(updateIngredient.getLastName()));
-		assertTrue(a.get(0).getAddress().equals(updateIngredient.getAddress()));
-		assertTrue(a.get(0).getTelNo().equals(updateIngredient.getTelNo()));
-		assertTrue(a.get(0).getMailAddress().equals(updateIngredient.getMailAddress()));
-		assertTrue(a.get(0).getCompany().equals(updateIngredient.getCompany()));
-		assertTrue(a.get(0).getPassword().equals(updateIngredient.getPassword()));
+		assertTrue(a.get(0).getName().equals(updateIngredient.getName()));
+		assertTrue(a.get(0).getGda_energy().equals(updateIngredient.getGda_energy()));
+		assertTrue(a.get(0).getGda_protein().equals(updateIngredient.getGda_protein()));
+		assertTrue(a.get(0).getGda_carbo().equals(updateIngredient.getGda_carbo()));
+		assertTrue(a.get(0).getGda_fat().equals(updateIngredient.getGda_fat()));
+		assertTrue(a.get(0).getGda_fiber().equals(updateIngredient.getGda_fiber()));
+		assertTrue(a.get(0).getGda_sodium().equals(updateIngredient.getGda_sodium()));
+		assertTrue(a.get(0).getPrice().equals(updateIngredient.getPrice()));
 		assert(a.get(0).getId() != null);
 		
 		cDAO.deleteIngredient(updateIngredient);
@@ -207,10 +218,10 @@ public class IngredientDAOTest extends TestCase {
 	public void testIngredientDAOUpdate_ShouldFail() {
 		ArrayList<Ingredient> a = new ArrayList<Ingredient>();
 		cDAO.insertIngredient(testIngredient);
-		Ingredient updateIngredient = new Ingredient("firstNameTest2", "lastNameTest2", "addressTest2", "12345678900", "test1@mail2.com", "testCompany2", "testPassword2");
+		Ingredient updateIngredient = new Ingredient("butter2", 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 20.0);
 		cDAO.insertIngredient(updateIngredient);
 		result = cDAO.selectIngredient(testIngredient);
-		Ingredient updateIngredient2 = new Ingredient("firstNameTest2", "lastNameTest2", "addressTest2", "12345678900", "test1@mail2.com", "testCompany2", "testPassword2");
+		Ingredient updateIngredient2 = new Ingredient("butter2", 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 20.0);
 		updateIngredient2.setId(result.get(0).getId());
 		a = cDAO.UpdateIngredient(updateIngredient2, updateIngredient);
 		assert(a.isEmpty());

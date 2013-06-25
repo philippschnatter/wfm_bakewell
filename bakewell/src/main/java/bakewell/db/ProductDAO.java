@@ -114,12 +114,23 @@ public class ProductDAO {
 			Product p = new Product();
 			p.setId(productid);
 			//Searching for the complete Product accodring to the ID in order to get all Product attributes
-			p = selectProduct(p).get(0);
+			ArrayList<Product> res = selectProduct(p);
+			if(res.isEmpty()) {
+				p = new Product();
+			} else {
+				p = res.get(0);
+			}
+			
 			Recipe r = new Recipe();
 			//Fetch the Recipe ID from the Product Attributes and inserting it into a new search recipe
 			r.setId(p.getRecipe_id());
-			//search the recipe in the DB in order to get all attributes, including the ArrayList with all Ingredient2Recipe Connections			
-			return rDAO.selectRecipe(r).get(0);
+			//search the recipe in the DB in order to get all attributes, including the ArrayList with all Ingredient2Recipe Connections
+			ArrayList<Recipe> result = rDAO.selectRecipe(r);
+			if(result.isEmpty()) {
+				return null;
+			} else {
+				return result.get(0);
+			}
 		}
 	   
 	   /**
@@ -364,7 +375,7 @@ public class ProductDAO {
 				res.setComment(rs.getString(12));
 				result.add(res);
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		

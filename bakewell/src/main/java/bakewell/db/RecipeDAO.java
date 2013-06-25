@@ -328,7 +328,7 @@ public class RecipeDAO {
 				res.setTotalprice(rs.getDouble(10));
 				result.add(res);	
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		

@@ -191,9 +191,8 @@ public class IngredientDAO {
 			
 			//executes the Insert query on the DB
 			pstmt.executeUpdate();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
 		}
 		
 		//closes the connection to the DB
@@ -415,15 +414,15 @@ public class IngredientDAO {
 		
 		//if a given Object is not null, it shall be appended to the query and the index 
 		//shall be incremented --> NEW ATTRIBUTES
-		if(newI.getId() != null) {query = query + " AND ID = ?"; index++;}
-		if(newI.getName() != null) {query = query + " AND NAME = ?"; index++;}
-		if(newI.getGda_energy() != null) {query = query + " AND GDA_ENERGY = ?"; index++;}
-		if(newI.getGda_protein() != null) {query = query + " AND GDA_PROTEIN = ?"; index++;}
-		if(newI.getGda_carbo() != null) {query = query + " AND GDA_CARBO = ?"; index++;}
-		if(newI.getGda_fat() != null) {query = query + " AND GDA_FAT = ?"; index++;}
-		if(newI.getGda_fiber() != null) {query = query + " AND GDA_FIBER = ?"; index++;}
-		if(newI.getGda_sodium() != null) {query = query + " AND GDA_SODIUM = ?"; index++;}
-		if(newI.getPrice() != null) {query = query + " AND PRICE = ?"; index++;}
+		if(newI.getId() != null) {query = query + " ID = ?, "; index++;}
+		if(newI.getName() != null) {query = query + " NAME = ?, "; index++;}
+		if(newI.getGda_energy() != null) {query = query + " GDA_ENERGY = ?, "; index++;}
+		if(newI.getGda_protein() != null) {query = query + " GDA_PROTEIN = ?, "; index++;}
+		if(newI.getGda_carbo() != null) {query = query + " GDA_CARBO = ?, "; index++;}
+		if(newI.getGda_fat() != null) {query = query + " GDA_FAT = ?, "; index++;}
+		if(newI.getGda_fiber() != null) {query = query + " GDA_FIBER = ?, "; index++;}
+		if(newI.getGda_sodium() != null) {query = query + " GDA_SODIUM = ?, "; index++;}
+		if(newI.getPrice() != null) {query = query + " PRICE = ? "; index++;}
 		
 		//The last "," from the subsequent query shall be removed in order to prevent a syntax error
 		//furthermore the WHERE Clause with a dummy argument shall be asserted

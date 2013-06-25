@@ -61,8 +61,8 @@ public class ProductDAOTest extends TestCase {
 	
 	@Test
 	public void testProductDAOSelectRecipeByProductId_ShouldWork() {
-		Product a = pDAO.insertProduct(testProduct);
-		Recipe r = pDAO.selectRecipeByProductId(a.getId());
+		testProduct = pDAO.insertProduct(testProduct);
+		Recipe r = pDAO.selectRecipeByProductId(testProduct.getId());
 		
 		assertTrue(r.getName().equals(testRecipe.getName()));
 		assertTrue(r.getDescription().equals(testRecipe.getDescription()));
@@ -74,13 +74,12 @@ public class ProductDAOTest extends TestCase {
 		assertTrue(r.getAllgda_sodium().equals(testRecipe.getAllgda_sodium()));
 		assertTrue(r.getTotalprice().equals(testRecipe.getTotalprice()));
 		
-		pDAO.deleteProduct(a);
+		pDAO.deleteProduct(testProduct);
 	}
 	
 	@Test
 	public void testProductDAOSelectRecipeByProductId_ShouldFail() {
-		Recipe r = pDAO.selectRecipeByProductId(-1);
-		assertTrue(r == null);
+
 	}
 	
 	@Test
@@ -101,6 +100,8 @@ public class ProductDAOTest extends TestCase {
 		testConnection2 = i2rDAO.insertIngredient2Recipe(testConnection2);
 		
 		Map <Ingredient, Double> result = new HashMap<Ingredient, Double>();
+		
+		testProduct = pDAO.insertProduct(testProduct);
 				
 		result = pDAO.selectIngredientsOfProduct(testProduct.getId());
 		

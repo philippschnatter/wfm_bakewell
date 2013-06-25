@@ -118,9 +118,8 @@ public class Ingredient2RecipeDAO {
 			
 			//executes the Insert query on the DB
 			pstmt.executeUpdate();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
 		}
 		
 		//closes the connection to the DB
@@ -272,10 +271,10 @@ public class Ingredient2RecipeDAO {
 		
 		//if a given Object is not null, it shall be appended to the query and the index 
 		//shall be incremented --> NEW ATTRIBUTES
-		if(newC.getId() != null) {query = query + " AND ID = ?"; index++;}
-		if(newC.getRecipe_id() != null) {query = query + " AND RECIPE_ID = ?"; index++;}
-		if(newC.getIngredient_id() != null) {query = query + " AND INGREDIENT_ID = ?"; index++;}
-		if(newC.getAmount() != null) {query = query + " AND AMOUNT = ?"; index++;}
+		if(newC.getId() != null) {query = query + " ID = ?, "; index++;}
+		if(newC.getRecipe_id() != null) {query = query + " RECIPE_ID = ?, "; index++;}
+		if(newC.getIngredient_id() != null) {query = query + " INGREDIENT_ID = ?, "; index++;}
+		if(newC.getAmount() != null) {query = query + " AMOUNT = ? "; index++;}
 		
 		//The last "," from the subsequent query shall be removed in order to prevent a syntax error
 		//furthermore the WHERE Clause with a dummy argument shall be asserted
