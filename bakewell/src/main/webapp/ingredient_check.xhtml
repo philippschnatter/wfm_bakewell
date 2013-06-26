@@ -5,15 +5,12 @@
 
 <h:head>
 	<title>Ingredient_Check</title>
-	<!-- <link href="/css/bootstrap.css" rel="stylesheet" />
-	<link href="/css/bootstrap-responsive.css" rel="stylesheet"
-		type="text/css" />-->
 	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap.min.css" rel="stylesheet"
-		type="text/css" />
-	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap-responsive.min.css"
-		rel="stylesheet" type="text/css" />
-	<link href="/bakewell/resources/twitterBootstrap/css/override.css" rel="stylesheet"
-		type="text/css" />
+			type="text/css" />
+		<link href="/bakewell/resources/twitterBootstrap/css/bootstrap-responsive.min.css"
+	 		rel="stylesheet" type="text/css" />
+	 	<link href="/bakewell/resources/twitterBootstrap/css/override.css" rel="stylesheet"
+			type="text/css" />
 </h:head>
 
 <h:body>
@@ -26,47 +23,58 @@
 						<p class="lead">Conduct check against legal constraints
 							imposed by current law.</p>
 
-						<h3>Current list of ingredients:</h3>
+						<h3>Current Recipe:</h3>
 
-						<h:panelGrid columns="5" columnClasses="label, value, label, value, value"
+						<h:panelGrid columns="2" columnClasses="label, value"
 							styleClass="grid" style="margin-bottom: 10px" border="1"
 							cellpadding="2" cellspacing="5">
-							<h:outputText value="Ingredient I:" />
-							<h:outputText value="Excepteur sint occaecat" />
-							<h:outputText value="Quantity:" />
-							<h:outputText value="1" />
-							<h:commandButton value="Legal Objection" type="button"
-								class="btn btn-danger" />
+							<h:outputText value="Recipe name:" />
+							<h:outputText required="true"
+								value="#{ingredientCheck.recipe.name}" />
 
-							<h:outputText value="Ingredient II:" />
-							<h:outputText value="Duis aute irure dolor" />
-							<h:outputText value="Quantity:" />
-							<h:outputText value="2" />
-							<h:commandButton value="Legal Objection" type="button"
-								class="btn btn-danger" />
+							<h:outputText value="Recipe description:" />
+							<h:outputText required="true"
+								value="#{ingredientCheck.recipe.description}" />
+						</h:panelGrid>
 
-							<h:outputText value="Ingredient III:" />
-							<h:outputText value="consectetur adipisicing elit" />
-							<h:outputText value="Quantity:" />
-							<h:outputText value="3" />
-							<h:commandButton value="Legal Objection" type="button"
-								class="btn btn-danger" />
+						<div class="span8">
+							<h3>Used Ingredients:</h3>
+							<!-- TODO iterate table over object reference -->
+							<h:dataTable value="" var="ingredient" styleClass="order-table"
+								headerClass="order-table-header" style="margin-bottom: 20px"
+								rowClasses="order-table-odd-row,order-table-even-row">
+								<h:column>
+									<f:facet name="header">Ingredient Name</f:facet>
+									<h:outputText required="true" value="" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Ingredient Quantity</f:facet>
+									<h:outputText required="true" value="" />
+								</h:column>
+							</h:dataTable>
+						</div>
 
-							<h:outputText value="Ingredient IV:" />
-							<h:outputText value="Lorem ipsum dolor" />
-							<h:outputText value="Quantity:" />
-							<h:outputText value="4" />
-							<h:commandButton value="Legal Objection" type="button"
-								class="btn btn-danger" />
+
+						<h:panelGrid columns="2" columnClasses="value, value"
+							styleClass="grid" style="margin-bottom: 10px" cellpadding="2"
+							cellspacing="5">
+							<div class="alert alert-error">
+								<h4>Legal Objections:</h4>
+								<h:inputText value="#{ingredientCheck.comment}" />
+							</div>
 						</h:panelGrid>
 
 					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="span2">
+				<div class="span1">
 					<h:commandButton value="Proceed" type="button"
 						class="btn btn-success" />
+				</div>
+				<div class="span1 offset1">
+					<h:commandButton value="Legal Objection" type="button"
+						class="btn btn-danger" />
 				</div>
 			</div>
 		</h:form>

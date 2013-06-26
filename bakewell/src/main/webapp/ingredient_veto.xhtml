@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Ingredient_Veto</title>
+	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap.min.css" rel="stylesheet"
+			type="text/css" />
+		<link href="/bakewell/resources/twitterBootstrap/css/bootstrap-responsive.min.css"
+	 		rel="stylesheet" type="text/css" />
+	 	<link href="/bakewell/resources/twitterBootstrap/css/override.css" rel="stylesheet"
+			type="text/css" />
+</h:head>
+
+<h:body>
+	<div class="container">
+		<h:form>
+			<h2>Veto Recipe</h2>
+			<div class="row">
+				<div class="span6">
+					<div class="well">
+						<p class="lead">Evaluate possible legal Veto for Product:
+						</p>
+						<h3>Current Recipe:</h3>
+
+						<h:panelGrid columns="2" columnClasses="label, value"
+							styleClass="grid" style="margin-bottom: 10px" border="1"
+							cellpadding="2" cellspacing="5">
+							<h:outputText value="Recipe name:" />
+							<h:outputText required="true"
+								value="#{ingredientVeto.recipe.name}" />
+
+							<h:outputText value="Recipe description:" />
+							<h:outputText required="true"
+								value="#{ingredientVeto.recipe.description}" />
+						</h:panelGrid>
+
+						<div class="span8">
+							<h3>Used Ingredients:</h3>
+							<!-- TODO iterate table over object reference -->
+							<h:dataTable value="" var="ingredient" styleClass="order-table"
+								headerClass="order-table-header" style="margin-bottom: 20px"
+								rowClasses="order-table-odd-row,order-table-even-row">
+								<h:column>
+									<f:facet name="header">Ingredient Name</f:facet>
+									<h:outputText required="true" value="" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Ingredient Quantity</f:facet>
+									<h:outputText required="true" value="" />
+								</h:column>
+							</h:dataTable>
+						</div>
+
+						<h:panelGrid columns="2" columnClasses="value, value"
+							styleClass="grid" style="margin-bottom: 10px" cellpadding="2"
+							cellspacing="5">
+							<div class="alert alert-error">
+								<h4>Legal Objections:</h4>
+								<h:outputText value="#{ingredientVeto.comment}" />
+							</div>
+						</h:panelGrid>
+
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span1">
+					<h:commandButton value="Approve Ingredients" type="button"
+						class="btn btn-success" />
+				</div>
+				<div class="span1 offset1">
+					<h:commandButton value="Reject Ingredients" type="button"
+						class="btn btn-danger" />
+				</div>
+			</div>
+		</h:form>
+	</div>
+</h:body>
+
+</html>

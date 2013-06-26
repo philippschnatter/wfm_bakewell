@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Final_Plan</title>
+	 	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap.min.css" rel="stylesheet"
+			type="text/css" />
+		<link href="/bakewell/resources/twitterBootstrap/css/bootstrap-responsive.min.css"
+	 		rel="stylesheet" type="text/css" />
+	 	<link href="/bakewell/resources/twitterBootstrap/css/override.css" rel="stylesheet"
+			type="text/css" />
+</h:head>
+
+<h:body>
+	<h:form>
+		<div class="container">
+			<div class="row">
+				<div class="span4 offset3">
+					<h2>Finalized Pre-Production Plan</h2>
+					<div class="well">
+						<h3>Contract Data:</h3>
+						<h:panelGrid columns="2" columnClasses="label, value"
+							styleClass="grid" style="margin-bottom: 10px" border="1"
+							cellpadding="2" cellspacing="5">
+							<h:outputText value="Contractor company:" />
+							<h:outputText value="#{finalPlan.company}" />
+							<h:outputText value="Business partner first name:" />
+							<h:outputText value="#{finalPlan.firstName}" />
+							<h:outputText value="Business partner last name:" />
+							<h:outputText value="#{finalPlan.lastName}" />
+							<h:outputText value="Telephone number:" />
+							<h:outputText value="#{finalPlan.telNo}" />
+							<h:outputText value="Mail address:" />
+							<h:outputText value="#{finalPlan.mailAddress}" />
+							<h:outputText value="Business address:" />
+							<h:outputText value="#{finalPlan.address}" />
+							<h:outputText value="Product name:" />
+							<h:outputText value="#{finalPlan.product_Name}" />
+							<h:outputText value="Delivery date:" />
+							<h:outputText value="#{finalPlan.deliveryDate}" />
+						</h:panelGrid>
+
+						<h3>Production Data:</h3>
+						<h:panelGrid columns="2" columnClasses="label, value"
+							styleClass="grid" style="margin-bottom: 10px" border="1"
+							cellpadding="2" cellspacing="5">
+							<h:outputText value="Production Contractor:" />
+							<h:outputText required="true"
+								value="#{finalPlan.production_Contractor}" />
+
+							<h:outputText value="Production Start:" />
+							<h:outputText required="true"
+								value="#{finalPlan.production_Start}" />
+
+							<h:outputText value="Production End:" />
+							<h:outputText required="true" value="#{finalPlan.production_End}" />
+
+							<h:outputText value="Production Facility:" />
+							<h:outputText required="true"
+								value="#{finalPlan.production_Facility}" />
+						</h:panelGrid>
+
+						<h3>Transportation Data:</h3>
+						<h:panelGrid columns="2" columnClasses="label, value"
+							styleClass="grid" style="margin-bottom: 10px" border="1"
+							cellpadding="2" cellspacing="5">
+							<h:outputText value="Transportation Contractor:" />
+							<h:outputText required="true"
+								value="#{finalPlan.transport_Contractor}" />
+
+							<h:outputText value="Projected Cost:" />
+							<h:outputText required="true" value="#{finalPlan.transport_cost}" />
+						</h:panelGrid>
+
+						<h3>Recipe Data:</h3>
+						<h:panelGrid columns="2" columnClasses="label, value"
+							styleClass="grid" style="margin-bottom: 10px" border="1"
+							cellpadding="2" cellspacing="5">
+							<h:outputText value="Recipe name:" />
+							<h:outputText required="true"
+								value="#{ingredientCheck.recipe.name}" />
+
+							<h:outputText value="Recipe description:" />
+							<h:outputText required="true"
+								value="#{ingredientCheck.recipe.description}" />
+						</h:panelGrid>
+
+						<h3>Used Ingredients:</h3>
+						<!-- TODO iterate table over object reference -->
+						<h:dataTable value="" var="ingredient" styleClass="order-table"
+							headerClass="order-table-header" style="margin-bottom: 20px"
+							rowClasses="order-table-odd-row,order-table-even-row">
+							<h:column>
+								<f:facet name="header">Ingredient Name</f:facet>
+								<h:outputText required="true" value="" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">Ingredient Quantity</f:facet>
+								<h:outputText required="true" value="" />
+							</h:column>
+						</h:dataTable>
+
+						<h3>Product Label Data:</h3>
+						<h:dataTable value="" var="ingredient" styleClass="order-table"
+							headerClass="order-table-header" style="margin-bottom: 20px"
+							rowClasses="order-table-odd-row,order-table-even-row">
+							<h:column>
+								<h:outputText value="&#160;" />
+								<h:outputText required="true" value="" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">Percent GDA</f:facet>
+								<h:outputText required="true" value="" />
+							</h:column>
+						</h:dataTable>
+					</div>
+				</div>
+			</div>
+		</div>
+	</h:form>
+</h:body>
+
+</html>
