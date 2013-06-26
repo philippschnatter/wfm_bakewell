@@ -12,7 +12,6 @@
 	rel="stylesheet" type="text/css" />
 <link href="/bakewell/resources/twitterBootstrap/css/override.css"
 	rel="stylesheet" type="text/css" />
-
 </head>
 
 <body>
@@ -28,16 +27,16 @@
 						cellspacing="5">
 						<h:outputText value=" Choose Recipe " />
 						<h:outputText value="&#160;" />
-						
+
 						<h:selectOneMenu value="recipeSelection.selectedRecipeId">
 							<f:selectItem itemValue="" itemLabel="Create a new Recipe" />
 							<f:selectItems value="#{recipeSelection.recipeList}" var="recipe"
 								itemLabel="#{recipe.name}" itemValue="#{recipe.id}" />
 						</h:selectOneMenu>
-						
+
 						<h:outputText value="&#160;" />
-						<h:commandButton value="Proceed" action="#{recipeSelection.proceed()}"
-							class="btn btn-primary" />
+						<h:commandButton value="Proceed"
+							action="#{recipeSelection.proceed()}" class="btn btn-primary" />
 					</h:panelGrid>
 
 				</div>

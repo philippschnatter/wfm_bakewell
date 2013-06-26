@@ -1,19 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
 	<title>Customer_Response</title>
-	<!-- <link href="/css/bootstrap.css" rel="stylesheet" />
-	<link href="/css/bootstrap-responsive.css" rel="stylesheet"
-		type="text/css" />-->
-	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap.min.css" rel="stylesheet"
-		type="text/css" />
-	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap-responsive.min.css"
+	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap.min.css"
 		rel="stylesheet" type="text/css" />
-	<link href="/bakewell/resources/twitterBootstrap/css/override.css" rel="stylesheet"
-		type="text/css" />
+	<link
+		href="/bakewell/resources/twitterBootstrap/css/bootstrap-responsive.min.css"
+		rel="stylesheet" type="text/css" />
+	<link href="/bakewell/resources/twitterBootstrap/css/override.css"
+		rel="stylesheet" type="text/css" />
 </h:head>
 
 <h:body>
@@ -26,35 +24,26 @@
 					<h:panelGrid columns="2" columnClasses="label, value"
 						styleClass="grid" style="margin-bottom: 10px" border="1"
 						cellpadding="2" cellspacing="5">
-						<h:outputText value="Contractor company:"/>
-						<h:outputText value="#{customerResponse.company}"/>
-						
-						<h:outputText value="Business partner first name:"/>
-						<h:outputText value="#{customerResponse.firstName}"/>
-						
-						<h:outputText value="Business partner last name:"/>
-						<h:outputText value="#{customerResponse.lastName}"/>
-						
-						<h:outputText value="Business address:"/>
-						<h:outputText value="#{customerResponse.address}"/>
-						
-						<h:outputText value="Product name:"/>
-						<h:outputText value="#{customerResponse.product_Name}"/>
-						
-						<h:outputText value="Delivery date:"/>
-						<h:outputText value="#{customerResponse.deliveryDate}"/>
+						<h:outputText value="Contractor company:" />
+						<h:outputText value="#{customerResponse.company}" />
+
+						<h:outputText value="Business partner first name:" />
+						<h:outputText value="#{customerResponse.firstName}" />
+
+						<h:outputText value="Business partner last name:" />
+						<h:outputText value="#{customerResponse.lastName}" />
+
+						<h:outputText value="Business address:" />
+						<h:outputText value="#{customerResponse.address}" />
+
+						<h:outputText value="Product name:" />
+						<h:outputText value="#{customerResponse.product_Name}" />
+
+						<h:outputText value="Delivery date:" />
+						<h:outputText value="#{customerResponse.deliveryDate}" />
 
 						<h:outputText value="Contractor Message:" />
-						<h:outputText
-							value="#{customerResponse.additionalMessage}" />
-					</h:panelGrid>
-
-					<h3>Price Offer</h3>
-					<h:panelGrid columns="2" columnClasses="label, value"
-						styleClass="grid" style="margin-bottom: 10px" border="1"
-						cellpadding="2" cellspacing="5">
-						<h:outputText value="Bid Price" />
-						<h:outputText value="#{customerResponse.bidPrice}" />
+						<h:outputText value="#{customerResponse.additionalMessage}" />
 					</h:panelGrid>
 				</div>
 			</div>
@@ -62,12 +51,12 @@
 		<h:form>
 			<div class="row">
 				<div class="span1">
-					<h:commandButton value="Accept Bid" action="#{customerResponse.accept()}"
-						class="btn btn-success" />
+					<h:commandButton value="Accept Bid"
+						action="#{customerResponse.accept()}" class="btn btn-success" />
 				</div>
 				<div class="span1 offset1">
-					<h:commandButton value="Reject Bid" action="#{customerResponse.reject()}"
-						class="btn btn-danger" />
+					<h:commandButton value="Reject Bid"
+						action="#{customerResponse.reject()}" class="btn btn-danger" />
 				</div>
 			</div>
 		</h:form>

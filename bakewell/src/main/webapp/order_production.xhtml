@@ -1,23 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
 	<title>Customer_Offer</title>
-	<!-- <link href="/css/bootstrap.css" rel="stylesheet" />
-	<link href="/css/bootstrap-responsive.css" rel="stylesheet"
-		type="text/css" />-->
-	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap.min.css" rel="stylesheet"
-		type="text/css" />
-	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap-responsive.min.css"
+	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap.min.css"
 		rel="stylesheet" type="text/css" />
-	<link href="/bakewell/resources/twitterBootstrap/css/override.css" rel="stylesheet"
-		type="text/css" />
+	<link
+		href="/bakewell/resources/twitterBootstrap/css/bootstrap-responsive.min.css"
+		rel="stylesheet" type="text/css" />
+	<link href="/bakewell/resources/twitterBootstrap/css/override.css"
+		rel="stylesheet" type="text/css" />
 </h:head>
 
 <h:body>
-<h:outputText value="#{orderProduction.taskID}"/>
+	<h:outputText value="#{orderProduction.taskID}" />
 	<div class="container">
 		<h:form>
 			<h2>Production Plan</h2>
@@ -26,29 +24,34 @@
 					<div class="well">
 						<p class="lead">Insert estimated data on production facility
 							usage:</p>
- 						<h:panelGrid columns="2" columnClasses="label, value"
+						<h:panelGrid columns="2" columnClasses="label, value"
 							styleClass="grid" style="margin-bottom: 10px" border="1"
 							cellpadding="2" cellspacing="5">
 							<h:outputText value="Production Contractor:" />
-							<h:inputText required="true" value="#{orderProduction.production_Contractor}"/>
-							
+							<h:inputText required="true"
+								value="#{orderProduction.production_Contractor}" />
+
 							<h:outputText value="Production Start:" />
-							<h:inputText required="true" value="#{orderProduction.production_Start}"/>
+							<h:inputText required="true"
+								value="#{orderProduction.production_Start}" />
 
 							<h:outputText value="Production End:" />
-							<h:inputText required="true" value="#{orderProduction.production_End}"/>
-							
+							<h:inputText required="true"
+								value="#{orderProduction.production_End}" />
+
 							<h:outputText value="Production Facility:" />
-							<h:inputText required="true" value="#{orderProduction.production_Facility}"/>
+							<h:inputText required="true"
+								value="#{orderProduction.production_Facility}" />
 						</h:panelGrid>
- 					</div>
+					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="span2">
-					<h:commandButton value="Proceed" class="btn btn-success" action="#{orderProduction.proceed()}"/>
+					<h:commandButton value="Proceed" class="btn btn-success"
+						action="#{orderProduction.proceed()}" />
 				</div>
-				
+
 			</div>
 		</h:form>
 	</div>
