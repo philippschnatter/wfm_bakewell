@@ -11,4 +11,13 @@ public class ActivitiConstants {
 	
 	// Controll variables (CV)
 	public static final String CV_REMAINDER_AMOUNT = "RemainderAmount";
+	
+	public static final String MAIL_INFORM_PRODUCTMANAGER_SUBJECT =  "MailInformProductManagerSubject";
+	public static final String MAIL_INFORM_PRODUCTMANAGER_TEXT =  "MailInformProductManagerText";
+	
+	public static final String MAIL_SEND_OFFER_SUBJECT =  "MailSendOfferSubject";
+	public static final String MAIL_SEND_OFFER_TEXT =  "MailSendOfferText";
+	
+	public static final String MAIL_SEND_TERMINATION_SUBJECT =  "MailSendTerminationSubject";
+	public static final String MAIL_SEND_TERMINATION_TEXT =  "MailSendTerminationText";
 }

@@ -41,12 +41,14 @@ public class ActivitiFactory {
 	
 	public Deployment init()
 	{
+		
 		String description = ActivitiConstants.PROCESS_NAME;
 		
 		if (processEngine == null)
 		{
 			// use an H2 in-memory database for Activiti
 			ProcessEngineConfiguration config = ProcessEngineConfiguration.createStandaloneInMemProcessEngineConfiguration();
+		//			.setMailServerPort(1025);
 			
 			/**
 			 *  use the Activiti Explorer's H2 database - the process will be shown in the Activiti Explorer 
