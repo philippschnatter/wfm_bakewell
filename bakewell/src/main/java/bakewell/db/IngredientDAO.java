@@ -192,7 +192,6 @@ public class IngredientDAO {
 			//executes the Insert query on the DB
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		
 		//closes the connection to the DB
@@ -273,7 +272,6 @@ public class IngredientDAO {
 				pstmt.executeUpdate();
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 			return null;
 		}
 		
@@ -317,7 +315,6 @@ public class IngredientDAO {
 				result.add(res);	
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		
 		//closes the connection to the DB...
@@ -391,7 +388,6 @@ public class IngredientDAO {
 				result.add(res);	
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		
 		//closes the connection to the DB...

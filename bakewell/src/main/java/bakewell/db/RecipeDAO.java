@@ -163,7 +163,6 @@ public class RecipeDAO {
 			}
 			
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
 		}
 		
@@ -253,7 +252,6 @@ public class RecipeDAO {
 				pstmt.executeUpdate();
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		
 		//closes the connection to the DB
@@ -329,7 +327,6 @@ public class RecipeDAO {
 				result.add(res);	
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		
 		//closes the connection to the DB...
@@ -418,7 +415,6 @@ public class RecipeDAO {
 			//Execute the Update on the DB
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
 		}
 		//Close the connection to the DB

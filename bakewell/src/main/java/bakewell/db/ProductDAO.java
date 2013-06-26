@@ -200,7 +200,6 @@ public class ProductDAO {
 			//executes the Insert query on the DB
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		
 		//closes the connection to the DB
@@ -288,7 +287,6 @@ public class ProductDAO {
 				pstmt.executeUpdate();
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 			return null;
 		}
 		
@@ -371,7 +369,6 @@ public class ProductDAO {
 				result.add(res);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		
 		//closes the connection to the DB...

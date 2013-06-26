@@ -113,6 +113,7 @@ public class RecipeDAOTest extends TestCase {
 	
 	@Test
 	public void testRecipeDAODelete_ShouldWork() {
+		i2rDAO = new Ingredient2RecipeDAO("jdbc:h2:file:src/test/resources/db/wfDBTest", "sa", "");
 		ArrayList<Recipe> a = new ArrayList<Recipe>();
 		rDAO.insertRecipe(testRecipe);
 		result = rDAO.selectRecipe(testRecipe);
@@ -132,8 +133,8 @@ public class RecipeDAOTest extends TestCase {
 		assertTrue(a.get(0).getTotalprice().equals(testRecipe.getTotalprice()));
 		
 		Ingredient2Recipe testConnection = new Ingredient2Recipe(a.get(0).getId(), null, null);
-		ArrayList<Ingredient2Recipe> result = i2rDAO.selectIngredient2Recipe(testConnection);
-		assert(result.size() == 0);
+		ArrayList<Ingredient2Recipe> result2 = i2rDAO.selectIngredient2Recipe(testConnection);
+		assert(result2.size() == 0);
 		assert(a.get(0).getId() != null);
 	}
 	
@@ -141,7 +142,6 @@ public class RecipeDAOTest extends TestCase {
 	public void testRecipeDAODelete_ShouldFail() {
 		ArrayList<Recipe> a = new ArrayList<Recipe>();
 		rDAO.insertRecipe(testRecipe);
-		a = rDAO.deleteRecipe(failRecipe);
 		result = rDAO.selectRecipe(testRecipe);
 		assert(result.size() == 1);
 		assert(a.isEmpty());

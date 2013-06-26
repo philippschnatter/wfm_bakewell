@@ -118,7 +118,6 @@ public class GDAReferenceDAO {
 			//executes the Insert query on the DB
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
 		}
 		
@@ -187,7 +186,6 @@ public class GDAReferenceDAO {
 				pstmt.executeUpdate();
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 			return null;
 		}
 		
@@ -243,7 +241,6 @@ public class GDAReferenceDAO {
 				result.add(res);	
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		
 		//closes the connection to the DB...
