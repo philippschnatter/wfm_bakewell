@@ -94,7 +94,10 @@ public class tasklistBean {
 		engine.init();
 		
 		RuntimeService runtimeService = engine.getProcessEngine().getRuntimeService();
-		ProcessInstance instance = runtimeService.startProcessInstanceByKey(processName, variableMap);
+		
+		//  DP: we use Activiti Factory 
+		// ProcessInstance instance = runtimeService.startProcessInstanceByKey(processName, variableMap);
+		 ProcessInstance instance = ActivitiFactory.getInstance().createProcessInstance();
 		
 		// Retrieve process ID
 		String id = instance.getId();

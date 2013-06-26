@@ -33,6 +33,7 @@ public class creditCheck {
 		System.out.println(this.taskId);
 		ActivitiFactory engine = ActivitiFactory.getInstance();
 		ProcessEngine processEngine = engine.getProcessEngine();
+		
 //		RuntimeService runtimeService = processEngine.getRuntimeService();
 		FormService formService = processEngine.getFormService();
 		Map<String, String> map = new HashMap<String, String>();

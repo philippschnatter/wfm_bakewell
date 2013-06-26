@@ -23,7 +23,7 @@
     <sequenceFlow id="DoesNotHaveSolvency" name="Not Ok" sourceRef="exclusivegateway7" targetRef="endevent2">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${HasSolvency=="false"}]]></conditionExpression>
     </sequenceFlow>
-    <sequenceFlow id="HasSolvency" name="Ok" sourceRef="exclusivegateway7" targetRef="manualtask3">
+    <sequenceFlow id="HasSolvency" name="Ok" sourceRef="exclusivegateway7" targetRef="InformProductManager">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${HasSolvency=="true"}]]></conditionExpression>
     </sequenceFlow>
     <subProcess id="subprocess2" name="Ingredient Management">
@@ -68,11 +68,11 @@
         <activiti:executionListener event="timerfired" class="bakewell.activiti.ExecutionTracker"></activiti:executionListener>
       </extensionElements>
     </sequenceFlow>
-    <sequenceFlow id="flow38" sourceRef="manualtask5" targetRef="endevent4"></sequenceFlow>
+    <sequenceFlow id="flow38" sourceRef="SendTermination" targetRef="endevent4"></sequenceFlow>
     <exclusiveGateway id="exclusivegateway6" name="Exclusive Gateway" default="WithinTimeLimit"></exclusiveGateway>
     <sequenceFlow id="WithinTimeLimit" name="Within time limit" sourceRef="exclusivegateway6" targetRef="SendRemainder"></sequenceFlow>
-    <sequenceFlow id="ExceedsLimit" name="exceeds time limit" sourceRef="exclusivegateway6" targetRef="manualtask5">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${ RemainderAmount =="2"}]]></conditionExpression>
+    <sequenceFlow id="ExceedsLimit" name="exceeds time limit" sourceRef="exclusivegateway6" targetRef="SendTermination">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${RemainderAmount =="2"}]]></conditionExpression>
     </sequenceFlow>
     <intermediateCatchEvent id="CustomerResponded" name="CustomerResponded">
       <signalEventDefinition signalRef="SendCustomerResponse"></signalEventDefinition>
@@ -98,13 +98,13 @@
     <task id="PrepareProduction" name="Prepare Production"></task>
     <endEvent id="endevent8" name="End"></endEvent>
     <sequenceFlow id="flow56" sourceRef="PrepareProduction" targetRef="endevent8"></sequenceFlow>
-    <sequenceFlow id="flow57" name="Offer Rejected, revision started" sourceRef="exclusivegateway5" targetRef="manualtask3">
+    <sequenceFlow id="flow57" name="Offer Rejected, revision started" sourceRef="exclusivegateway5" targetRef="InformProductManager">
       <extensionElements>
         <activiti:executionListener event="OfferNeedsRevision" class="activityTasks.ExecutionTracker"></activiti:executionListener>
       </extensionElements>
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${OfferResult=="NeedsRevision"}]]></conditionExpression>
     </sequenceFlow>
-    <sequenceFlow id="flow58" sourceRef="CompileOffer" targetRef="manualtask4"></sequenceFlow>
+    <sequenceFlow id="flow58" sourceRef="CompileOffer" targetRef="SendOffer"></sequenceFlow>
     <boundaryEvent id="boundaryerror1" name="Error" attachedToRef="subprocess2">
       <errorEventDefinition errorRef="LegalConstraintsViolated"></errorEventDefinition>
     </boundaryEvent>
@@ -131,10 +131,10 @@
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${IsNewReceipe=="false"}]]></conditionExpression>
     </sequenceFlow>
     <sequenceFlow id="flow75" sourceRef="exclusivegateway11" targetRef="parallelgateway2"></sequenceFlow>
-    <sequenceFlow id="flow97" sourceRef="manualtask3" targetRef="parallelgateway4"></sequenceFlow>
+    <sequenceFlow id="flow97" sourceRef="InformProductManager" targetRef="parallelgateway4"></sequenceFlow>
     <task id="manualtask2" name="Inform Customer"></task>
     <parallelGateway id="parallelgateway5" name="Parallel Gateway"></parallelGateway>
-    <sequenceFlow id="flow98" sourceRef="manualtask4" targetRef="parallelgateway5"></sequenceFlow>
+    <sequenceFlow id="flow98" sourceRef="SendOffer" targetRef="parallelgateway5"></sequenceFlow>
     <sequenceFlow id="flow99" sourceRef="parallelgateway5" targetRef="WaitForCustomer"></sequenceFlow>
     <subProcess id="CustomerSubProcess" name="Customer Process">
       <startEvent id="startevent4" name="Start"></startEvent>
@@ -168,9 +168,54 @@
     <sequenceFlow id="flow112" sourceRef="CustomerSubProcess" targetRef="parallelgateway8"></sequenceFlow>
     <parallelGateway id="parallelgateway8" name="Parallel Gateway"></parallelGateway>
     <sequenceFlow id="flow113" sourceRef="parallelgateway8" targetRef="exclusivegateway5"></sequenceFlow>
-    <task id="manualtask3" name="Inform Product Manager"></task>
-    <task id="manualtask4" name="Send Offer to customer"></task>
-    <task id="manualtask5" name="Send termination"></task>
+    <serviceTask id="InformProductManager" name="Inform Product Manager" activiti:type="mail">
+      <extensionElements>
+        <activiti:field name="to">
+          <activiti:string>wfm@localhost</activiti:string>
+        </activiti:field>
+        <activiti:field name="from">
+          <activiti:string>wfm@localhost</activiti:string>
+        </activiti:field>
+        <activiti:field name="subject">
+          <activiti:expression>${MailInformProductManagerSubject}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="html">
+          <activiti:expression>${MailInformProductManagerText}</activiti:expression>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <serviceTask id="SendOffer" name="Send Offer to customer" activiti:type="mail">
+      <extensionElements>
+        <activiti:field name="to">
+          <activiti:string>wfm@localhost</activiti:string>
+        </activiti:field>
+        <activiti:field name="from">
+          <activiti:string>wfm@localhost</activiti:string>
+        </activiti:field>
+        <activiti:field name="subject">
+          <activiti:expression>${MailSendOfferSubject}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="html">
+          <activiti:expression>${MailSendOfferText}</activiti:expression>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <serviceTask id="SendTermination" name="Send termination" activiti:type="mail">
+      <extensionElements>
+        <activiti:field name="to">
+          <activiti:string>wfm@localhost</activiti:string>
+        </activiti:field>
+        <activiti:field name="from">
+          <activiti:string>wfm@localhost</activiti:string>
+        </activiti:field>
+        <activiti:field name="subject">
+          <activiti:expression>${MailSendTerminationSubject}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="html">
+          <activiti:expression>${MailSendTerminationText}</activiti:expression>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_ProductCreationProcess">
     <bpmndi:BPMNPlane bpmnElement="ProductCreationProcess" id="BPMNPlane_ProductCreationProcess">
@@ -324,13 +369,13 @@
       <bpmndi:BPMNShape bpmnElement="OrderTransport" id="BPMNShape_OrderTransport">
         <omgdc:Bounds height="55.0" width="105.0" x="1850.0" y="430.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="manualtask3" id="BPMNShape_manualtask3">
+      <bpmndi:BPMNShape bpmnElement="InformProductManager" id="BPMNShape_InformProductManager">
         <omgdc:Bounds height="55.0" width="105.0" x="1370.0" y="259.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="manualtask4" id="BPMNShape_manualtask4">
+      <bpmndi:BPMNShape bpmnElement="SendOffer" id="BPMNShape_SendOffer">
         <omgdc:Bounds height="55.0" width="105.0" x="2990.0" y="199.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="manualtask5" id="BPMNShape_manualtask5">
+      <bpmndi:BPMNShape bpmnElement="SendTermination" id="BPMNShape_SendTermination">
         <omgdc:Bounds height="55.0" width="105.0" x="3455.0" y="52.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">

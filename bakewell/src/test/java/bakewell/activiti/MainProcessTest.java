@@ -94,7 +94,15 @@ public class MainProcessTest {
 		pid = processInstance.getProcessInstanceId();
 		formService = processEngine.getFormService();
 	
-		runtimeService.setVariable(pid, "RemainderAmount", "0");
+		runtimeService.setVariable(pid, ActivitiConstants.CV_REMAINDER_AMOUNT, "0");
+		runtimeService.setVariable(pid, ActivitiConstants.MAIL_INFORM_PRODUCTMANAGER_SUBJECT, "New Product");
+		runtimeService.setVariable(pid, ActivitiConstants.MAIL_INFORM_PRODUCTMANAGER_TEXT, "Dear Manager, <br/> We have invented a new product");
+		runtimeService.setVariable(pid, ActivitiConstants.MAIL_SEND_OFFER_SUBJECT, "Offer for Product");
+		runtimeService.setVariable(pid, ActivitiConstants.MAIL_SEND_OFFER_TEXT, "Dear Customer, <br/> We made a new offer for your product </br> please review it");
+	
+		runtimeService.setVariable(pid, ActivitiConstants.MAIL_SEND_TERMINATION_SUBJECT, "Termination of job");
+		runtimeService.setVariable(pid, ActivitiConstants.MAIL_SEND_TERMINATION_TEXT, "Dear customer <br/> Our offer has expired");
+	
 	}
 	
 	@After

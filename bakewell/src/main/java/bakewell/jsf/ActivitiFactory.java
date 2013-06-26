@@ -13,6 +13,7 @@ import org.activiti.engine.RepositoryService;
 import org.activiti.engine.identity.User;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.DeploymentBuilder;
+import org.activiti.engine.runtime.ProcessInstance;
 
 import org.activiti.engine.runtime.ProcessInstance;
 
@@ -46,7 +47,8 @@ public class ActivitiFactory {
 		if (processEngine == null)
 		{
 			// use an H2 in-memory database for Activiti
-			ProcessEngineConfiguration config = ProcessEngineConfiguration.createStandaloneInMemProcessEngineConfiguration();
+			ProcessEngineConfiguration config = ProcessEngineConfiguration.createStandaloneInMemProcessEngineConfiguration()
+					.setMailServerPort(1025);
 			
 			/**
 			 *  use the Activiti Explorer's H2 database - the process will be shown in the Activiti Explorer 
@@ -109,15 +111,21 @@ public class ActivitiFactory {
 		identityService.saveUser(processManager);
 	}
 	
-	public void CreateProcessInstance(){
+	public ProcessInstance createProcessInstance(){
 		
 		Map<String, Object> variableMap = new HashMap<String, Object>();
 		variableMap.put(ActivitiConstants.CV_REMAINDER_AMOUNT, "0");
-//		ProcessInstance instance = runtimeService.startProcessInstanceByKey(processName, variableMap);
-
-		this.processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(ActivitiConstants.PROCESS_NAME, variableMap);
-		this.pid = processInstance.getBusinessKey();
-
+		
+		// mail stuff
+		variableMap.put(ActivitiConstants.MAIL_INFORM_PRODUCTMANAGER_SUBJECT, "New Product");
+		variableMap.put(ActivitiConstants.MAIL_INFORM_PRODUCTMANAGER_TEXT, "Dear Manager, <br/> We have invented a new product");
+		variableMap.put(ActivitiConstants.MAIL_SEND_OFFER_SUBJECT, "Offer for Product");
+		variableMap.put(ActivitiConstants.MAIL_SEND_OFFER_TEXT, "Dear Customer, <br/> We made a new offer for your product </br> please review it");
+	
+		variableMap.put(ActivitiConstants.MAIL_SEND_TERMINATION_SUBJECT, "Termination of job");
+		variableMap.put(ActivitiConstants.MAIL_SEND_TERMINATION_TEXT, "Dear customer <br/> Our offer has expired");
+			
+		return processEngine.getRuntimeService().startProcessInstanceByKey(ActivitiConstants.PROCESS_NAME, variableMap);
 	}
 	
 	public ProcessEngine getProcessEngine() { return this.processEngine; }
