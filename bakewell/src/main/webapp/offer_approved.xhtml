@@ -1,28 +1,36 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:head><title>Offer_Approved</title>
-	 	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap.min.css" rel="stylesheet" 
-	 		type="text/css" /> 
-	 	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap-responsive.min.css" 
-	 		rel="stylesheet" type="text/css" /> 
-	 	<link href="/bakewell/resources/twitterBootstrap/css/override.css" rel="stylesheet" 
-	 		type="text/css" /></h:head> 
-<body> 
-<div class="alert alert-success">
-<h2>Offer approved!</h2>
-<h3>Production Phase can be initiated!</h3>
-</div>
-<h:form>
-			<div class="row">
-				<div class="span1">
-					<h:commandButton value="Proceed to Production" action="#{customerResponse.accept()}"
-						class="btn btn-success" />
+<h:head>
+	<title>Offer_Approved</title>
+	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap.min.css"
+		rel="stylesheet" type="text/css" />
+	<link
+		href="/bakewell/resources/twitterBootstrap/css/bootstrap-responsive.min.css"
+		rel="stylesheet" type="text/css" />
+	<link href="/bakewell/resources/twitterBootstrap/css/override.css"
+		rel="stylesheet" type="text/css" />>
+</h:head>
+<body>
+
+	<div class="span4 offset2">
+		<div class="alert alert-success">
+			<h2>Offer approved!</h2>
+			<h3>Production Phase can be initiated!</h3>
+			<h:form>
+				<div class="row">
+					<div class="span1">
+						<h:commandButton value="Proceed to Production"
+							action="#{customerResponse.accept()}" class="btn btn-success" />
+
+					</div>
 				</div>
-			</div>
-		</h:form>
-</body> 
+			</h:form>
+		</div>
+	</div>
+
+</body>
 </html>

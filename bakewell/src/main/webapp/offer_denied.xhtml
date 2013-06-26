@@ -4,29 +4,34 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:head><title>Offer_Denied</title>
-	 	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap.min.css" rel="stylesheet" 
-	 		type="text/css" /> 
-	 	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap-responsive.min.css" 
-	 		rel="stylesheet" type="text/css" /> 
-	 	<link href="/bakewell/resources/twitterBootstrap/css/override.css" rel="stylesheet" 
-	 		type="text/css" /></h:head>
+<h:head>
+	<title>Offer_Denied</title>
+	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap.min.css"
+		rel="stylesheet" type="text/css" />
+	<link
+		href="/bakewell/resources/twitterBootstrap/css/bootstrap-responsive.min.css"
+		rel="stylesheet" type="text/css" />
+	<link href="/bakewell/resources/twitterBootstrap/css/override.css"
+		rel="stylesheet" type="text/css" />
+</h:head>
 <body>
-	<div class="alert alert-error">
-		<h2>Offer denied!</h2>
-		<h3>What is to be done now?</h3>
-	</div>
-	<h:form>
-		<div class="row">
-			<div class="span1">
-				<h:commandButton value="Revise and Rework Bid"
-					action="#{customerResponse.accept()}" class="btn btn-warning" />
-			</div>
-			<div class="span1 offset1">
-				<h:commandButton value="Drop Bid and End Process"
-					action="#{customerResponse.reject()}" class="btn btn-danger" />
-			</div>
+	<div class="span4 offset2">
+		<div class="alert alert-error">
+			<h2>Offer denied!</h2>
+			<h3>What is to be done now?</h3>
 		</div>
-	</h:form>
+		<h:form>
+			<div class="row">
+				<div class="span1">
+					<h:commandButton value="Revise and Rework Bid"
+						action="#{customerResponse.accept()}" class="btn btn-warning" />
+				</div>
+				<div class="span1 offset1">
+					<h:commandButton value="Drop Bid and End Process"
+						action="#{customerResponse.reject()}" class="btn btn-danger" />
+				</div>
+			</div>
+		</h:form>
+	</div>
 </body>
 </html>

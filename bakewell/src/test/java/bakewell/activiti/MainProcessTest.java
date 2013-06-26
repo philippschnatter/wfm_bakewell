@@ -70,7 +70,7 @@ public class MainProcessTest {
 		runtimeService = processEngine.getRuntimeService();
 		RepositoryService repositoryService = processEngine.getRepositoryService();
 		DeploymentBuilder builder = repositoryService.createDeployment();
-		String xmlFile = "ProductCreation_v3_daniel_notfinished.bpmn";
+		String xmlFile = "ProductCreation_v3_daniel_WithMail.bpmn";
 		builder.addClasspathResource("diagrams/"+xmlFile);
 		builder.name(xmlFile);
 		builder.deploy();
@@ -160,7 +160,19 @@ public class MainProcessTest {
 		formService.submitTaskFormData(checkCreditId, map);
 	}
 	
-
+	private void checkExistingRecipe(String isNewRecipe){
+		String checkExistingRecipesId = taskService.createTaskQuery().taskDefinitionKey("CheckExistingRecipes").
+				taskAssignee(USER_PROCESSMANAGER).singleResult().getId();
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("IsNewRecipe", isNewRecipe);
+		formService.submitTaskFormData(checkExistingRecipesId, map);
+	}
+	private void createRecipe(){
+		String createRecipeId = taskService.createTaskQuery().taskDefinitionKey("CreateRecipe").
+				taskAssignee(USER_PROCESSMANAGER).singleResult().getId();
+		HashMap<String, String> map = new HashMap<String, String>();
+		formService.submitTaskFormData(createRecipeId, map);
+	}
 	
 	private void checkLegalConstrains(String legalConstraintsOk){
 		String constraintsId = taskService.createTaskQuery().taskDefinitionKey("CheckLegalConstraints").
@@ -200,6 +212,8 @@ public class MainProcessTest {
 	private void gotToPremProductionPlan(){
 		evaluateRequirements("true","true");
 		checkCreditWorthiness("true");
+		checkExistingRecipe("true");
+		createRecipe();
 		checkLegalConstrains("true");
 		planProductionProcess();
 	}
@@ -279,7 +293,7 @@ public class MainProcessTest {
 		checkCreditWorthiness("true");
 		
 		List<String> resultStates = new LinkedList<String>();
-		resultStates.add("CheckLegalConstraints");
+		resultStates.add("CheckExistingRecipes");
 		resultStates.add("BookProductionFacility");
 		resultStates.add("OrderTransport");
 		assertShouldContainStates(resultStates);
@@ -295,20 +309,68 @@ public class MainProcessTest {
 	}
 	
 	@Test
+	public void testCheckExistingRecipesOldAvailable(){
+		createNewProcess();
+		evaluateRequirements("true","true");
+		checkCreditWorthiness("true");
+		checkExistingRecipe("false");
+		
+		List<String> resultStates = new LinkedList<String>();
+		resultStates.add("BookProductionFacility");
+		resultStates.add("OrderTransport");
+		assertShouldContainStates(resultStates);
+	}
+	
+	@Test
+	public void testCheckExistingRecipesNewOne(){
+		createNewProcess();
+		evaluateRequirements("true","true");
+		checkCreditWorthiness("true");
+		checkExistingRecipe("true");
+		
+		List<String> resultStates = new LinkedList<String>();
+		resultStates.add("BookProductionFacility");
+		resultStates.add("OrderTransport");
+		resultStates.add("CreateRecipe");
+		assertShouldContainStates(resultStates);
+	}
+	
+	
+	@Test
+	public void testCreateRecipe(){
+		createNewProcess();
+		evaluateRequirements("true","true");
+		checkCreditWorthiness("true");
+		checkExistingRecipe("true");
+		createRecipe();
+		
+		List<String> resultStates = new LinkedList<String>();
+		resultStates.add("BookProductionFacility");
+		resultStates.add("OrderTransport");
+		resultStates.add("CheckLegalConstraints");
+		assertShouldContainStates(resultStates);
+	}
+	
+	@Test
 	public void testCheckLegalConstraintsPositive(){
 		createNewProcess();
 		evaluateRequirements("true","true");
 		checkCreditWorthiness("true");
+		checkExistingRecipe("true");
+		createRecipe();
 		checkLegalConstrains("true");
 		planProductionProcess();
 		assertNextTaskHasId("CompileProductionPlan");
 	}
+	
 	
 	@Test
 	public void testCheckLegalConstraintsWithError(){
 		createNewProcess();
 		evaluateRequirements("true","true");
 		checkCreditWorthiness("true");
+		checkExistingRecipe("true");
+		createRecipe();
 		checkLegalConstrains("false");
 		planProductionProcess();
 		assertNextTaskHasId("FindSubstitute");
@@ -319,6 +381,8 @@ public class MainProcessTest {
 		createNewProcess();
 		evaluateRequirements("true","true");
 		checkCreditWorthiness("true");
+		checkExistingRecipe("true");
+		createRecipe();
 		checkLegalConstrains("false");
 		findSubstitute("true");
 		planProductionProcess();
@@ -330,6 +394,8 @@ public class MainProcessTest {
 		createNewProcess();
 		evaluateRequirements("true","true");
 		checkCreditWorthiness("true");
+		checkExistingRecipe("true");
+		createRecipe();
 		checkLegalConstrains("false");
 		planProductionProcess();
 		findSubstitute("false");
@@ -347,8 +413,6 @@ public class MainProcessTest {
 		assertNextTaskHasId("DetermineFinalProductPrice");
 	}
 	
-	
-
 	
 	@Test
 	public void testDetermineFinalPrice(){

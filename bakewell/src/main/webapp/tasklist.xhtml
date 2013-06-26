@@ -5,12 +5,13 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-	 	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap.min.css" rel="stylesheet" 
-	 		type="text/css" /> 
-	 	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap-responsive.min.css" 
-	 		rel="stylesheet" type="text/css" /> 
-	 	<link href="/bakewell/resources/twitterBootstrap/css/override.css" rel="stylesheet" 
-	 		type="text/css" /> 
+	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap.min.css"
+		rel="stylesheet" type="text/css" />
+	<link
+		href="/bakewell/resources/twitterBootstrap/css/bootstrap-responsive.min.css"
+		rel="stylesheet" type="text/css" />
+	<link href="/bakewell/resources/twitterBootstrap/css/override.css"
+		rel="stylesheet" type="text/css" />
 </h:head>
 
 
@@ -37,7 +38,7 @@
 								value="#{tasklist.formService.getTaskFormData(v_task.id).formKey}">
 				Complete
 				<f:param name="taskId" value="#{v_task.id}"></f:param>
-				<f:param name="pid" value="#{tasklist.instanceId}"></f:param>
+								<f:param name="pid" value="#{tasklist.instanceId}"></f:param>
 							</h:outputLink>
 						</h:column>
 					</h:dataTable>

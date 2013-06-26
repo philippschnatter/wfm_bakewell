@@ -1,93 +1,72 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
 	<title>Customer_Offer</title>
-	<!-- <link href="/css/bootstrap.css" rel="stylesheet" />
-	<link href="/css/bootstrap-responsive.css" rel="stylesheet"
-		type="text/css" />-->
-	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap.min.css" rel="stylesheet"
-		type="text/css" />
-	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap-responsive.min.css"
+	<link href="/bakewell/resources/twitterBootstrap/css/bootstrap.min.css"
 		rel="stylesheet" type="text/css" />
-	<link href="/bakewell/resources/twitterBootstrap/css/override.css" rel="stylesheet"
-		type="text/css" />
+	<link
+		href="/bakewell/resources/twitterBootstrap/css/bootstrap-responsive.min.css"
+		rel="stylesheet" type="text/css" />
+	<link href="/bakewell/resources/twitterBootstrap/css/override.css"
+		rel="stylesheet" type="text/css" />
 </h:head>
 
 <h:body>
-<h:outputText value="#{customerOffer.taskId}"></h:outputText>
+	<h:outputText value="#{customerOffer.taskId}"></h:outputText>
 	<div class="container">
-		<h2>Customer Offer</h2>
-		<!-- <div class="row">
+		<div class="row">
+			<div class="span4 offset3">
+				<h2>New Customer Offer</h2>
+				<!-- <div class="row">
 			<div class="span4">
 				<div class="well">
 					
 				</div>
 			</div>
 		</div> -->
-		<h:form>
-		<h2>Customer Data</h2>
-		<h:panelGrid columns="2" columnClasses="label, value"
-styleClass="grid" style="margin-bottom: 10px" border="1" cellpadding="2" cellspacing="5">
-						<h:outputText value="Contractor company:"/>
-						<h:inputText value="#{customerOffer.company}"/>
-						<h:outputText value="Business partner first name:"/>
-						<h:inputText value="#{customerOffer.firstName}"/>
-						<h:outputText value="Business partner last name:"/>
-						<h:inputText value="#{customerOffer.lastName}"/>
-						<h:outputText value="Telephone number:"/>
-						<h:inputText value="#{customerOffer.telNo}"/>
-						<h:outputText value="Mail address:"/>
-						<h:inputText value="#{customerOffer.mailAddress}"/>
-						<h:outputText value="Business address:"/>
-						<h:inputText value="#{customerOffer.address}"/>
-						<h:outputText value="Product name:"/>
-						<h:inputText value="#{customerOffer.product_Name}"/>
-						<h:outputText value="Delivery date:"/>
+				<h:form>
+					<h3>Contract Data</h3>
+					<h:panelGrid columns="2" columnClasses="label, value"
+						styleClass="grid" style="margin-bottom: 10px" border="1"
+						cellpadding="2" cellspacing="5">
+						<h:outputText value="Contractor company:" />
+						<h:inputText value="#{customerOffer.company}" />
+						<h:outputText value="Business partner first name:" />
+						<h:inputText value="#{customerOffer.firstName}" />
+						<h:outputText value="Business partner last name:" />
+						<h:inputText value="#{customerOffer.lastName}" />
+						<h:outputText value="Telephone number:" />
+						<h:inputText value="#{customerOffer.telNo}" />
+						<h:outputText value="Mail address:" />
+						<h:inputText value="#{customerOffer.mailAddress}" />
+						<h:outputText value="Business address:" />
+						<h:inputText value="#{customerOffer.address}" />
+						<h:outputText value="Product name:" />
+						<h:inputText value="#{customerOffer.product_Name}" />
+						<h:outputText value="Delivery date:" />
 						<h:inputText value="#{customerOffer.deliveryDate}">
-							<f:convertDateTime pattern="yyyy-mm-dd"/>
+							<f:convertDateTime pattern="yyyy-mm-dd" />
 						</h:inputText>
 					</h:panelGrid>
-					
-					<h2>Product Data</h2>
-					<h:panelGrid columns="2" columnClasses="label, value"
-						styleClass="grid" style="margin-bottom: 10px" border="1" cellpadding="2" cellspacing="5">
-						<h:outputText value="Product Start:"/>
-						<h:inputText value="#{customerOffer.production_Start}">
-							<f:convertDateTime pattern="yyyy-mm-dd"/>
-						</h:inputText>
-						<h:outputText value="Product End:"/>
-						<h:inputText value="#{customerOffer.production_End}">
-							<f:convertDateTime pattern="yyyy-mm-dd"/>
-						</h:inputText>
-						<h:outputText value="Production Facility:"/>
-						<h:inputText value="#{customerOffer.production_Facility}"/>
-						<h:outputText value="Product Contractor:"/>
-						<h:inputText value="#{customerOffer.production_Contractor}"/>
-						<h:outputText value="Transport Contractor:"/>
-						<h:inputText value="#{customerOffer.transport_Contractor}"/>
-						<h:outputText value="Transport Cost:"/>
-						<h:inputText value="#{customerOffer.transport_cost}">
-							<f:converter converterId="javax.faces.Double"/>
-						</h:inputText>
-					</h:panelGrid>			
-					
-					
-		<div class="row">
-				<div class="span1">
-					<h:commandButton value="Start Process"
-						class="btn btn-success" action="#{customerOffer.approve()}"/>
-				</div>
-				<div class="span1 offset1">
-					<h:commandButton value="Reject Offer"
-						class="btn btn-danger" action="#{customerOffer.reject}" />
-						<h:commandButton value="reject2" action="#{customerOffer.reject()}"></h:commandButton>
-				</div>
+
+
+					<div class="row">
+						<div class="span1">
+							<h:commandButton value="Start Process" class="btn btn-success"
+								action="#{customerOffer.approve()}" />
+						</div>
+						<div class="span1 offset1">
+							<h:commandButton value="Reject Offer" class="btn btn-danger"
+								action="#{customerOffer.reject}" />
+						</div>
+					</div>
+				</h:form>
 			</div>
-		</h:form>
+		</div>
 	</div>
 </h:body>
 
