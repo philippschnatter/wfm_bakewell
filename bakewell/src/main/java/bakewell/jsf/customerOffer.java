@@ -43,7 +43,7 @@ import bakewell.beans.Ingredient;
 import bakewell.beans.Ingredient2Recipe;
 import bakewell.beans.Recipe;
 
-import bakewell.jsf.JsfService;
+import bakewell.jsf.jsfService;
 
 /**
  * @author Alex K
@@ -54,7 +54,7 @@ public class customerOffer {
 //	ActivitiFactory activiti = ActivitiFactory.getInstance();
 	HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 	String taskId = request.getParameter("taskId");
-	JsfService jsfService = new JsfService();
+	jsfService jsfService = new jsfService();
 	
 	// Customer variables
 	private Integer customerId = null;
@@ -255,9 +255,11 @@ public class customerOffer {
 		ActivitiFactory engine = ActivitiFactory.getInstance();
 		ProcessEngine processEngine = engine.getProcessEngine();
 		RuntimeService runtimeService = processEngine.getRuntimeService();
+		
 		FormService formService = processEngine.getFormService();
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("MeetsBusinessGoals", "true");
+		
 //		runtimeService.setVariable(engine.getInstance().toString(), "MeetsBusinessGoals", "true");
 		formService.submitTaskFormData(this.taskId, map);
 		
