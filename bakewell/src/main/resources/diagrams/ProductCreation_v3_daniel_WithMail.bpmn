@@ -72,7 +72,7 @@
     <exclusiveGateway id="exclusivegateway6" name="Exclusive Gateway" default="WithinTimeLimit"></exclusiveGateway>
     <sequenceFlow id="WithinTimeLimit" name="Within time limit" sourceRef="exclusivegateway6" targetRef="SendRemainder"></sequenceFlow>
     <sequenceFlow id="ExceedsLimit" name="exceeds time limit" sourceRef="exclusivegateway6" targetRef="SendTermination">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${ RemainderAmount =="2"}]]></conditionExpression>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${RemainderAmount =="2"}]]></conditionExpression>
     </sequenceFlow>
     <intermediateCatchEvent id="CustomerResponded" name="CustomerResponded">
       <signalEventDefinition signalRef="SendCustomerResponse"></signalEventDefinition>
@@ -318,7 +318,6 @@
       <bpmndi:BPMNShape bpmnElement="manualtask2" id="BPMNShape_manualtask2">
         <omgdc:Bounds height="55.0" width="105.0" x="2594.0" y="-30.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
- 
       <bpmndi:BPMNShape bpmnElement="WaitForCustomer" id="BPMNShape_WaitForCustomer">
         <omgdc:Bounds height="40.0" width="40.0" x="3155.0" y="206.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>

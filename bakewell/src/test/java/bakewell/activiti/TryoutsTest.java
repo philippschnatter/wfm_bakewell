@@ -33,6 +33,11 @@ public class TryoutsTest {
 	@BeforeClass
 	public static void init()
 	{	
+		MailServiceImpl service = new MailServiceImpl();
+		service.setRecipient("wfm@localhost");
+		
+		service.setMessage("hello");
+		service.sendMessage();
 		// Create Activiti process engine
 		processEngine = ProcessEngineConfiguration.createStandaloneInMemProcessEngineConfiguration()
 				.setMailServerPort(1025)
@@ -53,7 +58,6 @@ public class TryoutsTest {
 		processInstance = runtimeService.startProcessInstanceByKey("myProcess");
 	
 
-		
 		assertNotNull(processInstance.getId());
 		identityService = processEngine.getIdentityService();
 		taskService = processEngine.getTaskService(); 
