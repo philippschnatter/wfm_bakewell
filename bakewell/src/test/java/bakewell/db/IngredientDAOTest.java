@@ -7,12 +7,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import bakewell.beans.Ingredient;
+import bakewell.beans.Ingredient2Recipe;
+import bakewell.beans.Ingredient2RecipeNonPersistent;
 
 import junit.framework.TestCase;
 
 public class IngredientDAOTest extends TestCase {
 
 	IngredientDAO cDAO = null;
+	Ingredient2RecipeDAO i2rDAO = null;
 	Ingredient testIngredient = null;
 	Ingredient failIngredient = null;
 	ArrayList<Ingredient> result = null;
@@ -32,6 +35,63 @@ public class IngredientDAOTest extends TestCase {
 		testIngredient = null;
 		failIngredient = null;
 		result = null;
+	}
+	
+	@Test
+	public void testIngredientDAOinsertIngredient2RecipeNonPersistent_ShouldWork() {
+		i2rDAO = new Ingredient2RecipeDAO("jdbc:h2:file:src/test/resources/db/wfDBTest", "sa", "");
+		testIngredient = cDAO.insertIngredient(testIngredient);
+		ArrayList<Ingredient2RecipeNonPersistent> list = new ArrayList<Ingredient2RecipeNonPersistent>();
+		list.add(new Ingredient2RecipeNonPersistent(testIngredient.getName(), null, testIngredient.getId(), 26000.0));
+		list.add(new Ingredient2RecipeNonPersistent(testIngredient.getName(), null, testIngredient.getId(), 26000.0));
+		
+		ArrayList<Ingredient2RecipeNonPersistent> res = cDAO.insertIngredient2RecipeNonPersistent(list);
+
+		Ingredient2Recipe searchIngredient2Recipe = new Ingredient2Recipe(null, testIngredient.getId(), null);
+		ArrayList<Ingredient2Recipe> resi2r = i2rDAO.selectIngredient2Recipe(searchIngredient2Recipe);
+		
+		assert(res.size() == 2);
+		assert(resi2r.size() == 2);
+	}
+	
+	@Test
+	public void testIngredientDAOselectAllIngredient2RecipeNonPersistent_ShouldWork() {
+		i2rDAO = new Ingredient2RecipeDAO("jdbc:h2:file:src/test/resources/db/wfDBTest", "sa", "");
+		ArrayList<Ingredient2RecipeNonPersistent> res = cDAO.selectAllIngredient2RecipeNonPersistent();
+		result = cDAO.selectAllIngredients();
+		assertTrue(res.get(res.size()-1).getIngredient_name().equals(result.get(result.size()-1).getName()));
+		assertTrue(res.get(0).getIngredient_name().equals(result.get(0).getName()));
+		
+		assertTrue(res.get(res.size()-1).getAmount() != null);
+		assertTrue(res.get(0).getAmount() != null);
+	}
+	
+	@Test
+	public void testIngredientDAOselectAllIngredients_ShouldWork() {
+		result = cDAO.selectAllIngredients();
+		int i = result.size();
+		cDAO.insertIngredient(testIngredient);
+		cDAO.insertIngredient(testIngredient);
+		cDAO.insertIngredient(testIngredient);
+		cDAO.insertIngredient(testIngredient);
+		testIngredient = cDAO.insertIngredient(testIngredient);
+		result = cDAO.selectAllIngredients();
+		assert(i == (result.size()-5));
+		assert(result.get(0).getId().equals(1));
+		assert(result.get(result.size()-1).getId().equals(testIngredient.getId()));
+	}
+	
+	@Test
+	public void testIngredientDAOselectAllIngredients_ShouldWork2() {
+		result = cDAO.selectAllIngredients();
+		int i = result.size();
+		Ingredient testIngredient1 = cDAO.insertIngredient(testIngredient);
+		Ingredient testIngredient2 = cDAO.insertIngredient(testIngredient);
+		cDAO.deleteIngredient(testIngredient1);
+		result = cDAO.selectAllIngredients();
+		assert(i == (result.size()+1));
+		assert(result.get(0).getId().equals(1));
+		assert(result.get(result.size()-1).getId().equals(testIngredient2.getId()));
 	}
 	
 	@Test
