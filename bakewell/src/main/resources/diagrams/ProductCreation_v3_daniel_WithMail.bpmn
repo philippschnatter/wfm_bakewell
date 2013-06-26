@@ -138,7 +138,7 @@
     </sequenceFlow>
     <endEvent id="endevent10" name="End"></endEvent>
     <sequenceFlow id="flow70" sourceRef="manualtask2" targetRef="endevent10"></sequenceFlow>
-    <sequenceFlow id="flow71" sourceRef="parallelgateway4" targetRef="usertask1"></sequenceFlow>
+    <sequenceFlow id="flow71" sourceRef="parallelgateway4" targetRef="CheckExistingRecipes"></sequenceFlow>
     <exclusiveGateway id="exclusivegateway11" name="Exclusive Gateway"></exclusiveGateway>
     <sequenceFlow id="flow73" sourceRef="subprocess2" targetRef="exclusivegateway11"></sequenceFlow>
     <sequenceFlow id="flow75" sourceRef="exclusivegateway11" targetRef="parallelgateway2"></sequenceFlow>
@@ -227,17 +227,17 @@
         </activiti:field>
       </extensionElements>
     </serviceTask>
-    <userTask id="usertask1" name="Check Existing Recipes"></userTask>
-    <sequenceFlow id="flow114" sourceRef="usertask1" targetRef="exclusivegateway10"></sequenceFlow>
+    <userTask id="CheckExistingRecipes" name="Check Existing Recipes"></userTask>
+    <sequenceFlow id="flow114" sourceRef="CheckExistingRecipes" targetRef="exclusivegateway10"></sequenceFlow>
     <exclusiveGateway id="exclusivegateway10" name="Exclusive Gateway"></exclusiveGateway>
-    <sequenceFlow id="NewReceipe" name="New recipe" sourceRef="exclusivegateway10" targetRef="usertask2">
+    <sequenceFlow id="NewReceipe" name="New recipe" sourceRef="exclusivegateway10" targetRef="CreateRecipe">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${IsNewRecipe=="true"}]]></conditionExpression>
     </sequenceFlow>
     <sequenceFlow id="KnownReceipe" name="Known recipe" sourceRef="exclusivegateway10" targetRef="exclusivegateway11">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${IsNewReceipe=="false"}]]></conditionExpression>
     </sequenceFlow>
-    <userTask id="usertask2" name="Create Recipe"></userTask>
-    <sequenceFlow id="flow115" sourceRef="usertask2" targetRef="subprocess2"></sequenceFlow>
+    <userTask id="CreateRecipe" name="Create Recipe"></userTask>
+    <sequenceFlow id="flow115" sourceRef="CreateRecipe" targetRef="subprocess2"></sequenceFlow>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_ProductCreationProcess">
     <bpmndi:BPMNPlane bpmnElement="ProductCreationProcess" id="BPMNPlane_ProductCreationProcess">
@@ -404,6 +404,12 @@
         <omgdc:Bounds height="55.0" width="105.0" x="1434.0" y="185.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="usertask2" id="BPMNShape_usertask2">
+        <omgdc:Bounds height="55.0" width="105.0" x="1465.0" y="50.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="CheckExistingRecipes" id="BPMNShape_CheckExistingRecipes">
+        <omgdc:Bounds height="55.0" width="105.0" x="1434.0" y="185.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="CreateRecipe" id="BPMNShape_CreateRecipe">
         <omgdc:Bounds height="55.0" width="105.0" x="1465.0" y="50.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
