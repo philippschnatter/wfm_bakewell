@@ -43,7 +43,7 @@
       <serviceTask id="GetProductLabel" name="Get Product Label" activiti:class="bakewell.activiti.GetProductLabelWsCall">
         <extensionElements>
           <activiti:field name="service">
-            <activiti:string>http://localhost:63082</activiti:string>
+            <activiti:string>http://localhost:63083</activiti:string>
           </activiti:field>
           <activiti:field name="productId">
             <activiti:expression>${productId}</activiti:expression>
@@ -227,7 +227,7 @@
         </activiti:field>
       </extensionElements>
     </serviceTask>
-    <userTask id="CheckExistingRecipes" name="Check Existing Recipes"></userTask>
+    <userTask id="CheckExistingRecipes" name="Check Existing Recipes" activiti:assignee="ProcessManager"></userTask>
     <sequenceFlow id="flow114" sourceRef="CheckExistingRecipes" targetRef="exclusivegateway10"></sequenceFlow>
     <exclusiveGateway id="exclusivegateway10" name="Exclusive Gateway"></exclusiveGateway>
     <sequenceFlow id="NewReceipe" name="New recipe" sourceRef="exclusivegateway10" targetRef="CreateRecipe">
@@ -236,7 +236,7 @@
     <sequenceFlow id="KnownReceipe" name="Known recipe" sourceRef="exclusivegateway10" targetRef="exclusivegateway11">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${IsNewReceipe=="false"}]]></conditionExpression>
     </sequenceFlow>
-    <userTask id="CreateRecipe" name="Create Recipe"></userTask>
+    <userTask id="CreateRecipe" name="Create Recipe" activiti:assignee="ProcessManager"></userTask>
     <sequenceFlow id="flow115" sourceRef="CreateRecipe" targetRef="subprocess2"></sequenceFlow>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_ProductCreationProcess">
@@ -399,12 +399,6 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="SendTermination" id="BPMNShape_SendTermination">
         <omgdc:Bounds height="55.0" width="105.0" x="3455.0" y="52.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="usertask1" id="BPMNShape_usertask1">
-        <omgdc:Bounds height="55.0" width="105.0" x="1434.0" y="185.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="usertask2" id="BPMNShape_usertask2">
-        <omgdc:Bounds height="55.0" width="105.0" x="1465.0" y="50.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="CheckExistingRecipes" id="BPMNShape_CheckExistingRecipes">
         <omgdc:Bounds height="55.0" width="105.0" x="1434.0" y="185.0"></omgdc:Bounds>
