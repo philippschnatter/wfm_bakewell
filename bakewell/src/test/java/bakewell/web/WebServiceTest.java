@@ -145,17 +145,7 @@ public class WebServiceTest {
 		Recipe recipe;
 		
 		try {
-
-			CustomerDAO cDAO = new CustomerDAO("jdbc:h2:file:src/main/resources/db/wfDB", "sa", "");
-			Customer testCustomer = new Customer(null, "Gruber", null, null, null, null, null);
-			ArrayList<Customer> result = cDAO.selectCustomer(testCustomer);
-					
-			if (!result.isEmpty()) {
-				Customer newcustomer = result.get(0);
-				System.out.println(newcustomer.getFirstName()+" "+newcustomer.getLastName()+newcustomer.getMailAddress());	
-			}
-
-					
+	
 			recipe = service.calculatePrice("3");
 
 			NumberFormat numberFormat = new DecimalFormat("0.00");
