@@ -344,7 +344,6 @@ public class RecipeDAO {
 		return result;
 	}
 	
-	
 	public ArrayList<Recipe> UpdateRecipe(Recipe newR, Recipe oldR) {
 		
 		//Establish a connection to the DB

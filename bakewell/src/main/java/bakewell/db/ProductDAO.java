@@ -39,6 +39,7 @@ public class ProductDAO {
 	
 	RecipeDAO rDAO = null;
 	IngredientDAO iDAO = null;
+	Ingredient2RecipeDAO i2rDAO = null;
 
 	/**
 	 * Constructor, which takes the url, username and the password in order
@@ -62,6 +63,9 @@ public class ProductDAO {
 		  this.user = user;
 		  this.password = password;
 		  this.url = url;
+		  rDAO = new RecipeDAO(url, user, password);
+		  iDAO = new IngredientDAO(url, user, password);
+		  i2rDAO = new Ingredient2RecipeDAO(url, user, password);
 	}
 	
 	/**
@@ -108,8 +112,7 @@ public class ProductDAO {
 	    * @return ... returns the Recipe, which is connected to the product
 	    */
 		public Recipe selectRecipeByProductId(int productid) {
-			//initializing of all DAOs which are needed 
-			rDAO = new RecipeDAO(user, password);
+			
 			//Creating a new searchproduct
 			Product p = new Product();
 			p.setId(productid);
@@ -122,15 +125,8 @@ public class ProductDAO {
 			}
 			
 			Recipe r = new Recipe();
-			//Fetch the Recipe ID from the Product Attributes and inserting it into a new search recipe
 			r.setId(p.getRecipe_id());
-			//search the recipe in the DB in order to get all attributes, including the ArrayList with all Ingredient2Recipe Connections
-			ArrayList<Recipe> result = rDAO.selectRecipe(r);
-			if(result.isEmpty()) {
-				return null;
-			} else {
-				return result.get(0);
-			}
+			return rDAO.selectRecipe(r).get(0);
 		}
 	   
 	   /**
@@ -143,8 +139,6 @@ public class ProductDAO {
 	   public Map<Ingredient, Double> selectIngredientsOfProduct(int productid) {
 	
 			//initializing of all DAOs which are needed 
-			rDAO = new RecipeDAO(user, password);
-			iDAO = new IngredientDAO(user, password);
 			Map<Ingredient, Double> ingredientMap = new HashMap<Ingredient, Double>();
 			
 			//Creating a new searchproduct
@@ -158,7 +152,8 @@ public class ProductDAO {
 			//search the recipe in the DB in order to get all attributes, including the ArrayList with all Ingredient2Recipe Connections
 			r = rDAO.selectRecipe(r).get(0);
 			//Get the Ingredient2Recipe Connections
-			ArrayList<Ingredient2Recipe> ingredient2recipe = r.getIngredients();
+			Ingredient2Recipe i2r = new Ingredient2Recipe(r.getId(), null, null);
+			ArrayList<Ingredient2Recipe> ingredient2recipe = i2rDAO.selectIngredient2Recipe(i2r);
 			//... and run through them
 			for(int i = 0; i < ingredient2recipe.size(); i++) {
 				//Create a new search Ingredient and fetching the id from each ingredient2recipe
