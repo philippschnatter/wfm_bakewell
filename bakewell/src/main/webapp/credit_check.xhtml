@@ -18,6 +18,51 @@
 
 <h:body>
 <h:outputText value="#{creditCheck.taskId}"/>
+		<h:panelGrid columns="2" columnClasses="label, value"
+styleClass="grid" style="margin-bottom: 10px" border="1" cellpadding="2" cellspacing="5">
+						<h:outputText value="Contractor company:"/>
+						<h:outputText value="#{creditCheck.company}"/>
+						<h:outputText value="Business partner first name:"/>
+						<h:outputText value="#{creditCheck.firstName}"/>
+						<h:outputText value="Business partner last name:"/>
+						<h:outputText value="#{creditCheck.lastName}"/>
+						<h:outputText value="Telephone number:"/>
+						<h:outputText value="#{creditCheck.telNo}"/>
+						<h:outputText value="Mail address:"/>
+						<h:outputText value="#{creditCheck.mailAddress}"/>
+						<h:outputText value="Business address:"/>
+						<h:outputText value="#{creditCheck.address}"/>
+						<h:outputText value="Product name:"/>
+						<h:outputText value="#{creditCheck.product_Name}"/>
+						<h:outputText value="Delivery date:"/>
+						<h:outputText value="#{creditCheck.deliveryDate}">
+							<f:convertDateTime pattern="yyyy-mm-dd"/>
+						</h:outputText>
+					</h:panelGrid>
+					
+					<h2>Product Data</h2>
+					<h:panelGrid columns="2" columnClasses="label, value"
+						styleClass="grid" style="margin-bottom: 10px" border="1" cellpadding="2" cellspacing="5">
+						<h:outputText value="Product Start:"/>
+						<h:outputText value="#{creditCheck.production_Start}">
+							<f:convertDateTime pattern="yyyy-mm-dd"/>
+						</h:outputText>
+						<h:outputText value="Product End:"/>
+						<h:outputText value="#{creditCheck.production_End}">
+							<f:convertDateTime pattern="yyyy-mm-dd"/>
+						</h:outputText>
+						<h:outputText value="Production Facility:"/>
+						<h:outputText value="#{creditCheck.production_Facility}"/>
+						<h:outputText value="Product Contractor:"/>
+						<h:outputText value="#{creditCheck.production_Contractor}"/>
+						<h:outputText value="Transport Contractor:"/>
+						<h:outputText value="#{creditCheck.transport_Contractor}"/>
+						<h:outputText value="Transport Cost:"/>
+						<h:outputText value="#{creditCheck.transport_cost}">
+							<f:converter converterId="javax.faces.Double"/>
+						</h:outputText>
+					</h:panelGrid>			
+
 	<div class="container">
 		<h2>Customer Evaluation</h2>
 		<div class="row">
