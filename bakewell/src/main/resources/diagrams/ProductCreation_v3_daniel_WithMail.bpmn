@@ -138,16 +138,9 @@
     </sequenceFlow>
     <endEvent id="endevent10" name="End"></endEvent>
     <sequenceFlow id="flow70" sourceRef="manualtask2" targetRef="endevent10"></sequenceFlow>
-    <exclusiveGateway id="exclusivegateway10" name="Exclusive Gateway"></exclusiveGateway>
-    <sequenceFlow id="flow71" sourceRef="parallelgateway4" targetRef="exclusivegateway10"></sequenceFlow>
-    <sequenceFlow id="NewReceipe" name="New recipe" sourceRef="exclusivegateway10" targetRef="subprocess2">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${IsNewRecipe=="true"}]]></conditionExpression>
-    </sequenceFlow>
+    <sequenceFlow id="flow71" sourceRef="parallelgateway4" targetRef="usertask1"></sequenceFlow>
     <exclusiveGateway id="exclusivegateway11" name="Exclusive Gateway"></exclusiveGateway>
     <sequenceFlow id="flow73" sourceRef="subprocess2" targetRef="exclusivegateway11"></sequenceFlow>
-    <sequenceFlow id="KnownReceipe" name="Known recipe" sourceRef="exclusivegateway10" targetRef="exclusivegateway11">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${IsNewReceipe=="false"}]]></conditionExpression>
-    </sequenceFlow>
     <sequenceFlow id="flow75" sourceRef="exclusivegateway11" targetRef="parallelgateway2"></sequenceFlow>
     <sequenceFlow id="flow97" sourceRef="InformProductManager" targetRef="parallelgateway4"></sequenceFlow>
     <task id="manualtask2" name="Inform Customer"></task>
@@ -234,6 +227,17 @@
         </activiti:field>
       </extensionElements>
     </serviceTask>
+    <userTask id="usertask1" name="Check Existing Recipes"></userTask>
+    <sequenceFlow id="flow114" sourceRef="usertask1" targetRef="exclusivegateway10"></sequenceFlow>
+    <exclusiveGateway id="exclusivegateway10" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="NewReceipe" name="New recipe" sourceRef="exclusivegateway10" targetRef="usertask2">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${IsNewRecipe=="true"}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="KnownReceipe" name="Known recipe" sourceRef="exclusivegateway10" targetRef="exclusivegateway11">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${IsNewReceipe=="false"}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="usertask2" name="Create Recipe"></userTask>
+    <sequenceFlow id="flow115" sourceRef="usertask2" targetRef="subprocess2"></sequenceFlow>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_ProductCreationProcess">
     <bpmndi:BPMNPlane bpmnElement="ProductCreationProcess" id="BPMNPlane_ProductCreationProcess">
@@ -298,7 +302,7 @@
         <omgdc:Bounds height="35.0" width="35.0" x="2750.0" y="-20.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="exclusivegateway10" id="BPMNShape_exclusivegateway10">
-        <omgdc:Bounds height="40.0" width="40.0" x="1540.0" y="208.0"></omgdc:Bounds>
+        <omgdc:Bounds height="40.0" width="40.0" x="1570.0" y="199.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="exclusivegateway11" id="BPMNShape_exclusivegateway11">
         <omgdc:Bounds height="40.0" width="40.0" x="2300.0" y="208.0"></omgdc:Bounds>
@@ -395,6 +399,12 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="SendTermination" id="BPMNShape_SendTermination">
         <omgdc:Bounds height="55.0" width="105.0" x="3455.0" y="52.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask1" id="BPMNShape_usertask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="1434.0" y="185.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask2" id="BPMNShape_usertask2">
+        <omgdc:Bounds height="55.0" width="105.0" x="1465.0" y="50.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
         <omgdi:waypoint x="738.0" y="219.0"></omgdi:waypoint>
@@ -533,7 +543,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow71" id="BPMNEdge_flow71">
         <omgdi:waypoint x="1560.0" y="267.0"></omgdi:waypoint>
-        <omgdi:waypoint x="1560.0" y="248.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1486.0" y="240.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow73" id="BPMNEdge_flow73">
         <omgdi:waypoint x="2151.0" y="78.0"></omgdi:waypoint>
@@ -582,15 +592,15 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="NewReceipe" id="BPMNEdge_NewReceipe">
-        <omgdi:waypoint x="1560.0" y="208.0"></omgdi:waypoint>
-        <omgdi:waypoint x="1560.0" y="76.0"></omgdi:waypoint>
-        <omgdi:waypoint x="1660.0" y="78.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1590.0" y="199.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1535.0" y="162.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1517.0" y="105.0"></omgdi:waypoint>
         <bpmndi:BPMNLabel>
           <omgdc:Bounds height="14.0" width="56.0" x="10.0" y="0.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="KnownReceipe" id="BPMNEdge_KnownReceipe">
-        <omgdi:waypoint x="1580.0" y="228.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1610.0" y="219.0"></omgdi:waypoint>
         <omgdi:waypoint x="2300.0" y="228.0"></omgdi:waypoint>
         <bpmndi:BPMNLabel>
           <omgdc:Bounds height="14.0" width="68.0" x="10.0" y="0.0"></omgdc:Bounds>
@@ -682,6 +692,14 @@
         <omgdi:waypoint x="3570.0" y="323.0"></omgdi:waypoint>
         <omgdi:waypoint x="3627.0" y="323.0"></omgdi:waypoint>
         <omgdi:waypoint x="3640.0" y="323.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow114" id="BPMNEdge_flow114">
+        <omgdi:waypoint x="1539.0" y="212.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1570.0" y="219.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow115" id="BPMNEdge_flow115">
+        <omgdi:waypoint x="1570.0" y="77.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1660.0" y="78.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
