@@ -38,9 +38,6 @@ import javax.annotation.PostConstruct;
  *
  */
 public class tasklistBean {
-	  //private RepositoryService repositoryService = ActivitiFactory
-	
-
 //		processEngine = ActivitiFactory.getProcessEngine();
 //	  @Produces
 //	  @Named("processDefinitionList")

@@ -37,6 +37,7 @@
 								value="#{tasklist.formService.getTaskFormData(v_task.id).formKey}">
 				Complete
 				<f:param name="taskId" value="#{v_task.id}"></f:param>
+				<f:param name="pid" value="#{tasklist.instanceId}"></f:param>
 							</h:outputLink>
 						</h:column>
 					</h:dataTable>
