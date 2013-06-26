@@ -212,7 +212,7 @@ public class MainProcessTest {
 	private void gotToPremProductionPlan(){
 		evaluateRequirements("true","true");
 		checkCreditWorthiness("true");
-		checkExistingRecipe("false");
+		checkExistingRecipe("true");
 		createRecipe();
 		checkLegalConstrains("true");
 		planProductionProcess();
@@ -309,11 +309,11 @@ public class MainProcessTest {
 	}
 	
 	@Test
-	public void testCheckExistingRecipesPositive(){
+	public void testCheckExistingRecipesOldAvailable(){
 		createNewProcess();
 		evaluateRequirements("true","true");
 		checkCreditWorthiness("true");
-		checkExistingRecipe("true");
+		checkExistingRecipe("false");
 		
 		List<String> resultStates = new LinkedList<String>();
 		resultStates.add("BookProductionFacility");
@@ -322,7 +322,7 @@ public class MainProcessTest {
 	}
 	
 	@Test
-	public void testCheckExistingRecipesNegative(){
+	public void testCheckExistingRecipesNewOne(){
 		createNewProcess();
 		evaluateRequirements("true","true");
 		checkCreditWorthiness("true");
@@ -341,7 +341,7 @@ public class MainProcessTest {
 		createNewProcess();
 		evaluateRequirements("true","true");
 		checkCreditWorthiness("true");
-		checkExistingRecipe("false");
+		checkExistingRecipe("true");
 		createRecipe();
 		
 		List<String> resultStates = new LinkedList<String>();
@@ -356,7 +356,7 @@ public class MainProcessTest {
 		createNewProcess();
 		evaluateRequirements("true","true");
 		checkCreditWorthiness("true");
-		checkExistingRecipe("false");
+		checkExistingRecipe("true");
 		createRecipe();
 		checkLegalConstrains("true");
 		planProductionProcess();
@@ -369,7 +369,7 @@ public class MainProcessTest {
 		createNewProcess();
 		evaluateRequirements("true","true");
 		checkCreditWorthiness("true");
-		checkExistingRecipe("false");
+		checkExistingRecipe("true");
 		createRecipe();
 		checkLegalConstrains("false");
 		planProductionProcess();
@@ -381,7 +381,7 @@ public class MainProcessTest {
 		createNewProcess();
 		evaluateRequirements("true","true");
 		checkCreditWorthiness("true");
-		checkExistingRecipe("false");
+		checkExistingRecipe("true");
 		createRecipe();
 		checkLegalConstrains("false");
 		findSubstitute("true");
@@ -394,7 +394,7 @@ public class MainProcessTest {
 		createNewProcess();
 		evaluateRequirements("true","true");
 		checkCreditWorthiness("true");
-		checkExistingRecipe("false");
+		checkExistingRecipe("true");
 		createRecipe();
 		checkLegalConstrains("false");
 		planProductionProcess();

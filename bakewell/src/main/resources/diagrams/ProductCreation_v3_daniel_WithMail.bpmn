@@ -234,7 +234,7 @@
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${IsNewRecipe=="true"}]]></conditionExpression>
     </sequenceFlow>
     <sequenceFlow id="KnownReceipe" name="Known recipe" sourceRef="exclusivegateway10" targetRef="exclusivegateway11">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${IsNewReceipe=="false"}]]></conditionExpression>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${IsNewRecipe=="false"}]]></conditionExpression>
     </sequenceFlow>
     <userTask id="CreateRecipe" name="Create Recipe" activiti:assignee="ProcessManager"></userTask>
     <sequenceFlow id="flow115" sourceRef="CreateRecipe" targetRef="subprocess2"></sequenceFlow>
