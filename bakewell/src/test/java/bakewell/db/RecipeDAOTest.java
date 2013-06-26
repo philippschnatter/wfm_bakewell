@@ -37,6 +37,44 @@ public class RecipeDAOTest extends TestCase {
 	}
 	
 	@Test
+	public void testRecipeDAOInsertNewRecipe_ShouldWork() {
+		i2rDAO = new Ingredient2RecipeDAO("jdbc:h2:file:src/test/resources/db/wfDBTest", "sa", "");
+		ArrayList<Ingredient2Recipe> list = new ArrayList<Ingredient2Recipe>();
+		list.add(new Ingredient2Recipe(null, null, 25000.0));
+		list.add(new Ingredient2Recipe(null, null, 25000.0));
+		result = rDAO.insertNewRecipe(testRecipe, list);
+		assert(result.size() == 1);
+		
+		Ingredient2Recipe searchI2r = new Ingredient2Recipe(result.get(0).getId(), null, null);
+		ArrayList<Ingredient2Recipe> list2 = new ArrayList<Ingredient2Recipe>();
+		list2 = i2rDAO.selectIngredient2Recipe(searchI2r);
+		assert(list2.size() == 2);
+		assert(list2.get(0).getId().equals(result.get(0).getId()));
+		assert(list2.get(1).getId().equals(result.get(0).getId()));
+		assert(list2.get(0).getAmount().equals(25000.0));
+		assert(list2.get(0).getAmount().equals(list.get(1).getAmount()));
+	}
+	
+	public void testRecipeDAOInsertNewRecipe_ShouldWork2() {
+		i2rDAO = new Ingredient2RecipeDAO("jdbc:h2:file:src/test/resources/db/wfDBTest", "sa", "");
+		ArrayList<Ingredient2Recipe> list = new ArrayList<Ingredient2Recipe>();
+		list.add(new Ingredient2Recipe(null, null, 25000.0));
+		list.add(new Ingredient2Recipe(null, null, 25000.0));
+		testRecipe = rDAO.insertRecipe(testRecipe);
+		result = rDAO.insertNewRecipe(testRecipe, list);
+		assert(result.size() == 1);
+		
+		Ingredient2Recipe searchI2r = new Ingredient2Recipe(result.get(0).getId(), null, null);
+		ArrayList<Ingredient2Recipe> list2 = new ArrayList<Ingredient2Recipe>();
+		list2 = i2rDAO.selectIngredient2Recipe(searchI2r);
+		assert(list2.size() == 2);
+		assert(list2.get(0).getId().equals(result.get(0).getId()));
+		assert(list2.get(1).getId().equals(result.get(0).getId()));
+		assert(list2.get(0).getAmount().equals(25000.0));
+		assert(list2.get(0).getAmount().equals(list.get(1).getAmount()));
+	}
+	
+	@Test
 	public void testRecipeDAOInsert_ShouldWork() {
 		Recipe a = rDAO.insertRecipe(testRecipe);
 		result = rDAO.selectRecipe(testRecipe);
