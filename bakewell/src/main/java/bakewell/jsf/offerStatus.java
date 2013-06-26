@@ -5,7 +5,7 @@ package bakewell.jsf;
  *
  */
 public class offerStatus {
-	private String status;
+	private String status="";
 	
 	
 

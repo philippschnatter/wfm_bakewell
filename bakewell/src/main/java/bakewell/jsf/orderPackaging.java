@@ -15,7 +15,7 @@ import org.activiti.engine.ProcessEngine;
  *
  */
 public class orderPackaging {
-	private String packagingContractor;
+	private String packagingContractor="";
 	private double packagingCost;
 	
 	private String taskId;
