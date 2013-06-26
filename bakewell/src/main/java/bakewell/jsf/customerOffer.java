@@ -54,6 +54,8 @@ public class customerOffer {
 //	ActivitiFactory activiti = ActivitiFactory.getInstance();
 	HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 	String taskId = request.getParameter("taskId");
+	String pid = request.getParameter("pid");
+	
 	jsfService jsfService = new jsfService();
 	
 	// Customer variables
@@ -245,6 +247,8 @@ public class customerOffer {
 	}
 	
 	public String approve(){
+		System.out.println("production start: " + production_Start);
+		System.out.println("production end: " + production_End);
 		Customer newCustomer = jsfService.createCustomer(firstName, lastName, address, telNo, mailAddress, company);
 		this.customerId = newCustomer.getId();
 		Product newProduct = jsfService.createProduct(production_Start, production_End, customerId, product_Name, production_Contractor, production_Facility, transport_Contractor, transport_cost);
@@ -262,7 +266,7 @@ public class customerOffer {
 		
 //		runtimeService.setVariable(engine.getInstance().toString(), "MeetsBusinessGoals", "true");
 		formService.submitTaskFormData(this.taskId, map);
-		
+
 		return "approve";
 	}
 	public String reject(){
@@ -359,6 +363,7 @@ public class customerOffer {
 		
 		RuntimeService runtimeService = engine.getProcessEngine().getRuntimeService();
 		ProcessInstance instance = runtimeService.startProcessInstanceByKey(processName, variableMap);
+		
 		
 		// Retrieve process ID
 		String id = instance.getId();

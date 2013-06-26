@@ -47,16 +47,22 @@ styleClass="grid" style="margin-bottom: 10px" border="1" cellpadding="2" cellspa
 						<h:outputText value="Product name:"/>
 						<h:inputText value="#{customerOffer.product_Name}"/>
 						<h:outputText value="Delivery date:"/>
-						<h:inputText value="#{customerOffer.deliveryDate}"/>
+						<h:inputText value="#{customerOffer.deliveryDate}">
+							<f:convertDateTime pattern="yyyy-mm-dd"/>
+						</h:inputText>
 					</h:panelGrid>
 					
 					<h2>Product Data</h2>
 					<h:panelGrid columns="2" columnClasses="label, value"
 						styleClass="grid" style="margin-bottom: 10px" border="1" cellpadding="2" cellspacing="5">
 						<h:outputText value="Product Start:"/>
-						<h:inputText value="#{customerOffer.production_Start}"/>
+						<h:inputText value="#{customerOffer.production_Start}">
+							<f:convertDateTime pattern="yyyy-mm-dd"/>
+						</h:inputText>
 						<h:outputText value="Product End:"/>
-						<h:inputText value="#{customerOffer.production_End}"/>
+						<h:inputText value="#{customerOffer.production_End}">
+							<f:convertDateTime pattern="yyyy-mm-dd"/>
+						</h:inputText>
 						<h:outputText value="Production Facility:"/>
 						<h:inputText value="#{customerOffer.production_Facility}"/>
 						<h:outputText value="Product Contractor:"/>
