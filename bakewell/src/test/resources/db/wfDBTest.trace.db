@@ -4876,3 +4876,7 @@ org.h2.jdbc.JdbcSQLException: Invalid value "0" for parameter "parameterIndex" [
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+06-26 21:29:11 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "testComment2"
+Data conversion error converting "testComment2"; SQL statement:
+UPDATE PRODUCT SET  RECIPE_ID = ?,  CUSTOMER_ID = ?,  PRODUCTNAME = ?,  DELIVERYDATE = ?, PRODUCTION_START = ?,  PRODUCTION_END = ?,  PRODUCTION_FACILITY = ?,  PRODUCTION_CONTRACTOR = ?,  TRANSPORT_CONTRACTOR = ?,  TRANSPORT_COST = ?,  COMMENT = ? WHERE 1=1  AND ID = ? AND RECIPE_ID = ? AND CUSTOMER_ID = ? AND PRODUCTNAME = ? AND DELIVERYDATE = ? AND PRODUCTION_START = ? AND PRODUCTION_END = ? AND PRODUCTION_FACILITY = ? AND PRODUCTION_CONTRACTOR = ? AND TRANSPORT_CONTRACTOR = ? AND TRANSPORT_COST = ? AND COMMENT = ?; [22018-172]

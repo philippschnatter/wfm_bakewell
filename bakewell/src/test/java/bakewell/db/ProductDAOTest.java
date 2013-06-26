@@ -78,11 +78,6 @@ public class ProductDAOTest extends TestCase {
 	}
 	
 	@Test
-	public void testProductDAOSelectRecipeByProductId_ShouldFail() {
-
-	}
-	
-	@Test
 	public void testProductDAOSelectIngredientsOfProduct_ShouldWork() {
 		iDAO = new IngredientDAO("jdbc:h2:file:src/test/resources/db/wfDBTest", "sa", "");
 		i2rDAO = new Ingredient2RecipeDAO("jdbc:h2:file:src/test/resources/db/wfDBTest", "sa", "");
@@ -107,15 +102,6 @@ public class ProductDAOTest extends TestCase {
 		
 		assertTrue(result.values().size() == 2);
 		assertTrue(result.keySet().size() == 2);
-	}
-	
-	@Test
-	public void testProductDAOSelectIngredientsOfProduct_ShouldFail() {
-		Map <Ingredient, Double> result = new HashMap<Ingredient, Double>();
-		result = pDAO.selectIngredientsOfProduct(testProduct.getId());
-		
-		assertTrue(result.values().size() == 0);
-		assertTrue(result.keySet().size() == 0);
 	}
 	
 	@Test
