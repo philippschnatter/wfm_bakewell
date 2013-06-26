@@ -8,16 +8,22 @@ import org.activiti.engine.IdentityService;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngineConfiguration;
 import org.activiti.engine.ProcessEngines;
+
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.identity.User;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.DeploymentBuilder;
+
+import org.activiti.engine.runtime.ProcessInstance;
 
 import bakewell.activiti.ActivitiConstants;
 
 public class ActivitiFactory {
 	
 	private ProcessEngine processEngine = null;
+	private String pid = null;
+	private ProcessInstance processInstance = null;
+	
 	private static ActivitiFactory instance;
 //    private static Logger logger = Logger.getLogger(ActivitiEngine.class);
     private Map<String, String> taskErrorMap = new HashMap<String, String>();
@@ -107,15 +113,19 @@ public class ActivitiFactory {
 		
 		Map<String, Object> variableMap = new HashMap<String, Object>();
 		variableMap.put(ActivitiConstants.CV_REMAINDER_AMOUNT, "0");
-		
-		processEngine.getRuntimeService().startProcessInstanceByKey(ActivitiConstants.PROCESS_NAME, variableMap);
-		
+//		ProcessInstance instance = runtimeService.startProcessInstanceByKey(processName, variableMap);
+
+		this.processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(ActivitiConstants.PROCESS_NAME, variableMap);
+		this.pid = processInstance.getBusinessKey();
 
 	}
 	
 	public ProcessEngine getProcessEngine() { return this.processEngine; }
 	public void setProcessEngine(ProcessEngine processEngine) { this.processEngine = processEngine; }
-	
+
+	public String getProcessInstanceId() {
+		return this.pid;
+	}
 	public void destroy()
 	{
 		ProcessEngines.destroy();
