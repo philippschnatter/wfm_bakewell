@@ -20,19 +20,19 @@ public class RecipePriceRESTServiceImpl implements RecipePriceRESTService {
 	
 	public RecipePriceRESTServiceImpl() {
 		
-		this.prodao = new ProductDAO (USER, PW);
-		this.recdao = new RecipeDAO(USER, PW);
+		this.prodao = new ProductDAO ("jdbc:h2:file:src/main/resources/db/wfDB", USER, PW);
+		this.recdao = new RecipeDAO("jdbc:h2:file:src/main/resources/db/wfDB", USER, PW);
 	}
 	
 	@Override
-	public Recipe calculatePrice(@QueryParam("id") String id) throws WebApplicationException {
+	public Recipe calculatePrice(@QueryParam("productId") String id) throws WebApplicationException {
 		
 		int productid = Integer.valueOf(id);
 	    
 		// DAO: ich habe eine Product ID und brauche alle Ingredients + Mengen (in Gramm) jeweils dazu
-		// TODO DAO needed!!!!!
 
 //		Map<Ingredient, Double> ingredientmap = new HashMap<Ingredient, Double>();
+
 		Map<Ingredient, Double> ingredientmap = prodao.selectIngredientsOfProduct(productid);
 		
 		// statt der DAO temporaer eigene objekte

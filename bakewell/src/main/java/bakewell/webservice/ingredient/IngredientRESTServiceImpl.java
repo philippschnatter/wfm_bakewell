@@ -20,12 +20,12 @@ public class IngredientRESTServiceImpl implements IngredientRESTService {
 	
 	public IngredientRESTServiceImpl() {
 		
-		this.prodao = new ProductDAO (USER, PW);
-		this.recdao = new RecipeDAO(USER, PW);
+		this.prodao = new ProductDAO ("jdbc:h2:file:src/main/resources/db/wfDB", USER, PW);
+		this.recdao = new RecipeDAO("jdbc:h2:file:src/main/resources/db/wfDB", USER, PW);
 	}
 
 	@Override
-	public Recipe calculateIngredient(@QueryParam("id") String id) throws WebApplicationException {
+	public Recipe calculateIngredient(@QueryParam("productId") String id) throws WebApplicationException {
 		
 		int productid = Integer.valueOf(id);
     
@@ -33,8 +33,9 @@ public class IngredientRESTServiceImpl implements IngredientRESTService {
 		// TODO DAO needed!!!!!
 
 //		Map<Ingredient, Double> ingredientmap = new HashMap<Ingredient, Double>();
+		System.out.println("Getting ingredients of product with ID="+productid+"...");
 		Map<Ingredient, Double> ingredientmap = prodao.selectIngredientsOfProduct(productid);
-		
+
 		// statt der DAO temporaer eigene objekte
 //		Ingredient ing_mehl = new Ingredient("Mehl", 897.0, 43.0, 10.0, 20.0, 7.0, 2.0, 23.0);
 //		Ingredient ing_ei = new Ingredient("Ei", 223.0, 10.0, 30.0, 9.0, 21.0, 3.0, 20.0);
@@ -61,7 +62,7 @@ public class IngredientRESTServiceImpl implements IngredientRESTService {
 			    
 		    Ingredient ing_temp = entry.getKey();
 		    double amount = entry.getValue();
-		    
+
 		    allgda_energy = allgda_energy + ing_temp.getGda_energy().doubleValue() * amount / 100;
 		    allgda_protein = allgda_protein + ing_temp.getGda_protein().doubleValue() * amount / 100;
 			allgda_carbo = allgda_carbo + ing_temp.getGda_carbo().doubleValue() * amount / 100;

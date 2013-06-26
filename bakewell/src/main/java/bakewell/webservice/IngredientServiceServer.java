@@ -32,7 +32,7 @@ public class IngredientServiceServer {
 		JAXRSServerFactoryBean sf = new JAXRSServerFactoryBean();        
         sf.setResourceClasses(IngredientRESTService.class);
         sf.setResourceProvider(IngredientRESTService.class, new SingletonResourceProvider(new IngredientRESTServiceImpl()));
-        sf.setAddress("http://localhost:63082");
+        sf.setAddress("http://localhost:63083");
                 
         sf.getInFaultInterceptors().add(new LoggingInInterceptor());
         sf.getOutFaultInterceptors().add(new LoggingOutInterceptor());

@@ -44,7 +44,7 @@ public class GetProductLabelWsCall implements JavaDelegate
 		// Client setup programmatically
 		JAXRSClientFactoryBean sf = new JAXRSClientFactoryBean();
 		sf.setResourceClass(IngredientRESTService.class);
-		sf.setAddress("http://localhost:63082");
+		sf.setAddress("http://localhost:63083");
 		sf.setProvider(jsonProvider);
 		
 		BindingFactoryManager manager = sf.getBus().getExtension(BindingFactoryManager.class);

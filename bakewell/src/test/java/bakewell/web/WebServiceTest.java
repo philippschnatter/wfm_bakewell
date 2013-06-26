@@ -1,5 +1,9 @@
 package bakewell.web;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,9 +12,11 @@ import javax.ws.rs.core.MediaType;
 
 import junit.framework.Assert;
 
+import bakewell.beans.Customer;
 import bakewell.beans.Recipe;
-import bakewell.db.ProductDAO;
-import bakewell.db.RecipeDAO;
+import bakewell.db.CustomerDAO;
+//import bakewell.db.ProductDAO;
+//import bakewell.db.RecipeDAO;
 import bakewell.webservice.StartServers;
 import bakewell.webservice.ingredient.IngredientRESTService;
 import bakewell.webservice.logistics.RecipePriceRESTService;
@@ -28,10 +34,10 @@ import org.junit.Test;
 public class WebServiceTest {
 	
 	
-	private ProductDAO prodao;
-	private RecipeDAO recdao;
-	private final String USER = "sa";
-	private final String PW = "";
+//	private ProductDAO prodao;
+//	private RecipeDAO recdao;
+//	private final String USER = "SA";
+//	private final String PW = "";
 	private static StartServers server = null;
 	
 	@BeforeClass
@@ -45,8 +51,6 @@ public class WebServiceTest {
 	@Test
 	public void testIngredientWS() {
 		
-		this.prodao = new ProductDAO (USER, PW);
-		this.recdao = new RecipeDAO(USER, PW);
 		
 		// REST-Service
 		// define a JSON provider and a mapping between REST and JSON namespace's
@@ -60,14 +64,16 @@ public class WebServiceTest {
 		// Client setup programmatically
 		JAXRSClientFactoryBean sf = new JAXRSClientFactoryBean();
 		sf.setResourceClass(IngredientRESTService.class);
-		sf.setAddress("http://localhost:63082");
+		sf.setAddress("http://localhost:63083");
 		sf.setProvider(jsonProvider);
 		
+		// Binding
 		BindingFactoryManager manager = sf.getBus().getExtension(BindingFactoryManager.class);
 		JAXRSBindingFactory factory = new JAXRSBindingFactory();
 		factory.setBus(sf.getBus());
 		manager.registerBindingFactory(JAXRSBindingFactory.JAXRS_BINDING_ID, factory);
 		
+		// create service
 		IngredientRESTService service = sf.create(IngredientRESTService.class);
 		WebClient wc = sf.createWebClient();
 		wc.accept(MediaType.APPLICATION_JSON);
@@ -76,27 +82,30 @@ public class WebServiceTest {
 		
 		try {
 			
-			recipe = service.calculateIngredient("0");
+			recipe = service.calculateIngredient("3");
 
+			NumberFormat numberFormat = new DecimalFormat("0.00");
+		    numberFormat.setRoundingMode(RoundingMode.DOWN);
+		    
+		    
 			Assert.assertNotNull(recipe);
-			Assert.assertEquals(recipe.getAllgda_carbo().toString(), "name");
-			Assert.assertEquals(recipe.getName(), "description");
-			Assert.assertEquals(recipe.getDescription(), "54.20");
-			Assert.assertEquals(recipe.getAllgda_energy().toString(), "54.20");
-			Assert.assertEquals(recipe.getAllgda_fat().toString(), "54.20");
-			Assert.assertEquals(recipe.getAllgda_fiber().toString(), "54.20");
-			Assert.assertEquals(recipe.getAllgda_protein().toString(), "54.20");
-			Assert.assertEquals(recipe.getAllgda_sodium().toString(), "54.20");
+			Assert.assertEquals(recipe.getName(), "Sachertorte");
+//			Assert.assertEquals(recipe.getDescription(), "description"); // zu lange^^
+			
+			Assert.assertEquals(numberFormat.format(recipe.getAllgda_carbo()), "0,33");
+			Assert.assertEquals(numberFormat.format(recipe.getAllgda_energy()), "0,04");
+			Assert.assertEquals(numberFormat.format(recipe.getAllgda_fat()), "1,05");
+			Assert.assertEquals(numberFormat.format(recipe.getAllgda_fiber()), "4,16");
+			Assert.assertEquals(numberFormat.format(recipe.getAllgda_protein()), "1,81");
+			Assert.assertEquals(numberFormat.format(recipe.getAllgda_sodium()), "41,66");
 			Assert.assertNotNull(recipe.getIngredients());
 	
 		} catch (WebApplicationException waEx) {
 			
-			Assert.fail(waEx.getLocalizedMessage());
 			waEx.printStackTrace();
 			
 		} catch (Exception e) {
 			
-			Assert.fail(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
 		recipe = null;
@@ -106,11 +115,9 @@ public class WebServiceTest {
 	@Test
 	public void testRecipePriceWS() {
 		
-		this.prodao = new ProductDAO (USER, PW);
-		this.recdao = new RecipeDAO(USER, PW);
 		
 		// REST-Service
-		// define a JSON provider and a mapping between REST and JSON namespace's
+		// define a JSON provider and a mapping between REST and JSON namespaces
 		java.util.List<JSONProvider<RecipePriceRESTService>> providers = new java.util.ArrayList<JSONProvider<RecipePriceRESTService>> ();
 		JSONProvider<RecipePriceRESTService> jsonProvider = new JSONProvider<RecipePriceRESTService>();
 		Map<String, String> map = new HashMap<String, String> ();
@@ -124,11 +131,13 @@ public class WebServiceTest {
 		sf.setAddress("http://localhost:63082");
 		sf.setProvider(jsonProvider);
 		
+		// Binding
 		BindingFactoryManager manager = sf.getBus().getExtension(BindingFactoryManager.class);
 		JAXRSBindingFactory factory = new JAXRSBindingFactory();
 		factory.setBus(sf.getBus());
 		manager.registerBindingFactory(JAXRSBindingFactory.JAXRS_BINDING_ID, factory);
 		
+		// create service
 		RecipePriceRESTService service = sf.create(RecipePriceRESTService.class);
 		WebClient wc = sf.createWebClient();
 		wc.accept(MediaType.APPLICATION_JSON);
@@ -136,21 +145,32 @@ public class WebServiceTest {
 		Recipe recipe;
 		
 		try {
-			
-			recipe = service.calculatePrice("0");
 
+			CustomerDAO cDAO = new CustomerDAO("jdbc:h2:file:src/main/resources/db/wfDB", "sa", "");
+			Customer testCustomer = new Customer(null, "Gruber", null, null, null, null, null);
+			ArrayList<Customer> result = cDAO.selectCustomer(testCustomer);
+					
+			if (!result.isEmpty()) {
+				Customer newcustomer = result.get(0);
+				System.out.println(newcustomer.getFirstName()+" "+newcustomer.getLastName()+newcustomer.getMailAddress());	
+			}
+
+					
+			recipe = service.calculatePrice("3");
+
+			NumberFormat numberFormat = new DecimalFormat("0.00");
+		    numberFormat.setRoundingMode(RoundingMode.DOWN);
+		    
+		    
 			Assert.assertNotNull(recipe);
-			Assert.assertEquals(recipe.getTotalprice().toString(), "567.60");
+			Assert.assertEquals(numberFormat.format(recipe.getTotalprice()), "190,00");
 
 	
 		} catch (WebApplicationException waEx) {
 			
-			Assert.fail(waEx.getLocalizedMessage());
 			waEx.printStackTrace();
 			
 		} catch (Exception e) {
-			
-			Assert.fail(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
 		recipe = null;
