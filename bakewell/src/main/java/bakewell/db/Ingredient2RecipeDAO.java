@@ -119,7 +119,6 @@ public class Ingredient2RecipeDAO {
 			//executes the Insert query on the DB
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		
 		//closes the connection to the DB
@@ -189,7 +188,6 @@ public class Ingredient2RecipeDAO {
 				pstmt.executeUpdate();
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 			return null;
 		}
 		
@@ -197,7 +195,6 @@ public class Ingredient2RecipeDAO {
 		closeConnection();
 		return result;
 	}
-	
 	
 	public ArrayList<Ingredient2Recipe> selectIngredient2Recipe(Ingredient2Recipe c) {
 		
@@ -248,7 +245,6 @@ public class Ingredient2RecipeDAO {
 				result.add(res);	
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		
 		//closes the connection to the DB...

@@ -124,7 +124,6 @@ public class CustomerDAO {
 			//executes the Insert query on the DB
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
 			return null;
 		}
 		
@@ -203,7 +202,6 @@ public class CustomerDAO {
 				pstmt.executeUpdate();
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 			return null;
 		}
 		
@@ -273,7 +271,6 @@ public class CustomerDAO {
 				result.add(res);	
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		
 		//closes the connection to the DB...
