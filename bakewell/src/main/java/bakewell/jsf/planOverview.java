@@ -7,21 +7,21 @@ import java.util.Date;
  *
  */
 public class planOverview {
-	private String firstName = null;
-	private String lastName = null;
-	private String address = null;
-	private String telNo = null;
-	private String mailAddress = null;
-	private String company = null;
-	private String product_Name = null;
+	private String firstName = "";
+	private String lastName = "";
+	private String address = "";
+	private String telNo = "";
+	private String mailAddress = "";
+	private String company = "";
+	private String product_Name = "";
 	private Date deliveryDate = null;
 	private Date production_Start = null;
 	private Date production_End = null;
-	private String production_Facility = null;
-	private String production_Contractor = null;
-	private String transport_Contractor = null;
+	private String production_Facility = "";
+	private String production_Contractor = "";
+	private String transport_Contractor = "";
 	private Double transport_cost = null;
-	private String packagingContractor=null;
+	private String packagingContractor="";
 	private Double packagingCost=null;
 	
 	

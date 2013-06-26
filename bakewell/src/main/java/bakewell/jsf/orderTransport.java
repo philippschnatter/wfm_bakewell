@@ -5,7 +5,7 @@ package bakewell.jsf;
  *
  */
 public class orderTransport {
-	private String transport_Contractor = null;
+	private String transport_Contractor = "";
 	private Double transport_cost = null;
 	
 	

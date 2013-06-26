@@ -22,8 +22,8 @@ public class orderProduction {
 	
 	private Date production_Start = null;
 	private Date production_End = null;
-	private String production_Facility = null;
-	private String production_Contractor = null;
+	private String production_Facility = "";
+	private String production_Contractor = "";
 	
 	
 	public String getTaskID() {

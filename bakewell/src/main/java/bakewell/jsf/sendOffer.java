@@ -5,11 +5,10 @@ package bakewell.jsf;
  *
  */
 public class sendOffer {
-	private String mailAddress = null;
-	private String company = null;
-	private String additionalMessage = null;
-	private String product_Name = null;
-	private Double bidPrice=null;
+	private String mailAddress = "";
+	private String company = "";
+	private String additionalMessage = "";
+	private String product_Name = "";
 	
 	public String getMailAddress() {
 		return mailAddress;

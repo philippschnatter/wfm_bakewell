@@ -16,7 +16,7 @@ import bakewell.beans.Recipe;
  */
 public class recipeSelection {
 
-	String taskId=null;
+	String taskId="";
 	jsfService jsfService=null;
 	ArrayList<Recipe> recipeList=null;
 	Integer selectedRecipeId=null;

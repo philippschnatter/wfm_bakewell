@@ -3,14 +3,14 @@ package bakewell.jsf;
 import java.util.Date;
 
 public class customerResponse {
-	private String firstName = null;
-	private String lastName = null;
-	private String address = null;
-	private String company = null;
-	private String product_Name = null;
+	private String firstName = "";
+	private String lastName = "";
+	private String address = "";
+	private String company = "";
+	private String product_Name = "";
 	private Date deliveryDate = null;
 	private Double bidPrice;
-	private String additionalMessage = null;
+	private String additionalMessage = "";
 	
 	public String getFirstName() {
 		return firstName;

@@ -5,11 +5,11 @@ package bakewell.jsf;
  *
  */
 public class customerInformation {
-	private String mailAddress = null;
-	private String company = null;
-	private String problemMessage = null;
-	private String additionalMessage = null;
-	private String product_Name = null;
+	private String mailAddress = "";
+	private String company = "";
+	private String problemMessage = "";
+	private String additionalMessage = "";
+	private String product_Name = "";
 	
 	
 	public String getMailAddress() {
