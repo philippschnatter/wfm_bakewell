@@ -251,8 +251,10 @@ public class customerOffer {
 		System.out.println("production end: " + production_End);
 		Customer newCustomer = jsfService.createCustomer(firstName, lastName, address, telNo, mailAddress, company);
 		this.customerId = newCustomer.getId();
-		Product newProduct = jsfService.createProduct(production_Start, production_End, customerId, product_Name, production_Contractor, production_Facility, transport_Contractor, transport_cost);
+		Product newProduct = jsfService.createProduct(production_Start, production_End, customerId, product_Name, production_Contractor, production_Facility, transport_Contractor, transport_cost, deliveryDate);
 		this.productId = newProduct.getId();
+		System.out.println("productid: " + productId);
+		System.out.println("product name: " + newProduct.getProduct_Name());
 //		createRecipe();
 //		createIngredient2Recipe();
 		
@@ -263,6 +265,7 @@ public class customerOffer {
 		FormService formService = processEngine.getFormService();
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("MeetsBusinessGoals", "true");
+		map.put("productid", productId.toString());
 		
 //		runtimeService.setVariable(engine.getInstance().toString(), "MeetsBusinessGoals", "true");
 		formService.submitTaskFormData(this.taskId, map);

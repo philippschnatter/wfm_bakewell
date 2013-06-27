@@ -32,7 +32,9 @@
 
 							<h:outputText value="Projected Cost:" />
 							<h:inputText required="true"
-								value="#{orderTransport.transport_cost}" />
+								value="#{orderTransport.transport_cost}">
+								<f:convertNumber/>
+							</h:inputText>					
 						</h:panelGrid>
 					</div>
 				</div>

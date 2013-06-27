@@ -1,15 +1,21 @@
 package bakewell.jsf;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
+
+import java.util.Date;
 
 import org.activiti.engine.FormService;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.RuntimeService;
+
+import bakewell.beans.Customer;
+import bakewell.beans.Product;
+import bakewell.jsf.jsfService;
 
 /**
  * @author Alex K
@@ -18,12 +24,15 @@ import org.activiti.engine.RuntimeService;
 public class orderProduction {
 	HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 	String taskId = request.getParameter("taskId");
-
+	String pid = request.getParameter("pid");
+	private Integer productId = null;
+	
+	jsfService jsfService = new jsfService();
 	
 	private Date production_Start = null;
 	private Date production_End = null;
-	private String production_Facility = "";
-	private String production_Contractor = "";
+	private String production_Facility = null;
+	private String production_Contractor = null;
 	
 	
 	public String getTaskID() {
@@ -35,9 +44,8 @@ public class orderProduction {
 	}
 
 
-	@SuppressWarnings("deprecation")
-	public void setProduction_Start(String production_Start) {
-		this.production_Start = new Date(production_Start);
+	public void setProduction_Start(Date production_Start) {
+		this.production_Start = production_Start;
 	}
 
 
@@ -70,7 +78,23 @@ public class orderProduction {
 		this.production_Contractor = production_Contractor;
 	}
 
-
+	@PostConstruct
+	public void init() {
+		HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		taskId = request.getParameter("taskId");
+		
+		ActivitiFactory engine = ActivitiFactory.getInstance();
+		ProcessEngine processEngine = engine.getProcessEngine();
+		
+		RuntimeService runtimeService = processEngine.getRuntimeService();
+		FormService formService = processEngine.getFormService();
+		
+//		processEngine.getTaskService().createTaskQuery().singleResult().getProcessInstanceId();
+		processEngine.getTaskService().createTaskQuery().list().get(0).getProcessInstanceId();
+		this.productId = Integer.parseInt((String)runtimeService.getVariable(pid, "productid"));		
+		
+	}
+	
 	public String proceed(){
 		System.out.println("order production proceed start");
 		ActivitiFactory engine = ActivitiFactory.getInstance();

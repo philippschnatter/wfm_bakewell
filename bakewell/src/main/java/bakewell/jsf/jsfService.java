@@ -36,24 +36,30 @@ public class jsfService {
 		return insertedCustomer;
 	}
 
-	public Product createProduct(Date production_Start, Date production_End, int customerId, String product_Name, String production_Contractor, String production_Facility, String transport_Contractor, Double transport_cost) {
+	public Product createProduct(Date production_Start, Date production_End, int customerId, String product_Name, String production_Contractor, String production_Facility, String transport_Contractor, Double transport_cost, Date deliveryDate) {
+		System.out.println("jsfService start");
+		
 		Product newProduct = new Product();
 		
-		try {
-			newProduct.setProduction_Start(convertToSqlDate(production_Start));
-			newProduct.setProduction_End(convertToSqlDate(production_End));
-		} catch(ParseException e) {}
+//		try {
+//			newProduct.setProduction_Start(convertToSqlDate(production_Start));
+//			newProduct.setProduction_End(convertToSqlDate(production_End));
+//			newProduct.setDeliveryDate(convertToSqlDate(deliveryDate));
+//		} catch(ParseException e) {}
+		
+//		newProduct.setProduction_End(null);
+//		newProduct.setProduction_Start(null);
+//		newProduct.setDeliveryDate(null);
 		
 		newProduct.setCustomer_id(customerId);
 		newProduct.setProduct_Name(product_Name);
 		newProduct.setProduction_Contractor(production_Contractor);
 		newProduct.setProduction_Facility(production_Facility);
 		newProduct.setTransport_Contractor(transport_Contractor);
-		newProduct.setTransport_cost(transport_cost);
-		
+		newProduct.setTransport_cost(transport_cost);		
 		Product insertedProduct = productDAO.insertProduct(newProduct);
 //		this.productId = insertedProduct.getId();
-		
+		System.out.println("jsfService before return");
 		return insertedProduct;
 	}
 	

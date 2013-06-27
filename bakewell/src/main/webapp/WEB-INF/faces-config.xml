@@ -33,8 +33,8 @@
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
  <managed-bean>
-  <managed-bean-name>orderPackaging</managed-bean-name>
-  <managed-bean-class>bakewell.jsf.orderPackaging</managed-bean-class>
+  <managed-bean-name>orderTransport</managed-bean-name>
+  <managed-bean-class>bakewell.jsf.orderTransport</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
  <managed-bean>
@@ -83,7 +83,7 @@
   </navigation-case>
  </navigation-rule>
  <navigation-rule>
-  <from-view-id>/order_packaging.xhtml</from-view-id>
+  <from-view-id>/order_transport.xhtml</from-view-id>
   <navigation-case>
    <from-outcome>proceed</from-outcome>
    <to-view-id>/tasklist.xhtml</to-view-id>
