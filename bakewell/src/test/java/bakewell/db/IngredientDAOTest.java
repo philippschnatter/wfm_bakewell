@@ -22,7 +22,7 @@ public class IngredientDAOTest extends TestCase {
 	
 	@Before
 	protected void setUp() {
-		cDAO = new IngredientDAO("jdbc:h2:file:src/test/resources/db/wfDBTest", "sa", "");
+		cDAO = new IngredientDAO("jdbc:h2:file:C:/Users/stefan/Documents/Workflow/git/bakewell/src/main/resources/db/wfDB", "sa", "");
 		testIngredient = new Ingredient("butter", 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 10.0);
 		failIngredient = new Ingredient(); 
 		result = new ArrayList<Ingredient>();
@@ -54,13 +54,24 @@ public class IngredientDAOTest extends TestCase {
 		assert(resi2r.size() == 2);
 	}
 	
+//	@Test
+//	public void testIngredientDAOselectAllIngredient2RecipeNonPersistent_ShouldWork() {
+//		i2rDAO = new Ingredient2RecipeDAO("jdbc:h2:file:src/test/resources/db/wfDBTest", "sa", "");
+//		ArrayList<Ingredient2RecipeNonPersistent> res = cDAO.selectAllIngredient2RecipeNonPersistent();
+//		assertTrue(!res.get(0).getIngredient_name().isEmpty());
+////		assertTrue(!res.isEmpty());
+//	}
+	
 	@Test
-	public void testIngredientDAOselectAllIngredient2RecipeNonPersistent_ShouldWork() {
-		i2rDAO = new Ingredient2RecipeDAO("jdbc:h2:file:src/test/resources/db/wfDBTest", "sa", "");
-		ArrayList<Ingredient2RecipeNonPersistent> res = cDAO.selectAllIngredient2RecipeNonPersistent();
-		
-		assertTrue(!res.isEmpty());
+	public void testGetIngredientList() {
+//		System.out.println("jsfService ing2recnp start");
+		ArrayList<Ingredient2RecipeNonPersistent> dbIngredientList = new ArrayList<Ingredient2RecipeNonPersistent>();
+		dbIngredientList = cDAO.selectAllIngredient2RecipeNonPersistent();
+		System.out.println("neu");
+//		System.out.println("jsfService ing2recnp end");		
+		//return dbIngredientList;
 	}
+
 	
 	@Test
 	public void testIngredientDAOselectAllIngredients_ShouldWork() {

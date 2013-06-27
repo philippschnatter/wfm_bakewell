@@ -145,15 +145,15 @@ public class RecipeDAO {
 			pstmt = connection.prepareStatement(query);
 			
 			//...and assign the Values of the given Object to the query
-			pstmt.setString(1, c.getName());
-			pstmt.setString(2, c.getDescription());
-			pstmt.setDouble(3, c.getAllgda_energy());
-			pstmt.setDouble(4, c.getAllgda_protein());
-			pstmt.setDouble(5, c.getAllgda_carbo());
-			pstmt.setDouble(6, c.getAllgda_fat());
-			pstmt.setDouble(7, c.getAllgda_fiber());
-			pstmt.setDouble(8, c.getAllgda_sodium());
-			pstmt.setDouble(9, c.getTotalprice());
+			try{pstmt.setString(1, c.getName());}catch(Exception s) {pstmt.setNull(1, 0);}
+			try{pstmt.setString(2, c.getDescription());}catch(Exception s) {pstmt.setNull(2, 0);}
+			try{pstmt.setDouble(3, c.getAllgda_energy());}catch(Exception s) {pstmt.setNull(3, 0);}
+			try{pstmt.setDouble(4, c.getAllgda_protein());}catch(Exception s) {pstmt.setNull(4, 0);}
+			try{pstmt.setDouble(5, c.getAllgda_carbo());}catch(Exception s) {pstmt.setNull(5, 0);}
+			try{pstmt.setDouble(6, c.getAllgda_fat());}catch(Exception s) {pstmt.setNull(6, 0);}
+			try{pstmt.setDouble(7, c.getAllgda_fiber());}catch(Exception s) {pstmt.setNull(7, 0);}
+			try{pstmt.setDouble(8, c.getAllgda_sodium());}catch(Exception s) {pstmt.setNull(8, 0);}
+			try{pstmt.setDouble(9, c.getTotalprice());}catch(Exception s) {pstmt.setNull(9, 0);}
 			
 			//executes the Insert query on the DB
 			pstmt.executeUpdate();

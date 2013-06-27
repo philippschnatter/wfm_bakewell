@@ -113,18 +113,17 @@ public class CustomerDAO {
 			pstmt = connection.prepareStatement(query);
 			
 			//...and assign the Values of the given Object to the query
-			pstmt.setString(1, c.getFirstName());
-			pstmt.setString(2, c.getLastName());
-			pstmt.setString(3, c.getAddress());
-			pstmt.setString(4, c.getTelNo());
-			pstmt.setString(5, c.getMailAddress());
-			pstmt.setString(6, c.getCompany());
-			pstmt.setString(7, c.getPassword());
-			
+			try{pstmt.setString(1, c.getFirstName());}catch(SQLException s) {pstmt.setNull(1, 0);}
+			try{pstmt.setString(2, c.getLastName());}catch(SQLException s) {pstmt.setNull(2, 0);}
+			try{pstmt.setString(3, c.getAddress());}catch(SQLException s) {pstmt.setNull(3, 0);}
+			try{pstmt.setString(4, c.getTelNo());}catch(SQLException s) {pstmt.setNull(4, 0);}
+			try{pstmt.setString(5, c.getMailAddress());}catch(SQLException s) {pstmt.setNull(5, 0);}
+			try{pstmt.setString(6, c.getCompany());}catch(SQLException s) {pstmt.setNull(6, 0);}
+			try{pstmt.setString(7, c.getPassword());}catch(SQLException s) {pstmt.setNull(7, 0);}
+		
 			//executes the Insert query on the DB
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			return null;
 		}
 		
 		//closes the connection to the DB

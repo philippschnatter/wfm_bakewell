@@ -173,7 +173,7 @@ public class ProductDAO {
 	    * @param c 
 	    */
 	public Product insertProduct(Product c) {
-		
+		System.out.println("start insert product DAO");
 		//Establish a connection to the DB
 		openConnection();
 		
@@ -185,17 +185,17 @@ public class ProductDAO {
 			pstmt = connection.prepareStatement(query);
 			
 			//...and assign the Values of the given Object to the query
-			pstmt.setInt(1, c.getRecipe_id());
-			pstmt.setInt(2, c.getCustomer_id());
-			pstmt.setString(3, c.getProduct_Name());
-			pstmt.setDate(4, c.getDeliveryDate());
-			pstmt.setDate(5, c.getProduction_Start());
-			pstmt.setDate(6, c.getProduction_End());
-			pstmt.setString(7, c.getProduction_Facility());
-			pstmt.setString(8, c.getProduction_Contractor());
-			pstmt.setString(9, c.getTransport_Contractor());
-			pstmt.setDouble(10, c.getTransport_cost());
-			pstmt.setString(11, c.getComment());
+			try{pstmt.setInt(1, c.getRecipe_id());}catch(Exception s) {pstmt.setNull(1, 0);}
+			try{pstmt.setInt(2, c.getCustomer_id());}catch(Exception s) {pstmt.setNull(2, 0);}
+			try{pstmt.setString(3, c.getProduct_Name());}catch(Exception s) {pstmt.setNull(3, 0);}
+			try{pstmt.setDate(4, c.getDeliveryDate());}catch(Exception s) {pstmt.setNull(4, 0);}
+			try{pstmt.setDate(5, c.getProduction_Start());}catch(Exception s) {pstmt.setNull(5, 0);}
+			try{pstmt.setDate(6, c.getProduction_End());}catch(Exception s) {pstmt.setNull(6, 0);}
+			try{pstmt.setString(7, c.getProduction_Facility());}catch(Exception s) {pstmt.setNull(7, 0);}
+			try{pstmt.setString(8, c.getProduction_Contractor());}catch(Exception s) {pstmt.setNull(8, 0);}
+			try{pstmt.setString(9, c.getTransport_Contractor());}catch(Exception s) {pstmt.setNull(9, 0);}
+			try{pstmt.setDouble(10, c.getTransport_cost());}catch(Exception s) {pstmt.setNull(10, 0);}
+			try{pstmt.setString(11, c.getComment());}catch(Exception s) {pstmt.setNull(11, 0);}
 			
 			//executes the Insert query on the DB
 			pstmt.executeUpdate();

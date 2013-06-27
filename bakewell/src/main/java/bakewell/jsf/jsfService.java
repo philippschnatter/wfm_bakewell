@@ -7,11 +7,17 @@ import java.util.ArrayList;
 import bakewell.beans.Customer;
 import bakewell.beans.Product;
 import bakewell.beans.Recipe;
+import bakewell.beans.Ingredient;
+import bakewell.beans.Ingredient2Recipe;
 import bakewell.beans.Ingredient2RecipeNonPersistent;
+import bakewell.beans.Ingredient;
+import bakewell.beans.Ingredient2Recipe;
+
 import bakewell.db.CustomerDAO;
 import bakewell.db.ProductDAO;
 import bakewell.db.RecipeDAO;
 import bakewell.db.IngredientDAO;
+import bakewell.db.Ingredient2RecipeDAO;
 
 public class jsfService {
 	private String DBPath = "jdbc:h2:file:C:/Users/stefan/Documents/Workflow/git/bakewell/src/main/resources/db/wfDB";
@@ -19,6 +25,7 @@ public class jsfService {
 	private ProductDAO productDAO = new ProductDAO(DBPath, "sa", "");
 	private RecipeDAO recipeDAO = new RecipeDAO(DBPath, "sa", "");
 	private IngredientDAO ingredientDAO = new IngredientDAO(DBPath, "sa", "");
+	private Ingredient2RecipeDAO ingredient2RecipeDAO = new Ingredient2RecipeDAO(DBPath, "sa", "");
 	
 	public Customer createCustomer(String firstName, String lastName, String address, String telNo, String mailAddress, String company) {
 		Customer customer = new Customer();
@@ -115,9 +122,24 @@ public class jsfService {
 		return dbRecipe;
 	}
 	
-	public ArrayList<Ingredient2RecipeNonPersistent> getIngredientList() {
-		ArrayList<Ingredient2RecipeNonPersistent> dbIngredientList = new ArrayList<Ingredient2RecipeNonPersistent>();
+	public Recipe createRecipe(Recipe newRecipe) {
+		Recipe dbRecipe = recipeDAO.insertRecipe(newRecipe);
 		
+		return dbRecipe;
+	}
+	
+	public void updateRecipe(Recipe newRecipe) {
+		Recipe oldRecipe = new Recipe();
+		oldRecipe.setId(newRecipe.getId());
+		
+		recipeDAO.UpdateRecipe(newRecipe, oldRecipe);
+	}
+	
+	public ArrayList<Ingredient2RecipeNonPersistent> getIngredientList() {
+		System.out.println("jsfService ing2recnp start");
+		ArrayList<Ingredient2RecipeNonPersistent> dbIngredientList = new ArrayList<Ingredient2RecipeNonPersistent>();
+		dbIngredientList = ingredientDAO.selectAllIngredient2RecipeNonPersistent();
+		System.out.println("jsfService ing2recnp end");		
 		return dbIngredientList;
 	}
 	

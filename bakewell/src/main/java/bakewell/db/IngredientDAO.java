@@ -111,12 +111,11 @@ public class IngredientDAO {
 		  
 		  //Holt alle Ingredient2Recipe Connections mittels Ingredient2RecipeDAO aus der DB
 		  ArrayList<Ingredient2Recipe> ingredient2recipe = new ArrayList<Ingredient2Recipe>();
-		  i2rDAO = new Ingredient2RecipeDAO(user, password);
+		  i2rDAO = new Ingredient2RecipeDAO("jdbc:h2:file:C:/Users/stefan/Documents/Workflow/git/bakewell/src/main/resources/db/wfDB", user, password);
 		  ingredient2recipe = i2rDAO.selectIngredient2Recipe(new Ingredient2Recipe());
 		  
 		  //Ergebnisliste vom Typ Ingredient2RecipeNonPersistent
 		  ArrayList<Ingredient2RecipeNonPersistent> result = new ArrayList<Ingredient2RecipeNonPersistent>();
-		  
 		  //Durchlaufe alle Ingredient2Recipe Connections
 		  for(int i = 0; i < ingredient2recipe.size(); i++) {
 			  //... und fuege alle drei Attribute in ein Temp Element
@@ -134,8 +133,10 @@ public class IngredientDAO {
 				  }
 			  }
 			  //... und zur Ergebnisliste hinzufuegen
-			  result.add(temp);  
+			  result.add(temp); 
+			  System.out.println("dao_ing2recnp: " + temp.getIngredient_name());
 		  }
+		  System.out.println("dao succeeds");
 		  return result;
 	   }
 

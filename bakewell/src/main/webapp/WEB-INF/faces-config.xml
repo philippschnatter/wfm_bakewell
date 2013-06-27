@@ -47,6 +47,11 @@
   <managed-bean-class>bakewell.jsf.recipeSelection</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>newRecipe</managed-bean-name>
+  <managed-bean-class>bakewell.jsf.newRecipe</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
  <navigation-rule>
   <from-view-id>/credit_check.xhtml</from-view-id>
   <navigation-case>

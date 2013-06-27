@@ -236,7 +236,7 @@
     <sequenceFlow id="KnownReceipe" name="Known recipe" sourceRef="exclusivegateway10" targetRef="exclusivegateway11">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${IsNewRecipe=="false"}]]></conditionExpression>
     </sequenceFlow>
-    <userTask id="CreateRecipe" name="Create Recipe" activiti:assignee="ProcessManager"></userTask>
+    <userTask id="CreateRecipe" name="Create Recipe" activiti:assignee="ProcessManager" activiti:formKey="new_recipe.xhtml"></userTask>
     <sequenceFlow id="flow115" sourceRef="CreateRecipe" targetRef="subprocess2"></sequenceFlow>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_ProductCreationProcess">

@@ -21,35 +21,44 @@
 		<h:form>
 			<h2>Recipe Data</h2>
 			<h:panelGrid columns="2" columnClasses="label, value"
-				styleClass="grid" style="margin-bottom: 10px" border="1"
-				cellpadding="2" cellspacing="5">
-				<h:outputText value="Recipe Name:" />
-				<h:inputText value="" />
-				<h:outputText value="Recipe Description:" />
-				<h:inputText value="" />
+						styleClass="grid" style="margin-bottom: 10px" border="1"
+						cellpadding="2" cellspacing="5">
+						<h:outputText value="Title:" />
+						<h:inputText value="#{customerOffer.company}" />
+						<h:outputText value="Description:" />
+						<h:inputText value="#{customerOffer.company}" />
 			</h:panelGrid>
 			<h3>Ingredients in grams</h3>
+			
+			<h:dataTable value="#{newRecipe.ingredientList}" var="v_ing" id="ingList"
+						class="table table-bordered">
+						<h:column>
+							<f:facet name="header">Task Name</f:facet>
+			#{v_ing.ingredient_name}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Description</f:facet>
+			#{v_ing.amount}
+						</h:column>
+					</h:dataTable>
+			
 			<h:panelGrid columns="2" columnClasses="label, value"
 				styleClass="grid" style="margin-bottom: 10px" border="1"
 				cellpadding="2" cellspacing="5">
 				<h:outputText value="Flour:" />
-				<h:inputText value="">
+				<h:inputText value="#{newRecipe.flourAmount}">
 					<f:converter converterId="javax.faces.Double" />
 				</h:inputText>
-				<h:outputText value="Flour:" />
-				<h:inputText value="">
+				<h:outputText value="Yeast:" />
+				<h:inputText value="#{newRecipe.yeastAmount}">
 					<f:converter converterId="javax.faces.Double" />
 				</h:inputText>
-				<h:outputText value="Flour:" />
-				<h:inputText value="">
+				<h:outputText value="Salt:" />
+				<h:inputText value="#{newRecipe.saltAmount}">
 					<f:converter converterId="javax.faces.Double" />
 				</h:inputText>
-				<h:outputText value="Flour:" />
-				<h:inputText value="">
-					<f:converter converterId="javax.faces.Double" />
-				</h:inputText>
-			</h:panelGrid>
-			<h:commandButton value="Proceed" action="none"
+				</h:panelGrid>
+			<h:commandButton value="Proceed" action="#{newRecipe.proceed()}"
 				class="btn btn-primary" />
 		</h:form>
 	</div>

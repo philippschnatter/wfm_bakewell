@@ -33,11 +33,15 @@
 
 							<h:outputText value="Production Start:" />
 							<h:inputText required="true"
-								value="#{orderProduction.production_Start}" />
+								value="#{orderProduction.production_Start}">
+								<f:convertDateTime pattern="yyyy-mm-dd" />
+							</h:inputText>
 
 							<h:outputText value="Production End:" />
 							<h:inputText required="true"
-								value="#{orderProduction.production_End}" />
+								value="#{orderProduction.production_End}">
+								<f:convertDateTime pattern="yyyy-mm-dd" />								
+							</h:inputText>
 
 							<h:outputText value="Production Facility:" />
 							<h:inputText required="true"
