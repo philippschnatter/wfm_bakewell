@@ -163,7 +163,7 @@
       <startEvent id="startevent5" name="Start"></startEvent>
       <parallelGateway id="parallelgateway6" name="Parallel Gateway"></parallelGateway>
       <userTask id="BookProductionFacility" name="Book Production Facility" activiti:assignee="ProcessManager" activiti:formKey="order_production.xhtml"></userTask>
-      <userTask id="OrderTransport" name="Order transport" activiti:assignee="ProcessManager" activiti:formKey="order_packaging.xhtml"></userTask>
+      <userTask id="OrderTransport" name="Order transport" activiti:assignee="ProcessManager" activiti:formKey="order_transport.xhtml"></userTask>
       <parallelGateway id="parallelgateway7" name="Parallel Gateway"></parallelGateway>
       <sequenceFlow id="flow104" sourceRef="startevent5" targetRef="parallelgateway6"></sequenceFlow>
       <sequenceFlow id="flow105" sourceRef="parallelgateway6" targetRef="BookProductionFacility"></sequenceFlow>
@@ -227,7 +227,7 @@
         </activiti:field>
       </extensionElements>
     </serviceTask>
-    <userTask id="CheckExistingRecipes" name="Check Existing Recipes" activiti:assignee="ProcessManager"></userTask>
+    <userTask id="CheckExistingRecipes" name="Check Existing Recipes" activiti:assignee="ProcessManager" activiti:formKey="recipe_selection.xhtml"></userTask>
     <sequenceFlow id="flow114" sourceRef="CheckExistingRecipes" targetRef="exclusivegateway10"></sequenceFlow>
     <exclusiveGateway id="exclusivegateway10" name="Exclusive Gateway"></exclusiveGateway>
     <sequenceFlow id="NewReceipe" name="New recipe" sourceRef="exclusivegateway10" targetRef="CreateRecipe">

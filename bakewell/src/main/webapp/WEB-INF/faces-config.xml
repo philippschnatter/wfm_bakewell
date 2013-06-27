@@ -42,6 +42,11 @@
   <managed-bean-class>bakewell.jsf.ingredientCheck</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>recipeSelection</managed-bean-name>
+  <managed-bean-class>bakewell.jsf.recipeSelection</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
  <navigation-rule>
   <from-view-id>/credit_check.xhtml</from-view-id>
   <navigation-case>
@@ -92,6 +97,14 @@
  </navigation-rule>
  <navigation-rule>
   <from-view-id>/ingredient_check.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>proceed</from-outcome>
+   <to-view-id>/tasklist.xhtml</to-view-id>
+   <redirect include-view-params="true"/>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/recipe_selection.xhtml</from-view-id>
   <navigation-case>
    <from-outcome>proceed</from-outcome>
    <to-view-id>/tasklist.xhtml</to-view-id>
